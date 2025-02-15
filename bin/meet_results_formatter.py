@@ -3,7 +3,13 @@ import re
 import json
 
 
-def parse_data_row(data_row: list[str], event: str, header: list[str], calendar_year: int, meet_name: str):
+etc_dir = 'etc'
+etc_tmp = os.path.join(etc_dir, 'tmp')
+MEET_DATES_PATH = os.path.join(etc_tmp, 'meet_dates.json')
+BIG_ASS_JSON_PATH = os.path.join(etc_tmp, 'BIG_ASS_JSON.json')
+
+
+def parse_data_row(data_row: list[str], event: str, header: list[str], calendar_year: int, meet_name: str, meet_metadata: dict):
     # New result indicator
     if len(data_row) == 5 and data_row[-1] == '':
         data_row.pop(-1)
@@ -78,7 +84,8 @@ def parse_data_row(data_row: list[str], event: str, header: list[str], calendar_
                 # 'wind_sign': wind_sign,
                 'wind': wind,
                 'heat': heat,
-                'event': event
+                'event': event,
+                'meet_metadata': meet_metadata,
             }
             return data_obj
     elif len(header) == 5 and len(data_row) == 3:
@@ -99,7 +106,8 @@ def parse_data_row(data_row: list[str], event: str, header: list[str], calendar_
                 'team': data_row[2],
                 'mark': mark,
                 'heat': heat,
-                'event': event
+                'event': event,
+                'meet_metadata': meet_metadata,
             }
             return data_obj
         else:
@@ -112,16 +120,27 @@ def parse_data_row(data_row: list[str], event: str, header: list[str], calendar_
         return None
 
 
-def parse_meet_file(path: str):
+def parse_meet_file(path: str, meet_dates: dict):
     with open(path, 'r') as tf:
         data = [l[:-1] for l in tf.readlines()]
     meet_name = os.path.splitext(os.path.basename(path))[0]
-    calendar_year = int(path[:4])
+    calendar_year = int(path.split('/')[-2][:4])
 
     event = None
     header = []
     meet_data = []
     data_row = []
+    for date, deets in meet_dates.get(str(calendar_year), {}).items():
+        if  os.path.basename(path) == deets['filename']:
+            meet_metadata = {
+                'date': deets['date'],
+                'meet_name': deets['meet'],
+                'location': deets['location']
+            }
+            break
+    else:
+        meet_metadata = None
+
     # for line in data:
     for index, line in enumerate(data):
         # if meet_name == 'Arcadia Invitational' and calendar_year == 2022 and index == 4510:
@@ -130,7 +149,7 @@ def parse_meet_file(path: str):
             continue
         newline_re = re.search(r'^\d+$', line.strip())
         if newline_re:
-            row = parse_data_row(data_row=data_row, event=event, header=header, calendar_year=calendar_year, meet_name=meet_name)
+            row = parse_data_row(data_row=data_row, event=event, header=header, calendar_year=calendar_year, meet_name=meet_name, meet_metadata=meet_metadata)
             if row:
                 meet_data.append(row)
             data_row = []
@@ -155,7 +174,7 @@ def parse_meet_file(path: str):
             if data_row:
                 data_row.pop(-1)
 
-            row = parse_data_row(data_row=data_row, event=event, header=header, calendar_year=calendar_year, meet_name=meet_name)
+            row = parse_data_row(data_row=data_row, event=event, header=header, calendar_year=calendar_year, meet_name=meet_name, meet_metadata=meet_metadata)
             if row:
                 meet_data.append(row)
             data_row = []
@@ -172,20 +191,19 @@ def parse_meet_file(path: str):
     return return_object
 
 meets_dirs = []
-for item in os.listdir('.'):
+for item in os.listdir(etc_dir):
     if item.endswith('_results'):
-        meets_dirs.append(item)
+        meets_dirs.append(os.path.join(etc_dir, item))
+
+with open(MEET_DATES_PATH, 'r') as jf:
+    meet_dates = json.loads(jf.read())
 
 meets_athlete_data = {}
 for meets in meets_dirs:
     for meet in os.listdir(meets):
-        results = parse_meet_file(path=os.path.join(meets, meet))
+        results = parse_meet_file(path=os.path.join(meets, meet), meet_dates=meet_dates)
         meet_name = meet.replace('.txt','').strip()
         meets_athlete_data[meet_name] = results
-with open('deleteme.json', 'w') as jf:
+with open(BIG_ASS_JSON_PATH, 'w') as jf:
     jf.write(json.dumps(meets_athlete_data, indent=4))
 x=1
-
-"""
-Its still transitioning poorly out of relay events. Maybe into them as well
-"""

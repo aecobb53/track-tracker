@@ -1,15 +1,25 @@
+from calendar import calendar
 import os
 import re
 import json
 import pyperclip
+from datetime import datetime
 
 
 event_rename = {
     r'boys?': 'mens',
     r'girls?': 'womens',
     r'finals?': '',
+    r'varsity': '',
+    r'emerging elite': '',
+    r'championship': '',
     r'\da': '',
 }
+etc_dir = 'etc'
+etc_tmp = os.path.join(etc_dir, 'tmp')
+BIG_ASS_JSON_PATH = os.path.join(etc_tmp, 'BIG_ASS_JSON.json')
+ATHLETE_JSON_PATH = os.path.join(etc_tmp, 'athlete.json')
+SCHOOL_JSON_PATH = os.path.join(etc_tmp, 'school.json')
 
 
 def rename_event(event):
@@ -21,7 +31,7 @@ def rename_event(event):
     event = event.strip().title()
     return event
 
-with open('deleteme.json', 'r') as jf:
+with open(BIG_ASS_JSON_PATH, 'r') as jf:
     data = json.load(jf)
 
 athletes = {}
@@ -59,31 +69,36 @@ for meet, details in data.items():
                 meets[meet][event].append(result)
                 # different_event_names.add(event)
 
-with open('deleteme2.json', 'w') as jf:
+with open(ATHLETE_JSON_PATH, 'w') as jf:
     jf.write(json.dumps(athletes, indent=4))
-with open('deleteme3.json', 'w') as jf:
+with open(SCHOOL_JSON_PATH, 'w') as jf:
     jf.write(json.dumps(meets, indent=4))
 
-# a = list(different_event_names)
-# a.sort()
-# for i in a:
-#     print(i)
 
-csv = ['Name,Event,Mark,Wind,Attempt,Year,Meet']
+a = list(different_event_names)
+a.sort()
+for i in a:
+    print(i)
+
+csv = ['Name,Event,Mark,Wind,Attempt,Year,Date,Meet']
 for athlete, events in athletes.items():
-    
     if athlete == 'Relay':
         continue
     for event_name, results in events.items():
         for result in results:
-            if result['mark'] is None:
-                x=1
+            if result.get('meet_metadata'):
+                month, day = result['meet_metadata']['date'].split('/')
+                date = datetime(int(result['calendar_year']), int(month), int(day))
+                date = date.strftime('%m/%d/%Y')
+            else:
+                date = None
             data = [athlete]
             data.append(event_name)
             data.append(str(result['mark']))
             data.append(str(result['wind']))
             data.append(str(result['attempt']))
             data.append(str(result['calendar_year']))
+            data.append(str(date))
             data.append(str(result['meet']))
             row_s = f','.join(data)
             row_s = row_s.replace('None', '-')
