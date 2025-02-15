@@ -1,0 +1,36 @@
+version: '3'
+
+services:
+    db:
+        image: postgis/postgis
+        container_name: TrackTrackerDB
+        environment:
+            POSTGRES_USER: example
+            POSTGRES_PASSWORD: example
+            POSTGRES_DB: example_db
+        ports:
+            - "5432:5432"
+        volumes:
+            - postgres_data:/var/lib/postgresql/data
+
+    app:
+        build: .
+        container_name: TrackTracker
+        image: track_tracker:latest
+        depends_on:
+            - db
+        environment:
+            DATABASE_URL: postgresql://example:example@db:5432/example_db
+            PYTHONUNBUFFERED: 1
+        command: bash entrypoint.sh
+        volumes:
+            - .:/app
+        ports:
+            - 8205:8000
+        links:
+            - db
+        # image: game_process_calculator
+        # container_name: game_process_calculator
+
+volumes:
+  postgres_data:

@@ -1,0 +1,48 @@
+# Functionality
+python-dotenv
+requests
+# websocket
+# websockets
+pyyaml
+sqlmodel
+psycopg2-binary
+shapely
+GeoAlchemy2
+pydantic_geojson
+
+
+# Daemon
+uvicorn
+fastapi
+gunicorn
+jinja2
+pydantic
+python-multipart
+
+# Testing
+behave
+pycodestyle
+pytest
+pytest-cov
+pytest-flakes
+pytest-mock
+pytest-pep8
+pytest-pythonpath
+pytest-stub
+
+coverage
+pylint
+
+# Database
+# sqlalchemy
+
+# Scraping
+lxml
+
+# # Tutorial on Machine Learning
+# openpyxl
+# pandas
+
+# My libraries
+git+https://github.com/aecobb53/phtml@main
+git+https://github.com/aecobb53/my_base_html_lib@main
