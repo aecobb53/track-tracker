@@ -7,17 +7,14 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from models import (
     ResponseTypes,
-    RestHeaders, 
+    RestHeaders,
     ContextSingleton)
-# from handlers import DatabaseHandler, init_logger
+from handlers import DatabaseHandler, init_logger
 from html import project_base_page, unimplemented_page
-# from routs import (event_router,
-#     venue_router,
-#     event_html_router,
-#     explicit_html_router,
-#     clean_html_router,
-#     venue_html_router
-# )
+from routs import (
+    athlete_router,
+    mark_router,
+)
 
 # Service Info
 with open(os.path.join(os.path.dirname(os.getcwd()), 'info.json'), 'r') as jf:
@@ -39,22 +36,17 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# app.include_router(event_router)
-# app.include_router(venue_router)
-# app.include_router(event_html_router)
-# app.include_router(explicit_html_router)
-# app.include_router(clean_html_router)
-# app.include_router(venue_html_router)
+app.include_router(athlete_router)
+app.include_router(mark_router)
 
 
-
-# @app.on_event("startup")
-# async def startup_event():
-#     db = DatabaseHandler()
-#     db.create_tables()
-#     context = ContextSingleton()
-#     context.database = db
-#     context.logger = init_logger()
+@app.on_event("startup")
+async def startup_event():
+    db = DatabaseHandler()
+    db.create_tables()
+    context = ContextSingleton()
+    context.database = db
+    context.logger = init_logger()
 
 
 # # Root
