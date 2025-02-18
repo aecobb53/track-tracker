@@ -47,6 +47,31 @@ class MarkHandler(BaseHandler):
         self.context.logger.info(f"Marks Filtered: {len(marks)}")
         return marks
 
+    async def find_marks(self, mark_filter: MarkFilter, silence_missing=False) -> MarkData:
+        """
+        Find single matching mark or error
+        """
+        self.context.logger.info(f"Filtering marks: {mark_filter.model_dump_json()}")
+        with Session(self.context.database.engine) as session:
+            query = select(MarkDB)
+            query = mark_filter.apply_filters(MarkDB, query)
+            rows = session.exec(query).all()
+            marks = []
+            for row in rows:
+                read_obj = MarkDBRead.model_validate(row)
+                mark = read_obj.cast_data_object()
+                marks.append(mark)
+            if len(marks) == 0:
+                if silence_missing:
+                    return None
+                raise MissingRecordException(f"No records found for filter: [{mark_filter.model_dump_json()}]")
+            elif len(marks) > 1:
+                raise DuplicateRecordsException(f"Multiple records found for filter: [{mark_filter.model_dump_json()}]")
+            else:
+                mark = marks[0]
+        self.context.logger.info(f"Mark found")
+        return mark
+
     # async def find_mark(self, mark_uid: str) -> Mark:
     #     self.context.logger.info(f"Finding mark: {mark_uid}")
     #     with Session(self.context.database.engine) as session:

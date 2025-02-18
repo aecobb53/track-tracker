@@ -34,6 +34,9 @@ class AthleteHandler(BaseHandler):
         return athlete
 
     async def filter_athletes(self, athlete_filter: AthleteFilter) -> list[AthleteData]:
+        """
+        Return matching athletes
+        """
         self.context.logger.info(f"Filtering athletes: {athlete_filter.model_dump_json()}")
         with Session(self.context.database.engine) as session:
             query = select(AthleteDB)
@@ -46,6 +49,31 @@ class AthleteHandler(BaseHandler):
                 athletes.append(athlete)
         self.context.logger.info(f"Athletes Filtered: {len(athletes)}")
         return athletes
+
+    async def find_athletes(self, athlete_filter: AthleteFilter, silence_missing=False) -> AthleteData:
+        """
+        Find single matching athlete or error
+        """
+        self.context.logger.info(f"Filtering athletes: {athlete_filter.model_dump_json()}")
+        with Session(self.context.database.engine) as session:
+            query = select(AthleteDB)
+            query = athlete_filter.apply_filters(AthleteDB, query)
+            rows = session.exec(query).all()
+            athletes = []
+            for row in rows:
+                read_obj = AthleteDBRead.model_validate(row)
+                athlete = read_obj.cast_data_object()
+                athletes.append(athlete)
+            if len(athletes) == 0:
+                if silence_missing:
+                    return None
+                raise MissingRecordException(f"No records found for filter: [{athlete_filter.model_dump_json()}]")
+            elif len(athletes) > 1:
+                raise DuplicateRecordsException(f"Multiple records found for filter: [{athlete_filter.model_dump_json()}]")
+            else:
+                athlete = athletes[0]
+        self.context.logger.info(f"Athlete found")
+        return athlete
 
     # async def find_athlete(self, athlete_uid: str) -> Athlete:
     #     self.context.logger.info(f"Finding athlete: {athlete_uid}")
@@ -60,46 +88,32 @@ class AthleteHandler(BaseHandler):
     #     self.context.logger.info(f"Athlete found: [{athlete_uid}]")
     #     return athlete
 
-    # async def update_athlete(self, athlete_uid: str, athlete: Athlete) -> Athlete:
-    #     self.context.logger.info(f"Updating athlete: {athlete_uid}")
-    #     with Session(self.context.database.engine) as session:
-    #         query = select(AthleteDB)
-    #         query = query.where(AthleteDB.uid == athlete_uid)
-    #         row = session.exec(query).first()
-    #         if row is None:
-    #             raise MissingRecordException(f"No records found for uid: [{athlete_uid}]")
+    async def update_athlete(self, athlete: AthleteData) -> AthleteData:
+        self.context.logger.info(f"Updating athlete: {athlete.uid}")
+        with Session(self.context.database.engine) as session:
+            query = select(AthleteDB)
+            query = query.where(AthleteDB.uid == athlete.uid)
+            row = session.exec(query).first()
+            if row is None:
+                raise MissingRecordException(f"No records found for uid: [{athlete.uid}]")
 
-    #         # Verify data integrity
-    #         immutable_fields = [
-    #             'uid',
-    #             'creation_datetime',
-    #         ]
-    #         immutable_modification_detected = []
-    #         for key in immutable_fields:
-    #             if getattr(row, key) != getattr(athlete, key):
-    #                 immutable_modification_detected.append(key)
-    #         if len(immutable_modification_detected) > 0:
-    #             raise DataIntegrityException(f"Immutable fields were modified: {immutable_modification_detected}")
+            skip_fields = ("uid", "update_datetime")
 
-    #         # Make changes
-    #         skip_fields = [
-    #             'geometry',
-    #         ]
-    #         for key in Athlete.__fields__.keys():
-    #             if key not in skip_fields:
-    #                 try:
-    #                     if getattr(row, key) != getattr(athlete, key):
-    #                         setattr(row, key, getattr(athlete, key))
-    #                 except AttributeError:
-    #                     pass
-    #         row.update_datetime = datetime.utcnow()
-    #         session.add(row)
-    #         session.commit()
-    #         session.refresh(row)
-    #         read_obj = AthleteDBRead.model_validate(row)
-    #         athlete = read_obj.cast_data_object(Athlete)
-    #     self.context.logger.info(f"Athlete updated: [{athlete_uid}]")
-    #     return athlete
+            for key in AthleteData.__fields__.keys():
+                if key not in skip_fields:
+                    try:
+                        if getattr(row, key) != getattr(athlete, key):
+                            setattr(row, key, getattr(athlete, key))
+                    except AttributeError:
+                        pass
+            row.update_datetime = datetime.utcnow()
+            session.add(row)
+            session.commit()
+            session.refresh(row)
+            read_obj = AthleteDBRead.model_validate(row)
+            athlete = read_obj.cast_data_object()
+        self.context.logger.info(f"Athlete updated: [{athlete.uid}]")
+        return athlete
 
     # async def set_activation(self, athlete_uid: str, active_state: bool) -> Athlete:
     #     self.context.logger.debug(f"Setting Athlete activation: [{athlete_uid}] to [{active_state}]")

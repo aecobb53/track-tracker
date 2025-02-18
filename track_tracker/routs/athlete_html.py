@@ -1,13 +1,13 @@
-# from calendar import month
-# from datetime import date, datetime, timedelta
-# from fastapi import APIRouter, HTTPException, Request, Response, Depends
-# from fastapi.responses import HTMLResponse, ORJSONResponse
+from calendar import month
+from datetime import date, datetime, timedelta
+from fastapi import APIRouter, HTTPException, Request, Response, Depends
+from fastapi.responses import HTMLResponse, ORJSONResponse
 
-# from models import Event, EventFilter
-# # from handlers import EventHandler
-# from handlers import EventHandler, parse_query_params
-# # from utils import parse_query_params, parse_header, MissingRecordException, DuplicateRecordsException
-# from models import ContextSingleton
+from models import Event, EventFilter
+# from handlers import EventHandler
+from handlers import EventHandler, parse_query_params
+# from utils import parse_query_params, parse_header, MissingRecordException, DuplicateRecordsException
+from models import ContextSingleton
 
 
 # from html import (
@@ -18,12 +18,12 @@
 #     # unimplemented_page
 #     )
 
-# context = ContextSingleton()
+context = ContextSingleton()
 
-# router = APIRouter(
-#     prefix='/html/events',
-#     tags=['events', 'html'],
-# )
+router = APIRouter(
+    prefix='/html/events',
+    tags=['events', 'html'],
+)
 # explicit_router = APIRouter(
 #     prefix='/is-there-a-fucking-game',
 #     tags=['is-there-a-game', 'html', 'explicit'],

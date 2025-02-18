@@ -57,16 +57,18 @@ async def startup_event():
 # Root
 @app.get('/', status_code=200)
 async def root(request: Request):
-    # context.logger.debug('GET on /')
-    # context.logger.debug(f"REQUEST STUFF")
     header_details = RestHeaders(request=request)
     if header_details.response_type == ResponseTypes.HTML:
         project_page = project_base_page()
         return HTMLResponse(content=project_page)
     elif header_details.response_type == ResponseTypes.JSON:
         return {'Hello': 'WORLD!'}
-    return {'Hello': 'WORLD!'}
 
+# About
+@app.get('/about', status_code=200)
+async def root(request: Request):
+    unimplemented_page_content = unimplemented_page()
+    return HTMLResponse(content=unimplemented_page_content)
 
 
 # today

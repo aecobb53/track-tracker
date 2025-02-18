@@ -16,6 +16,7 @@ class RestHeaders:
 
     @property
     def response_type(self):
+        """IS THERE A WAY TO TELL WHEN ITS FROM A BROWSER OR A PHONE AND THEN ONLY HAVE THE SIDEBAR FOR LARGER SCREENS"""
         if 'html' in self.accept:
             return ResponseTypes.HTML
         else:

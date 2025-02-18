@@ -6,6 +6,8 @@ from pydantic import BaseModel, model_validator
 from enum import Enum
 from uuid import uuid4
 
+from .event import EventParser
+
 
 class AthleteData(BaseModel):
     uid: str
@@ -44,7 +46,7 @@ class AthleteApiCreate(BaseModel):
     last_name: str
     graduation_year: int
     team: str
-    gender: str
+    gender: str | None = None
 
     def cast_data_object(self) -> AthleteData:
         """Return a data object based on the AthleteData class"""

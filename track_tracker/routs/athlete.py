@@ -2,10 +2,9 @@ from fastapi import APIRouter, HTTPException, Request, Response, Depends
 
 # from models import Athlete, AthleteFilter
 # # from handlers import AthleteHandler
-from handlers import AthleteHandler, parse_query_params, DuplicateRecordsException
+from handlers import AthleteHandler, parse_query_params, DuplicateRecordsException, MissingRecordException
 # # from utils import parse_query_params, parse_header, MissingRecordException, DuplicateRecordsException
-from models import AthleteData, AthleteApiCreate, AthleteFilter
-from models import ContextSingleton
+from models import AthleteData, AthleteApiCreate, AthleteFilter, ContextSingleton, RestHeaders
 
 from typing import Annotated
 
@@ -20,8 +19,13 @@ router = APIRouter(
 @router.post('/', status_code=201)
 async def create_athlete(athlete: AthleteApiCreate):
     try:
-        athlete_data = athlete.cast_data_object()
+        existing_athlete_filter = AthleteFilter(first_name=[athlete.first_name], last_name=[athlete.last_name], team=[athlete.team])
         ah = AthleteHandler()
+        existing_athlete = await ah.find_athletes(athlete_filter=existing_athlete_filter, silence_missing=True)
+        if existing_athlete:
+            # Verify the record doesnt already exist
+            raise DuplicateRecordsException(f"first_name={athlete.first_name}, last_name={athlete.last_name}, team={athlete.team}")
+        athlete_data = athlete.cast_data_object()
         created_athlete = await ah.create_athlete(athlete=athlete_data)
         return created_athlete.put
     except DuplicateRecordsException as err:
@@ -40,6 +44,41 @@ async def filter_athlete(request: Request):
         ah = AthleteHandler()
         athletes = await ah.filter_athletes(athlete_filter=athlete_filter)
         return {'athletes': athletes}
+    except Exception as err:
+        context.logger.warning(f'ERROR: {err}')
+        raise HTTPException(status_code=500, detail='Internal Service Error')
+
+
+@router.get('/{first}/{last}/{team}', status_code=200)
+async def find_athlete(request: Request, first: str, last: str, team: str):
+    try:
+        athlete_filter = AthleteFilter(first_name=[first], last_name=[last], team=[team])
+        ah = AthleteHandler()
+        athlete = await ah.find_athletes(athlete_filter=athlete_filter)
+        return athlete
+    except MissingRecordException as err:
+        message = f"No record found: [{err}]"
+        context.logger.error(message)
+        raise HTTPException(status_code=404, detail=message)
+    except DuplicateRecordsException as err:
+        message = f"Duplicate records found: [{err}]"
+        context.logger.error(message)
+        raise HTTPException(status_code=409, detail=message)
+    except Exception as err:
+        context.logger.warning(f'ERROR: {err}')
+        raise HTTPException(status_code=500, detail='Internal Service Error')
+
+
+@router.put('/', status_code=201)
+async def update_athlete(athlete: AthleteData):
+    try:
+        ah = AthleteHandler()
+        created_athlete = await ah.update_athlete(athlete=athlete)
+        return created_athlete.put
+    except DuplicateRecordsException as err:
+        message = f"Dupe record attempt: {err}"
+        context.logger.warning(message)
+        raise HTTPException(status_code=409, detail=message)
     except Exception as err:
         context.logger.warning(f'ERROR: {err}')
         raise HTTPException(status_code=500, detail='Internal Service Error')

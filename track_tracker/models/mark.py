@@ -75,6 +75,8 @@ class MarkData(BaseModel):
     team: str | None = None
     meet_date: datetime
     mark: Mark
+    meet: str
+    gender: str | None = None
 
     @model_validator(mode='before')
     def validate_fields(cls, fields):
@@ -99,6 +101,8 @@ class MarkApiCreate(BaseModel):
     team: str | None = None
     meet_date: datetime
     mark: Mark
+    meet: str
+    gender: str | None = None
 
     athlete: AthleteData | None = None
 
@@ -109,6 +113,7 @@ class MarkApiCreate(BaseModel):
         fields['athlete'] = None
         mark = Mark.parse_event_mark(event=fields['event'], mark=fields['mark'])
         fields['mark'] = mark
+        fields['gender'] = EventParser.parse_event_gender(event_s=fields['event'])
         return fields
 
     def cast_data_object(self) -> MarkData:
@@ -139,6 +144,8 @@ class MarkDBBase(SQLModel):
     team: str | None = None
     meet_date: datetime
     mark: Dict | None = Field(default_factory=dict, sa_column=Column(JSON))
+    meet: str
+    gender: str | None = None
 
     @model_validator(mode='before')
     def validate_fields(cls, fields):
@@ -176,86 +183,63 @@ class MarkDB(MarkDBBase, table=True):
 
 class MarkFilter(BaseModel):
     uid: List[str] | None = None
-# #     name: List[str] | None = None
-# #     venue: List[str] | None = None
-# #     # geometry: List[Point | Polygon] | None = None
-# #     geometry: PointModel | PolygonModel | MultiPolygonModel | None = None
-# #     active: bool | str | None = True
-# #     # closures_start: datetime
-# #     # closures_end: datetime
-# #     # event_start: datetime
-# #     # event_end: datetime
-# #     event_after: datetime | None = None
-# #     event_before: datetime | None = None
 
-# #     expected_impact: List[ExpectedImpact] | None = None
-# #     source: List[str] | None = None
+    event: List[str] = []
 
-# #     creation_datetime_after: datetime | None = None
-# #     creation_datetime_before: datetime | None = None
-# #     limit: int = 1000
-# #     order_by: List[str] = ['creation_datetime']
-# #     offset: int = 0
+    # heat: List[int] = []
+    # place: List[int] = []
+    # wind: List[float] = []
+    # attempt: List[int] = []
 
-# #     @model_validator(mode='before')
-# #     def validate_fields(cls, fields):
-# #         if isinstance(fields.get('event_after'), list):
-# #             fields['event_after'] = fields['event_after'][0]
-# #         if isinstance(fields.get('event_before'), list):
-# #             fields['event_before'] = fields['event_before'][0]
+    athlete_uid: List[str] = []
+    team: List[str] = []
+    meet: List[str] = []
+    gender: List[str] = []
 
-# #         if isinstance(fields.get('creation_datetime_after'), list):
-# #             fields['creation_datetime_after'] = fields['creation_datetime_after'][0]
-# #         if isinstance(fields.get('creation_datetime_before'), list):
-# #             fields['creation_datetime_before'] = fields['creation_datetime_before'][0]
-# #         if isinstance(fields.get('active'), list):
-# #             fields['active'] = fields['active'][0]
-# #         if isinstance(fields.get('geometry'), list):
-# #             geometry = fields['geometry'][0]
-# #             geometry = shapely.wkt.loads(geometry)
-# #             geometry = PolygonModel(**json.loads(to_geojson(geometry)))
-# #             fields['geometry'] = geometry
-# #         if isinstance(fields.get('limit'), list):
-# #             fields['limit'] = fields['limit'][0]
-# #         if isinstance(fields.get('offset'), list):
-# #             fields['offset'] = fields['offset'][0]
-# #         return fields
+    # meet_date: List[datetime] = []
+    # mark: Dict | None = Field(default_factory=dict, sa_column=Column(JSON))
 
-# #     def apply_filters(self, database_object_class: MarkDBBase, query: select) -> select:
-# #         """Apply the filters to the query"""
-# #         if self.uid:
-# #             query = query.filter(database_object_class.uid.in_(self.uid))
-# #         if self.name:
-# #             query = query.filter(database_object_class.name.in_(self.name))
-# #         if self.active is not None:
-# #             if not isinstance(self.active, str):
-# #                 query = query.filter(database_object_class.active == self.active)
-# #         if self.venue:
-# #             query = query.filter(database_object_class.venue.in_(self.venue))
-# #         if self.source:
-# #             query = query.filter(database_object_class.source.in_(self.source))
-# #         if self.geometry:
-# #             geometry = from_geojson(self.geometry.model_dump_json())
-# #             query = query.filter(
-# #                 func.ST_Intersects(database_object_class.geometry, from_shape(geometry))
-# #             )
+    limit: int = 1000
+    order_by: List[str] = ['event', 'place']
+    offset: int = 0
 
-# #         if self.event_after:
-# #             query = query.filter(database_object_class.event_start >= self.event_after)
-# #         if self.event_before:
-# #             query = query.filter(database_object_class.event_end <= self.event_before)
+    @model_validator(mode='before')
+    def validate_fields(cls, fields):
+        # if isinstance(fields.get('active'), list):
+        #     fields['active'] = fields['active'][0]
+        if isinstance(fields.get('limit'), list):
+            fields['limit'] = fields['limit'][0]
+        if isinstance(fields.get('offset'), list):
+            fields['offset'] = fields['offset'][0]
+        return fields
 
-# #         if self.creation_datetime_after:
-# #             query = query.filter(database_object_class.creation_datetime >= self.creation_datetime_after)
-# #         if self.creation_datetime_before:
-# #             query = query.filter(database_object_class.creation_datetime <= self.creation_datetime_before)
-# #         if self.limit:
-# #             query = query.limit(self.limit)
-# #         for order_by in self.order_by:
-# #             query = query.order_by(getattr(database_object_class, order_by))
-# #         if self.offset:
-# #             query = query.offset(self.offset)
+    def apply_filters(self, database_object_class: MarkDBBase, query: select) -> select:
+        """Apply the filters to the query"""
+        if self.uid:
+            query = query.filter(database_object_class.uid.in_(self.uid))
 
-# #         return query
+        if self.event:
+            query = query.filter(database_object_class.event.in_(self.event))
+        # heat: List[int] = []
+        # place: List[int] = []
+        # wind: List[float] = []
+
+        # attempt: List[int] = []
+        if self.athlete_uid:
+            query = query.filter(database_object_class.athlete_uid.in_(self.athlete_uid))
+        if self.team:
+            query = query.filter(database_object_class.team.in_(self.team))
+        if self.meet:
+            query = query.filter(database_object_class.meet.in_(self.meet))
+        # meet_date: List[datetime] = []
+
+        if self.limit:
+            query = query.limit(self.limit)
+        for order_by in self.order_by:
+            query = query.order_by(getattr(database_object_class, order_by))
+        if self.offset:
+            query = query.offset(self.offset)
+
+        return query
 
 

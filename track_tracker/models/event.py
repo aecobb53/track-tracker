@@ -10,19 +10,25 @@ class EventParser:
         self.event = self.parse_event(event)
 
     def parse_event(self, event_s: str):
-        if re.search(r'(Boys?|Mens?)', event_s):
-            self.gender = 'Mens'
-        elif re.search(r'(Girls?|Womens?)', event_s):
-            self.gender = 'Womens'
-        else:
-            x=1
-
         if re.search(r'(Dash|Run|Relay|Hurdles|Steeplechase|Javelin|Racewalk|Wheelchair)', event_s):
             self.re_s = r'(?P<MINUTES>\d+:)?(?P<SECONDS>\d+)\.?(?P<SUBSECOND>\d*)'
         elif re.search(r'(Shot[\s\t]*Put|Discus|Hammer[\s\t]+Throw|High[\s\t]+Jump|Long[\s\t]+Jump|Triple[\s\t]+Jump|Pole[\s\t]+Vault)', event_s):
             self.re_s = r'(?P<FEET>\d+)\.?(?P<INCHES>\d*)'
         else:
             x=1
+
+    def parse_gender(self, event_s: str):
+        print(f"PARSING GENDER FROM {event_s}")
+        if re.search(r'(Boys?|Mens?)', event_s):
+            print('ITS A BOY')
+            self.gender = 'Mens'
+        elif re.search(r'(Girls?|Womens?)', event_s):
+            print('ITS A GIRL')
+            self.gender = 'Womens'
+        else:
+            print('ITS AN ELSE')
+            x=1
+        return self.gender
 
     def parse_mark(self, mark_s: str):
         re_s = re.search(self.re_s, mark_s)
@@ -73,6 +79,11 @@ class EventParser:
         assert result is not None, f"Mark {mark_s} is not valid for event {event_s}"
         return result
 
+    @classmethod
+    def parse_event_gender(cls, event_s: str):
+        ep = cls(event_s)
+        result = ep.parse_gender(event_s)
+        return result
 
 # # re_s = re.search(r'(?P<THING>\d+:?\d+\.?\d*)', '1:23.45')
 
