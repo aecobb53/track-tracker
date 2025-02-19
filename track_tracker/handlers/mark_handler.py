@@ -72,6 +72,39 @@ class MarkHandler(BaseHandler):
         self.context.logger.info(f"Mark found")
         return mark
 
+    async def filter_marks_display(self, mark_filter: MarkFilter) -> list[MarkData]:
+        self.context.logger.info(f"Filtering marks: {mark_filter.model_dump_json()}")
+        with Session(self.context.database.engine) as session:
+            query = select(MarkDB)
+            query = mark_filter.apply_filters(MarkDB, query)
+            rows = session.exec(query).all()
+            marks = []
+            for row in rows:
+                read_obj = MarkDBRead.model_validate(row)
+                mark = read_obj.cast_data_object()
+                marks.append(mark)
+        self.context.logger.info(f"Marks Filtered: {len(marks)}")
+        display_marks = []
+        for mark in marks:
+            if mark.athlete:
+                athlete = mark.athlete.name
+            else:
+                athlete = '-'
+
+            display_marks.append({
+                'Event': mark.event,
+                'Place': mark.place,
+                'Athlete': athlete,
+                'Team': mark.team,
+                'Mark': mark.mark.format,
+                'Wind': mark.wind,
+                'Heat': mark.heat,
+                'Meet': mark.meet,
+                'Date': mark.meet_date,
+                'Gender': mark.gender,
+            })
+        return display_marks
+
     # async def find_mark(self, mark_uid: str) -> Mark:
     #     self.context.logger.info(f"Finding mark: {mark_uid}")
     #     with Session(self.context.database.engine) as session:

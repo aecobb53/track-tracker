@@ -10,10 +10,15 @@ from models import (
     RestHeaders,
     ContextSingleton)
 from handlers import DatabaseHandler, init_logger
-from html import project_base_page, unimplemented_page
+from html import project_home_page, unimplemented_page
 from routs import (
     athlete_router,
     mark_router,
+    mark_html_router,
+    athlete_html_router,
+    team_html_router,
+    event_html_router,
+    record_html_router,
 )
 
 # Service Info
@@ -38,6 +43,11 @@ app.add_middleware(
 
 app.include_router(athlete_router)
 app.include_router(mark_router)
+app.include_router(mark_html_router)
+app.include_router(athlete_html_router)
+app.include_router(team_html_router)
+app.include_router(event_html_router)
+app.include_router(record_html_router)
 
 
 @app.on_event("startup")
@@ -49,17 +59,12 @@ async def startup_event():
     context.logger = init_logger()
 
 
-# # Root
-# @app.get('/', status_code=200)
-# async def root(request: Request):
-#     return {'Hello': 'WORLD!'}
-
 # Root
 @app.get('/', status_code=200)
 async def root(request: Request):
     header_details = RestHeaders(request=request)
     if header_details.response_type == ResponseTypes.HTML:
-        project_page = project_base_page()
+        project_page = project_home_page()
         return HTMLResponse(content=project_page)
     elif header_details.response_type == ResponseTypes.JSON:
         return {'Hello': 'WORLD!'}
@@ -71,10 +76,6 @@ async def root(request: Request):
     return HTMLResponse(content=unimplemented_page_content)
 
 
-# today
-# soon
-# this_week
-# this_month
 
 
 # @app.get('/service-info', status_code=200)
@@ -98,13 +99,3 @@ async def root(request: Request):
 #         return HTMLResponse(content=new_formated_doc.return_document, status_code=200)
 #     elif header_details.response_type == ResponseTypes.JSON:
 #         return service_info
-
-# @app.get('/TESTING', status_code=200)
-# async def root(request: Request):
-#     ch = CalculationHandler()
-#     workflow_filter = parse_query_params(request=request, query_class=WorkflowFilter)
-#     print(workflow_filter)
-#     balance_criteria = parse_query_params(request=request, query_class=BalanceWorkflowArgs)
-#     print(balance_criteria)
-#     workflows = await ch.calculate_workflow(workflow_filter=workflow_filter, balance_criteria=balance_criteria)
-#     return {'workflows': workflows}

@@ -1,0 +1,135 @@
+filter:
+    Event:
+        event:
+            variable: event
+            display: Event
+            description: Filter by event.
+            datatype: string
+            default_value: null
+            grouping: Group1
+        gender:
+            variable: gender
+            display: Gender
+            description: Filter by gender.
+            datatype: string
+            default_value: null
+    Team:
+        team:
+            variable: team
+            display: Team
+            description: Filter by team.
+            datatype: string
+            default_value: null
+            grouping: Group1
+    Meet:
+        meet:
+            variable: meet
+            display: Meet
+            description: Filter by meet.
+            datatype: string
+            default_value: null
+            grouping: Group1
+display:
+    Event:
+        event:
+            variable: event
+            display: Event
+            formatted_function: null
+            html_display_filtering:
+                display_column: Common
+                description: Filter by event.
+                checked: true
+                grouping_classes:
+                    - Example
+        place:
+            variable: place
+            display: Place
+            formatted_function: null
+            html_display_filtering:
+                display_column: Common
+                description: Filter by place.
+                checked: true
+                grouping_classes:
+                    - Example
+        athlete:
+            variable: athlete
+            display: Athlete
+            formatted_function: null
+            html_display_filtering:
+                display_column: Common
+                description: Filter by athlete.
+                checked: true
+                grouping_classes:
+                    - Example
+        team:
+            variable: team
+            display: Team
+            formatted_function: null
+            html_display_filtering:
+                display_column: Common
+                description: Filter by team.
+                checked: true
+                grouping_classes:
+                    - Example
+        mark:
+            variable: mark
+            display: Mark
+            formatted_function: null
+            html_display_filtering:
+                display_column: Common
+                description: Filter by mark.
+                checked: true
+                grouping_classes:
+                    - Example
+        wind:
+            variable: wind
+            display: Wind
+            formatted_function: null
+            html_display_filtering:
+                display_column: Common
+                description: Filter by wind.
+                checked: false
+                grouping_classes:
+                    - Example
+        heat:
+            variable: heat
+            display: Heat
+            formatted_function: null
+            html_display_filtering:
+                display_column: Common
+                description: Filter by heat.
+                checked: false
+                grouping_classes:
+                    - Example
+        gender:
+            variable: gender
+            display: Gender
+            formatted_function: null
+            html_display_filtering:
+                display_column: Common
+                description: Filter by gender.
+                checked: false
+                grouping_classes:
+                    - Example
+    Meet:
+        meet:
+            variable: meet
+            display: Meet
+            formatted_function: null
+            html_display_filtering:
+                display_column: Common
+                description: Filter by meet.
+                checked: true
+                grouping_classes:
+                    - Example
+        date:
+            variable: date
+            display: Date
+            formatted_function: null
+            html_display_filtering:
+                display_column: Common
+                description: Filter by date.
+                checked: true
+                grouping_classes:
+                    - Example
+

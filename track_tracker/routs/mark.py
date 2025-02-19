@@ -83,6 +83,18 @@ async def update_mark(mark: MarkData):
         raise HTTPException(status_code=500, detail='Internal Service Error')
 
 
+@router.get('/display', status_code=200)
+async def filter_mark(request: Request):
+    try:
+        mark_filter = parse_query_params(request=request, query_class=MarkFilter)
+        mh = MarkHandler()
+        marks = await mh.filter_marks_display(mark_filter=mark_filter)
+        return marks
+    except Exception as err:
+        context.logger.warning(f'ERROR: {err}')
+        raise HTTPException(status_code=500, detail='Internal Service Error')
+
+
 # @router.put('/{mark_id}', status_code=200)
 # async def update_mark(mark_id: str, mark: Mark):
 #     rh = MarkHandler()

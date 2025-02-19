@@ -8,7 +8,10 @@ This is just to look at the annual meet schedule and link the meet files so we c
 This is the big guy. It looks through the results directories and grabs each meets data. Then parses every entry. Then saves all athlete data in the HuGE JSON FILE.
 
 ## data_curator.py
-Takes the formatted HUGE JSON FILE and extracts athlete and team specific results. Then creates two new files with that data. 
+Takes the formatted HUGE JSON FILE and extracts athlete and team specific results. Then creates two new files with that data.
+
+## populate_db.py
+Takes the results files and adds them to the local DB.
 
 ## meets_formatter.py
 I actually dont remember what this is for

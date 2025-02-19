@@ -1,5 +1,6 @@
 from datetime import datetime, timezone
 import json
+import re
 from typing import List, Dict, Any
 from sqlmodel import Field, SQLModel, JSON, ARRAY, String, Column, UniqueConstraint, select
 from pydantic import BaseModel, model_validator
@@ -17,11 +18,12 @@ class Mark(BaseModel):
     seconds: int | None = None
     subsecond: float | None = None
     feet: int | None = None
-    inches: float | None = None
+    inches: int | None = None
+    fractions: float | None = None
 
     @classmethod
     def parse_event_mark(cls, event: str, mark: str):
-        minutes, seconds, subsecond, feet, inches = EventParser.parse_event_mark(event_s=event, mark_s=mark)
+        minutes, seconds, subsecond, feet, inches, fractions = EventParser.parse_event_mark(event_s=event, mark_s=mark)
         obj = cls(
             event_str=event,
             mark_str=mark,
@@ -30,31 +32,33 @@ class Mark(BaseModel):
             subsecond=subsecond,
             feet=feet,
             inches=inches,
+            fractions=fractions,
         )
         return obj
 
     @property
     def format(self):
-        if self.minutes is not None:
-            minutes = str(self.minutes)
-        if self.seconds is not None:
-            seconds = str(self.seconds).rjust(2, '0')
-        if self.subsecond is not None:
-            subsecond = str(self.subsecond).rjust(2, '0')
-        if self.feet is not None:
-            feet = str(self.feet).rjust(2, '0')
-        if self.inches is not None:
-            inches = str(self.inches * 12 / 100).rjust(2, '0')
+        minutes = str(self.minutes) if self.minutes is not None else None
+        seconds = str(self.seconds) if self.seconds is not None else None
+        subsecond = str(self.subsecond) if self.subsecond is not None else None
+
+        feet = str(self.feet) if self.feet is not None else None
+        inches = str(self.inches) if self.inches is not None else None
+        fractions = str(self.fractions) if self.fractions is not None else None
+
         if all([minutes, seconds, subsecond]):
-            return f"{minutes}:{seconds}.{subsecond}"
+            return f"{minutes}:{seconds}.{subsecond[2:]}"
         elif all([seconds, subsecond]):
-            return f"{seconds}.{subsecond}"
+            return f"{seconds}.{subsecond[2:]}"
+        elif all([feet, inches, fractions]):
+            return f"{feet}-{inches}.{fractions[2:]}"
         elif all([feet, inches]):
-            return f"{feet}.{inches}"
+            return f"{feet}-{inches}"
 
     @property
     def put(self):
         output = f"{self.event_str}::{self.mark_str}"
+        return output
 
     @classmethod
     def build(cls, input):
@@ -70,7 +74,7 @@ class MarkData(BaseModel):
     heat: int
     place: int
     wind: float
-    attempt: int | None = None
+    # attempt: int | None = None
     athlete: AthleteData | None = None
     team: str | None = None
     meet_date: datetime
@@ -94,7 +98,7 @@ class MarkApiCreate(BaseModel):
     heat: int
     place: int
     wind: float | None = None
-    attempt: int | None = None
+    # attempt: int | None = None
     athlete_uid: str | None = None
     athlete_first_name: str | None = None
     athlete_last_name: str | None = None
@@ -108,7 +112,7 @@ class MarkApiCreate(BaseModel):
 
     @model_validator(mode='before')
     def validate_fields(cls, fields):
-        if fields['wind'] is None:
+        if not fields.get('wind'):
             fields['wind'] = 0.0
         fields['athlete'] = None
         mark = Mark.parse_event_mark(event=fields['event'], mark=fields['mark'])
@@ -139,7 +143,7 @@ class MarkDBBase(SQLModel):
     heat: int
     place: int
     wind: float
-    attempt: int | None = None
+    # attempt: int | None = None
     athlete_uid: str = Field(foreign_key="athlete.uid")
     team: str | None = None
     meet_date: datetime
@@ -161,15 +165,10 @@ class MarkDBBase(SQLModel):
 class MarkDBCreate(MarkDBBase):
     @model_validator(mode='before')
     def validate_fields(cls, fields):
-        print(f"IN DB CREATE VALIDATE")
         if not isinstance(fields, dict):
             fields = fields.model_dump()
-        print(fields)
         fields['athlete_uid'] = fields['athlete']['uid']
         # fields['mark'] = ['fields']['mark']['put']
-        print('---')
-        print(fields)
-        print(f"DB CREATE VALIDATE")
         return fields
 
 
@@ -189,7 +188,7 @@ class MarkFilter(BaseModel):
     # heat: List[int] = []
     # place: List[int] = []
     # wind: List[float] = []
-    # attempt: List[int] = []
+    attempt: List[int] = []
 
     athlete_uid: List[str] = []
     team: List[str] = []
@@ -224,7 +223,7 @@ class MarkFilter(BaseModel):
         # place: List[int] = []
         # wind: List[float] = []
 
-        # attempt: List[int] = []
+        attempt: List[int] = []
         if self.athlete_uid:
             query = query.filter(database_object_class.athlete_uid.in_(self.athlete_uid))
         if self.team:

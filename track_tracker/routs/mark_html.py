@@ -12,80 +12,80 @@ from models import ContextSingleton
 
 
 from html import (
-    # create_athlete_html_page,
-    # filter_athletes_html_page,
-    # find_athlete_html_page,
-    # athlete_base_page,
+    # create_mark_html_page,
+    # filter_marks_html_page,
+    # find_mark_html_page,
+    # mark_base_page,
+    filter_marks_html_page,
     unimplemented_page
     )
 
 context = ContextSingleton()
 
 router = APIRouter(
-    prefix='/html/athlete',
-    tags=['athlete', 'html'],
+    prefix='/html/mark',
+    tags=['mark', 'html'],
 )
-'''HTML pages for viewing and filtering different athletes.'''
 
 
 @router.get('/')
-async def html_athlete(request: Request):
-    athlete_page = unimplemented_page()
-    return HTMLResponse(content=athlete_page, status_code=200)
+async def html_mark(request: Request):
+    mark_page = filter_marks_html_page()
+    return HTMLResponse(content=mark_page, status_code=200)
 
 # path = '/today'
 # @router.get(path)
 # @explicit_router.get(path)
 # @clean_router.get(path)
-# async def html_athletes_today(request: Request):
+# async def html_marks_today(request: Request):
 #     now = datetime.now()
 #     morning = datetime(now.year, now.month, now.day)
 #     evening = morning + timedelta(days=1)
-#     athlete_page = filter_athletes_html_page(
+#     mark_page = filter_marks_html_page(
 #         datetime_start=morning,
 #         datetime_end=evening
 #     )
-#     return HTMLResponse(content=athlete_page, status_code=200)
+#     return HTMLResponse(content=mark_page, status_code=200)
 
 # path = '/this-month'
 # @router.get(path)
 # @explicit_router.get(path)
 # @clean_router.get(path)
-# async def html_athletes_today(request: Request):
+# async def html_marks_today(request: Request):
 #     now = datetime.now()
 #     first_day = datetime(now.year, now.month, 1)
 #     last_day = first_day.replace(month=first_day.month + 1)
-#     athlete_page = filter_athletes_html_page(
+#     mark_page = filter_marks_html_page(
 #         datetime_start=first_day,
 #         datetime_end=last_day
 #     )
-#     return HTMLResponse(content=athlete_page, status_code=200)
+#     return HTMLResponse(content=mark_page, status_code=200)
 
 # path = '/in-the-next-{number_of_days}-days'
 # @router.get(path)
 # @explicit_router.get(path)
 # @clean_router.get(path)
-# async def html_athletes_today(number_of_days: int, request: Request):
+# async def html_marks_today(number_of_days: int, request: Request):
 #     now = datetime.now()
 #     first_day = datetime(now.year, now.month, now.day)
 #     last_day = first_day + timedelta(days=number_of_days)
-#     athlete_page = filter_athletes_html_page(
+#     mark_page = filter_marks_html_page(
 #         datetime_start=first_day,
 #         datetime_end=last_day
 #     )
-#     return HTMLResponse(content=athlete_page, status_code=200)
+#     return HTMLResponse(content=mark_page, status_code=200)
 
 # # @router.get('/modify')
-# # async def html_modify_athlete(request: Request):
-# #     athlete_page = create_athlete_html_page()
-# #     return HTMLResponse(content=athlete_page, status_code=200)
+# # async def html_modify_mark(request: Request):
+# #     mark_page = create_mark_html_page()
+# #     return HTMLResponse(content=mark_page, status_code=200)
 
 
-# @router.get('/{athlete_uid}')
-# async def html_athlete_athlete_uid(request: Request, athlete_uid: str):
+# @router.get('/{mark_uid}')
+# async def html_mark_mark_uid(request: Request, mark_uid: str):
 #     eh = EventHandler()
 #     try:
-#         athlete = await eh.find_athlete(athlete_uid=athlete_uid)
+#         mark = await eh.find_mark(mark_uid=mark_uid)
 #     # except MissingRecordException as err:
 #     #     context.logger.error(f"ERROR: {err}")
 #     #     raise HTTPException(status_code=404, detail=str(err))
@@ -95,5 +95,5 @@ async def html_athlete(request: Request):
 #     except Exception as err:
 #         context.logger.error(f'ERROR: {err}')
 #         raise HTTPException(status_code=500, detail='Internal Server Error')
-#     athlete_page = find_athlete_html_page(athlete=athlete)
-#     return HTMLResponse(content=athlete_page, status_code=200)
+#     mark_page = find_mark_html_page(mark=mark)
+#     return HTMLResponse(content=mark_page, status_code=200)

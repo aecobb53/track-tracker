@@ -9,6 +9,40 @@ MEET_DATES_PATH = os.path.join(etc_tmp, 'meet_dates.json')
 BIG_ASS_JSON_PATH = os.path.join(etc_tmp, 'BIG_ASS_JSON.json')
 
 
+
+with open(BIG_ASS_JSON_PATH, 'r') as jf:
+    fuck = json.load(jf)
+
+# for meet, events in fuck.items():
+#     x=1
+#     for event_name, places in events.items():
+#         x=1
+#         for shit in places:
+#             if re.search(r'\d', shit['team']):
+#                 team = shit['team']
+#                 event = shit['event']
+#                 meet = shit['meet_metadata']['meet_name']
+#                 if team == '127 Project':
+#                     pass
+#                 elif team == 'Columbia (Sec 2)':
+#                     pass
+#                 else:
+#                     x=1
+#     # for event in meets_athlete_data[meet]:
+#     #     for record in meets_athlete_data[meet][event]:
+#     #         if record['mark']:
+#     #             if ':' in record['mark']:
+#     #                 x=1
+#     #             else:
+#     #                 x=1
+#     #         else:
+#     #             x=1
+
+# x=1
+
+
+
+
 def parse_data_row(data_row: list[str], event: str, header: list[str], calendar_year: int, meet_name: str, meet_metadata: dict):
     # New result indicator
     if len(data_row) == 5 and data_row[-1] == '':
@@ -38,23 +72,21 @@ def parse_data_row(data_row: list[str], event: str, header: list[str], calendar_
             wind_sign = None
             wind = None
             heat = None
+            result_run_re = re.search(r'[\s\t]+(\d*:?\d+\.?\d*)[\s\t]+([-+])?(\d*\.?\d*)?[\s\t]*(\d+)', data_row[-1])
+            result_jump_re = re.search(r'[\s\t]+(\d+-\d+\.?\d*)[\s\t]+([-+])?(\d*\.?\d*)?[\s\t]*(\d+)', data_row[-1])
+            # result_jump_re = re.search(r'[\s\t]+(\d+-?\d+\.?\d*)[\s\t]+([-+])?(\d*\.?\d*)?[\s\t]*(\d+)', data_row[-1])
 
-            result_wind_re = re.search(r'[\s\t]+((\d+:)?\d+\.?\d*)[\s\t]+([-+])[\s\t]*(\d+.?\d*)[\s\t]+(\d+)', data_row[-1])
-            result_no_wind_re = re.search(r'[\s\t]+((\d+:)?\d+?\.\d+)[\s\t]+(\d+)', data_row[-1])
-            result_high_jump_re = re.search(r'[\s\t]+(\d+)-(\d+\.?\d*)[\s\t]+(\d+)', data_row[-1])
-            result_long_jump_re = re.search(r'[\s\t]+(\d+)-(\d+\.?\d*)[\s\t]+([-+])(\d*\.?\d*)[\s\t]+(\d+)', data_row[-1])
-            if result_wind_re:
-                mark, _, wind_sign, wind, heat = result_wind_re.groups()
-                team = data_row[-1][:result_wind_re.start(0)].strip()
-            elif result_no_wind_re:
-                mark, _, heat = result_no_wind_re.groups()
-                team = data_row[-1][:result_no_wind_re.start(0)].strip()
-            elif result_high_jump_re:
-                attempt, mark, heat = result_high_jump_re.groups()
-                team = data_row[-1][:result_high_jump_re.start(0)].strip()
-            elif result_long_jump_re:
-                attempt, mark, wind_sign, wind, heat = result_long_jump_re.groups()
-                team = data_row[-1][:result_long_jump_re.start(0)].strip()
+
+            # if 'Kaleb Kimaita' in data_row[1] and 'Erie' in meet_metadata['meet_name']:
+            #     x=1
+
+
+            if result_jump_re:
+                mark, wind_sign, wind, heat = result_jump_re.groups()
+                team = data_row[-1][:result_jump_re.start(0)].strip()
+            elif result_run_re:
+                mark, wind_sign, wind, heat = result_run_re.groups()
+                team = data_row[-1][:result_run_re.start(0)].strip()
             else:
                 x=1
 
@@ -63,8 +95,6 @@ def parse_data_row(data_row: list[str], event: str, header: list[str], calendar_
                 year = int(year_re.groups()[0])
                 team = team.replace(str(year), '').strip()
 
-            if attempt:
-                attempt = int(attempt)
             if wind:
                 wind = float(wind)
             if wind_sign:
@@ -79,9 +109,8 @@ def parse_data_row(data_row: list[str], event: str, header: list[str], calendar_
                 'year': year,
                 'calendar_year': calendar_year,
                 'team': team,
-                'attempt': attempt,
+                # 'attempt': attempt,
                 'mark': mark,
-                # 'wind_sign': wind_sign,
                 'wind': wind,
                 'heat': heat,
                 'event': event,
@@ -98,16 +127,19 @@ def parse_data_row(data_row: list[str], event: str, header: list[str], calendar_
                 mark, _, heat = result_relay_re.groups()
             else:
                 x=1
+            team = data_row[-2]
 
             if heat:
                 heat = int(heat)
             data_obj = {
                 'place': int(data_row[0]),
-                'team': data_row[2],
+                'calendar_year': calendar_year,
+                'team': team,
                 'mark': mark,
                 'heat': heat,
                 'event': event,
                 'meet_metadata': meet_metadata,
+                'wind': 0.0,
             }
             return data_obj
         else:
@@ -141,10 +173,7 @@ def parse_meet_file(path: str, meet_dates: dict):
     else:
         meet_metadata = None
 
-    # for line in data:
     for index, line in enumerate(data):
-        # if meet_name == 'Arcadia Invitational' and calendar_year == 2022 and index == 4510:
-        #     x=1
         if 'All Results' in line or not line:
             continue
         newline_re = re.search(r'^\d+$', line.strip())

@@ -1,0 +1,25 @@
+async function GETFilterMark(params) {
+    console.log('GETing to /mark/display');
+    // var url = '/mark/display';
+    var url = '/mark/display?' + new URLSearchParams(params).toString();
+    console.log('url: ' + url);
+
+    console.log('params: ' + JSON.stringify(params));
+
+    const response = await fetch(url, {
+        method: 'get',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        // params: JSON.stringify(params),
+    });
+    const data = await response.json();
+
+
+    console.log('Call data: ' + JSON.stringify(data));
+
+
+    const status = response.status;
+    console.log('Call status: ' + status);
+    return data;
+}

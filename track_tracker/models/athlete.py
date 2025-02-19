@@ -25,26 +25,31 @@ class AthleteData(BaseModel):
     @property
     def put(self):
         output = self.model_dump()
-        year = output['graduation_year'] - datetime.now(timezone.utc).year
-        if year < 0:
-            output['current_year'] = f'Graduated'
-        elif year == 0:
-            output['current_year'] = f'Senior'
-        elif year == 1:
-            output['current_year'] = f'Junior'
-        elif year == 2:
-            output['current_year'] = f'Sophomore'
-        elif year == 3:
-            output['current_year'] = f'Freshman'
-        elif year > 3:
-            output['current_year'] = f'Not in HS yet'
+        if output.get('graduation_year') is not None:
+            year = output['graduation_year'] - datetime.now(timezone.utc).year
+            if year < 0:
+                output['current_year'] = f'Graduated'
+            elif year == 0:
+                output['current_year'] = f'Senior'
+            elif year == 1:
+                output['current_year'] = f'Junior'
+            elif year == 2:
+                output['current_year'] = f'Sophomore'
+            elif year == 3:
+                output['current_year'] = f'Freshman'
+            elif year > 3:
+                output['current_year'] = f'Not in HS yet'
         return output
+
+    @property
+    def name(self):
+        return f"{self.first_name} {self.last_name}"
 
 
 class AthleteApiCreate(BaseModel):
     first_name: str
     last_name: str
-    graduation_year: int
+    graduation_year: int | None = None
     team: str
     gender: str | None = None
 

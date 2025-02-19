@@ -1,3 +1,4 @@
+from multiprocessing.sharedctypes import Value
 import re
 
 
@@ -7,33 +8,29 @@ class EventParser:
     """
     def __init__(self, event: str):
         self.event_s = event
-        self.event = self.parse_event(event)
+        self.parse_event(event)
 
     def parse_event(self, event_s: str):
-        if re.search(r'(Dash|Run|Relay|Hurdles|Steeplechase|Javelin|Racewalk|Wheelchair)', event_s):
+        if re.search(r'(Dash|Run|Relay|Hurdles|Steeplechase|Javelin|Racewalk|Meter)', event_s):
             self.re_s = r'(?P<MINUTES>\d+:)?(?P<SECONDS>\d+)\.?(?P<SUBSECOND>\d*)'
         elif re.search(r'(Shot[\s\t]*Put|Discus|Hammer[\s\t]+Throw|High[\s\t]+Jump|Long[\s\t]+Jump|Triple[\s\t]+Jump|Pole[\s\t]+Vault)', event_s):
-            self.re_s = r'(?P<FEET>\d+)\.?(?P<INCHES>\d*)'
+            self.re_s = r'((?P<FEET>\d+)-)?(?P<INCHES>\d*)\.?(?P<FRACTIONS>\d*)'
         else:
-            x=1
+            raise ValueError(f"UNABLE TO DETERMINE EVENT TYPE FOR {event_s}")
 
     def parse_gender(self, event_s: str):
-        print(f"PARSING GENDER FROM {event_s}")
         if re.search(r'(Boys?|Mens?)', event_s):
-            print('ITS A BOY')
             self.gender = 'Mens'
         elif re.search(r'(Girls?|Womens?)', event_s):
-            print('ITS A GIRL')
             self.gender = 'Womens'
         else:
-            print('ITS AN ELSE')
             x=1
         return self.gender
 
     def parse_mark(self, mark_s: str):
         re_s = re.search(self.re_s, mark_s)
         if re_s:
-            minutes = seconds = subsecond = feet = inches = None
+            minutes = seconds = subsecond = feet = inches = fractions = None
             try:
                 minutes = re_s.group('MINUTES')
             except:
@@ -54,10 +51,16 @@ class EventParser:
                 inches = re_s.group('INCHES')
             except:
                 pass
-            if not any([minutes, seconds, subsecond, feet, inches]):
-                x=1
-            if not all([seconds, subsecond]) and not all([feet, inches]):
-                x=1
+            try:
+                fractions = re_s.group('FRACTIONS')
+            except:
+                pass
+
+
+            if not any([minutes, seconds, subsecond, feet, inches, fractions]):
+                raise ValueError(f"Mark {mark_s} is not valid for event {self.event_s} [{minutes, seconds, subsecond, feet, inches, fractions}]")
+            # if not all([seconds, subsecond, subsecond]) and not all([feet, inches, fractions]):
+            #     raise ValueError(f"Mark {mark_s} is not valid for event {self.event_s} [{minutes, seconds, subsecond, feet, inches, fractions}]")
             if minutes is not None:
                 minutes = int(minutes[:-1])
             if seconds is not None:
@@ -67,8 +70,10 @@ class EventParser:
             if feet is not None:
                 feet = int(feet)
             if inches is not None:
-                inches = int(inches) * 12 / 100
-            return minutes, seconds, subsecond, feet, inches
+                inches = int(inches)
+            if fractions is not None:
+                fractions = float(f"0.{fractions}")
+            return minutes, seconds, subsecond, feet, inches, fractions
         else:
             return None
 
@@ -100,8 +105,6 @@ class EventParser:
 #     for event, entries in events_d.items():
 #         events.add(event)
 #         for entry in entries:
-#             # print(event)
-#             # print(entry['mark'])
 #             if event == 'raw':
 #                 continue
 #             ep = EventParser(event)
@@ -109,7 +112,6 @@ class EventParser:
 # events_l = list(events)
 # events_l.sort()
 # for i in events_l:
-#     print(f"    '{i}',")
 # x=1
 
 # events_l = [

@@ -44,7 +44,7 @@ def parse_query_params(request, query_class=None, body_class=None):
     # print(query_params)
     if query_class:
         query_params = query_class(**query_params)
-    # print(query_params)
+    print(query_params)
     return query_params
 
 def parse_header(request):

@@ -8,84 +8,83 @@ from fastapi.responses import HTMLResponse, ORJSONResponse
 # from handlers import EventHandler, parse_query_params
 # from utils import parse_query_params, parse_header, MissingRecordException, DuplicateRecordsException
 from models import ContextSingleton
-# from .html.unimplemented_page import unimplemented_page
 
 
 from html import (
-    # create_athlete_html_page,
-    # filter_athletes_html_page,
-    # find_athlete_html_page,
-    # athlete_base_page,
+    # create_team_html_page,
+    # filter_teams_html_page,
+    # find_team_html_page,
+    # team_base_page,
     unimplemented_page
     )
 
 context = ContextSingleton()
 
 router = APIRouter(
-    prefix='/html/athlete',
-    tags=['athlete', 'html'],
+    prefix='/html/team',
+    tags=['team', 'html'],
 )
-'''HTML pages for viewing and filtering different athletes.'''
+'''HTML pages for viewing and filtering different athletes or results based on team.'''
 
 
 @router.get('/')
-async def html_athlete(request: Request):
-    athlete_page = unimplemented_page()
-    return HTMLResponse(content=athlete_page, status_code=200)
+async def html_team(request: Request):
+    team_page = unimplemented_page()
+    return HTMLResponse(content=team_page, status_code=200)
 
 # path = '/today'
 # @router.get(path)
 # @explicit_router.get(path)
 # @clean_router.get(path)
-# async def html_athletes_today(request: Request):
+# async def html_teams_today(request: Request):
 #     now = datetime.now()
 #     morning = datetime(now.year, now.month, now.day)
 #     evening = morning + timedelta(days=1)
-#     athlete_page = filter_athletes_html_page(
+#     team_page = filter_teams_html_page(
 #         datetime_start=morning,
 #         datetime_end=evening
 #     )
-#     return HTMLResponse(content=athlete_page, status_code=200)
+#     return HTMLResponse(content=team_page, status_code=200)
 
 # path = '/this-month'
 # @router.get(path)
 # @explicit_router.get(path)
 # @clean_router.get(path)
-# async def html_athletes_today(request: Request):
+# async def html_teams_today(request: Request):
 #     now = datetime.now()
 #     first_day = datetime(now.year, now.month, 1)
 #     last_day = first_day.replace(month=first_day.month + 1)
-#     athlete_page = filter_athletes_html_page(
+#     team_page = filter_teams_html_page(
 #         datetime_start=first_day,
 #         datetime_end=last_day
 #     )
-#     return HTMLResponse(content=athlete_page, status_code=200)
+#     return HTMLResponse(content=team_page, status_code=200)
 
 # path = '/in-the-next-{number_of_days}-days'
 # @router.get(path)
 # @explicit_router.get(path)
 # @clean_router.get(path)
-# async def html_athletes_today(number_of_days: int, request: Request):
+# async def html_teams_today(number_of_days: int, request: Request):
 #     now = datetime.now()
 #     first_day = datetime(now.year, now.month, now.day)
 #     last_day = first_day + timedelta(days=number_of_days)
-#     athlete_page = filter_athletes_html_page(
+#     team_page = filter_teams_html_page(
 #         datetime_start=first_day,
 #         datetime_end=last_day
 #     )
-#     return HTMLResponse(content=athlete_page, status_code=200)
+#     return HTMLResponse(content=team_page, status_code=200)
 
 # # @router.get('/modify')
-# # async def html_modify_athlete(request: Request):
-# #     athlete_page = create_athlete_html_page()
-# #     return HTMLResponse(content=athlete_page, status_code=200)
+# # async def html_modify_team(request: Request):
+# #     team_page = create_team_html_page()
+# #     return HTMLResponse(content=team_page, status_code=200)
 
 
-# @router.get('/{athlete_uid}')
-# async def html_athlete_athlete_uid(request: Request, athlete_uid: str):
+# @router.get('/{team_uid}')
+# async def html_team_team_uid(request: Request, team_uid: str):
 #     eh = EventHandler()
 #     try:
-#         athlete = await eh.find_athlete(athlete_uid=athlete_uid)
+#         team = await eh.find_team(team_uid=team_uid)
 #     # except MissingRecordException as err:
 #     #     context.logger.error(f"ERROR: {err}")
 #     #     raise HTTPException(status_code=404, detail=str(err))
@@ -95,5 +94,5 @@ async def html_athlete(request: Request):
 #     except Exception as err:
 #         context.logger.error(f'ERROR: {err}')
 #         raise HTTPException(status_code=500, detail='Internal Server Error')
-#     athlete_page = find_athlete_html_page(athlete=athlete)
-#     return HTMLResponse(content=athlete_page, status_code=200)
+#     team_page = find_team_html_page(team=team)
+#     return HTMLResponse(content=team_page, status_code=200)
