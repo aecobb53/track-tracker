@@ -2,7 +2,7 @@ filter:
     Event:
         event:
             variable: event
-            display: Event
+            display: Event(s)
             description: Filter by event.
             datatype: string
             default_value: null
@@ -13,22 +13,132 @@ filter:
             description: Filter by gender.
             datatype: string
             default_value: null
+            # options:
+            #     - "All"
+            #     - "Mens"
+            #     - "Womens"
+    Heat:
+        heat1:
+            variable: heat
+            display: Heat
+            description: Filter by heat.
+            datatype: string
+            default_value: null
+            size: 5
+            # required: true
+            options:
+                - "="
+                - "<="
+                - ">="
+                - "<"
+                - ">"
+                - "!="
+        heat2:
+            variable: heat
+            display: Heat
+            description: Filter by heat.
+            datatype: string
+            default_value: null
+            size: 5
+            options:
+                - "<="
+                - ">="
+                - "<"
+                - ">"
+                - "!="
+    Place:
+        place1:
+            variable: place
+            display: Plate
+            description: Filter by place.
+            datatype: string
+            default_value: null
+            size: 5
+            options:
+                - "="
+                - "<="
+                - ">="
+                - "<"
+                - ">"
+                - "!="
+        place2:
+            variable: place
+            display: Plate
+            description: Filter by place.
+            datatype: string
+            default_value: null
+            size: 5
+            options:
+                - "<="
+                - ">="
+                - "<"
+                - ">"
+                - "!="
+    Wind:
+        wind1:
+            variable: wind
+            display: Wind
+            description: Filter by wind.
+            datatype: string
+            default_value: null
+            size: 5
+            options:
+                - "="
+                - "<="
+                - ">="
+                - "<"
+                - ">"
+                - "!="
+        wind2:
+            variable: wind
+            display: Wind
+            description: Filter by wind.
+            datatype: string
+            default_value: null
+            size: 5
+            options:
+                - "<="
+                - ">="
+                - "<"
+                - ">"
+                - "!="
     Team:
         team:
             variable: team
-            display: Team
+            display: Team(s)
             description: Filter by team.
+            datatype: string
+            default_value: null
+            grouping: Group1
+        first_name:
+            variable: first_name
+            display: First Name(s)
+            description: Filter by athlete first name.
+            datatype: string
+            default_value: null
+            grouping: Group1
+        last_name:
+            variable: last_name
+            display: Last Name(s)
+            description: Filter by athlete last name.
             datatype: string
             default_value: null
             grouping: Group1
     Meet:
         meet:
             variable: meet
-            display: Meet
+            display: Meet(s)
             description: Filter by meet.
             datatype: string
             default_value: null
             grouping: Group1
+        # meet_date:
+        #     variable: meet_date
+        #     display: Meet Date
+        #     description: Filter by date of meet.
+        #     datatype: string
+        #     default_value: null
+        #     grouping: Group1
 display:
     Event:
         event:

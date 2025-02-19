@@ -96,7 +96,6 @@ for athlete, events in athletes.items():
             data.append(event_name)
             data.append(str(result['mark']))
             data.append(str(result['wind']))
-            # data.append(str(result['attempt']))
             data.append(str(result['calendar_year']))
             data.append(str(date))
             data.append(str(result['meet']))

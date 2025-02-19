@@ -13,17 +13,19 @@ Get enough pulled together to deploy on server.
     - Verify for long jump as well
     - Verify for high jump
     - Verify for pole vault
-- [ ] Implement additional search parameters
-    - [ ] Backend
-    - [ ] API
-    - [ ] UI
+- [X] Implement additional search parameters
+    - [X] Backend
+    - [X] API
+    - [X] UI
 - [X] Implement column hiding
-- [ ] Allow fractional searches like 'Discus' instead of 'Mens Discus'
+- [X] Allow fractional searches like 'Discus' instead of 'Mens Discus'
 - [ ] Maybe add an advanced hidden section with things like setting sort order
     - [ ] Add filter order?
+    - [ ] Add display order?
 - [X] Change text color
-- [ ] Remove Attempt from everywhere in codebase
+- [X] Remove Attempt from everywhere in codebase
 - [ ] Verify all marks look correct for each event
+- [ ] Fix gender on UI to just be a dropdown not a dropdown and a text input
 
 ### Deploy
 - [ ] Try to upload the entire dataset to see what else breaks
@@ -64,6 +66,7 @@ Things I want to get to but they are low priority or the scope is still unknown
 - [ ] Make things scale by % instead of pixels everywhere
 - [ ] Auto data upload?
     - [ ] Is there a way to auto scrape data?
+- [ ] In filtering allow a '=' list such as Heat=1,2
 
 
 # Done

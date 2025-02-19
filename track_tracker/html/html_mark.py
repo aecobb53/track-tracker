@@ -11,6 +11,8 @@ def filter_marks_html_page():
     # Filter Form
     filter_form_div = Div()
     filter_form_div.add_element(Header(level=1, internal='Data Filter'))
+    filter_form_div.add_element(Paragraph(
+        internal='For multiple items separate with a comma. Ex "Fairview, Boulder"'))
     filter_form = Form(action=f"/mark", method='get').add_class('filter-form')
     filter_groupings = {}
     for grouping in MARK_FILTER_PARAMS.keys():
@@ -23,19 +25,42 @@ def filter_marks_html_page():
         grouping_div = Div()
         grouping_div.add_element(Header(level=3, internal=grouping))
         for param in params:
-            id_base = param['display'].replace(' ', '-').lower()
+            id_base = param['variable'].replace(' ', '-').lower()
             input_kwargs = {
-                'type': param['datatype'],
                 'id': f"{id_base}-input",
                 'name': param['display'],
                 'value': param['default_value'],
             }
-            box = [
-                Span(
-                    for_=f"{id_base}-input", internal=param['display']
-                ).add_class('filter-checkbox-input').add_style({'margin': '0px'}),
-                Input(**input_kwargs).add_style({'margin': '0px'}),
-            ]
+            if param.get('datatype'):
+                input_kwargs['type'] = param['datatype']
+            if param.get('size'):
+                input_kwargs['size'] = param['size']
+            # if param.get('required'):
+            #     input_kwargs['required'] = True
+            if param.get('options'):
+                # If there are options add them as a modifier to the input
+                input_kwargs['options'] = param['options']
+                options = []
+                for option in param['options']:
+                    options.append(Option(value=option, internal=option))
+                select = Select(internal=options, id=f"{id_base}-input-select")
+                box = [
+                    Span(
+                        for_=f"{id_base}-input", internal=param['display']
+                    ).add_class('filter-checkbox-input').add_style({'margin': '0px'}),
+                    select,
+                    Input(**input_kwargs).add_style({'margin': '0px'}),
+                ]
+            else:
+                box = [
+                    Span(
+                        for_=f"{id_base}-input", internal=param['display']
+                    ).add_class('filter-checkbox-input').add_style({'margin': '0px'}),
+                    Input(**input_kwargs).add_style({'margin': '0px'}),
+                ]
+
+            # print(f"BOX: {box}")
+            # print(f"LEN: {len(box)}")
             grouping_div.add_element(
                 Label(
                     for_=f"{id_base}-input", internal=box, title=param['description']
@@ -57,12 +82,12 @@ def filter_marks_html_page():
         for details in MARK_DISPLAY_PARAMS[grouping].values():
             display_groupings[grouping].append(details)
     for grouping in display_groupings.keys():
-        print(f"GROUPING: {grouping}")
+        # print(f"GROUPING: {grouping}")
         params = display_groupings[grouping]
         grouping_div = Div()
         grouping_div.add_element(Header(level=3, internal=grouping))
         for param in params:
-            id_base = param['display'].replace(' ', '-').lower()
+            id_base = param['variable'].replace(' ', '-').lower()
             input_kwargs = {
                 'type': 'checkbox',
                 'id': f"{id_base}-input",

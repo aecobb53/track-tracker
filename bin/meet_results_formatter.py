@@ -65,7 +65,6 @@ def parse_data_row(data_row: list[str], event: str, header: list[str], calendar_
     A_row_len = len(data_row)
     if len(header) == 7 and len(data_row) == 3:
         if header == ['PLACE', 'VIDEO', 'ATHLETE', 'TEAM', 'MARK', 'WIND', 'HEAT']:
-            attempt = None
             year = None
             team = None
             mark = None
@@ -109,7 +108,6 @@ def parse_data_row(data_row: list[str], event: str, header: list[str], calendar_
                 'year': year,
                 'calendar_year': calendar_year,
                 'team': team,
-                # 'attempt': attempt,
                 'mark': mark,
                 'wind': wind,
                 'heat': heat,

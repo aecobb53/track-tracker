@@ -15,10 +15,6 @@ async function GETFilterMark(params) {
     });
     const data = await response.json();
 
-
-    console.log('Call data: ' + JSON.stringify(data));
-
-
     const status = response.status;
     console.log('Call status: ' + status);
     return data;

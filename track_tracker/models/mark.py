@@ -3,6 +3,7 @@ import json
 import re
 from typing import List, Dict, Any
 from sqlmodel import Field, SQLModel, JSON, ARRAY, String, Column, UniqueConstraint, select
+from sqlmodel import or_, and_
 from pydantic import BaseModel, model_validator
 from enum import Enum
 from uuid import uuid4
@@ -74,7 +75,6 @@ class MarkData(BaseModel):
     heat: int
     place: int
     wind: float
-    # attempt: int | None = None
     athlete: AthleteData | None = None
     team: str | None = None
     meet_date: datetime
@@ -98,7 +98,6 @@ class MarkApiCreate(BaseModel):
     heat: int
     place: int
     wind: float | None = None
-    # attempt: int | None = None
     athlete_uid: str | None = None
     athlete_first_name: str | None = None
     athlete_last_name: str | None = None
@@ -143,7 +142,6 @@ class MarkDBBase(SQLModel):
     heat: int
     place: int
     wind: float
-    # attempt: int | None = None
     athlete_uid: str = Field(foreign_key="athlete.uid")
     team: str | None = None
     meet_date: datetime
@@ -185,13 +183,14 @@ class MarkFilter(BaseModel):
 
     event: List[str] = []
 
-    # heat: List[int] = []
-    # place: List[int] = []
-    # wind: List[float] = []
-    attempt: List[int] = []
+    heat: List[str] = []
+    place: List[str] = []
+    wind: List[str] = []
 
     athlete_uid: List[str] = []
     team: List[str] = []
+    first_name: List[str] = []
+    last_name: List[str] = []
     meet: List[str] = []
     gender: List[str] = []
 
@@ -202,8 +201,74 @@ class MarkFilter(BaseModel):
     order_by: List[str] = ['event', 'place']
     offset: int = 0
 
+
     @model_validator(mode='before')
     def validate_fields(cls, fields):
+        if fields.get('event'):
+            event = []
+            [event.extend(i.split(',')) for i in fields['event']]
+            fields['event'] = [e.strip() for e in event]
+
+        if fields.get('heat'):
+            heat = []
+            for i in fields['heat']:
+                i_l = i.split(',')
+                for ii in i_l:
+                    ii = ii.strip()
+                    if ii:
+                        heat.append(ii)
+            fields['heat'] = heat
+
+        if fields.get('place'):
+            place = []
+            for i in fields['place']:
+                i_l = i.split(',')
+                for ii in i_l:
+                    ii = ii.strip()
+                    if ii:
+                        place.append(ii)
+            fields['place'] = place
+
+        if fields.get('wind'):
+            wind = []
+            for i in fields['wind']:
+                i_l = i.split(',')
+                for ii in i_l:
+                    ii = ii.strip()
+                    if ii:
+                        wind.append(ii)
+            fields['wind'] = wind
+
+        if fields.get('team'):
+            team = []
+            [team.extend(i.split(',')) for i in fields['team']]
+            fields['team'] = [t.strip() for t in team]
+
+        if fields.get('meet'):
+            meet = []
+            [meet.extend(i.split(',')) for i in fields['meet']]
+            fields['meet'] = [m.strip() for m in meet]
+
+        if fields.get('first_name'):
+            first_name = []
+            [first_name.extend(i.split(',')) for i in fields['first_name']]
+            fields['first_name'] = [f.strip() for f in first_name]
+
+        if fields.get('last_name'):
+            last_name = []
+            [last_name.extend(i.split(',')) for i in fields['last_name']]
+            fields['last_name'] = [l.strip() for l in last_name]
+
+        if fields.get('athlete_uid'):
+            athlete_uid = []
+            [athlete_uid.extend(i.split(',')) for i in fields['athlete_uid']]
+            fields['athlete_uid'] = [g.strip() for g in athlete_uid]
+
+        if fields.get('gender'):
+            gender = []
+            [gender.extend(i.split(',')) for i in fields['gender']]
+            fields['gender'] = [g.strip() for g in gender]
+
         # if isinstance(fields.get('active'), list):
         #     fields['active'] = fields['active'][0]
         if isinstance(fields.get('limit'), list):
@@ -214,22 +279,73 @@ class MarkFilter(BaseModel):
 
     def apply_filters(self, database_object_class: MarkDBBase, query: select) -> select:
         """Apply the filters to the query"""
+        def apply_modifier(query, db_obj_cls, string):
+            if string.startswith('='):
+                return query.filter(db_obj_cls == string[1:])
+            elif string.startswith('>='):
+                return query.filter(db_obj_cls >= string[2:])
+            elif string.startswith('>'):
+                return query.filter(db_obj_cls > string[1:])
+            elif string.startswith('<='):
+                return query.filter(db_obj_cls <= string[2:])
+            elif string.startswith('<'):
+                return query.filter(db_obj_cls < string[1:])
+            elif string.startswith('!='):
+                return query.filter(db_obj_cls != string[2:])
+
         if self.uid:
             query = query.filter(database_object_class.uid.in_(self.uid))
 
         if self.event:
-            query = query.filter(database_object_class.event.in_(self.event))
-        # heat: List[int] = []
-        # place: List[int] = []
-        # wind: List[float] = []
+            filter_list = [database_object_class.event.contains(e) for e in self.event]
+            query = query.filter(or_(*filter_list))
 
-        attempt: List[int] = []
+        if self.heat:
+            filter_list = []
+            for heat in self.heat:
+                query = apply_modifier(query, database_object_class.heat, heat)
+
+        if self.place:
+            filter_list = []
+            for place in self.place:
+                query = apply_modifier(query, database_object_class.place, place)
+
+        if self.wind:
+            filter_list = []
+            for wind in self.wind:
+                query = apply_modifier(query, database_object_class.wind, wind)
+
         if self.athlete_uid:
             query = query.filter(database_object_class.athlete_uid.in_(self.athlete_uid))
+
         if self.team:
-            query = query.filter(database_object_class.team.in_(self.team))
+            filter_list = [database_object_class.team.contains(t) for t in self.team]
+            query = query.filter(or_(*filter_list))
+
         if self.meet:
-            query = query.filter(database_object_class.meet.in_(self.meet))
+            filter_list = [database_object_class.meet.contains(m) for m in self.meet]
+            query = query.filter(or_(*filter_list))
+
+        if self.team:
+            filter_list = [database_object_class.team.contains(t) for t in self.team]
+            query = query.filter(or_(*filter_list))
+
+        if self.first_name:
+            filter_list = [database_object_class.first_name.contains(f) for f in self.first_name]
+            query = query.filter(or_(*filter_list))
+
+        if self.last_name:
+            filter_list = [database_object_class.last_name.contains(l) for l in self.last_name]
+            query = query.filter(or_(*filter_list))
+
+        if self.athlete_uid:
+            filter_list = [database_object_class.athlete_uid.contains(a) for a in self.athlete_uid]
+            query = query.filter(or_(*filter_list))
+
+        if self.gender:
+            filter_list = [database_object_class.gender.contains(g) for g in self.gender]
+            query = query.filter(or_(*filter_list))
+
         # meet_date: List[datetime] = []
 
         if self.limit:
@@ -240,5 +356,3 @@ class MarkFilter(BaseModel):
             query = query.offset(self.offset)
 
         return query
-
-
