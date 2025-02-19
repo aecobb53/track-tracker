@@ -10,5 +10,5 @@ async function applyFilterForm() {
     const filterResults = await GETFilterMark(params);
 
     populateMarkTable(filterResults);
-    // applyDisplayFilters();
+    applyDisplayFilters();
 }

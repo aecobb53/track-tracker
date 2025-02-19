@@ -6,7 +6,7 @@ from .base_page import project_base_page
 from .common import MARK_FILTER_PARAMS, MARK_DISPLAY_PARAMS
 
 def filter_marks_html_page():
-    page_content = Div().add_style({'display': 'block'})
+    page_content = Div().add_style({'display': 'block', 'color': '#949ba4'})
 
     # Filter Form
     filter_form_div = Div()
@@ -84,6 +84,12 @@ def filter_marks_html_page():
                     internal=box, id=f"{id_base}-label", title=param['html_display_filtering']['description'], for_=f"{id_base}-input"
                 ).add_class('checkbox-label'))
         display_form.add_element(grouping_div)
+
+    display_form.add_element(
+        Button(internal='All', title='Toggle all checkboxes', type='button', onclick='toggleCheckboxesAll()').add_class('small-button'))
+
+    display_form.add_element(
+        Button(internal='Apply', type='button', onclick='applyDisplayFilters()').add_class('big-button'))
     display_form_div.add_element(display_form)
     page_content.add_element(display_form_div)
 
@@ -97,6 +103,8 @@ def filter_marks_html_page():
         os.path.join('mark', 'applyFilterForm.js'),
         os.path.join('mark', 'GETFilterMark.js'),
         os.path.join('mark', 'populateMarkTable.js'),
+        os.path.join('mark', 'applyDisplayFilters.js'),
+        os.path.join('mark', 'toggleCheckboxes.js'),
     ]
     for fl in js_files:
         with open(os.path.join('html', fl), 'r') as jf:

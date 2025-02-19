@@ -47,12 +47,12 @@ def project_base_page():
     sidebar_content = SidebarContent(sidebar_content=[sidebar_content])
     body_content = BodyContent(
         body_content=[page_content],
-        style_details={'width': '90%', 'margin-left': '10%'})
+        style_details={'width': '94%', 'margin-left': '6%', 'margin-top': '3%'})
     new_formatted_doc = MyBaseDocument(
         navigation_content=navigation_content,
         sidebar_content=sidebar_content,
         body_content=body_content,
-        sidebar_width='10%',
+        sidebar_width='5%',
     )
     return new_formatted_doc
     # return new_formatted_doc.return_document

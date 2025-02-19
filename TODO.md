@@ -13,14 +13,20 @@ Get enough pulled together to deploy on server.
     - Verify for long jump as well
     - Verify for high jump
     - Verify for pole vault
+- [ ] Implement additional search parameters
+    - [ ] Backend
+    - [ ] API
+    - [ ] UI
+- [X] Implement column hiding
 - [ ] Allow fractional searches like 'Discus' instead of 'Mens Discus'
 - [ ] Maybe add an advanced hidden section with things like setting sort order
     - [ ] Add filter order?
-- [ ] Change background text color
+- [X] Change text color
 - [ ] Remove Attempt from everywhere in codebase
-- [ ] Verify all times look correct for each event
+- [ ] Verify all marks look correct for each event
 
 ### Deploy
+- [ ] Try to upload the entire dataset to see what else breaks
 - [ ] Update documentation
 - [ ] Update version
 - [ ] Deploy code
