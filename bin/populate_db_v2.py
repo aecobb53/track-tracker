@@ -17,9 +17,14 @@ YEAR_MAP = {
     12: 'Senior',
 }
 
+runtime_start = datetime.now(timezone.utc)
 
 with open(BIG_ASS_JSON_PATH, 'r') as jf:
     data = json.load(jf)
+
+
+progress_count = sum([len(m) for y, m in data.items()])
+progress_pointer = 0
 x=1
 for year, meets in data.items():
     for meet_name, events in meets.items():
@@ -55,6 +60,8 @@ for year, meets in data.items():
                             athlete_resp = requests.put(f"{SERVER_URL}/athlete", json=athlete_content)
                             if not athlete_resp.ok:
                                 x=1
+                                print(f"POST BODY: {athlete_content}")
+                                raise ValueError('Failed to update athlete, investigate why')
                             x=1
 
                     else:
@@ -74,7 +81,14 @@ for year, meets in data.items():
                     x=1
                 x=1
     x=1
+    progress_pointer += 1
+    percent_complete = int(progress_pointer / progress_count * 10000) / 100
+    print(f"Percent complete: {percent_complete}%")
 x=1
+
+runtime_stop = datetime.now(timezone.utc)
+print(f"RUNTIME: {runtime_start}, {runtime_stop}")
+print(f"RUNTIME DIFF: {runtime_stop - runtime_start}")
 
 
 
