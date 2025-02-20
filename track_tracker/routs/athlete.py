@@ -21,7 +21,7 @@ async def create_athlete(athlete: AthleteApiCreate):
     try:
         existing_athlete_filter = AthleteFilter(first_name=[athlete.first_name], last_name=[athlete.last_name], team=[athlete.team])
         ah = AthleteHandler()
-        existing_athlete = await ah.find_athletes(athlete_filter=existing_athlete_filter, silence_missing=True)
+        existing_athlete = await ah.find_athlete(athlete_filter=existing_athlete_filter, silence_missing=True)
         if existing_athlete:
             # Verify the record doesnt already exist
             raise DuplicateRecordsException(f"first_name={athlete.first_name}, last_name={athlete.last_name}, team={athlete.team}")
@@ -54,7 +54,7 @@ async def find_athlete(request: Request, first: str, last: str, team: str):
     try:
         athlete_filter = AthleteFilter(first_name=[first], last_name=[last], team=[team])
         ah = AthleteHandler()
-        athlete = await ah.find_athletes(athlete_filter=athlete_filter)
+        athlete = await ah.find_athlete(athlete_filter=athlete_filter)
         return athlete
     except MissingRecordException as err:
         message = f"No record found: [{err}]"

@@ -24,7 +24,6 @@ x=1
 for year, meets in data.items():
     for meet_name, events in meets.items():
         for event_name, results in events.items():
-            x=11
             for result in results:
                 athlete = result.get('athlete')
                 mark = result['mark']
@@ -38,12 +37,28 @@ for year, meets in data.items():
                         athlete_resp = requests.post(f"{SERVER_URL}/athlete", json=athlete)
                         if not athlete_resp.ok:
                             x=1
-                    else:
+                    elif athlete_resp.ok:
                         # Compare the athlete data
                         athlete_content = athlete_resp.json()
+                        update = False
                         for key, value in athlete.items():
                             if athlete_content[key] != value:
+                                print('')
+                                print('compared athletes but are different')
+                                print(athlete_content)
+                                print(athlete)
+                                update = True
+                                athlete_content[key] = value
                                 x=1
+                        if update:
+                            x=1
+                            athlete_resp = requests.put(f"{SERVER_URL}/athlete", json=athlete_content)
+                            if not athlete_resp.ok:
+                                x=1
+                            x=1
+
+                    else:
+                        x=1
                     athlete_content = athlete_resp.json()
                     athlete_uid = athlete_content['uid']
                     mark['athlete_uid'] = athlete_uid

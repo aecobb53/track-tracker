@@ -50,7 +50,7 @@ class AthleteHandler(BaseHandler):
         self.context.logger.info(f"Athletes Filtered: {len(athletes)}")
         return athletes
 
-    async def find_athletes(self, athlete_filter: AthleteFilter, silence_missing=False) -> AthleteData:
+    async def find_athlete(self, athlete_filter: AthleteFilter, silence_missing=False) -> AthleteData:
         """
         Find single matching athlete or error
         """

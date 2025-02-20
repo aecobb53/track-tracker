@@ -84,9 +84,15 @@ def parse_data_row(data_row: list[str], event: str, header: list[str], calendar_
 
             # Graduation Year
             if year:
-                graduation_year = calendar_year + (year - 10)
-                if year == 11 and calendar_year == 2023:
-                    assert graduation_year == 2024
+                graduation_year = calendar_year + (12 - year)
+                if year == 12:
+                    assert graduation_year == calendar_year
+                elif year == 11:
+                    assert graduation_year == calendar_year + 1
+                elif year == 10:
+                    assert graduation_year == calendar_year + 2
+                elif year == 9:
+                    assert graduation_year == calendar_year + 3
             else:
                 graduation_year = None
 
@@ -172,6 +178,14 @@ def parse_data_row(data_row: list[str], event: str, header: list[str], calendar_
             # if any([True for v in interigate_data.values() if v is None]):
             #     x=1
 
+            athlete_data = {
+                'first_name': team,
+                'last_name': f"{gender} Relay",
+                'team': team,
+                'gender': gender,
+                'graduation_year': calendar_year,
+            }
+
             mark_data = {
                 'event': event,
                 'heat': heat,
@@ -189,6 +203,7 @@ def parse_data_row(data_row: list[str], event: str, header: list[str], calendar_
                 x=1
 
             data_obj = {
+                'athlete': athlete_data,
                 'mark': mark_data,
             }
 

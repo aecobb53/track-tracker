@@ -22,7 +22,7 @@ router = APIRouter(
 async def create_mark(mark: MarkApiCreate):
     try:
         ah = AthleteHandler()
-        athlete = await ah.find_athletes(AthleteFilter(
+        athlete = await ah.find_athlete(AthleteFilter(
             first_name=[mark.athlete_first_name],
             last_name=[mark.athlete_last_name],
             team=[mark.team],
@@ -68,7 +68,7 @@ async def filter_mark(request: Request):
         raise HTTPException(status_code=500, detail='Internal Service Error')
 
 
-@router.put('/', status_code=201)
+@router.put('/', status_code=200)
 async def update_mark(mark: MarkData):
     try:
         mh = AthleteHandler()
