@@ -100,7 +100,7 @@ class MarkHandler(BaseHandler):
                 'Wind': mark.wind,
                 'Heat': mark.heat,
                 'Meet': mark.meet,
-                'Date': mark.meet_date,
+                'Date': datetime.strftime(mark.meet_date, "%Y-%m-%d"),
                 'Gender': mark.gender,
             })
         return display_marks

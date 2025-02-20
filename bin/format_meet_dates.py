@@ -6,6 +6,8 @@ etc_dir = 'etc'
 directory = os.path.join(etc_dir, 'year_overview')
 etc_tmp = os.path.join(etc_dir, 'tmp')
 
+exit()  # Just so I dont overwrite data...
+
 try:
     with open(os.path.join(etc_tmp  , 'meet_dates.json'), 'r') as jf:
         meets = json.load(jf)

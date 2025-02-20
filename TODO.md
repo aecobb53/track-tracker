@@ -19,13 +19,10 @@ Get enough pulled together to deploy on server.
     - [X] UI
 - [X] Implement column hiding
 - [X] Allow fractional searches like 'Discus' instead of 'Mens Discus'
-- [ ] Maybe add an advanced hidden section with things like setting sort order
-    - [ ] Add filter order?
-    - [ ] Add display order?
 - [X] Change text color
 - [X] Remove Attempt from everywhere in codebase
-- [ ] Verify all marks look correct for each event
-- [ ] Fix gender on UI to just be a dropdown not a dropdown and a text input
+- [X] Verify all marks look correct for each event
+- [ ] It seems like 2 meets still arent loading. Figure out why
 
 ### Deploy
 - [ ] Try to upload the entire dataset to see what else breaks
@@ -49,7 +46,10 @@ Add to the project to make it more useful. More will be added and items are subj
 - [ ] Enable usable via phone
 - [ ] SPIKE: Auth
     - Explore auth and user management. To start only have an admin, coach, and athlete logins
-
+- [ ] Fix gender on UI to just be a dropdown not a dropdown and a text input
+- [ ] Maybe add an advanced hidden section with things like setting sort order
+    - [ ] Add filter order?
+    - [ ] Add display order?
 
 ## Roadmap
 

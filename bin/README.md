@@ -16,6 +16,9 @@ Takes the results files and adds them to the local DB.
 ## meets_formatter.py
 I actually dont remember what this is for
 
+## data_loader_formatter.py
+This is a copy of meet_results_formatter.py to make uploading meets long term
+
 
 # Etc
 

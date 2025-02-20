@@ -9,10 +9,11 @@ filter:
             grouping: Group1
         gender:
             variable: gender
-            display: Gender
+            display: "Mens/Women's"
             description: Filter by gender.
             datatype: string
             default_value: null
+            # no_text_field: true
             # options:
             #     - "All"
             #     - "Mens"
@@ -108,7 +109,7 @@ filter:
             display: Team(s)
             description: Filter by team.
             datatype: string
-            default_value: null
+            default_value: Fairview
             grouping: Group1
         first_name:
             variable: first_name
@@ -132,13 +133,27 @@ filter:
             datatype: string
             default_value: null
             grouping: Group1
-        # meet_date:
-        #     variable: meet_date
-        #     display: Meet Date
-        #     description: Filter by date of meet.
-        #     datatype: string
-        #     default_value: null
-        #     grouping: Group1
+        meet_date1:
+            variable: meet_date
+            display: Meet Date
+            description: Filter by date of meet.
+            datatype: date
+            default_value: 2024-01-01
+            grouping: Group1
+            options:
+                - ">="
+                - "<="
+                - "="
+        meet_date2:
+            variable: meet_date
+            display: Meet Date
+            description: Filter by date of meet.
+            datatype: date
+            default_value: null
+            grouping: Group1
+            options:
+                - "<="
+                - ">="
 display:
     Event:
         event:
@@ -213,7 +228,7 @@ display:
                     - Example
         gender:
             variable: gender
-            display: Gender
+            display: "Mens/Women's"
             formatted_function: null
             html_display_filtering:
                 display_column: Common

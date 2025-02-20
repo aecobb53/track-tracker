@@ -48,11 +48,11 @@ class Mark(BaseModel):
         fractions = str(self.fractions) if self.fractions is not None else None
 
         if all([minutes, seconds, subsecond]):
-            return f"{minutes}:{seconds}.{subsecond[2:]}"
+            return f"{minutes}:{seconds.zfill(2)}.{subsecond[2:]}"
         elif all([seconds, subsecond]):
             return f"{seconds}.{subsecond[2:]}"
         elif all([feet, inches, fractions]):
-            return f"{feet}-{inches}.{fractions[2:]}"
+            return f"{feet}-{inches.zfill(2)}.{fractions[2:]}"
         elif all([feet, inches]):
             return f"{feet}-{inches}"
 
@@ -90,6 +90,11 @@ class MarkData(BaseModel):
     @property
     def put(self):
         output = self.model_dump()
+        return output
+
+    @property
+    def rest_output(self):
+        output = self.model_dump_json()
         return output
 
 
@@ -194,7 +199,7 @@ class MarkFilter(BaseModel):
     meet: List[str] = []
     gender: List[str] = []
 
-    # meet_date: List[datetime] = []
+    meet_date: List[str] = []
     # mark: Dict | None = Field(default_factory=dict, sa_column=Column(JSON))
 
     limit: int = 1000
@@ -268,6 +273,11 @@ class MarkFilter(BaseModel):
             gender = []
             [gender.extend(i.split(',')) for i in fields['gender']]
             fields['gender'] = [g.strip() for g in gender]
+
+        if fields.get('meet_date'):
+            meet_date = []
+            [meet_date.extend(i.split(',')) for i in fields['meet_date']]
+            fields['meet_date'] = [m.strip() for m in meet_date]
 
         # if isinstance(fields.get('active'), list):
         #     fields['active'] = fields['active'][0]
@@ -346,7 +356,14 @@ class MarkFilter(BaseModel):
             filter_list = [database_object_class.gender.contains(g) for g in self.gender]
             query = query.filter(or_(*filter_list))
 
-        # meet_date: List[datetime] = []
+        if self.meet_date:
+            for meet_date in self.meet_date:
+                if meet_date.startswith('='):
+                    query = query.filter(database_object_class.meet_date == datetime.strptime(meet_date[1:], "%Y-%m-%d"))
+                elif meet_date.startswith('>='):
+                    query = query.filter(database_object_class.meet_date >= datetime.strptime(meet_date[2:], "%Y-%m-%d"))
+                elif meet_date.startswith('<='):
+                    query = query.filter(database_object_class.meet_date <= datetime.strptime(meet_date[2:], "%Y-%m-%d"))
 
         if self.limit:
             query = query.limit(self.limit)

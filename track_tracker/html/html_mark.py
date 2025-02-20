@@ -102,7 +102,7 @@ def filter_marks_html_page():
                 input_tag.add_class(group_class)
             box = [
                 input_tag,
-                Span(internal=param['display'].title()).add_style({'margin': '0px'}),
+                Span(internal=param['display']).add_style({'margin': '0px'}),
             ]
             grouping_div.add_element(
                 Label(
