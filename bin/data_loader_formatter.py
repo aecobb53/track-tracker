@@ -222,7 +222,7 @@ def parse_meet_file(path: str, meet_name: str, meet_dates: dict):
     with open(path, 'r') as tf:
         data = [l[:-1] for l in tf.readlines()]
     # meet_name = os.path.splitext(os.path.basename(path))[0]
-    calendar_year = int(path.split('/')[-2][:4])
+    calendar_year = int(path.split('/')[-2][5:9])
 
     event = None
     header = []
