@@ -15,16 +15,16 @@ services:
 
     app:
         build: .
-        container_name: TrackTracker
+        # container_name: TrackTracker
         image: track_tracker:latest
         depends_on:
             - db
         environment:
             DATABASE_URL: postgresql://example:example@db:5432/example_db
             PYTHONUNBUFFERED: 1
-        command: bash entrypoint.sh
-        volumes:
-            - .:/app
+        # command: bash /entrypoint.sh
+        # volumes:
+        #     - .:/app
         ports:
             - 8205:8000
         links:

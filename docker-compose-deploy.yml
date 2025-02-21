@@ -1,0 +1,46 @@
+version: '3'
+
+services:
+    db:
+        image: postgres:17
+        container_name: TrackTrackerDB
+        environment:
+            POSTGRES_USER: example
+            POSTGRES_PASSWORD: example
+            POSTGRES_DB: example_db
+        ports:
+            - "5432:5432"
+        volumes:
+            - postgres_data:/var/lib/postgresql/data
+
+    app:
+        container_name: TrackTracker
+        image: track_tracker
+        depends_on:
+            - db
+        environment:
+            DATABASE_URL: postgresql://example:example@db:5432/example_db
+            LOGICAL_ENV: ${LOGICAL_ENV}
+            SERVICE_URL: ''
+            PYTHONUNBUFFERED: 1
+            # RUNNING_PORT: 8205
+        # command: bash entrypoint.sh
+        volumes:
+            - .:/app
+        ports:
+            - 8205:8000
+        links:
+            - db
+        labels:
+            - "traefik.enable=true"
+
+            - "traefik.http.routers.track_tracking_lan.rule=Host(`fhs-track.bragi.lan`)"
+            - "traefik.http.routers.track_tracking_lan.entrypoints=web"
+            # - "traefik.http.routers.emergencyinfo_lan.entrypoints=websecure"
+
+            - "traefik.http.routers.track_tracking.rule=Host(`fhs-track.nax.lol`)"
+            - "traefik.http.routers.track_tracking.entrypoints=websecure"
+            - "traefik.http.routers.track_tracking.tls.certresolver=myresolver"
+
+volumes:
+  postgres_data:
