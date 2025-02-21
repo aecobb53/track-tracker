@@ -20,9 +20,9 @@ YEAR_MAP = {
 }
 
 
-resp = requests.get(f"{SERVER_URL}/mark")
-content= resp.json()
-x=1
+# resp = requests.get(f"{SERVER_URL}/mark/")
+# content= resp.json()
+# x=1
 
 
 runtime_start = datetime.now(timezone.utc)
@@ -65,9 +65,7 @@ for year, meets in data.items():
                     'place': mark['place'],
                     'team': mark['team'],
                 }
-                a = f"{SERVER_URL}/mark"
-                existing_event_resp = requests.get(f"{SERVER_URL}/mark", params=event_query_params)
-                b = existing_event_resp.text
+                existing_event_resp = requests.get(f"{SERVER_URL}/mark/", params=event_query_params)
                 existing_event_content = existing_event_resp.json()
                 if existing_event_content.get('marks') != []:
                     continue
@@ -76,11 +74,10 @@ for year, meets in data.items():
                     first = athlete['first_name']
                     last = athlete['last_name']
                     team = athlete['team']
-                    athlete_resp = requests.get(f"{SERVER_URL}/athlete/{first}/{last}/{team}")
-                    athlete_content = athlete_resp.json()
+                    athlete_resp = requests.get(f"{SERVER_URL}/athlete/{first}/{last}/{team}/")
                     if athlete_resp.status_code == 404:
                         # Post new athlete
-                        athlete_resp = requests.post(f"{SERVER_URL}/athlete", json=athlete)
+                        athlete_resp = requests.post(f"{SERVER_URL}/athlete/", json=athlete)
                         athlete_content = athlete_resp.json()
                         if not athlete_resp.ok:
                             search_params = {
@@ -88,7 +85,7 @@ for year, meets in data.items():
                                 'last_name': last,
                                 'team': team,
                             }
-                            athlete_resp = requests.get(f"{SERVER_URL}/athlete", params=search_params)
+                            athlete_resp = requests.get(f"{SERVER_URL}/athlete/", params=search_params)
                             athlete_content = athlete_resp.json()['athletes'][0]
                     elif athlete_resp.ok:
                         # Compare the athlete data
@@ -106,14 +103,13 @@ for year, meets in data.items():
                                 x=1
                         if update:
                             x=1
-                            athlete_resp = requests.put(f"{SERVER_URL}/athlete", json=athlete_content)
+                            athlete_resp = requests.put(f"{SERVER_URL}/athlete/", json=athlete_content)
                             if not athlete_resp.ok:
                                 x=1
                                 print(f"POST BODY: {athlete_content}")
                                 raise ValueError('Failed to update athlete, investigate why')
                             x=1
                             athlete_content = athlete_resp.json()
-
                     else:
                         x=1
                     # athlete_content = athlete_resp.json()
@@ -129,7 +125,7 @@ for year, meets in data.items():
                 else:
                     # No athlete (Relay)
                     x=1
-                mark_resp = requests.post(f"{SERVER_URL}/mark", json=mark)
+                mark_resp = requests.post(f"{SERVER_URL}/mark/", json=mark)
                 mark_content = mark_resp.json()
                 if not mark_resp.ok and mark_resp.status_code != 409:
                     x=1
