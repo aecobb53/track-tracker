@@ -50,6 +50,9 @@ Add to the project to make it more useful. More will be added and items are subj
 - [ ] Maybe add an advanced hidden section with things like setting sort order
     - [ ] Add filter order?
     - [ ] Add display order?
+- [ ] Implement results page size
+    - Default sizes 25, 50, 100, 500 (50 default)?
+- [ ] Implement displaying pagination
 
 ## Roadmap
 
