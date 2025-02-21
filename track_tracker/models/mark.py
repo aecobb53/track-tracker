@@ -302,6 +302,8 @@ class MarkFilter(BaseModel):
                 return query.filter(db_obj_cls < string[1:])
             elif string.startswith('!='):
                 return query.filter(db_obj_cls != string[2:])
+            else:
+                return query.filter(db_obj_cls == string)
 
         if self.uid:
             query = query.filter(database_object_class.uid.in_(self.uid))
