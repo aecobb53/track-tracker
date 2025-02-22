@@ -6,9 +6,9 @@ requests
 pyyaml
 sqlmodel
 psycopg2-binary
-shapely
-GeoAlchemy2
-pydantic_geojson
+# shapely
+# GeoAlchemy2
+# pydantic_geojson
 
 
 # Daemon
