@@ -162,12 +162,11 @@ def filter_marks_html_page():
 
     display_form.add_element(
         Button(internal='All', title='Toggle all checkboxes', type='button', onclick='toggleCheckboxesAll()').add_class('small-button'))
-
-    display_form.add_element(
-        Button(internal='Apply', type='button', onclick='applyDisplayFilters()').add_class('big-button'))
     display_form_div.add_element(display_form)
     page_content.add_element(display_form_div)
 
+    page_content.add_element(
+        Button(internal='Apply', type='button', onclick='applyDisplayFilters()').add_class('big-button'))
 
     # Table
     table_div = Div(id='table-div')
@@ -220,7 +219,7 @@ def filter_marks_html_page():
             margin: 0;
         """),
         StyleTag(name='.big-button', internal="""
-            margin: 5px;
+            margin: 10px;
             padding: 5px;
             font-size: 120%;
             font-weight: bold;

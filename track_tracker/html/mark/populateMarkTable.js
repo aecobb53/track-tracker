@@ -16,6 +16,25 @@ async function populateMarkTable(filterResults) {
     table_element.style.height = '100%';
     table_element.style.border = '5px solid black';
 
+    if (filterResults.length == 0) {
+        // No results
+        var table_item = document.createElement('th');
+        table_item.innerHTML = 'No results found';
+
+        var table_row = document.createElement('tr');
+        table_row.appendChild(table_item);
+
+        var table_header = document.createElement('thead');
+        table_header.style.width = '100%';
+        table_header.style.fontWeight = 'bold';
+        table_header.style.padding = '5px';
+        table_header.appendChild(table_row);
+
+        table_element.appendChild(table_header);
+        table_div.appendChild(table_element);
+        return;
+    }
+
     // HEADER
     var table_header = document.createElement('thead');
     table_header.style.width = '100%';
@@ -86,5 +105,8 @@ async function populateMarkTable(filterResults) {
 
     table_element.appendChild(table_body);
     table_div.appendChild(table_element);
+
+    // Pagination
+
 }
 // window.onload = populateTable();

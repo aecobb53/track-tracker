@@ -41,12 +41,15 @@ Thoughts
     - [X] Needs Gender toggle or dial
     - [X] Submit needs to be larger
     - [X] All/apply needs to be larger
-    - [ ] Trigger columsn on check??
+    - [ ] ~~Trigger columsn on check??~~
     - [X] Set page limit
     - [ ] Pagination
         - For pagination I will need to query the entire table to see what meets the criteria to know how many 
         pages could exist
-    - [ ] All/Apply needs to be on different lines
+        - I also need to change the responses back to a key: value of lists so I can add other keys like pagination
+        info
+    - [X] All/Apply needs to be on different lines
+    - [X] No results found
 
 
 - [ ] Athlete
@@ -59,6 +62,7 @@ Thoughts
     - [ ] Set page limit
     - [ ] Pagination
     - [ ] All/Apply needs to be on different lines
+    - [ ] No results found
 
 - [ ] Team
     - [ ] Needs a header to indicate its athlete data
@@ -70,6 +74,7 @@ Thoughts
     - [ ] Set page limit
     - [ ] Pagination
     - [ ] All/Apply needs to be on different lines
+    - [ ] No results found
 
 - [ ] record needs an unimplemented response
 - [ ] resources needs an unimplemented response
