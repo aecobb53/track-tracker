@@ -23,3 +23,9 @@ with open(os.path.join(path, 'athlete.yml')) as yf:
     athlete_file = yaml.safe_load(yf)
 ATHLETE_FILTER_PARAMS = athlete_file['filter']
 ATHLETE_DISPLAY_PARAMS = athlete_file['display']
+
+# Team Filter Params
+with open(os.path.join(path, 'team.yml')) as yf:
+    team_file = yaml.safe_load(yf)
+TEAM_FILTER_PARAMS = team_file['filter']
+TEAM_DISPLAY_PARAMS = team_file['display']

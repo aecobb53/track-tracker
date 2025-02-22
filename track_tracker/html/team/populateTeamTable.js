@@ -1,5 +1,5 @@
-async function populateAthleteTable(filterResults) {
-    console.log('Populating Athlete table');
+async function populateTeamTable(filterResults) {
+    console.log('Populating Team table');
 
     // var tracking_project_name_hashtable = {};
 
@@ -56,14 +56,9 @@ async function populateAthleteTable(filterResults) {
             table_item.style.padding = '1px 25px';
             table_item.classList.add(class_name);
 
-            if (key == 'First Name') {
+            if (key == 'Team') {
                 // Link to athlete page
-                table_item.innerHTML = '<a class="athlete-link" href="' + filterResults[i]['uid'] + '">' +
-                value + '</a>';
-                // table_item.classList.add('athlete-link');
-            } else if (key == 'Last Name') {
-                // Link to athlete page
-                table_item.innerHTML = '<a class="athlete-link" href="' + filterResults[i]['uid'] + '">' +
+                table_item.innerHTML = '<a class="team-link" href="' + value + '">' +
                 value + '</a>';
             } else {
                 table_item.innerHTML = value;

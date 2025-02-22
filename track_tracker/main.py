@@ -12,11 +12,12 @@ from models import (
 from handlers import DatabaseHandler, init_logger
 from html import project_home_page, unimplemented_page
 from routs import (
-    athlete_router,
     mark_router,
+    athlete_router,
+    team_router,
     mark_html_router,
     athlete_html_router,
-    # team_html_router,
+    team_html_router,
     # event_html_router,
     # record_html_router,
     unimplemented_html_router,
@@ -48,11 +49,12 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-app.include_router(athlete_router)
 app.include_router(mark_router)
+app.include_router(athlete_router)
+app.include_router(team_router)
 app.include_router(mark_html_router)
 app.include_router(athlete_html_router)
-# app.include_router(team_html_router)
+app.include_router(team_html_router)
 # app.include_router(event_html_router)
 # app.include_router(record_html_router)
 app.include_router(unimplemented_html_router)

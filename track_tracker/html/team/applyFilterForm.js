@@ -41,8 +41,8 @@ async function applyFilterForm() {
 
         params[key] = data_value;
     }
-    const filterResults = await GETFilterAthlete(params);
+    const filterResults = await GETFilterTeam(params);
 
-    populateAthleteTable(filterResults);
+    populateTeamTable(filterResults);
     applyDisplayFilters();
 }

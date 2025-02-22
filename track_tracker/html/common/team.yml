@@ -1,0 +1,20 @@
+filter:
+    Optional:
+        team:
+            variable: team
+            display: Team
+            description: Filter by team.
+            datatype: string
+            default_value: null
+display:
+    Team:
+        team:
+            variable: team
+            display: Team
+            formatted_function: null
+            html_display_filtering:
+                display_column: Common
+                description: Filter by team.
+                checked: true
+                grouping_classes:
+                    - Example
