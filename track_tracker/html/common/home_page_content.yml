@@ -8,16 +8,16 @@ Primary Pages:
         endpoint: athlete
         description: This page focuses on athletes. Each athlete's marks, PRs, and other information is listed here.
     Teams:
-        endpoint: teams
+        endpoint: team
         description: This page focuses on teams. Each team's athletes, records, marks, and other information is listed here.
     Records:
-        endpoint: records
+        endpoint: record
         description: This page focuses on state records. I may add a way to compare athltes or teams to state records.
     Schedule:
         endpoint: schedule
         description: This page displays the current meet schedule. you will also be able to select some previous years as well.
     Resources:
-        endpoint: resources
+        endpoint: resource
         description: Track Team resource links. I may not have anything for this for a while
 Extra Pages:
     Video:
