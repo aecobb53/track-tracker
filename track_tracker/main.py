@@ -15,10 +15,11 @@ from routs import (
     athlete_router,
     mark_router,
     mark_html_router,
-    athlete_html_router,
-    team_html_router,
-    event_html_router,
-    record_html_router,
+    # athlete_html_router,
+    # team_html_router,
+    # event_html_router,
+    # record_html_router,
+    unimplemented_html_router,
 )
 
 # Can delete after done testing rest calls from different sources
@@ -50,10 +51,11 @@ app.add_middleware(
 app.include_router(athlete_router)
 app.include_router(mark_router)
 app.include_router(mark_html_router)
-app.include_router(athlete_html_router)
-app.include_router(team_html_router)
-app.include_router(event_html_router)
-app.include_router(record_html_router)
+# app.include_router(athlete_html_router)
+# app.include_router(team_html_router)
+# app.include_router(event_html_router)
+# app.include_router(record_html_router)
+app.include_router(unimplemented_html_router)
 
 
 @app.on_event("startup")

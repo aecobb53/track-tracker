@@ -15,7 +15,8 @@ Trying to get to a useful level.
     - [ ] All unimplemented pages have Unimplemented responses
     - [ ] All pages have a description at the top
     - [ ] All pages have more explanation about how to effectively use them as a dropdown
-    - [ ] Remove sidebar and only have it on the home page - Probably. Confirm I want this
+    - [X] Remove sidebar and only have it on the home page - Probably. Confirm I want this
+    - [X] Home page has description/link for each page
 - [ ] Backend
     - [ ] favicon.ico
     - [ ] robots.txt
@@ -64,7 +65,6 @@ Trying to get to a useful level.
     - [ ] When no results found, inform the user
     - [ ] In filtering allow a '=' list such as Heat=1,2
     - [ ] Button on results to indicate bad data and request or implement an update
-    - [ ] Home page has description/link for each page
     - [ ] Change scaling based on screen size. Computer or phone?
     - [ ] Change default columns based on computer or phone
     - [ ] Mark data as bad or update data on the spot

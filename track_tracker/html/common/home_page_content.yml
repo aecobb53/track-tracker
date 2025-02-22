@@ -35,7 +35,7 @@ Extra Pages:
         endpoint: roadmap
         description: Current things im tracking for implementation and the priority I place on them. I will try to keep this updated.
     Service Health:
-        endpoint: service health
+        endpoint: healthcheck
         description: I may remove the tile but this is my healthcheck and status endpoints info
     Contact Me:
         endpoint: contact-me
