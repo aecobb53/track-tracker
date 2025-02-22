@@ -50,6 +50,8 @@ Thoughts
         info
     - [X] All/Apply needs to be on different lines
     - [X] No results found
+    - [X] Rename Submit to Request
+    - [X] Move Requst button lower
 
 
 - [ ] Athlete
@@ -63,6 +65,8 @@ Thoughts
     - [ ] Pagination
     - [ ] All/Apply needs to be on different lines
     - [ ] No results found
+    - [ ] Rename Submit to Request
+    - [ ] Move Requst button lower
 
 - [ ] Team
     - [ ] Needs a header to indicate its athlete data
@@ -75,12 +79,13 @@ Thoughts
     - [ ] Pagination
     - [ ] All/Apply needs to be on different lines
     - [ ] No results found
+    - [ ] Rename Submit to Request
+    - [ ] Move Requst button lower
 
-- [ ] record needs an unimplemented response
-- [ ] resources needs an unimplemented response
-- [ ] Rename Submit to Request
-- [ ] Move Requst button lower
+- [X] record needs an unimplemented response
+- [X] resources needs an unimplemented response
 - [ ] Sort by Meet doesnt seem to be working
+- [ ] Verify other sorts are working
 
 ### Stretch
 

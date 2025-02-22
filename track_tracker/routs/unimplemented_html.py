@@ -40,7 +40,7 @@ router = APIRouter(
 # async def html_teams():
 #     return HTMLResponse(content=unimplemented_page(), status_code=200)
 
-@router.get('/records')
+@router.get('/record')
 async def html_records():
     return HTMLResponse(content=unimplemented_page(), status_code=200)
 
@@ -48,7 +48,7 @@ async def html_records():
 async def html_schedule():
     return HTMLResponse(content=unimplemented_page(), status_code=200)
 
-@router.get('/resources')
+@router.get('/resource')
 async def html_resources():
     return HTMLResponse(content=unimplemented_page(), status_code=200)
 
