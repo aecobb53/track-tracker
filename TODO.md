@@ -27,6 +27,47 @@ Trying to get to a useful level.
     - [ ] Fix prod data
     - [ ] Upload the rest of the data
 
+- IMPLEMENTATION THOUGHT - Add a dudner eq and dudner gt... functions to the mark class so you can compare and sort by marks
+
+
+
+Thoughts
+-  [] Marks
+    -  [] Needs a header to indicate its athlete data
+    -  [] needs a left margin
+    -  [] Needs a filter secion
+    -  [] Needs Gender toggle or dial
+    -  [] Submit needs to be larger
+    -  [] All/apply needs to be larger
+    -  [] Trigger columsn on check??
+    -  [] Set page limit
+    -  [] Pagination
+
+
+- [ ] Athlete
+    - [ ] Needs a header to indicate its athlete data
+    - [ ] needs a left margin
+    - [ ] Needs Gender toggle or dial
+    - [ ] Submit needs to be larger
+    - [ ] All/apply needs to be larger
+    - [ ] Trigger columsn on check??
+    - [ ] Set page limit
+    - [ ] Pagination
+
+- [ ] Team
+    - [ ] Needs a header to indicate its athlete data
+    - [ ] needs a left margin
+    - [ ] Needs Gender toggle or dial
+    - [ ] Submit needs to be larger
+    - [ ] All/apply needs to be larger
+    - [ ] Trigger columsn on check??
+    - [ ] Set page limit
+    - [ ] Pagination
+
+- [ ] record needs an unimplemented response
+- [ ] resources needs an unimplemented response
+
+
 ### Stretch
 
 - [ ] Data Pages
@@ -76,6 +117,7 @@ Trying to get to a useful level.
     - [ ] Change scaling based on screen size. Computer or phone?
     - [ ] Change default columns based on computer or phone
     - [ ] Mark data as bad or update data on the spot
+    - [ ] Move `add_style` to style docs for more global application
 - [ ] Backend
     - [ ] Parse response to determine rest, computer, or phone
 - [ ] Data

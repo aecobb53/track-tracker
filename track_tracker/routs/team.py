@@ -61,7 +61,9 @@ async def filter_athlete(request: Request):
                     'Athlete Count': 0
                 }
             team_details[team]['Athlete Count'] += 1
-        teams = [team for team in team_details.values()]
+        team_keys = list(team_details.keys())
+        team_keys.sort()
+        teams = [team_details[key] for key in team_keys]
         return teams
     except Exception as err:
         context.logger.warning(f'ERROR: {err}')

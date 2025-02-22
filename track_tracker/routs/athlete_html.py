@@ -1,5 +1,6 @@
 from calendar import month
 from datetime import date, datetime, timedelta
+from re import A
 from fastapi import APIRouter, HTTPException, Request, Response, Depends
 from fastapi.responses import HTMLResponse, ORJSONResponse
 
@@ -8,15 +9,14 @@ from fastapi.responses import HTMLResponse, ORJSONResponse
 # from handlers import EventHandler, parse_query_params
 # from utils import parse_query_params, parse_header, MissingRecordException, DuplicateRecordsException
 from models import ContextSingleton
+from handlers import AthleteHandler, MarkHandler
+from models import AthleteFilter, MarkFilter
 # from .html.unimplemented_page import unimplemented_page
 
 
 from html import (
-    # create_athlete_html_page,
-    # filter_athletes_html_page,
-    # find_athlete_html_page,
-    # athlete_base_page,
     filter_athletes_html_page,
+    find_athletes_html_page,
     unimplemented_page
     )
 
@@ -37,8 +37,11 @@ async def html_athlete(request: Request):
 
 @router.get('/{athlete_uid}')
 async def html_athlete(athlete_uid: str, request: Request):
-    # athlete_page = display_athlete_html_page()
-    athlete_page = unimplemented_page()
+    ah = AthleteHandler()
+    athlete = await ah.find_athlete(AthleteFilter(uid=[athlete_uid]))
+    mh = MarkHandler()
+    marks = await mh.filter_marks(MarkFilter(athlete_uid=[athlete_uid]))
+    athlete_page = find_athletes_html_page(athlete=athlete, marks=marks)
     return HTMLResponse(content=athlete_page, status_code=200)
 
 # path = '/today'
