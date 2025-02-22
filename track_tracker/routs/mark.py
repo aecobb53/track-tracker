@@ -62,6 +62,10 @@ async def filter_mark(request: Request):
         mark_filter = parse_query_params(request=request, query_class=MarkFilter)
         mh = MarkHandler()
         marks = await mh.filter_marks(mark_filter=mark_filter)
+        ah = AthleteHandler()
+        for mark in marks:
+            athlete = await ah.find_athlete(AthleteFilter(uid=[mark.athlete_uid]))
+            mark.athlete = athlete
         return {'marks': marks}
     except Exception as err:
         context.logger.warning(f'ERROR: {err}')
@@ -89,6 +93,10 @@ async def filter_mark(request: Request):
         mark_filter = parse_query_params(request=request, query_class=MarkFilter)
         mh = MarkHandler()
         marks = await mh.filter_marks_display(mark_filter=mark_filter)
+        ah = AthleteHandler()
+        for mark in marks:
+            athlete = await ah.find_athlete(AthleteFilter(uid=[mark['Athlete']]))
+            mark['Athlete'] = f"{athlete.first_name} {athlete.last_name}"
         return marks
     except Exception as err:
         context.logger.warning(f'ERROR: {err}')

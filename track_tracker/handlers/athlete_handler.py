@@ -75,19 +75,6 @@ class AthleteHandler(BaseHandler):
         self.context.logger.info(f"Athlete found")
         return athlete
 
-    # async def find_athlete(self, athlete_uid: str) -> Athlete:
-    #     self.context.logger.info(f"Finding athlete: {athlete_uid}")
-    #     with Session(self.context.database.engine) as session:
-    #         query = select(AthleteDB)
-    #         query = query.where(AthleteDB.uid == athlete_uid)
-    #         row = session.exec(query).first()
-    #         if row is None:
-    #             raise MissingRecordException(f"No records found for uid: [{athlete_uid}]")
-    #         read_obj = AthleteDBRead.model_validate(row)
-    #         athlete = read_obj.cast_data_object(Athlete)
-    #     self.context.logger.info(f"Athlete found: [{athlete_uid}]")
-    #     return athlete
-
     async def update_athlete(self, athlete: AthleteData) -> AthleteData:
         self.context.logger.info(f"Updating athlete: {athlete.uid}")
         with Session(self.context.database.engine) as session:
@@ -114,6 +101,33 @@ class AthleteHandler(BaseHandler):
             athlete = read_obj.cast_data_object()
         self.context.logger.info(f"Athlete updated: [{athlete.uid}]")
         return athlete
+
+    async def filter_athletes_display(self, athlete_filter: AthleteFilter) -> list[dict]:
+        self.context.logger.info(f"Filtering athletes for display: {athlete_filter.model_dump_json()}")
+        with Session(self.context.database.engine) as session:
+            query = select(AthleteDB)
+            query = athlete_filter.apply_filters(AthleteDB, query)
+            rows = session.exec(query).all()
+            athletes = []
+            for row in rows:
+                read_obj = AthleteDBRead.model_validate(row)
+                athlete = read_obj.cast_data_object()
+                athletes.append(athlete)
+        self.context.logger.info(f"Athletes Filtered: {len(athletes)}")
+        display_athletes = []
+        for athlete in athletes:
+            marks = {}
+            records = {}
+            display_athletes.append({
+                'First Name': athlete.first_name,
+                'Last Name': athlete.last_name,
+                'Team': athlete.team,
+                'Graduation Year': athlete.graduation_year,
+                'marks': marks,
+                'records': records,
+                'uid': athlete.uid,
+            })
+        return display_athletes
 
     # async def set_activation(self, athlete_uid: str, active_state: bool) -> Athlete:
     #     self.context.logger.debug(f"Setting Athlete activation: [{athlete_uid}] to [{active_state}]")

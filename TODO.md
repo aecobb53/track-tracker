@@ -8,6 +8,8 @@ Trying to get to a useful level.
 
 - [ ] Data Pages
     - [ ] Athletes
+        - [ ] Find Athlete
+        - [ ] Display Athlete
     - [ ] Teams
     - [ ] Records
     - [ ] Schedule - Meet schedule for this or previous years
@@ -39,6 +41,12 @@ Trying to get to a useful level.
 - [ ] Data
     - [ ] Add weather data for each meet location
     - [ ] Two meets arent loading. Fix
+
+### Bug
+- [ ] Athletes name got dropped from display. I suspect the parent isnt being grabbed which is reasonable.
+    - This could actually be a neat safety feature. If you dont have permissions you see results just not names
+- [ ] Drop the #A from the start of events if they are at a state track meet?
+    - Rename all events to what I would expect of Mens/Womens ...
 
 ## Roadmap
 

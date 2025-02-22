@@ -76,6 +76,7 @@ class MarkData(BaseModel):
     place: int
     wind: float
     athlete: AthleteData | None = None
+    athlete_uid: str | None = None
     team: str | None = None
     meet_date: datetime
     mark: Mark
@@ -122,6 +123,8 @@ class MarkApiCreate(BaseModel):
         mark = Mark.parse_event_mark(event=fields['event'], mark=fields['mark'])
         fields['mark'] = mark
         fields['gender'] = EventParser.parse_event_gender(event_s=fields['event'])
+        if not any([fields.get('athlete_uid'), fields.get('athlete_first_name'), fields.get('athlete_last_name')]):
+            raise ValueError("Must provide either athlete_uid or athlete_first_name and athlete_last_name")
         return fields
 
     def cast_data_object(self) -> MarkData:
@@ -170,8 +173,9 @@ class MarkDBCreate(MarkDBBase):
     def validate_fields(cls, fields):
         if not isinstance(fields, dict):
             fields = fields.model_dump()
+        print(f"FIELDS IN: {fields}")
         fields['athlete_uid'] = fields['athlete']['uid']
-        # fields['mark'] = ['fields']['mark']['put']
+        print(f"FIELDS OUT: {fields}")
         return fields
 
 

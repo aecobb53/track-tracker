@@ -16,3 +16,10 @@ with open(os.path.join(path, 'mark.yml')) as yf:
     mark_file = yaml.safe_load(yf)
 MARK_FILTER_PARAMS = mark_file['filter']
 MARK_DISPLAY_PARAMS = mark_file['display']
+
+
+# Athlete Filter Params
+with open(os.path.join(path, 'athlete.yml')) as yf:
+    athlete_file = yaml.safe_load(yf)
+ATHLETE_FILTER_PARAMS = athlete_file['filter']
+ATHLETE_DISPLAY_PARAMS = athlete_file['display']

@@ -9,7 +9,7 @@ etc_tmp = os.path.join(etc_dir, 'tmp')
 BIG_ASS_JSON_PATH = os.path.join(etc_tmp, 'upload_file.json')
 COMPLETED_STEPS = os.path.join(etc_tmp, 'workfile_deleteme.json')
 SERVER_URL = 'http://localhost:8205'
-SERVER_URL = 'https://fhs-track.nax.lol'
+# SERVER_URL = 'https://fhs-track.nax.lol'
 CURRENT_YEAR = 2025
 
 YEAR_MAP = {
@@ -55,6 +55,7 @@ for year, meets in data.items():
                 progress_tracking[year][meet_name][event_name] = False
             if progress_tracking[year][meet_name].get(event_name):
                 continue
+            x=1
             for result in results:
                 athlete = result.get('athlete')
                 mark = result['mark']

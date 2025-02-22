@@ -72,8 +72,8 @@ class MarkHandler(BaseHandler):
         self.context.logger.info(f"Mark found")
         return mark
 
-    async def filter_marks_display(self, mark_filter: MarkFilter) -> list[MarkData]:
-        self.context.logger.info(f"Filtering marks: {mark_filter.model_dump_json()}")
+    async def filter_marks_display(self, mark_filter: MarkFilter) -> list[dict]:
+        self.context.logger.info(f"Filtering marks for display: {mark_filter.model_dump_json()}")
         with Session(self.context.database.engine) as session:
             query = select(MarkDB)
             query = mark_filter.apply_filters(MarkDB, query)
@@ -86,10 +86,11 @@ class MarkHandler(BaseHandler):
         self.context.logger.info(f"Marks Filtered: {len(marks)}")
         display_marks = []
         for mark in marks:
-            if mark.athlete:
-                athlete = mark.athlete.name
-            else:
-                athlete = '-'
+            # if mark.athlete:
+            #     athlete = mark.athlete.name
+            # else:
+            #     athlete = '-'
+            athlete = mark.athlete_uid
 
             display_marks.append({
                 'Event': mark.event,

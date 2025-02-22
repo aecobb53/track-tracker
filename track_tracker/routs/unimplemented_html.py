@@ -32,9 +32,9 @@ router = APIRouter(
 # async def html_mark():
 #     return HTMLResponse(content=unimplemented_page(), status_code=200)
 
-@router.get('/athlete')
-async def html_athlete():
-    return HTMLResponse(content=unimplemented_page(), status_code=200)
+# @router.get('/athlete')
+# async def html_athlete():
+#     return HTMLResponse(content=unimplemented_page(), status_code=200)
 
 @router.get('/teams')
 async def html_teams():

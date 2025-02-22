@@ -2,6 +2,7 @@ from datetime import datetime, timezone
 import json
 from typing import List, Dict, Any
 from sqlmodel import Field, SQLModel, JSON, ARRAY, String, Column, UniqueConstraint, select
+from sqlmodel import or_, and_
 from pydantic import BaseModel, model_validator
 from enum import Enum
 from uuid import uuid4
@@ -112,6 +113,31 @@ class AthleteFilter(BaseModel):
 
     @model_validator(mode='before')
     def validate_fields(cls, fields):
+        if fields.get('first_name'):
+            first_name = []
+            [first_name.extend(i.split(',')) for i in fields['first_name']]
+            fields['first_name'] = [e.strip() for e in first_name]
+
+        if fields.get('last_name'):
+            last_name = []
+            [last_name.extend(i.split(',')) for i in fields['last_name']]
+            fields['last_name'] = [e.strip() for e in last_name]
+
+        if fields.get('team'):
+            team = []
+            [team.extend(i.split(',')) for i in fields['team']]
+            fields['team'] = [e.strip() for e in team]
+
+        if fields.get('graduation_year'):
+            graduation_year = []
+            for i in fields['graduation_year']:
+                i_l = i.split(',')
+                for ii in i_l:
+                    ii = ii.strip()
+                    if ii:
+                        graduation_year.append(ii)
+            fields['graduation_year'] = graduation_year
+
         # if isinstance(fields.get('active'), list):
         #     fields['active'] = fields['active'][0]
         if isinstance(fields.get('limit'), list):
@@ -122,19 +148,46 @@ class AthleteFilter(BaseModel):
 
     def apply_filters(self, database_object_class: AthleteDBBase, query: select) -> select:
         """Apply the filters to the query"""
+    def apply_filters(self, database_object_class: AthleteDBBase, query: select) -> select:
+        """Apply the filters to the query"""
+        def apply_modifier(query, db_obj_cls, string):
+            if string.startswith('='):
+                return query.filter(db_obj_cls == string[1:])
+            elif string.startswith('>='):
+                return query.filter(db_obj_cls >= string[2:])
+            elif string.startswith('>'):
+                return query.filter(db_obj_cls > string[1:])
+            elif string.startswith('<='):
+                return query.filter(db_obj_cls <= string[2:])
+            elif string.startswith('<'):
+                return query.filter(db_obj_cls < string[1:])
+            elif string.startswith('!='):
+                return query.filter(db_obj_cls != string[2:])
+            else:
+                return query.filter(db_obj_cls == string)
+
         if self.uid:
             query = query.filter(database_object_class.uid.in_(self.uid))
 
         if self.first_name:
-            query = query.filter(database_object_class.first_name.in_(self.first_name))
+            filter_list = [database_object_class.first_name.contains(e) for e in self.first_name]
+            query = query.filter(or_(*filter_list))
+
         if self.last_name:
-            query = query.filter(database_object_class.last_name.in_(self.last_name))
+            filter_list = [database_object_class.last_name.contains(e) for e in self.last_name]
+            query = query.filter(or_(*filter_list))
+
         if self.team:
-            query = query.filter(database_object_class.team.in_(self.team))
+            filter_list = [database_object_class.team.contains(e) for e in self.team]
+            query = query.filter(or_(*filter_list))
+
+        if self.graduation_year:
+            filter_list = []
+            for graduation_year in self.graduation_year:
+                query = apply_modifier(query, database_object_class.graduation_year, graduation_year)
+
         if self.gender:
             query = query.filter(database_object_class.gender.in_(self.gender))
-        if self.graduation_year:
-            query = query.filter(database_object_class.graduation_year.in_(self.graduation_year))
 
         if self.limit:
             query = query.limit(self.limit)

@@ -16,6 +16,7 @@ from html import (
     # filter_athletes_html_page,
     # find_athlete_html_page,
     # athlete_base_page,
+    filter_athletes_html_page,
     unimplemented_page
     )
 
@@ -30,6 +31,13 @@ router = APIRouter(
 
 @router.get('/')
 async def html_athlete(request: Request):
+    athlete_page = filter_athletes_html_page()
+    return HTMLResponse(content=athlete_page, status_code=200)
+
+
+@router.get('/{athlete_uid}')
+async def html_athlete(athlete_uid: str, request: Request):
+    # athlete_page = display_athlete_html_page()
     athlete_page = unimplemented_page()
     return HTMLResponse(content=athlete_page, status_code=200)
 

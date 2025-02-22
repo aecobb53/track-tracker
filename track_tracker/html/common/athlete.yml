@@ -1,0 +1,82 @@
+filter:
+    Required:
+        first_name:
+            variable: first_name
+            display: First Name
+            description: Filter by event.
+            datatype: string
+            default_value: null
+            grouping: Group1
+        last_name:
+            variable: last_name
+            display: Last Name
+            description: Filter by last_name.
+            datatype: string
+            default_value: null
+        team:
+            variable: team
+            display: Team
+            description: Filter by team.
+            datatype: string
+            default_value: null
+    Optional:
+        meet:
+            variable: meet
+            display: Meet - Not implemented yet
+            description: Filter by meet.
+            datatype: string
+            default_value: null
+        gender:
+            variable: gender
+            display: Mens/Womens
+            description: Filter by gender.
+            datatype: string
+            default_value: null
+        event:
+            variable: event
+            display: Event - Not implemented yet
+            description: Filter by event.
+            datatype: string
+            default_value: null
+display:
+    Athlete:
+        first_name:
+            variable: first_name
+            display: First Name
+            formatted_function: null
+            html_display_filtering:
+                display_column: Common
+                description: Filter by first_name.
+                checked: true
+                grouping_classes:
+                    - Example
+        last_name:
+            variable: last_name
+            display: Last Name
+            formatted_function: null
+            html_display_filtering:
+                display_column: Common
+                description: Filter by last_name.
+                checked: true
+                grouping_classes:
+                    - Example
+        team:
+            variable: team
+            display: Team
+            formatted_function: null
+            html_display_filtering:
+                display_column: Common
+                description: Filter by team.
+                checked: true
+                grouping_classes:
+                    - Example
+        graduation:
+            variable: graduation
+            display: Graduation Year
+            formatted_function: null
+            html_display_filtering:
+                display_column: Common
+                description: Filter by graduation.
+                checked: true
+                grouping_classes:
+                    - Example
