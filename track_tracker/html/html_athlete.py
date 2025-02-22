@@ -126,10 +126,9 @@ def filter_athletes_html_page():
 
     display_form.add_element(
         Button(internal='All', title='Toggle all checkboxes', type='button', onclick='toggleCheckboxesAll()').add_class('small-button'))
-
-    display_form.add_element(
-        Button(internal='Apply', type='button', onclick='applyDisplayFilters()').add_class('big-button'))
     display_form_div.add_element(display_form)
+    display_form_div.add_element(
+        Button(internal='Apply', type='button', onclick='applyDisplayFilters()').add_class('big-button'))
     page_content.add_element(display_form_div)
 
     # Table

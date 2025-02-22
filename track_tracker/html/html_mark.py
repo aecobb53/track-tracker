@@ -6,11 +6,17 @@ from .base_page import project_base_page
 from .common import MARK_FILTER_PARAMS, MARK_DISPLAY_PARAMS
 
 def filter_marks_html_page():
-    page_content = Div().add_style({'display': 'block', 'color': '#949ba4'})
+    page_content = Div().add_class('page-content')
 
     # Filter Form
     filter_form_div = Div()
-    filter_form_div.add_element(Header(level=1, internal='Data Filter'))
+    filter_form_div.add_element(Header(level=1, internal='Mark Results'))
+    filter_form_div.add_element(Paragraph(internal='''
+    Marks are the results of a race, jump, or throw. I use mark to avoid overloading other common phrases. You can use 
+    this page to filter criteria. The filters are partial as in you can query for the Team "Fairview" to get all 
+    Fairview High School marks. Some have additional dropdowns. For example, you can filter for Heats <= 3. 
+    Table columns can be toggled with the checkboxes to make viewing easier.
+    '''))
     filter_form_div.add_element(Paragraph(
         internal='For multiple items separate with a comma. Ex "Fairview, Boulder"'))
     filter_form = Form(action=f"/mark", method='get').add_class('filter-form')
@@ -47,16 +53,16 @@ def filter_marks_html_page():
                 box = [
                     Span(
                         for_=f"{id_base}-input", internal=param['display']
-                    ).add_class('filter-checkbox-input').add_style({'margin': '0px'}),
+                    ).add_class('filter-checkbox-input'),
                     select,
-                    Input(**input_kwargs).add_style({'margin': '0px'}),
+                    Input(**input_kwargs),
                 ]
             else:
                 box = [
                     Span(
                         for_=f"{id_base}-input", internal=param['display']
-                    ).add_class('filter-checkbox-input').add_style({'margin': '0px'}),
-                    Input(**input_kwargs).add_style({'margin': '0px'}),
+                    ).add_class('filter-checkbox-input'),
+                    Input(**input_kwargs),
                 ]
 
             # print(f"BOX: {box}")
@@ -97,12 +103,12 @@ def filter_marks_html_page():
                 input_kwargs['checked'] = True
             input_tag = Input(
                     **input_kwargs
-                ).add_class('display-checkbox-input').add_style({'margin': '0px'})
+                ).add_class('display-checkbox-input')
             for group_class in param['html_display_filtering']['grouping_classes']:
                 input_tag.add_class(group_class)
             box = [
                 input_tag,
-                Span(internal=param['display']).add_style({'margin': '0px'}),
+                Span(internal=param['display']),
             ]
             grouping_div.add_element(
                 Label(
@@ -142,6 +148,58 @@ def filter_marks_html_page():
 
     # Styles
 
+
+    # Styles
+    document_style = [
+        StyleTag(name='.page-content', internal="""
+            display: block;
+            color: #949ba4;
+            margin: 10px;
+        """),
+        StyleTag(name='.filter-checkbox-input', internal="""
+            margin: 0;
+        """),
+        StyleTag(name='.big-button', internal="""
+            margin: 5px;
+            padding: 5px;
+            font-size: 120%;
+            font-weight: bold;
+            text-decoration: underline;
+        """),
+        StyleTag(name='.small-button', internal="""
+            margin: 5px;
+            padding: 5px;
+            font-size: 100%;
+            font-weight: bold;
+        """),
+    
+    
+    
+    
+    
+    
+        # add_class('page-content')
+
+        # add_class('filter-form')
+        # add_class('filter-checkbox-input'),
+
+        # add_class('checkbox-label')
+        # add_class('filter-label'))
+        # add_class('big-button'))
+        # add_class('display-form')
+        # add_class('display-checkbox-input')
+        # add_class('checkbox-label'))
+        # add_class('small-button'))
+    
+    
+    ]
+
     base_doc = project_base_page()
     base_doc.body_content.body_content.append(page_content)
+    for style in document_style:
+        base_doc.document.add_head_element(style)
+
+
+    # base_doc = project_base_page()
+    # base_doc.body_content.body_content.append(page_content)
     return base_doc.return_document

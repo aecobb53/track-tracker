@@ -11,6 +11,8 @@ Trying to get to a useful level.
         - [ ] Find Athlete
         - [ ] Display Athlete
     - [ ] Teams
+        - [ ] Find Teams
+        - [ ] Display Teams
     - [ ] Records
     - [ ] Schedule - Meet schedule for this or previous years
 - [ ] UI
@@ -32,16 +34,17 @@ Trying to get to a useful level.
 
 
 Thoughts
--  [] Marks
-    -  [] Needs a header to indicate its athlete data
-    -  [] needs a left margin
-    -  [] Needs a filter secion
-    -  [] Needs Gender toggle or dial
-    -  [] Submit needs to be larger
-    -  [] All/apply needs to be larger
-    -  [] Trigger columsn on check??
-    -  [] Set page limit
-    -  [] Pagination
+- [ ] Marks
+    - [x] Needs a header to indicate its athlete data
+    - [x] needs a left margin
+    - [ ] Needs a filter secion
+    - [ ] Needs Gender toggle or dial
+    - [X] Submit needs to be larger
+    - [X] All/apply needs to be larger
+    - [ ] Trigger columsn on check??
+    - [ ] Set page limit
+    - [ ] Pagination
+    - [ ] All/Apply needs to be on different lines
 
 
 - [ ] Athlete
@@ -53,6 +56,7 @@ Thoughts
     - [ ] Trigger columsn on check??
     - [ ] Set page limit
     - [ ] Pagination
+    - [ ] All/Apply needs to be on different lines
 
 - [ ] Team
     - [ ] Needs a header to indicate its athlete data
@@ -63,6 +67,7 @@ Thoughts
     - [ ] Trigger columsn on check??
     - [ ] Set page limit
     - [ ] Pagination
+    - [ ] All/Apply needs to be on different lines
 
 - [ ] record needs an unimplemented response
 - [ ] resources needs an unimplemented response
