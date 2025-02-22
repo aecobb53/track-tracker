@@ -60,6 +60,7 @@ async def create_mark(mark: MarkApiCreate):
 async def filter_mark(request: Request):
     try:
         mark_filter = parse_query_params(request=request, query_class=MarkFilter)
+        print(' I AM RUN ')
         mh = MarkHandler()
         marks = await mh.filter_marks(mark_filter=mark_filter)
         ah = AthleteHandler()

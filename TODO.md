@@ -37,13 +37,15 @@ Thoughts
 - [ ] Marks
     - [x] Needs a header to indicate its athlete data
     - [x] needs a left margin
-    - [ ] Needs a filter secion
-    - [ ] Needs Gender toggle or dial
+    - [X] Needs a filter secion
+    - [X] Needs Gender toggle or dial
     - [X] Submit needs to be larger
     - [X] All/apply needs to be larger
     - [ ] Trigger columsn on check??
-    - [ ] Set page limit
+    - [X] Set page limit
     - [ ] Pagination
+        - For pagination I will need to query the entire table to see what meets the criteria to know how many 
+        pages could exist
     - [ ] All/Apply needs to be on different lines
 
 
@@ -71,7 +73,9 @@ Thoughts
 
 - [ ] record needs an unimplemented response
 - [ ] resources needs an unimplemented response
-
+- [ ] Rename Submit to Request
+- [ ] Move Requst button lower
+- [ ] Sort by Meet doesnt seem to be working
 
 ### Stretch
 

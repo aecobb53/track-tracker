@@ -1,9 +1,10 @@
 import os
+from re import L
 
 from phtml import *
 from my_base_html_lib import MyBaseDocument, NavigationContent, SidebarContent, BodyContent, FooterContent
 from .base_page import project_base_page
-from .common import MARK_FILTER_PARAMS, MARK_DISPLAY_PARAMS
+from .common import MARK_FILTER_PARAMS, MARK_ARRANGE_PARAMS, MARK_DISPLAY_PARAMS
 
 def filter_marks_html_page():
     page_content = Div().add_class('page-content')
@@ -41,41 +42,84 @@ def filter_marks_html_page():
                 input_kwargs['type'] = param['datatype']
             if param.get('size'):
                 input_kwargs['size'] = param['size']
-            # if param.get('required'):
-            #     input_kwargs['required'] = True
+            box = [
+                Span(
+                    for_=f"{id_base}-input", internal=param['display']
+                ).add_class('arrange-checkbox-input'),
+            ]
             if param.get('options'):
-                # If there are options add them as a modifier to the input
-                input_kwargs['options'] = param['options']
                 options = []
                 for option in param['options']:
-                    options.append(Option(value=option, internal=option))
-                select = Select(internal=options, id=f"{id_base}-input-select")
-                box = [
-                    Span(
-                        for_=f"{id_base}-input", internal=param['display']
-                    ).add_class('filter-checkbox-input'),
-                    select,
-                    Input(**input_kwargs),
-                ]
+                    options.append(Option(internal=option, id=f"{id_base}-input-select"))
+                box.append(Select(internal=options, id=f"{id_base}-input-select"))
+            if not param.get('no_text_field'):
+                box.append(Input(**input_kwargs).add_class('filter-select'))
             else:
-                box = [
-                    Span(
-                        for_=f"{id_base}-input", internal=param['display']
-                    ).add_class('filter-checkbox-input'),
-                    Input(**input_kwargs),
-                ]
+                box[-1].add_class('filter-select').add_class('standalone-select')
 
-            # print(f"BOX: {box}")
-            # print(f"LEN: {len(box)}")
             grouping_div.add_element(
                 Label(
                     for_=f"{id_base}-input", internal=box, title=param['description']
                 ).add_class('checkbox-label').add_class('filter-label'))
         filter_form.add_element(grouping_div)
     filter_form_div.add_element(filter_form)
-    filter_form_div.add_element(
-        Button(internal='Submit', type='button', onclick='applyFilterForm()').add_class('big-button'))
     page_content.add_element(filter_form_div)
+
+    # Arrange
+    arrange_div = Div()
+    arrange_div.add_element(Header(level=1, internal='Filter Results'))
+    arrange_form = Form(action=f"/mark", method='get').add_class('arrange-form')
+    arrange_groupings = {}
+    for grouping in MARK_ARRANGE_PARAMS.keys():
+        if grouping not in arrange_groupings:
+            arrange_groupings[grouping] = []
+        for details in MARK_ARRANGE_PARAMS[grouping].values():
+            arrange_groupings[grouping].append(details)
+    for grouping in arrange_groupings.keys():
+        params = arrange_groupings[grouping]
+        grouping_div = Div()
+        grouping_div.add_element(Header(level=3, internal=grouping))
+        for param in params:
+            id_base = param['variable'].replace(' ', '-').lower()
+            input_kwargs = {
+                'id': f"{id_base}-input",
+                'name': param['display'],
+                'value': param.get('default_value'),
+            }
+            if param.get('datatype'):
+                input_kwargs['type'] = param['datatype']
+            if param.get('size'):
+                input_kwargs['size'] = param['size']
+            # if param.get('required'):
+            #     input_kwargs['required'] = True
+
+            box = [
+                Span(
+                    for_=f"{id_base}-input", internal=param['display']
+                ).add_class('arrange-checkbox-input'),
+            ]
+            if param.get('options'):
+                options = []
+                for option in param['options']:
+                    options.append(Option(internal=option, id=f"{id_base}-input-select"))
+                box.append(Select(internal=options, id=f"{id_base}-input-select"))
+            if not param.get('no_text_field'):
+                box.append(Input(**input_kwargs).add_class('arrange-select'))
+            else:
+                box[-1].add_class('arrange-select').add_class('standalone-select')
+
+            grouping_div.add_element(
+                Label(
+                    for_=f"{id_base}-input", internal=box, title=param['description']
+                ).add_class('checkbox-label').add_class('arrange-label'))
+        arrange_form.add_element(grouping_div)
+    arrange_div.add_element(arrange_form)
+    page_content.add_element(arrange_div)
+
+
+    page_content.add_element(
+        Button(internal='Request', type='button', onclick='applyFilterForm()').add_class('big-button'))
+
 
     # Display Form
     display_form_div = Div()
@@ -129,6 +173,25 @@ def filter_marks_html_page():
     table_div = Div(id='table-div')
     page_content.add_element(table_div)
 
+    # Pagination
+    pagination_div = Div().add_class('pagination-div')
+    # pagination_div.add_element(Link(href='#', internal='&laquo;'))
+    # pagination_div.add_element(Link(href='#', internal='-'))
+    # # pagination_div.add_element(Link(href='#', internal='1').add_class('active'))
+    # # pagination_div.add_element(Link(href='#', internal='2'))
+    # # pagination_div.add_element(Link(href='#', internal='3'))
+    # pagination_div.add_element(Link(href='#', internal='&raquo;'))
+
+    #   <a href="#">&laquo;</a>
+    #   <a href="#">1</a>
+    #   <a href="#" class="active">2</a>
+    #   <a href="#">3</a>
+    #   <a href="#">4</a>
+    #   <a href="#">5</a>
+    #   <a href="#">6</a>
+    #   <a href="#">&raquo;</a>
+    page_content.add_element(pagination_div)
+
     # JS Files
     js_files = [
         os.path.join('mark', 'applyFilterForm.js'),
@@ -145,9 +208,6 @@ def filter_marks_html_page():
             page_content.add_element(
                 Script(internal=[l[:-1] for l in js_lines])
             )
-
-    # Styles
-
 
     # Styles
     document_style = [
@@ -172,34 +232,35 @@ def filter_marks_html_page():
             font-size: 100%;
             font-weight: bold;
         """),
-    
-    
-    
-    
-    
-    
-        # add_class('page-content')
 
-        # add_class('filter-form')
-        # add_class('filter-checkbox-input'),
-
-        # add_class('checkbox-label')
-        # add_class('filter-label'))
-        # add_class('big-button'))
-        # add_class('display-form')
-        # add_class('display-checkbox-input')
-        # add_class('checkbox-label'))
-        # add_class('small-button'))
-    
-    
+        StyleTag(name='.pagination-div', internal="""
+            display: inline-block;
+            font-size: 300%;
+            color: #949ba4;
+            margin: 10px;
+            text-decoration: none;
+            text-align: center;
+            width: 100%;
+        """),
+        StyleTag(name='.pagination-div a', internal="""
+            border-radius: 5px;
+            margin: 5px;
+            padding: 0;
+            text-decoration: none;
+        """),
+        StyleTag(name='.pagination-div a.active', internal="""
+            color: #000000;
+        """),
     ]
 
     base_doc = project_base_page()
     base_doc.body_content.body_content.append(page_content)
     for style in document_style:
         base_doc.document.add_head_element(style)
-
-
-    # base_doc = project_base_page()
-    # base_doc.body_content.body_content.append(page_content)
     return base_doc.return_document
+
+
+
+"""
+https://www.w3schools.com/css/css3_pagination.asp
+"""

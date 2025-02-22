@@ -173,9 +173,7 @@ class MarkDBCreate(MarkDBBase):
     def validate_fields(cls, fields):
         if not isinstance(fields, dict):
             fields = fields.model_dump()
-        print(f"FIELDS IN: {fields}")
         fields['athlete_uid'] = fields['athlete']['uid']
-        print(f"FIELDS OUT: {fields}")
         return fields
 
 
@@ -277,11 +275,24 @@ class MarkFilter(BaseModel):
             gender = []
             [gender.extend(i.split(',')) for i in fields['gender']]
             fields['gender'] = [g.strip() for g in gender]
+            if fields['gender'] == ['All']:
+                fields['gender'] = []
 
         if fields.get('meet_date'):
             meet_date = []
             [meet_date.extend(i.split(',')) for i in fields['meet_date']]
             fields['meet_date'] = [m.strip() for m in meet_date]
+
+        if fields.get('sort'):
+            order_by = fields.get('order_by', [])
+            for sort in fields['sort']:
+                for item in sort.split(','):
+                    if not item or item in ['-', 'None', 'null', None]:
+                        continue
+                    order_by.append(item.lower())
+            print(f"SORT: {fields['sort']}")
+            print(f"ORDER BY: {order_by}")
+            fields['order_by'] = order_by
 
         # if isinstance(fields.get('active'), list):
         #     fields['active'] = fields['active'][0]

@@ -54,7 +54,7 @@ class AthleteHandler(BaseHandler):
         """
         Find single matching athlete or error
         """
-        self.context.logger.info(f"Filtering athletes: {athlete_filter.model_dump_json()}")
+        # self.context.logger.info(f"Filtering athletes: {athlete_filter.model_dump_json()}")
         with Session(self.context.database.engine) as session:
             query = select(AthleteDB)
             query = athlete_filter.apply_filters(AthleteDB, query)
@@ -72,7 +72,7 @@ class AthleteHandler(BaseHandler):
                 raise DuplicateRecordsException(f"Multiple records found for filter: [{athlete_filter.model_dump_json()}]")
             else:
                 athlete = athletes[0]
-        self.context.logger.info(f"Athlete found")
+        # self.context.logger.info(f"Athlete found")
         return athlete
 
     async def update_athlete(self, athlete: AthleteData) -> AthleteData:
