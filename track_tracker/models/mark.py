@@ -97,7 +97,7 @@ class Mark(BaseModel):
                 other.fractions or 0
             ]
             other_distance = other_distance[0] * 12 + other_distance[1] + other_distance[2]
-            if self_distance > other_distance:
+            if self_distance < other_distance:
                 return False
             else:
                 return True
