@@ -1,6 +1,6 @@
 import json
 from datetime import datetime
-from sqlmodel import Session, select
+from sqlmodel import Session, select, func
 
 from .base_handler import BaseHandler
 from models import (
@@ -83,13 +83,13 @@ class MarkHandler(BaseHandler):
                 read_obj = MarkDBRead.model_validate(row)
                 mark = read_obj.cast_data_object()
                 marks.append(mark)
+
+            query_max_count = rows = session.exec(
+                select(func.count(MarkDB.uid))).one()
+
         self.context.logger.info(f"Marks Filtered: {len(marks)}")
         display_marks = []
         for mark in marks:
-            # if mark.athlete:
-            #     athlete = mark.athlete.name
-            # else:
-            #     athlete = '-'
             athlete = mark.athlete_uid
 
             display_marks.append({
@@ -104,7 +104,7 @@ class MarkHandler(BaseHandler):
                 'Date': datetime.strftime(mark.meet_date, "%Y-%m-%d"),
                 'Gender': mark.gender,
             })
-        return display_marks
+        return display_marks, query_max_count
 
     # async def find_mark(self, mark_uid: str) -> Mark:
     #     self.context.logger.info(f"Finding mark: {mark_uid}")

@@ -157,6 +157,7 @@ arrange:
             default_value: null
             no_text_field: true
             options:
+                - '5'
                 - '25'
                 - '50'
                 - '100'

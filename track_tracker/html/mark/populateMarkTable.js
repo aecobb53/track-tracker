@@ -1,5 +1,9 @@
-async function populateMarkTable(filterResults) {
+async function populateMarkTable(filterResults, page, page_size, record_size) {
     console.log('Populating Mark table');
+
+    // filterResults = queryResults['marks'];
+    // query_max_count = queryResults['query_max_count'];
+    // console.log('Max result count' + query_max_count);
 
     // var tracking_project_name_hashtable = {};
 
@@ -107,6 +111,7 @@ async function populateMarkTable(filterResults) {
     table_div.appendChild(table_element);
 
     // Pagination
+    pagination(page, page_size, record_size, false);
 
 }
 // window.onload = populateTable();

@@ -1,5 +1,8 @@
-async function applyFilterForm() {
+async function applyFilterForm(page=1, page_size=null, record_size=null) {
     console.log('Applying Filter Form');
+    console.log('page: ' + page);
+    console.log('page_size: ' + page_size);
+    console.log('record_size: ' + record_size);
     var params = {};
 
     let filterLabel = document.getElementsByClassName("filter-label");
@@ -48,9 +51,15 @@ async function applyFilterForm() {
         params[key] = data_value;
     }
 
+    var offset = page - 1;
+    params['offset'] = offset
 
-    const filterResults = await GETFilterMark(params);
+    const queryResults = await GETFilterMark(params);
 
-    populateMarkTable(filterResults);
+    filterResults = queryResults['marks'];
+    record_size = queryResults['query_max_count'];
+    page_size = Math.round(record_size / filterResults.length);
+
+    populateMarkTable(filterResults, page, page_size, record_size);
     applyDisplayFilters();
 }

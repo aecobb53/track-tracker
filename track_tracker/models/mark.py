@@ -390,3 +390,7 @@ class MarkFilter(BaseModel):
             query = query.offset(self.offset)
 
         return query
+
+    def count_applicable(self, database_object_class: MarkDBBase, query: select) -> select:
+        count = query
+        x=1

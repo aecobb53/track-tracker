@@ -198,6 +198,7 @@ def filter_marks_html_page():
         os.path.join('mark', 'populateMarkTable.js'),
         os.path.join('mark', 'applyDisplayFilters.js'),
         os.path.join('mark', 'toggleCheckboxes.js'),
+        os.path.join('common', 'pagination.js'),
     ]
     for fl in js_files:
         with open(os.path.join('html', fl), 'r') as jf:
@@ -241,14 +242,15 @@ def filter_marks_html_page():
             text-align: center;
             width: 100%;
         """),
-        StyleTag(name='.pagination-div a', internal="""
+        StyleTag(name='.pagination-div button', internal="""
             border-radius: 5px;
-            margin: 5px;
-            padding: 0;
+            margin: 4px;
+            padding: 5px;
             text-decoration: none;
         """),
-        StyleTag(name='.pagination-div a.active', internal="""
+        StyleTag(name='.pagination-div button.active', internal="""
             color: #000000;
+            background-color: green;
         """),
     ]
 

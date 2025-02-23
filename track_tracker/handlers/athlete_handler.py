@@ -127,6 +127,23 @@ class AthleteHandler(BaseHandler):
                 'records': records,
                 'uid': athlete.uid,
             })
+        """from sqlalchemy import select, func, Integer, Table, Column, MetaData
+
+        metadata = MetaData()
+
+        table = Table("table", metadata,
+                    Column('primary_key', Integer),
+                    Column('other_column', Integer)  # just to illustrate
+                    )   
+
+        print select([func.count()]).select_from(table)
+        """
+
+        """
+        from sqlalchemy import func
+
+        session.exec(select([func.count(Users.email)]).where(Users.email == res.email)).one()
+        """
         return display_athletes
 
     # async def set_activation(self, athlete_uid: str, active_state: bool) -> Athlete:
