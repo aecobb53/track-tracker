@@ -93,6 +93,9 @@ Thoughts
 - [ ] Sort by Meet doesnt seem to be working
 - [ ] Verify other sorts are working
 - [ ] Before data load, fix all event headers to a uniform format
+- [ ] DIn disciption mention 
+- [ ] Home page move add_style to add_class and styles at the bottom
+
 
 ### Stretch
 

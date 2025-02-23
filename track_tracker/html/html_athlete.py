@@ -253,6 +253,7 @@ def filter_athletes_html_page():
 
 def find_athletes_html_page(athlete, marks):
     page_content = Div().add_class('page-content')
+    page_content.add_element(Header(level=1, internal='Athlete Page'))
 
     page_content.add_element(Paragraph(internal='''
     This page displays information about an athlete. Notice there is one final row in each table and that is the 
