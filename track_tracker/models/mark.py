@@ -1,4 +1,4 @@
-from datetime import datetime, timezone
+from datetime import datetime, timezone, timedelta
 import json
 import re
 from typing import List, Dict, Any
@@ -65,6 +65,52 @@ class Mark(BaseModel):
     def build(cls, input):
         event, mark = input.split('::')
         return cls.parse_event_mark(event=event, mark=mark)
+
+    def __gt__(self, other):
+        if self.seconds is not None and self.subsecond is not None and other.seconds is not None and other.subsecond is not None:
+            self_time = [
+                self.minutes or 0,
+                self.seconds or 0,
+                self.subsecond or 0
+            ]
+            self_time = timedelta(minutes=self_time[0], seconds=self_time[1], milliseconds=self_time[2] * 1000)
+            other_time = [
+                other.minutes or 0,
+                other.seconds or 0,
+                other.subsecond or 0
+            ]
+            other_time = timedelta(minutes=other_time[0], seconds=other_time[1], milliseconds=other_time[2] * 1000)
+            if self_time > other_time:
+                return True
+            else:
+                return False
+        elif self.inches is not None and self.fractions is not None and other.inches is not None and other.fractions is not None:
+            self_distance = [
+                self.feet or 0,
+                self.inches or 0,
+                self.fractions or 0
+            ]
+            self_distance = self_distance[0] * 12 + self_distance[1] + self_distance[2]
+            other_distance = [
+                other.feet or 0,
+                other.inches or 0,
+                other.fractions or 0
+            ]
+            other_distance = other_distance[0] * 12 + other_distance[1] + other_distance[2]
+            if self_distance > other_distance:
+                return False
+            else:
+                return True
+        else:
+            print(f"event_str: {self.event_str}, {other.event_str}")
+            print(f"mark_str: {self.mark_str}, {other.mark_str}")
+            print(f"minutes: {self.minutes}, {other.minutes}")
+            print(f"seconds: {self.seconds}, {other.seconds}")
+            print(f"subsecond: {self.subsecond}, {other.subsecond}")
+            print(f"feet: {self.feet}, {other.feet}")
+            print(f"inches: {self.inches}, {other.inches}")
+            print(f"fractions: {self.fractions}, {other.fractions}")
+            raise ValueError('Invalid Mark')
 
 
 class MarkData(BaseModel):

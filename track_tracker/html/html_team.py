@@ -249,6 +249,12 @@ def filter_teams_html_page():
 def find_team_html_page(athletes, marks):
     page_content = Div().add_class('page-content')
 
+    page_content.add_element(Paragraph(internal='''
+    This page displays information about a team. Notice there is one final row in each table and that is 
+    the current record for the team for that event. 
+    '''))
+
+
     page_content.add_element(Header(level=1, internal=f"{athletes[0].team}"))
 
     men = [a for a in athletes if a.gender == 'Mens']
@@ -285,6 +291,10 @@ def find_team_html_page(athletes, marks):
     table_row_background_colors = ('#35363b', '#2c2d2e')
     for event, marks in events_dict.items():
         marks.sort(key=lambda x: x.meet_date)
+        record_mark = marks[0]
+        for mark in marks:
+            if mark.mark > record_mark.mark:
+                record_mark = mark
 
         event_div = Div().add_class('event-div')
         event_div.add_element(Header(level=3, internal=event))
@@ -293,6 +303,8 @@ def find_team_html_page(athletes, marks):
             internal=[TableHeader(internal=col).add_class('event-table-header') for col in column_names]
         ).add_style({'background-color': table_row_background_colors[1]})
         )
+
+
         for index, mark in enumerate(marks):
             event_table_row = TableRow().add_style({'background-color': table_row_background_colors[index % 2]})
             event_table_row.add_element(
@@ -312,6 +324,31 @@ def find_team_html_page(athletes, marks):
                 TableData(internal=f"{datetime.strftime(mark.meet_date, '%Y-%m-%d')}").add_class('event-table-data'))
             event_table.add_element(event_table_row)
 
+        # Final rows
+        event_table_row = TableRow().add_style({'background-color': table_row_background_colors[0]})
+        for _ in column_names:
+            event_table_row.add_element(
+            TableData(internal=f"-").add_class('event-table-data'))
+        event_table.add_element(event_table_row)
+
+        event_table_row = TableRow().add_style({'background-color': table_row_background_colors[1]})
+        event_table_row.add_element(
+            TableData(internal=f"{record_mark.place}").add_class('event-table-data'))
+        event_table_row.add_element(
+            TableData(internal=f"{record_mark.meet}").add_class('event-table-data'))
+        athlete_name = f"{record_mark.athlete.first_name} {record_mark.athlete.last_name}"
+        event_table_row.add_element(
+            TableData(internal=f"{athlete_name}").add_class('event-table-data'))
+        event_table_row.add_element(
+            TableData(internal=f"{record_mark.mark.mark_str}").add_class('event-table-data'))
+        event_table_row.add_element(
+            TableData(internal=f"{record_mark.wind}").add_class('event-table-data'))
+        event_table_row.add_element(
+            TableData(internal=f"{record_mark.heat}").add_class('event-table-data'))
+        event_table_row.add_element(
+            TableData(internal=f"{datetime.strftime(record_mark.meet_date, '%Y-%m-%d')}").add_class('event-table-data'))
+        event_table.add_element(event_table_row)
+
         event_div.add_element(event_table)
         events_div.add_element(event_div)
     page_content.add_element(events_div)
@@ -324,6 +361,9 @@ def find_team_html_page(athletes, marks):
         """),
         StyleTag(name='h2', internal="""
             margin: 10px 30px;
+        """),
+        StyleTag(name='p', internal="""
+            margin: 20px 30px;
         """),
         # StyleTag(name='.events-div', internal="""
         #     margin: 10px 40px;

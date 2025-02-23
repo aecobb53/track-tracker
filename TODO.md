@@ -52,6 +52,7 @@ Thoughts
     - [X] Rename Submit to Request
     - [X] Move Requst button lower
     - [X] Remove add_style for style items
+    - [ ] Add links to athlete and team in the marks page
 
 
 - [ ] Athlete
@@ -67,7 +68,7 @@ Thoughts
     - [X] Rename Submit to Request
     - [X] Move Requst button lower
     - [X] Remove add_style for style items
-    - [ ] Dont forget about athlete specific page
+    - [X] Dont forget about athlete specific page
 
 - [ ] Team
     - [X] Needs a header to indicate its athlete data
@@ -84,9 +85,9 @@ Thoughts
     - [X] Remove add_style for style items
     - [X] Dont forget about team specific page
 
-- [ ] Athlete specific page
-    - [ ] Add records based on mark values
-    - [ ] I believe this means I need to implement records and mark comparison
+- [X] Athlete specific page
+    - [X] Add records based on mark values
+    - [X] I believe this means I need to implement records and mark comparison
 
 - [X] record needs an unimplemented response
 - [X] resources needs an unimplemented response
@@ -144,6 +145,9 @@ Thoughts
     - [ ] Change default columns based on computer or phone
     - [ ] Mark data as bad or update data on the spot
     - [ ] Move `add_style` to style docs for more global application
+    - [ ] On the team and probably also athlete pages add a way to select which years to show
+        - [ ] By default age off old athletes from the team page
+        - [ ] While im at it, age off old results from all pages except athlete specific pages at least by default
 - [ ] Backend
     - [ ] Parse response to determine rest, computer, or phone
 - [ ] Data
