@@ -7,7 +7,7 @@ from .base_page import project_base_page
 from .common import ATHLETE_FILTER_PARAMS, ATHLETE_ARRANGE_PARAMS, ATHLETE_DISPLAY_PARAMS
 
 def filter_athletes_html_page():
-    page_content = Div().add_style({'display': 'block', 'color': '#949ba4'})
+    page_content = Div().add_class('page-content')
 
     # Filter Form
     filter_form_div = Div()
@@ -118,7 +118,7 @@ def filter_athletes_html_page():
     page_content.add_element(arrange_div)
 
     page_content.add_element(
-        Button(internal='Submit', type='button', onclick='applyFilterForm()').add_class('big-button'))
+        Button(internal='Request', type='button', onclick='applyFilterForm()').add_class('big-button'))
 
     # Display Form
     display_form_div = Div()
@@ -145,12 +145,12 @@ def filter_athletes_html_page():
                 input_kwargs['checked'] = True
             input_tag = Input(
                     **input_kwargs
-                ).add_class('display-checkbox-input').add_style({'margin': '0px'})
+                ).add_class('display-checkbox-input')
             for group_class in param['html_display_filtering']['grouping_classes']:
                 input_tag.add_class(group_class)
             box = [
                 input_tag,
-                Span(internal=param['display']).add_style({'margin': '0px'}),
+                Span(internal=param['display'])
             ]
             grouping_div.add_element(
                 Label(
@@ -167,7 +167,7 @@ def filter_athletes_html_page():
         Button(internal='Apply', type='button', onclick='applyDisplayFilters()').add_class('big-button'))
 
     # Table
-    table_div = Div(id='table-div').add_style({'margin': '10px'})
+    table_div = Div(id='table-div')
     page_content.add_element(table_div)
 
     # Pagination
@@ -252,7 +252,7 @@ def filter_athletes_html_page():
 
 
 def find_athletes_html_page(athlete, marks):
-    page_content = Div().add_style({'display': 'block', 'color': '#949ba4'})
+    page_content = Div().add_class('page-content')
 
     print(f"ATHLETE: {athlete}")
 
@@ -274,6 +274,8 @@ def find_athletes_html_page(athlete, marks):
     # column_names = ['Place', 'Meet', 'Wind', 'Heat', 'Date']
     table_row_background_colors = ('#35363b', '#2c2d2e')
     for event, marks in events_dict.items():
+        marks.sort(key=lambda x: x.meet_date)
+
         event_div = Div().add_class('event-div')
         event_div.add_element(Header(level=3, internal=event))
         event_table = Table().add_class('event-table')

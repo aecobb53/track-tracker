@@ -41,9 +41,8 @@ Thoughts
     - [X] Needs Gender toggle or dial
     - [X] Submit needs to be larger
     - [X] All/apply needs to be larger
-    - [ ] ~~Trigger columsn on check??~~
     - [X] Set page limit
-    - [ ] Pagination
+    - [X] Pagination
         - For pagination I will need to query the entire table to see what meets the criteria to know how many 
         pages could exist
         - I also need to change the responses back to a key: value of lists so I can add other keys like pagination
@@ -52,43 +51,48 @@ Thoughts
     - [X] No results found
     - [X] Rename Submit to Request
     - [X] Move Requst button lower
-    - [ ] Remove add_style for style items
+    - [X] Remove add_style for style items
 
 
 - [ ] Athlete
-    - [ ] Needs a header to indicate its athlete data
-    - [ ] needs a left margin
-    - [ ] Needs Gender toggle or dial
-    - [ ] Submit needs to be larger
-    - [ ] All/apply needs to be larger
-    - [ ] Trigger columsn on check??
-    - [ ] Set page limit
-    - [ ] Pagination
-    - [ ] All/Apply needs to be on different lines
-    - [ ] No results found
-    - [ ] Rename Submit to Request
-    - [ ] Move Requst button lower
-    - [ ] Remove add_style for style items
+    - [X] Needs a header to indicate its athlete data
+    - [X] needs a left margin
+    - [X] Needs Gender toggle or dial
+    - [X] Submit needs to be larger
+    - [X] All/apply needs to be larger
+    - [X] Set page limit
+    - [X] Pagination
+    - [X] All/Apply needs to be on different lines
+    - [X] No results found
+    - [X] Rename Submit to Request
+    - [X] Move Requst button lower
+    - [X] Remove add_style for style items
+    - [ ] Dont forget about athlete specific page
 
 - [ ] Team
-    - [ ] Needs a header to indicate its athlete data
-    - [ ] needs a left margin
-    - [ ] Needs Gender toggle or dial
-    - [ ] Submit needs to be larger
-    - [ ] All/apply needs to be larger
-    - [ ] Trigger columsn on check??
-    - [ ] Set page limit
-    - [ ] Pagination
-    - [ ] All/Apply needs to be on different lines
-    - [ ] No results found
-    - [ ] Rename Submit to Request
-    - [ ] Move Requst button lower
-    - [ ] Remove add_style for style items
+    - [X] Needs a header to indicate its athlete data
+    - [X] needs a left margin
+    - [ ] ~Needs Gender toggle or dial~
+    - [X] Submit needs to be larger
+    - [X] All/apply needs to be larger
+    - [X] Set page limit
+    - [X] Pagination
+    - [X] All/Apply needs to be on different lines
+    - [X] No results found
+    - [X] Rename Submit to Request
+    - [X] Move Requst button lower
+    - [X] Remove add_style for style items
+    - [X] Dont forget about team specific page
+
+- [ ] Athlete specific page
+    - [ ] Add records based on mark values
+    - [ ] I believe this means I need to implement records and mark comparison
 
 - [X] record needs an unimplemented response
 - [X] resources needs an unimplemented response
 - [ ] Sort by Meet doesnt seem to be working
 - [ ] Verify other sorts are working
+- [ ] Before data load, fix all event headers to a uniform format
 
 ### Stretch
 

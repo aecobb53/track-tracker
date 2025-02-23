@@ -30,7 +30,7 @@ router = APIRouter(
 
 
 @router.get('/')
-async def html_athlete(request: Request):
+async def html_athletes(request: Request):
     athlete_page = filter_athletes_html_page()
     return HTMLResponse(content=athlete_page, status_code=200)
 

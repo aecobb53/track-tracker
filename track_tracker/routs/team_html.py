@@ -8,10 +8,13 @@ from fastapi.responses import HTMLResponse, ORJSONResponse
 # from handlers import EventHandler, parse_query_params
 # from utils import parse_query_params, parse_header, MissingRecordException, DuplicateRecordsException
 from models import ContextSingleton
+from handlers import AthleteHandler, MarkHandler
+from models import AthleteFilter, MarkFilter
 
 
 from html import (
     filter_teams_html_page,
+    find_team_html_page,
     unimplemented_page
     )
 
@@ -25,12 +28,16 @@ router = APIRouter(
 
 
 @router.get('/')
-async def html_team(request: Request):
+async def html_teams(request: Request):
     team_page = filter_teams_html_page()
     return HTMLResponse(content=team_page, status_code=200)
 
 
-@router.get('/{team_uid}')
-async def html_team(team_uid: str, request: Request):
-    team_page = unimplemented_page()
+@router.get('/{team_name}')
+async def html_team(team_name: str, request: Request):
+    ah = AthleteHandler()
+    athletes = await ah.filter_athletes(AthleteFilter(team=[team_name]))
+    mh = MarkHandler()
+    marks = await mh.filter_marks(MarkFilter(team=[team_name]))
+    team_page = find_team_html_page(athletes=athletes, marks=marks)
     return HTMLResponse(content=team_page, status_code=200)

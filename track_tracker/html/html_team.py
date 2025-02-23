@@ -1,12 +1,13 @@
 import os
 
+from datetime import datetime
 from phtml import *
 from my_base_html_lib import MyBaseDocument, NavigationContent, SidebarContent, BodyContent, FooterContent
 from .base_page import project_base_page
 from .common import TEAM_FILTER_PARAMS, TEAM_ARRANGE_PARAMS, TEAM_DISPLAY_PARAMS
 
 def filter_teams_html_page():
-    page_content = Div().add_style({'display': 'block', 'color': '#949ba4'})
+    page_content = Div().add_class('page-content')
 
     # Filter Form
     filter_form_div = Div()
@@ -113,7 +114,7 @@ def filter_teams_html_page():
     page_content.add_element(arrange_div)
 
     page_content.add_element(
-        Button(internal='Submit', type='button', onclick='applyFilterForm()').add_class('big-button'))
+        Button(internal='Request', type='button', onclick='applyFilterForm()').add_class('big-button'))
 
     # Display Form
     display_form_div = Div()
@@ -141,12 +142,12 @@ def filter_teams_html_page():
                 input_kwargs['checked'] = True
             input_tag = Input(
                     **input_kwargs
-                ).add_class('display-checkbox-input').add_style({'margin': '0px'})
+                ).add_class('display-checkbox-input')
             for group_class in param['html_display_filtering']['grouping_classes']:
                 input_tag.add_class(group_class)
             box = [
                 input_tag,
-                Span(internal=param['display']).add_style({'margin': '0px'}),
+                Span(internal=param['display'])
             ]
             grouping_div.add_element(
                 Label(
@@ -164,7 +165,7 @@ def filter_teams_html_page():
         Button(internal='Apply', type='button', onclick='applyDisplayFilters()').add_class('big-button'))
 
     # Table
-    table_div = Div(id='table-div').add_style({'margin': '10px'})
+    table_div = Div(id='table-div')
     page_content.add_element(table_div)
 
     # Pagination
@@ -244,3 +245,128 @@ def filter_teams_html_page():
     for style in document_style:
         base_doc.document.add_head_element(style)
     return base_doc.return_document
+
+def find_team_html_page(athletes, marks):
+    page_content = Div().add_class('page-content')
+
+    page_content.add_element(Header(level=1, internal=f"{athletes[0].team}"))
+
+    men = [a for a in athletes if a.gender == 'Mens']
+    women = [a for a in athletes if a.gender == 'Womens']
+
+    current_year = datetime.now().year
+    freshmen = [a for a in athletes if a.graduation_year == current_year + 3]
+    sophomore = [a for a in athletes if a.graduation_year == current_year + 2]
+    juniors = [a for a in athletes if a.graduation_year == current_year + 1]
+    seniors = [a for a in athletes if a.graduation_year == current_year]
+
+
+    page_content.add_element(Header(level=2, internal=f"Athletes: {len(athletes)}"))
+    page_content.add_element(Header(level=2, internal=f"Men: {len(men)}"))
+    page_content.add_element(Header(level=2, internal=f"Women: {len(women)}"))
+    page_content.add_element(Header(level=2, internal=f"Freshmen: {len(freshmen)}"))
+    page_content.add_element(Header(level=2, internal=f"Sophomore: {len(sophomore)}"))
+    page_content.add_element(Header(level=2, internal=f"Juniors: {len(juniors)}"))
+    page_content.add_element(Header(level=2, internal=f"Seniors: {len(seniors)}"))
+
+    page_content.add_element(Header(level=1, internal=f"Events"))
+
+    events_dict = {}
+    for mark in marks:
+        if mark.event not in events_dict:
+            events_dict[mark.event] = []
+        for athlete in athletes:
+            if athlete.uid == mark.athlete_uid:
+                mark.athlete = athlete
+                break
+        events_dict[mark.event].append(mark)
+    events_div = Div()
+    column_names = ['Place', 'Meet', 'Athlete', 'Mark', 'Wind', 'Heat', 'Date']
+    table_row_background_colors = ('#35363b', '#2c2d2e')
+    for event, marks in events_dict.items():
+        marks.sort(key=lambda x: x.meet_date)
+
+        event_div = Div().add_class('event-div')
+        event_div.add_element(Header(level=3, internal=event))
+        event_table = Table().add_class('event-table')
+        event_table.add_element(TableRow(
+            internal=[TableHeader(internal=col).add_class('event-table-header') for col in column_names]
+        ).add_style({'background-color': table_row_background_colors[1]})
+        )
+        for index, mark in enumerate(marks):
+            event_table_row = TableRow().add_style({'background-color': table_row_background_colors[index % 2]})
+            event_table_row.add_element(
+                TableData(internal=f"{mark.place}").add_class('event-table-data'))
+            event_table_row.add_element(
+                TableData(internal=f"{mark.meet}").add_class('event-table-data'))
+            athlete_name = f"{mark.athlete.first_name} {mark.athlete.last_name}"
+            event_table_row.add_element(
+                TableData(internal=f"{athlete_name}").add_class('event-table-data'))
+            event_table_row.add_element(
+                TableData(internal=f"{mark.mark.mark_str}").add_class('event-table-data'))
+            event_table_row.add_element(
+                TableData(internal=f"{mark.wind}").add_class('event-table-data'))
+            event_table_row.add_element(
+                TableData(internal=f"{mark.heat}").add_class('event-table-data'))
+            event_table_row.add_element(
+                TableData(internal=f"{datetime.strftime(mark.meet_date, '%Y-%m-%d')}").add_class('event-table-data'))
+            event_table.add_element(event_table_row)
+
+        event_div.add_element(event_table)
+        events_div.add_element(event_div)
+    page_content.add_element(events_div)
+
+
+    # Styles
+    document_style = [
+        StyleTag(name='h1', internal="""
+            margin: 20px;
+        """),
+        StyleTag(name='h2', internal="""
+            margin: 10px 30px;
+        """),
+        # StyleTag(name='.events-div', internal="""
+        #     margin: 10px 40px;
+        # """),
+
+        # StyleTag(name='.events-div', internal="""
+        #     color: #c4cedb;
+        #     margin: 0;
+        #     padding: 0;
+        #     display: inline;
+        # """),
+
+        StyleTag(name='.event-div', internal="""
+            background-color: #393B41;
+            margin: 10px;
+            padding: 0px 5px 10px;
+            border: 3px solid black;
+            border-radius: 15px;
+            -moz-border-radius: 15px;
+            width: 97%;
+            display: inline-block;
+            vertical-align: top;
+        """),
+
+        # IM NOT SURE WHY IT IS NOT FITTING PROPPERLY AT 100% WIDTH
+
+        StyleTag(name='.event-div h3', internal="""
+            margin: 10px;
+            padding: 0;
+            text-align: center;
+        """),
+        StyleTag(name='.event-table', internal="""
+            width: 100%;
+            border: 5 solid black;
+        """),
+    ]
+
+    base_doc = project_base_page()
+    base_doc.body_content.body_content.append(page_content)
+    for style in document_style:
+        base_doc.document.add_head_element(style)
+    return base_doc.return_document
+
+
+
+

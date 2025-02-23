@@ -44,7 +44,7 @@ async def filter_athlete(request: Request):
     try:
         athlete_filter = parse_query_params(request=request, query_class=AthleteFilter)
         ah = AthleteHandler()
-        athletes = await ah.filter_athletes(athlete_filter=AthleteFilter())
+        athletes = await ah.filter_athletes(athlete_filter=AthleteFilter(team=athlete_filter.team))
         offset = athlete_filter.offset
         limit = athlete_filter.limit
         start_index = offset

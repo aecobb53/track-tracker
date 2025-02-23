@@ -42,3 +42,13 @@ display:
                 checked: true
                 grouping_classes:
                     - Example
+        # count:
+        #     variable: athlete-count
+        #     display: Athlete Count
+        #     formatted_function: null
+        #     html_display_filtering:
+        #         display_column: Common
+        #         description: Filter by athlete count.
+        #         checked: true
+        #         grouping_classes:
+        #             - Example
