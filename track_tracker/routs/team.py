@@ -1,9 +1,6 @@
 from fastapi import APIRouter, HTTPException, Request, Response, Depends
 
-# from models import Athlete, AthleteFilter
-# # from handlers import AthleteHandler
 from handlers import AthleteHandler, MarkHandler, parse_query_params, DuplicateRecordsException, MissingRecordException
-# # from utils import parse_query_params, parse_header, MissingRecordException, DuplicateRecordsException
 from models import AthleteData, AthleteApiCreate, AthleteFilter, MarkFilter, ContextSingleton, RestHeaders
 
 from typing import Annotated
@@ -47,7 +44,11 @@ async def filter_athlete(request: Request):
     try:
         athlete_filter = parse_query_params(request=request, query_class=AthleteFilter)
         ah = AthleteHandler()
-        athletes = await ah.filter_athletes(athlete_filter=athlete_filter)
+        athletes = await ah.filter_athletes(athlete_filter=AthleteFilter())
+        offset = athlete_filter.offset
+        limit = athlete_filter.limit
+        start_index = offset
+        stop_index = start_index + limit
 
         # APPLY A FILTER TO ONLY GET ACTIVE TEAM MEMEBRS
         # DISPLAY HOW MANY STUDENTS ARE IN EACH GRADE?
@@ -64,7 +65,12 @@ async def filter_athlete(request: Request):
         team_keys = list(team_details.keys())
         team_keys.sort()
         teams = [team_details[key] for key in team_keys]
-        return teams
+        query_max_count = len(teams)
+        response = {
+            'teams': teams[start_index:stop_index],
+            'query_max_count': query_max_count,
+        }
+        return response
     except Exception as err:
         context.logger.warning(f'ERROR: {err}')
         raise HTTPException(status_code=500, detail='Internal Service Error')

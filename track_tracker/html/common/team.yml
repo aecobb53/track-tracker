@@ -6,6 +6,30 @@ filter:
             description: Filter by team.
             datatype: string
             default_value: null
+arrange:
+    Results:
+        limit:
+            variable: limit
+            display: Page Limit
+            description: Records per page.
+            datatype: str
+            default_value: null
+            no_text_field: true
+            options:
+                - '25'
+                - '50'
+                - '100'
+                - '1000'
+    # Sort:
+    #     sort1:
+    #         variable: sort
+    #         display: Sort Item 1
+    #         description: What to sort by first.
+    #         datatype: str
+    #         default_value: Team
+    #         no_text_field: true
+    #         options:
+    #             - Team
 display:
     Team:
         team:

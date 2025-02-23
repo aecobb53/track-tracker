@@ -30,4 +30,5 @@ ATHLETE_DISPLAY_PARAMS = athlete_file['display']
 with open(os.path.join(path, 'team.yml')) as yf:
     team_file = yaml.safe_load(yf)
 TEAM_FILTER_PARAMS = team_file['filter']
+TEAM_ARRANGE_PARAMS = team_file['arrange']
 TEAM_DISPLAY_PARAMS = team_file['display']

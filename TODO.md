@@ -52,6 +52,7 @@ Thoughts
     - [X] No results found
     - [X] Rename Submit to Request
     - [X] Move Requst button lower
+    - [ ] Remove add_style for style items
 
 
 - [ ] Athlete
@@ -67,6 +68,7 @@ Thoughts
     - [ ] No results found
     - [ ] Rename Submit to Request
     - [ ] Move Requst button lower
+    - [ ] Remove add_style for style items
 
 - [ ] Team
     - [ ] Needs a header to indicate its athlete data
@@ -81,6 +83,7 @@ Thoughts
     - [ ] No results found
     - [ ] Rename Submit to Request
     - [ ] Move Requst button lower
+    - [ ] Remove add_style for style items
 
 - [X] record needs an unimplemented response
 - [X] resources needs an unimplemented response
