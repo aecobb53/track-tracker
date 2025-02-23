@@ -1,8 +1,8 @@
-async function pagination(target, page_size, record_size, update=false) {
+async function pagination(target, page_size, page_count, update=false) {
     console.log('Pagination Management');
     console.log('target: ' + target);
     console.log('page_size: ' + page_size);
-    console.log('record_size: ' + record_size);
+    console.log('page_count: ' + page_count);
     console.log('update: ' + update);
 
     // Div
@@ -14,15 +14,25 @@ async function pagination(target, page_size, record_size, update=false) {
     leading_button.innerHTML = '<<';  // '&laquo;'
     leading_button.classList.add('pagination-button');
     var leading_target = target - 1;
-    leading_button.setAttribute('onclick', "applyFilterForm(" + leading_target + ", " + page_size + ", " + record_size + ")");
+    leading_button.setAttribute('onclick', "applyFilterForm(" + leading_target + ", " + page_size + ", " + page_count + ")");
     pagination_div.appendChild(leading_button);
 
 
     // Middle
+    // Math optomized for 5 results
+    var total_page_count = Math.ceil(page_count / page_size)
     var min_page = Math.max(1, target - 3);
+    var max_page = Math.min(target + 6, total_page_count);
     console.log('min_page: ' + min_page);
-    var max_page = Math.min(min_page + 6, Math.ceil(record_size / page_size));
     console.log('max_page: ' + max_page);
+    console.log('total_page_count: ' + total_page_count);
+    if (max_page > min_page + 6) {
+        max_page = min_page + 6;
+    }
+    // max_page = Math.max(min_page + 6, max_page);
+    console.log('ADJ max_page: ' + max_page);
+
+
 
     var page_numbers = Array.from({length: max_page - min_page + 1}, (_, i) => i + min_page);
     console.log('page_numbers: ' + page_numbers);
@@ -34,7 +44,7 @@ async function pagination(target, page_size, record_size, update=false) {
         if (page_numbers[i] == target) {
             page_button.classList.add('active');
         }
-        page_button.setAttribute('onclick', "applyFilterForm(" + page_numbers[i] + ", " + page_size + ", " + record_size + ")");
+        page_button.setAttribute('onclick', "applyFilterForm(" + page_numbers[i] + ", " + page_size + ", " + page_count + ")");
         pagination_div.appendChild(page_button);
     }
 
@@ -44,7 +54,7 @@ async function pagination(target, page_size, record_size, update=false) {
     trailing_button.innerHTML = '>>';  // '&raquo;'
     trailing_button.classList.add('pagination-button');
     var trailing_target = target + 1;
-    trailing_button.setAttribute('onclick', "applyFilterForm(" + trailing_target + ", " + page_size + ", " + record_size + ")");
+    trailing_button.setAttribute('onclick', "applyFilterForm(" + trailing_target + ", " + page_size + ", " + page_count + ")");
     pagination_div.appendChild(trailing_button);
     console.log('Pagination Management Complete');
 

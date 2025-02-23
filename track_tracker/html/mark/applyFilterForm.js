@@ -49,6 +49,10 @@ async function applyFilterForm(page=1, page_size=null, record_size=null) {
             data_value = data_value + inputTag.value;
         }
         params[key] = data_value;
+
+        if (key == 'limit') {
+            page_size = inputTag.value;
+        }
     }
 
     var offset = page - 1;
@@ -58,8 +62,8 @@ async function applyFilterForm(page=1, page_size=null, record_size=null) {
 
     filterResults = queryResults['marks'];
     record_size = queryResults['query_max_count'];
-    page_size = Math.round(record_size / filterResults.length);
+    page_count = Math.round(record_size / filterResults.length);
 
-    populateMarkTable(filterResults, page, page_size, record_size);
+    populateMarkTable(filterResults, page, page_size, page_count);
     applyDisplayFilters();
 }

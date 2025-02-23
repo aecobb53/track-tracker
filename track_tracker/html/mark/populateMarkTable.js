@@ -1,4 +1,4 @@
-async function populateMarkTable(filterResults, page, page_size, record_size) {
+async function populateMarkTable(filterResults, page, page_size, page_count) {
     console.log('Populating Mark table');
 
     // filterResults = queryResults['marks'];
@@ -111,7 +111,7 @@ async function populateMarkTable(filterResults, page, page_size, record_size) {
     table_div.appendChild(table_element);
 
     // Pagination
-    pagination(page, page_size, record_size, false);
+    pagination(page, page_size, page_count, false);
 
 }
 // window.onload = populateTable();
