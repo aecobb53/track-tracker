@@ -6,7 +6,7 @@ from my_base_html_lib import MyBaseDocument, NavigationContent, SidebarContent, 
 from .base_page import project_base_page
 from .common import MARK_FILTER_PARAMS, MARK_ARRANGE_PARAMS, MARK_DISPLAY_PARAMS
 
-def filter_marks_html_page():
+async def filter_marks_html_page():
     page_content = Div().add_class('page-content')
 
     # Filter Form
@@ -254,7 +254,7 @@ def filter_marks_html_page():
         """),
     ]
 
-    base_doc = project_base_page()
+    base_doc = await project_base_page()
     base_doc.body_content.body_content.append(page_content)
     for style in document_style:
         base_doc.document.add_head_element(style)

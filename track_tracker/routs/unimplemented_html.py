@@ -46,32 +46,40 @@ router = APIRouter(
 
 @router.get('/schedule')
 async def html_schedule():
-    return HTMLResponse(content=unimplemented_page(), status_code=200)
+    content = await unimplemented_page()
+    return HTMLResponse(content=content, status_code=200)
 
 @router.get('/resource')
 async def html_resources():
-    return HTMLResponse(content=unimplemented_page(), status_code=200)
+    content = await unimplemented_page()
+    return HTMLResponse(content=content, status_code=200)
 
 @router.get('/video')
 async def html_video():
-    return HTMLResponse(content=unimplemented_page(), status_code=200)
+    content = await unimplemented_page()
+    return HTMLResponse(content=content, status_code=200)
 
 @router.get('/request-data')
 async def html_request_data():
-    return HTMLResponse(content=unimplemented_page(), status_code=200)
+    content = await unimplemented_page()
+    return HTMLResponse(content=content, status_code=200)
 
 @router.get('/about')
 async def html_about():
-    return HTMLResponse(content=unimplemented_page(), status_code=200)
+    content = await unimplemented_page()
+    return HTMLResponse(content=content, status_code=200)
 
 @router.get('/roadmap')
 async def html_roadmap():
-    return HTMLResponse(content=unimplemented_page(), status_code=200)
+    content = await unimplemented_page()
+    return HTMLResponse(content=content, status_code=200)
 
 @router.get('/healthcheck')
 async def html_healthcheck():
-    return HTMLResponse(content=unimplemented_page(), status_code=200)
+    content = await unimplemented_page()
+    return HTMLResponse(content=content, status_code=200)
 
 @router.get('/contact-me')
 async def html_contact_me():
-    return HTMLResponse(content=unimplemented_page(), status_code=200)
+    content = await unimplemented_page()
+    return HTMLResponse(content=content, status_code=200)

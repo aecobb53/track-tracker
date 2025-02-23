@@ -7,7 +7,7 @@ from my_base_html_lib import MyBaseDocument, NavigationContent, SidebarContent, 
 from .base_page import project_base_page
 
 
-def filter_records_html_page(event_details):
+async def filter_records_html_page(event_details):
     page_content = Div().add_class('page-content')
     page_content.add_element(Header(level=1, internal='Team Page'))
 
@@ -26,7 +26,7 @@ def filter_records_html_page(event_details):
     events_div = Div()
     table_row_background_colors = ('#35363b', '#2c2d2e')
     for event, mark in event_details.items():
-        column_names = ['Place', 'Meet', 'Athlete', 'Mark', 'Wind', 'Heat', 'Date']
+        column_names = ['Place', 'Meet', 'Athlete', 'Team', 'Mark', 'Wind', 'Heat', 'Graduation', 'Date']
         event_div = Div().add_class('event-div')
         event_div.add_element(Header(level=3, internal=event))
         event_table = Table().add_class('event-table')
@@ -34,7 +34,6 @@ def filter_records_html_page(event_details):
             internal=[TableHeader(internal=col).add_class('event-table-header') for col in column_names]
         ).add_style({'background-color': table_row_background_colors[1]})
         )
-
 
         event_table_row = TableRow().add_style({'background-color': table_row_background_colors[0]})
         event_table_row.add_element(
@@ -44,11 +43,15 @@ def filter_records_html_page(event_details):
         event_table_row.add_element(
             TableData(internal=f"{mark.athlete.name}").add_class('event-table-data'))
         event_table_row.add_element(
+            TableData(internal=f"{mark.athlete.team}").add_class('event-table-data'))
+        event_table_row.add_element(
             TableData(internal=f"{mark.mark.mark_str}").add_class('event-table-data'))
         event_table_row.add_element(
             TableData(internal=f"{mark.wind}").add_class('event-table-data'))
         event_table_row.add_element(
             TableData(internal=f"{mark.heat}").add_class('event-table-data'))
+        event_table_row.add_element(
+            TableData(internal=f"{mark.athlete.graduation_year}").add_class('event-table-data'))
         event_table_row.add_element(
             TableData(internal=f"{datetime.strftime(mark.meet_date, '%Y-%m-%d')}").add_class('event-table-data'))
         event_table.add_element(event_table_row)
@@ -104,7 +107,7 @@ def filter_records_html_page(event_details):
         """),
     ]
 
-    base_doc = project_base_page()
+    base_doc = await project_base_page()
     base_doc.body_content.body_content.append(page_content)
     for style in document_style:
         base_doc.document.add_head_element(style)

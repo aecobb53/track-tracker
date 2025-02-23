@@ -30,7 +30,7 @@ router = APIRouter(
 
 @router.get('/')
 async def html_mark(request: Request):
-    mark_page = filter_marks_html_page()
+    mark_page = await filter_marks_html_page()
     return HTMLResponse(content=mark_page, status_code=200)
 
 # path = '/today'

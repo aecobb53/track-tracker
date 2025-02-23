@@ -76,7 +76,7 @@ async def startup_event():
 async def root(request: Request):
     header_details = RestHeaders(request=request)
     if header_details.response_type == ResponseTypes.HTML:
-        project_page = project_home_page()
+        project_page = await project_home_page()
         return HTMLResponse(content=project_page)
     elif header_details.response_type == ResponseTypes.JSON:
         return {'Hello': 'WORLD!'}
@@ -142,7 +142,7 @@ async def root(request: Request):
     page_content.add_element(Paragraph(internal=f"Response Type: {header_details.response_type}"))
 
 
-    base_doc = project_base_page()
+    base_doc = await project_base_page()
     base_doc.body_content.body_content.append(page_content)
     return HTMLResponse(content=base_doc.return_document)
 

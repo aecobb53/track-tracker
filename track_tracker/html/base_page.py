@@ -8,7 +8,7 @@ from .common import HOME_PAGE_LINK_CONTENT
 service_url = os.environ.get('SERVICE_URL')
 
 
-def project_base_page():
+async def project_base_page():
     # Body
     page_content = Div().add_style({'display': 'block'})
 
@@ -27,8 +27,8 @@ def project_base_page():
     return new_formatted_doc
     # return new_formatted_doc.return_document
 
-def project_home_page():
-    base_doc = project_base_page()
+async def project_home_page():
+    base_doc = await project_base_page()
 
     # Body
     page_content = Div().add_style({'display': 'block'})

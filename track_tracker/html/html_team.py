@@ -6,7 +6,7 @@ from my_base_html_lib import MyBaseDocument, NavigationContent, SidebarContent, 
 from .base_page import project_base_page
 from .common import TEAM_FILTER_PARAMS, TEAM_ARRANGE_PARAMS, TEAM_DISPLAY_PARAMS
 
-def filter_teams_html_page():
+async def filter_teams_html_page():
     page_content = Div().add_class('page-content')
 
     # Filter Form
@@ -240,13 +240,13 @@ def filter_teams_html_page():
         """),
     ]
 
-    base_doc = project_base_page()
+    base_doc = await project_base_page()
     base_doc.body_content.body_content.append(page_content)
     for style in document_style:
         base_doc.document.add_head_element(style)
     return base_doc.return_document
 
-def find_team_html_page(athletes, marks):
+async def find_team_html_page(athletes, marks):
     page_content = Div().add_class('page-content')
     page_content.add_element(Header(level=1, internal='Team Page'))
 
@@ -288,7 +288,7 @@ def find_team_html_page(athletes, marks):
                 break
         events_dict[mark.event].append(mark)
     events_div = Div()
-    column_names = ['Place', 'Meet', 'Athlete', 'Mark', 'Wind', 'Heat', 'Date']
+    column_names = ['Place', 'Meet', 'Athlete', 'Mark', 'Wind', 'Heat', 'Graduation', 'Date']
     table_row_background_colors = ('#35363b', '#2c2d2e')
     for event, marks in events_dict.items():
         marks.sort(key=lambda x: x.meet_date)
@@ -322,6 +322,8 @@ def find_team_html_page(athletes, marks):
             event_table_row.add_element(
                 TableData(internal=f"{mark.heat}").add_class('event-table-data'))
             event_table_row.add_element(
+                TableData(internal=f"{mark.athlete.graduation_year}").add_class('event-table-data'))
+            event_table_row.add_element(
                 TableData(internal=f"{datetime.strftime(mark.meet_date, '%Y-%m-%d')}").add_class('event-table-data'))
             event_table.add_element(event_table_row)
 
@@ -346,6 +348,8 @@ def find_team_html_page(athletes, marks):
             TableData(internal=f"{record_mark.wind}").add_class('event-table-data'))
         event_table_row.add_element(
             TableData(internal=f"{record_mark.heat}").add_class('event-table-data'))
+        event_table_row.add_element(
+            TableData(internal=f"{mark.athlete.graduation_year}").add_class('event-table-data'))
         event_table_row.add_element(
             TableData(internal=f"{datetime.strftime(record_mark.meet_date, '%Y-%m-%d')}").add_class('event-table-data'))
         event_table.add_element(event_table_row)
@@ -402,7 +406,7 @@ def find_team_html_page(athletes, marks):
         """),
     ]
 
-    base_doc = project_base_page()
+    base_doc = await project_base_page()
     base_doc.body_content.body_content.append(page_content)
     for style in document_style:
         base_doc.document.add_head_element(style)

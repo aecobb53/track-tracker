@@ -6,7 +6,7 @@ from my_base_html_lib import MyBaseDocument, NavigationContent, SidebarContent, 
 from .base_page import project_base_page
 from .common import ATHLETE_FILTER_PARAMS, ATHLETE_ARRANGE_PARAMS, ATHLETE_DISPLAY_PARAMS
 
-def filter_athletes_html_page():
+async def filter_athletes_html_page():
     page_content = Div().add_class('page-content')
 
     # Filter Form
@@ -243,7 +243,7 @@ def filter_athletes_html_page():
 
     ]
 
-    base_doc = project_base_page()
+    base_doc = await project_base_page()
     base_doc.body_content.body_content.append(page_content)
     for style in document_style:
         base_doc.document.add_head_element(style)
@@ -251,7 +251,7 @@ def filter_athletes_html_page():
 
 
 
-def find_athletes_html_page(athlete, marks):
+async def find_athletes_html_page(athlete, marks):
     page_content = Div().add_class('page-content')
     page_content.add_element(Header(level=1, internal='Athlete Page'))
 
@@ -382,7 +382,7 @@ def find_athletes_html_page(athlete, marks):
         """),
     ]
 
-    base_doc = project_base_page()
+    base_doc = await project_base_page()
     base_doc.body_content.body_content.append(page_content)
     for style in document_style:
         base_doc.document.add_head_element(style)

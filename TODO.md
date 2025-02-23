@@ -97,6 +97,11 @@ Thoughts
 - [ ] Home page move add_style to add_class and styles at the bottom
 - [ ] Set page title as a link to home page
 - [ ] Home page needs a left margin for headers
+- [ ] Records page takes a while to load or struggles to load
+- [ ] Add Team to records page
+- [ ] Add graduation year to team and records pages
+- [ ] Pull historic records for state and FHS
+- [ ] Async any endpoint
 
 
 ### Stretch

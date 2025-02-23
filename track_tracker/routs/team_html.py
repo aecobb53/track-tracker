@@ -29,7 +29,7 @@ router = APIRouter(
 
 @router.get('/')
 async def html_teams(request: Request):
-    team_page = filter_teams_html_page()
+    team_page = await filter_teams_html_page()
     return HTMLResponse(content=team_page, status_code=200)
 
 
@@ -39,5 +39,5 @@ async def html_team(team_name: str, request: Request):
     athletes = await ah.filter_athletes(AthleteFilter(team=[team_name]))
     mh = MarkHandler()
     marks = await mh.filter_marks(MarkFilter(team=[team_name]))
-    team_page = find_team_html_page(athletes=athletes, marks=marks)
+    team_page = await find_team_html_page(athletes=athletes, marks=marks)
     return HTMLResponse(content=team_page, status_code=200)

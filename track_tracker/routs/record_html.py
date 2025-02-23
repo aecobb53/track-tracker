@@ -1,4 +1,5 @@
-from calendar import month
+import asyncio
+
 from datetime import date, datetime, timedelta
 from fastapi import APIRouter, HTTPException, Request, Response, Depends
 from fastapi.responses import HTMLResponse, ORJSONResponse
@@ -43,6 +44,7 @@ async def html_record(request: Request):
         if len(marks_l) < size:
             checking = False
         offset += size
+        await asyncio.sleep(0)
 
     # APPLY A FILTER TO ONLY GET ACTIVE TEAM MEMEBRS
     # DISPLAY HOW MANY STUDENTS ARE IN EACH GRADE?
@@ -59,5 +61,5 @@ async def html_record(request: Request):
                 athlete = await ah.find_athlete(AthleteFilter(uid=[mark.athlete_uid]))
                 mark.athlete = athlete
                 event_details[mark.event] = mark
-    record_page = filter_records_html_page(event_details)
+    record_page = await filter_records_html_page(event_details)
     return HTMLResponse(content=record_page, status_code=200)
