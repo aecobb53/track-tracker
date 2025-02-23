@@ -45,7 +45,7 @@ def filter_marks_html_page():
             box = [
                 Span(
                     for_=f"{id_base}-input", internal=param['display']
-                ).add_class('arrange-checkbox-input'),
+                ).add_class('filter-checkbox-input'),
             ]
             if param.get('options'):
                 options = []

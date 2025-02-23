@@ -23,6 +23,7 @@ MARK_DISPLAY_PARAMS = mark_file['display']
 with open(os.path.join(path, 'athlete.yml')) as yf:
     athlete_file = yaml.safe_load(yf)
 ATHLETE_FILTER_PARAMS = athlete_file['filter']
+ATHLETE_ARRANGE_PARAMS = athlete_file['arrange']
 ATHLETE_DISPLAY_PARAMS = athlete_file['display']
 
 # Team Filter Params

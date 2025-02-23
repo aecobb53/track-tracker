@@ -1,4 +1,4 @@
-async function populateAthleteTable(filterResults) {
+async function populateAthleteTable(filterResults, page, page_size, page_count) {
     console.log('Populating Athlete table');
 
     // var tracking_project_name_hashtable = {};
@@ -8,8 +8,6 @@ async function populateAthleteTable(filterResults) {
     // DIV
     console.log('Clearing table...');
     var table_div = document.getElementById('table-div');
-    // table_div.classList.add('sticky');
-    // table_div.classList.add('fixTableHead');
     table_div.innerHTML = '';
 
     // TABLE
@@ -17,6 +15,25 @@ async function populateAthleteTable(filterResults) {
     table_element.style.width = '100%';
     table_element.style.height = '100%';
     table_element.style.border = '5px solid black';
+
+    if (filterResults.length == 0) {
+        // No results
+        var table_item = document.createElement('th');
+        table_item.innerHTML = 'No results found';
+
+        var table_row = document.createElement('tr');
+        table_row.appendChild(table_item);
+
+        var table_header = document.createElement('thead');
+        table_header.style.width = '100%';
+        table_header.style.fontWeight = 'bold';
+        table_header.style.padding = '5px';
+        table_header.appendChild(table_row);
+
+        table_element.appendChild(table_header);
+        table_div.appendChild(table_element);
+        return;
+    }
 
     // HEADER
     var table_header = document.createElement('thead');
@@ -83,5 +100,8 @@ async function populateAthleteTable(filterResults) {
 
     table_element.appendChild(table_body);
     table_div.appendChild(table_element);
+
+    // Pagination
+    pagination(page, page_size, page_count, false);
 }
 // window.onload = populateTable();

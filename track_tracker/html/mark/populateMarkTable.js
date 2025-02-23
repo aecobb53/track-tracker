@@ -1,12 +1,6 @@
 async function populateMarkTable(filterResults, page, page_size, page_count) {
     console.log('Populating Mark table');
 
-    // filterResults = queryResults['marks'];
-    // query_max_count = queryResults['query_max_count'];
-    // console.log('Max result count' + query_max_count);
-
-    // var tracking_project_name_hashtable = {};
-
     // DIV
     console.log('Clearing table...');
     var table_div = document.getElementById('table-div');

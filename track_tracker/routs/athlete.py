@@ -89,10 +89,10 @@ async def filter_athlete(request: Request):
     try:
         athlete_filter = parse_query_params(request=request, query_class=AthleteFilter)
         ah = AthleteHandler()
-        athletes = await ah.filter_athletes_display(athlete_filter=athlete_filter)
+        athletes, query_max_count = await ah.filter_athletes_display(athlete_filter=athlete_filter)
         mh = MarkHandler()
         for athlete in athletes:
-            marks = await mh.filter_marks_display(MarkFilter(athlete_uid=[athlete['uid']]))
+            marks, _ = await mh.filter_marks_display(MarkFilter(athlete_uid=[athlete['uid']]))
             athlete_marks = {}
             for mark in marks:
                 event = mark['Event']
@@ -100,7 +100,11 @@ async def filter_athlete(request: Request):
                     athlete_marks[event] = []
                 athlete_marks[event].append(mark)
             athlete['marks'] = athlete_marks
-        return athletes
+        response = {
+            'athletes': athletes,
+            'query_max_count': query_max_count,
+        }
+        return response
     except Exception as err:
         context.logger.warning(f'ERROR: {err}')
         raise HTTPException(status_code=500, detail='Internal Service Error')

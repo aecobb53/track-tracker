@@ -157,17 +157,16 @@ arrange:
             default_value: null
             no_text_field: true
             options:
-                - '5'
                 - '25'
                 - '50'
                 - '100'
                 - '1000'
-        page_select:
-            variable: page_select
-            display: Page
-            description: Which page of results.
-            datatype: str
-            default_value: null
+        # page_select:
+        #     variable: page_select
+        #     display: Page
+        #     description: Which page of results.
+        #     datatype: str
+        #     default_value: null
     Sort:
         sort1:
             variable: sort

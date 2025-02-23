@@ -20,24 +20,119 @@ filter:
             datatype: string
             default_value: null
     Optional:
-        meet:
-            variable: meet
-            display: Meet - Not implemented yet
-            description: Filter by meet.
-            datatype: string
-            default_value: null
+        # meet:
+        #     variable: meet
+        #     display: Meet - Not implemented yet
+        #     description: Filter by meet.
+        #     datatype: string
+        #     default_value: null
         gender:
             variable: gender
             display: Mens/Womens
             description: Filter by gender.
             datatype: string
             default_value: null
-        event:
-            variable: event
-            display: Event - Not implemented yet
-            description: Filter by event.
-            datatype: string
+            no_text_field: true
+            options:
+                - "All"
+                - "Mens"
+                - "Womens"
+        # event:
+        #     variable: event
+        #     display: Event - Not implemented yet
+        #     description: Filter by event.
+        #     datatype: string
+        #     default_value: null
+arrange:
+    Results:
+        limit:
+            variable: limit
+            display: Page Limit
+            description: Records per page.
+            datatype: str
             default_value: null
+            no_text_field: true
+            options:
+                - '25'
+                - '50'
+                - '100'
+                - '1000'
+        # page_select:
+        #     variable: page_select
+        #     display: Page
+        #     description: Which page of results.
+        #     datatype: str
+        #     default_value: null
+    Sort:
+        sort1:
+            variable: sort
+            display: Sort Item 1
+            description: What to sort by first.
+            datatype: str
+            default_value: Last Name
+            no_text_field: true
+            options:
+                - Last Name
+                - First Name
+                - Team
+                - Gender
+                - Graduation Year
+        sort2:
+            variable: sort
+            display: Sort Item 2
+            description: What to sort by first.
+            datatype: str
+            default_value: First Name
+            no_text_field: true
+            options:
+                - First Name
+                - Last Name
+                - Team
+                - Gender
+                - Graduation Year
+                - '-'
+        sort3:
+            variable: sort
+            display: Sort Item 3
+            description: What to sort by first.
+            datatype: str
+            default_value: Team
+            no_text_field: true
+            options:
+                - Team
+                - First Name
+                - Last Name
+                - Gender
+                - Graduation Year
+                - '-'
+        sort4:
+            variable: sort
+            display: Sort Item 4
+            description: What to sort by first.
+            datatype: str
+            default_value: '-'
+            no_text_field: true
+            options:
+                - '-'
+                - First Name
+                - Last Name
+                - Team
+                - Gender
+                - Graduation Year
+        sort5:
+            variable: sort
+            display: Sort Item 5
+            description: What to sort by first.
+            datatype: str
+            default_value: '-'
+            no_text_field: true
+            options:
+                - '-'
+                - First Name
+                - Last Name
+                - Team
+                - Gender
+                - Graduation Year
 display:
     Athlete:
         first_name:

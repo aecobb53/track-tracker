@@ -128,6 +128,13 @@ class AthleteFilter(BaseModel):
             [team.extend(i.split(',')) for i in fields['team']]
             fields['team'] = [e.strip() for e in team]
 
+        if fields.get('gender'):
+            gender = []
+            [gender.extend(i.split(',')) for i in fields['gender']]
+            fields['gender'] = [g.strip() for g in gender]
+            if fields['gender'] == ['All']:
+                fields['gender'] = []
+
         if fields.get('graduation_year'):
             graduation_year = []
             for i in fields['graduation_year']:
@@ -138,6 +145,15 @@ class AthleteFilter(BaseModel):
                         graduation_year.append(ii)
             fields['graduation_year'] = graduation_year
 
+        if fields.get('sort'):
+            order_by = fields.get('order_by', [])
+            for sort in fields['sort']:
+                for item in sort.split(','):
+                    if not item or item in ['-', 'None', 'null', None]:
+                        continue
+                    order_by.append(item.replace(' ', '_').lower())
+            fields['order_by'] = order_by
+
         # if isinstance(fields.get('active'), list):
         #     fields['active'] = fields['active'][0]
         if isinstance(fields.get('limit'), list):
@@ -146,9 +162,7 @@ class AthleteFilter(BaseModel):
             fields['offset'] = fields['offset'][0]
         return fields
 
-    def apply_filters(self, database_object_class: AthleteDBBase, query: select) -> select:
-        """Apply the filters to the query"""
-    def apply_filters(self, database_object_class: AthleteDBBase, query: select) -> select:
+    def apply_filters(self, database_object_class: AthleteDBBase, query: select, count: bool = False) -> select:
         """Apply the filters to the query"""
         def apply_modifier(query, db_obj_cls, string):
             if string.startswith('='):
@@ -187,13 +201,15 @@ class AthleteFilter(BaseModel):
                 query = apply_modifier(query, database_object_class.graduation_year, graduation_year)
 
         if self.gender:
-            query = query.filter(database_object_class.gender.in_(self.gender))
+            filter_list = [database_object_class.gender.contains(g) for g in self.gender]
+            query = query.filter(or_(*filter_list))
 
-        if self.limit:
-            query = query.limit(self.limit)
-        for order_by in self.order_by:
-            query = query.order_by(getattr(database_object_class, order_by))
-        if self.offset:
-            query = query.offset(self.offset)
+        if not count:
+            if self.limit:
+                query = query.limit(self.limit)
+            for order_by in self.order_by:
+                query = query.order_by(getattr(database_object_class, order_by))
+            if self.offset:
+                query = query.offset(self.offset)
 
         return query

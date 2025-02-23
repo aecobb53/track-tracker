@@ -4,27 +4,20 @@ from datetime import datetime, timezone
 from phtml import *
 from my_base_html_lib import MyBaseDocument, NavigationContent, SidebarContent, BodyContent, FooterContent
 from .base_page import project_base_page
-from .common import ATHLETE_FILTER_PARAMS, ATHLETE_DISPLAY_PARAMS
+from .common import ATHLETE_FILTER_PARAMS, ATHLETE_ARRANGE_PARAMS, ATHLETE_DISPLAY_PARAMS
 
 def filter_athletes_html_page():
     page_content = Div().add_style({'display': 'block', 'color': '#949ba4'})
 
-
-    # Filter
-    # First Name
-    # Last Name
-    # School
-
-    # Display Each event theyve done in its own tile that can be hidden
-    # It should have their record, the date and a list of previous instances
-
-
-
-
-
     # Filter Form
     filter_form_div = Div()
-    filter_form_div.add_element(Header(level=1, internal='Data Filter'))
+    filter_form_div.add_element(Header(level=1, internal='Athlete Results'))
+    filter_form_div.add_element(Paragraph(internal='''
+    This page is for finding athletes by filtering criteria. You can use it to get headcounts of similar athletes or 
+    find similar athletes to compare. The filters are partial as in you can query for the Team "Fairview" to get all 
+    Fairview High School marks. Some have additional dropdowns. For example, you can filter for Heats <= 3. 
+    Table columns can be toggled with the checkboxes to make viewing easier.
+    '''))
     filter_form_div.add_element(Paragraph(
         internal='For multiple items separate with a comma. Ex "Fairview, Boulder"'))
     filter_form = Form(action=f"/athlete", method='get').add_class('filter-form')
@@ -49,41 +42,83 @@ def filter_athletes_html_page():
                 input_kwargs['type'] = param['datatype']
             if param.get('size'):
                 input_kwargs['size'] = param['size']
-            # if param.get('required'):
-            #     input_kwargs['required'] = True
+
+            box = [
+                Span(
+                    for_=f"{id_base}-input", internal=param['display']
+                ).add_class('filter-checkbox-input'),
+            ]
             if param.get('options'):
-                # If there are options add them as a modifier to the input
-                input_kwargs['options'] = param['options']
                 options = []
                 for option in param['options']:
-                    options.append(Option(value=option, internal=option))
-                select = Select(internal=options, id=f"{id_base}-input-select")
-                box = [
-                    Span(
-                        for_=f"{id_base}-input", internal=param['display']
-                    ).add_class('filter-checkbox-input').add_style({'margin': '0px'}),
-                    select,
-                    Input(**input_kwargs).add_style({'margin': '0px'}),
-                ]
+                    options.append(Option(internal=option, id=f"{id_base}-input-select"))
+                box.append(Select(internal=options, id=f"{id_base}-input-select"))
+            if not param.get('no_text_field'):
+                box.append(Input(**input_kwargs).add_class('filter-select'))
             else:
-                box = [
-                    Span(
-                        for_=f"{id_base}-input", internal=param['display']
-                    ).add_class('filter-checkbox-input').add_style({'margin': '0px'}),
-                    Input(**input_kwargs).add_style({'margin': '0px'}),
-                ]
+                box[-1].add_class('filter-select').add_class('standalone-select')
 
-            # print(f"BOX: {box}")
-            # print(f"LEN: {len(box)}")
             grouping_div.add_element(
                 Label(
                     for_=f"{id_base}-input", internal=box, title=param['description']
                 ).add_class('checkbox-label').add_class('filter-label'))
         filter_form.add_element(grouping_div)
     filter_form_div.add_element(filter_form)
-    filter_form_div.add_element(
-        Button(internal='Submit', type='button', onclick='applyFilterForm()').add_class('big-button'))
     page_content.add_element(filter_form_div)
+
+    # Arrange
+    arrange_div = Div()
+    arrange_div.add_element(Header(level=1, internal='Filter Results'))
+    arrange_form = Form(action=f"/athlete", method='get').add_class('arrange-form')
+    arrange_groupings = {}
+    for grouping in ATHLETE_ARRANGE_PARAMS.keys():
+        if grouping not in arrange_groupings:
+            arrange_groupings[grouping] = []
+        for details in ATHLETE_ARRANGE_PARAMS[grouping].values():
+            arrange_groupings[grouping].append(details)
+    for grouping in arrange_groupings.keys():
+        params = arrange_groupings[grouping]
+        grouping_div = Div()
+        grouping_div.add_element(Header(level=3, internal=grouping))
+        for param in params:
+            id_base = param['variable'].replace(' ', '-').lower()
+            input_kwargs = {
+                'id': f"{id_base}-input",
+                'name': param['display'],
+                'value': param.get('default_value'),
+            }
+            if param.get('datatype'):
+                input_kwargs['type'] = param['datatype']
+            if param.get('size'):
+                input_kwargs['size'] = param['size']
+            # if param.get('required'):
+            #     input_kwargs['required'] = True
+
+            box = [
+                Span(
+                    for_=f"{id_base}-input", internal=param['display']
+                ).add_class('arrange-checkbox-input'),
+            ]
+            if param.get('options'):
+                options = []
+                for option in param['options']:
+                    options.append(Option(internal=option, id=f"{id_base}-input-select"))
+                box.append(Select(internal=options, id=f"{id_base}-input-select"))
+            if not param.get('no_text_field'):
+                box.append(Input(**input_kwargs).add_class('arrange-select'))
+            else:
+                box[-1].add_class('arrange-select').add_class('standalone-select')
+
+            grouping_div.add_element(
+                Label(
+                    for_=f"{id_base}-input", internal=box, title=param['description']
+                ).add_class('checkbox-label').add_class('arrange-label'))
+        arrange_form.add_element(grouping_div)
+    arrange_div.add_element(arrange_form)
+    page_content.add_element(arrange_div)
+
+    page_content.add_element(
+        Button(internal='Submit', type='button', onclick='applyFilterForm()').add_class('big-button'))
 
     # Display Form
     display_form_div = Div()
@@ -96,7 +131,6 @@ def filter_athletes_html_page():
         for details in ATHLETE_DISPLAY_PARAMS[grouping].values():
             display_groupings[grouping].append(details)
     for grouping in display_groupings.keys():
-        # print(f"GROUPING: {grouping}")
         params = display_groupings[grouping]
         grouping_div = Div()
         grouping_div.add_element(Header(level=3, internal=grouping))
@@ -127,13 +161,18 @@ def filter_athletes_html_page():
     display_form.add_element(
         Button(internal='All', title='Toggle all checkboxes', type='button', onclick='toggleCheckboxesAll()').add_class('small-button'))
     display_form_div.add_element(display_form)
-    display_form_div.add_element(
-        Button(internal='Apply', type='button', onclick='applyDisplayFilters()').add_class('big-button'))
     page_content.add_element(display_form_div)
+
+    page_content.add_element(
+        Button(internal='Apply', type='button', onclick='applyDisplayFilters()').add_class('big-button'))
 
     # Table
     table_div = Div(id='table-div').add_style({'margin': '10px'})
     page_content.add_element(table_div)
+
+    # Pagination
+    pagination_div = Div().add_class('pagination-div')
+    page_content.add_element(pagination_div)
 
     # JS Files
     js_files = [
@@ -142,6 +181,7 @@ def filter_athletes_html_page():
         os.path.join('athlete', 'populateAthleteTable.js'),
         os.path.join('athlete', 'applyDisplayFilters.js'),
         os.path.join('athlete', 'toggleCheckboxes.js'),
+        os.path.join('common', 'pagination.js'),
     ]
     for fl in js_files:
         with open(os.path.join('html', fl), 'r') as jf:
@@ -158,6 +198,49 @@ def filter_athletes_html_page():
             color: #949ba4;
             text-decoration: underline;
         """),
+
+        StyleTag(name='.page-content', internal="""
+            display: block;
+            color: #949ba4;
+            margin: 10px;
+        """),
+        StyleTag(name='.filter-checkbox-input', internal="""
+            margin: 0;
+        """),
+        StyleTag(name='.big-button', internal="""
+            margin: 10px;
+            padding: 5px;
+            font-size: 120%;
+            font-weight: bold;
+            text-decoration: underline;
+        """),
+        StyleTag(name='.small-button', internal="""
+            margin: 5px;
+            padding: 5px;
+            font-size: 100%;
+            font-weight: bold;
+        """),
+
+        StyleTag(name='.pagination-div', internal="""
+            display: inline-block;
+            font-size: 300%;
+            color: #949ba4;
+            margin: 10px;
+            text-decoration: none;
+            text-align: center;
+            width: 100%;
+        """),
+        StyleTag(name='.pagination-div button', internal="""
+            border-radius: 5px;
+            margin: 4px;
+            padding: 5px;
+            text-decoration: none;
+        """),
+        StyleTag(name='.pagination-div button.active', internal="""
+            color: #000000;
+            background-color: green;
+        """),
+
     ]
 
     base_doc = project_base_page()
@@ -181,7 +264,7 @@ def find_athletes_html_page(athlete, marks):
 
     events_dict = {}
     for mark in marks:
-        print(f"MARK: {mark}")
+        print(f"ATHLETE: {mark}")
         if mark.event not in events_dict:
             events_dict[mark.event] = []
         events_dict[mark.event].append(mark)
@@ -218,11 +301,11 @@ def find_athletes_html_page(athlete, marks):
                 TableData(internal=f"{datetime.strftime(mark.meet_date, '%Y-%m-%d')}").add_class('event-table-data'))
             event_table.add_element(event_table_row)
 
-# MARK: uid='bc73a769-9306-4665-9555-4fcdaf6e4133' update_datetime=datetime.datetime(2025, 2, 22, 17, 3, 3, 918969) event='Girls Long Jump Finals' heat=1 place=1 wind=-0.9 athlete=None athlete_uid='df35325b-2b2d-41b4-879c-b8afe78a1e2c' team='Fairview High School' meet_date=datetime.datetime(2024, 3, 20, 0, 0) mark=Mark(event_str='Girls Long Jump Finals', mark_str='17-08.50', minutes=None, seconds=None, subsecond=None, feet=17, inches=8, fractions=0.5) meet='The Fairview Quad Meet' gender='Womens'
+# ATHLETE: uid='bc73a769-9306-4665-9555-4fcdaf6e4133' update_datetime=datetime.datetime(2025, 2, 22, 17, 3, 3, 918969) event='Girls Long Jump Finals' heat=1 place=1 wind=-0.9 athlete=None athlete_uid='df35325b-2b2d-41b4-879c-b8afe78a1e2c' team='Fairview High School' meet_date=datetime.datetime(2024, 3, 20, 0, 0) mark=Mark(event_str='Girls Long Jump Finals', mark_str='17-08.50', minutes=None, seconds=None, subsecond=None, feet=17, inches=8, fractions=0.5) meet='The Fairview Quad Meet' gender='Womens'
 
 
             # mark_div = Div()
-        #     mark_div.add_element(Paragraph(internal=f"-MARK-"))
+        #     mark_div.add_element(Paragraph(internal=f"-ATHLETE-"))
 
         #     table_div = Div(id='event-table-div')
         #     table = Table()

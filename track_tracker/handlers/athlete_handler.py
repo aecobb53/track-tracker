@@ -1,6 +1,6 @@
 import json
 from datetime import datetime
-from sqlmodel import Session, select
+from sqlmodel import Session, select, func
 
 from .base_handler import BaseHandler
 from models import (
@@ -113,6 +113,12 @@ class AthleteHandler(BaseHandler):
                 read_obj = AthleteDBRead.model_validate(row)
                 athlete = read_obj.cast_data_object()
                 athletes.append(athlete)
+
+            query_max_count = select(func.count(AthleteDB.uid))
+            query_max_count = athlete_filter.apply_filters(AthleteDB, query_max_count, count=True)
+            query_max_count = session.exec(
+                query_max_count).one()
+
         self.context.logger.info(f"Athletes Filtered: {len(athletes)}")
         display_athletes = []
         for athlete in athletes:
@@ -127,24 +133,7 @@ class AthleteHandler(BaseHandler):
                 'records': records,
                 'uid': athlete.uid,
             })
-        """from sqlalchemy import select, func, Integer, Table, Column, MetaData
-
-        metadata = MetaData()
-
-        table = Table("table", metadata,
-                    Column('primary_key', Integer),
-                    Column('other_column', Integer)  # just to illustrate
-                    )   
-
-        print select([func.count()]).select_from(table)
-        """
-
-        """
-        from sqlalchemy import func
-
-        session.exec(select([func.count(Users.email)]).where(Users.email == res.email)).one()
-        """
-        return display_athletes
+        return display_athletes, query_max_count
 
     # async def set_activation(self, athlete_uid: str, active_state: bool) -> Athlete:
     #     self.context.logger.debug(f"Setting Athlete activation: [{athlete_uid}] to [{active_state}]")

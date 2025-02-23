@@ -290,8 +290,6 @@ class MarkFilter(BaseModel):
                     if not item or item in ['-', 'None', 'null', None]:
                         continue
                     order_by.append(item.lower())
-            print(f"SORT: {fields['sort']}")
-            print(f"ORDER BY: {order_by}")
             fields['order_by'] = order_by
 
         # if isinstance(fields.get('active'), list):
