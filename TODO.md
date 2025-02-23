@@ -6,18 +6,17 @@ Trying to get to a useful level.
 
 ### Primary
 
-- [ ] Data Pages
+- [X] Data Pages
     - [X] Athletes
         - [X] Find Athlete
         - [X] Display Athlete
     - [X] Teams
         - [X] Find Teams
         - [X] Display Teams
-    - [ ] Records
-    - [ ] Schedule - Meet schedule for this or previous years
+    - [X] Records
 - [ ] UI
-    - [ ] All unimplemented pages have Unimplemented responses
-    - [ ] All pages have a description at the top
+    - [X] All unimplemented pages have Unimplemented responses
+    - [X] All pages have a description at the top
     - [ ] All pages have more explanation about how to effectively use them as a dropdown
     - [X] Remove sidebar and only have it on the home page - Probably. Confirm I want this
     - [X] Home page has description/link for each page
@@ -93,6 +92,9 @@ Thoughts
 - [ ] Sort by Meet doesnt seem to be working
 - [ ] Verify other sorts are working
 - [ ] Before data load, fix all event headers to a uniform format
+- [ ] DIn disciption mention 
+- [ ] Home page move add_style to add_class and styles at the bottom
+
 
 ### Stretch
 
@@ -123,6 +125,7 @@ Thoughts
     - [ ] About
     - [ ] Contact Author
     - [ ] video Download Links?
+    - [ ] Schedule - Meet schedule for this or previous years
 - [ ] UI
     - [ ] Description on every field
     - [ ] Add a data sort order capability
@@ -151,6 +154,11 @@ Thoughts
     - [ ] Parse response to determine rest, computer, or phone
 - [ ] Data
     - [ ] Auto Scrapping with opening a window on the system to pull html?
+- [ ] Generic endpoints to consider
+TrackTracker  | INFO:     172.23.0.1:56842 - "GET /favicon.ico HTTP/1.1" 404 Not Found
+TrackTracker  | INFO:     172.23.0.1:56842 - "GET /ads.txt HTTP/1.1" 404 Not Found
+TrackTracker  | INFO:     172.23.0.1:40570 - "GET /js/twint_ch.js HTTP/1.1" 404 Not Found
+TrackTracker  | INFO:     172.23.0.1:53906 - "GET /.env HTTP/1.1" 404 Not Found
 
 ## MVP-1
 

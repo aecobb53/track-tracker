@@ -2,7 +2,7 @@ import os
 import json
 
 from fastapi import FastAPI, Query, Request, HTTPException, Body
-from fastapi.responses import HTMLResponse, ORJSONResponse
+from fastapi.responses import HTMLResponse, ORJSONResponse, FileResponse
 from fastapi.middleware.cors import CORSMiddleware
 
 from models import (
@@ -15,11 +15,11 @@ from routs import (
     mark_router,
     athlete_router,
     team_router,
+    record_router,
     mark_html_router,
     athlete_html_router,
     team_html_router,
-    # event_html_router,
-    # record_html_router,
+    record_html_router,
     unimplemented_html_router,
 )
 
@@ -32,6 +32,8 @@ from html import project_base_page
 # Service Info
 with open(os.path.join(os.path.dirname(os.getcwd()), 'info.json'), 'r') as jf:
     app_info = json.load(jf)
+FAVICON_PATH = 'favicon.ico'
+ROBOTS_PATH = 'robots.txt'
 
 app = FastAPI(
     title=app_info['service_name'],
@@ -52,11 +54,11 @@ app.add_middleware(
 app.include_router(mark_router)
 app.include_router(athlete_router)
 app.include_router(team_router)
+app.include_router(record_router)
 app.include_router(mark_html_router)
 app.include_router(athlete_html_router)
 app.include_router(team_html_router)
-# app.include_router(event_html_router)
-# app.include_router(record_html_router)
+app.include_router(record_html_router)
 app.include_router(unimplemented_html_router)
 
 
@@ -78,6 +80,18 @@ async def root(request: Request):
         return HTMLResponse(content=project_page)
     elif header_details.response_type == ResponseTypes.JSON:
         return {'Hello': 'WORLD!'}
+
+# Favicon
+@app.get('/static/favicon.ico', include_in_schema=False)
+@app.get('/favicon.ico', include_in_schema=False)
+async def favicon():
+    return FileResponse(FAVICON_PATH)
+
+# Robots
+@app.get('/static/robots.txt', include_in_schema=False)
+@app.get('/robots.txt', include_in_schema=False)
+async def favicon():
+    return FileResponse(ROBOTS_PATH)
 
 # About
 @app.get('/about', status_code=200)

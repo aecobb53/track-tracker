@@ -248,6 +248,7 @@ def filter_teams_html_page():
 
 def find_team_html_page(athletes, marks):
     page_content = Div().add_class('page-content')
+    page_content.add_element(Header(level=1, internal='Team Page'))
 
     page_content.add_element(Paragraph(internal='''
     This page displays information about a team. Notice there is one final row in each table and that is 

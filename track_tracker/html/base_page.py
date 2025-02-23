@@ -21,15 +21,13 @@ def project_base_page():
         body_content=body_content,
         # sidebar_width='5%',
     )
+    new_formatted_doc.document.add_head_element(
+        Link(rel='icon', type="image/x-icon", href=f'/favicon.ico')
+    )
     return new_formatted_doc
     # return new_formatted_doc.return_document
 
 def project_home_page():
-    print('')
-    print('')
-    print('')
-    print('')
-    print('IN PROJECT HOME PAGE')
     base_doc = project_base_page()
 
     # Body
@@ -117,4 +115,9 @@ def project_home_page():
         footer_content=base_doc.footer_content,
         document_style=document_style,
     )
+
+    base_doc.document.add_head_element(
+        HyperLink(rel='icon', type="image/x-icon", href=f'/favicon.ico')
+    )
+
     return base_doc.return_document
