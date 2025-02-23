@@ -7,12 +7,12 @@ Trying to get to a useful level.
 ### Primary
 
 - [ ] Data Pages
-    - [ ] Athletes
-        - [ ] Find Athlete
-        - [ ] Display Athlete
-    - [ ] Teams
-        - [ ] Find Teams
-        - [ ] Display Teams
+    - [X] Athletes
+        - [X] Find Athlete
+        - [X] Display Athlete
+    - [X] Teams
+        - [X] Find Teams
+        - [X] Display Teams
     - [ ] Records
     - [ ] Schedule - Meet schedule for this or previous years
 - [ ] UI
@@ -52,7 +52,6 @@ Thoughts
     - [X] Rename Submit to Request
     - [X] Move Requst button lower
     - [X] Remove add_style for style items
-    - [ ] Add links to athlete and team in the marks page
 
 
 - [ ] Athlete
