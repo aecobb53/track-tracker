@@ -18,11 +18,12 @@ Trying to get to a useful level.
     - [X] All unimplemented pages have Unimplemented responses
     - [X] All pages have a description at the top
     - [ ] All pages have more explanation about how to effectively use them as a dropdown
+    - [ ] Better descriptions on fields you can interact with
     - [X] Remove sidebar and only have it on the home page - Probably. Confirm I want this
     - [X] Home page has description/link for each page
 - [ ] Backend
-    - [ ] favicon.ico
-    - [ ] robots.txt
+    - [X] favicon.ico
+    - [X] robots.txt
     - [ ] Auth
 - [ ] Data
     - [ ] Fix prod data
@@ -94,6 +95,8 @@ Thoughts
 - [ ] Before data load, fix all event headers to a uniform format
 - [ ] DIn disciption mention 
 - [ ] Home page move add_style to add_class and styles at the bottom
+- [ ] Set page title as a link to home page
+- [ ] Home page needs a left margin for headers
 
 
 ### Stretch

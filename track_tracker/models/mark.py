@@ -80,7 +80,7 @@ class Mark(BaseModel):
                 other.subsecond or 0
             ]
             other_time = timedelta(minutes=other_time[0], seconds=other_time[1], milliseconds=other_time[2] * 1000)
-            if self_time > other_time:
+            if self_time < other_time:
                 return True
             else:
                 return False
