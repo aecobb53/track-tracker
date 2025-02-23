@@ -98,10 +98,54 @@ Thoughts
 - [ ] Set page title as a link to home page
 - [ ] Home page needs a left margin for headers
 - [ ] Records page takes a while to load or struggles to load
-- [ ] Add Team to records page
-- [ ] Add graduation year to team and records pages
+- [X] Add Team to records page
+- [X] Add graduation year to team and records pages
 - [ ] Pull historic records for state and FHS
-- [ ] Async any endpoint
+- [X] Async any endpoint
+- [ ] Verify it works on mobile
+
+
+
+
+
+
+Hard to read too dark
+background could use color or pictures
+Remove I from all descriptions
+Move query to search
+Double check marks are an effective way to explain things
+	Maybe Results
+Dropdown for events?
+Ranges should be 'up to' 'equal to' instead of <=, =
+Date to American bullshit
+Dashis are kinda weird in the tables
+Filter sorted
+Units on Wind
+Meet lines could use different color hues for each meet or different data
+	OR different meets between each set of data
+Dropdown for events should have an "add button"
+Meet names need to accept non capital convention
+
+Concept: I want to see my best performers in a particular event
+
+
+Center Primary Page
+Fairview Colors?
+Color Code lines by gendeR?
+Table columns after Request is confusing
+Change All to Select All or something
+After Registered clicked change color or indicate it was clicked?
+Click to hilight a row in the table?
+pull up athletes by graduation year
+"sort item 1" to "sort column 1"
+
+
+
+
+
+
+
+
 
 
 ### Stretch

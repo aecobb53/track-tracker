@@ -73,14 +73,52 @@ def parse_data_row(data_row: list[str], event: str, header: list[str], calendar_
             meet_date = f"{calendar_year}-{meet_metadata['date'].replace('/', '-')}"
 
             # Gender
-            re_strings = {
+            re_gender_strings = {
                 r'(Boys?|Mens?)': 'Mens',
                 r'(Girls?|Womens?)': 'Womens',
             }
-            for re_string, gender_string in re_strings.items():
+            for re_string, gender_string in re_gender_strings.items():
                 if re.search(re_string, event):
                     gender = gender_string
                     break
+
+            # Event Rename
+            re_event_strings = {
+                r'100 Meter Dash': '100 Meter Dash',
+                r'120 Meter Dash': '120 Meter Dash',
+                r'200 Meter Dash': '200 Meter Dash',
+                r'400 Meter Dash': '400 Meter Dash',
+                r'800 Meter Run': '800 Meter Run',
+                r'1500 Meter Run': '1500 Meter Run',
+                r'1600 Meter Run': '1600 Meter Run',
+                r'3000 Meter Run': '3000 Meter Run',
+                r'3200 Meter Run': '3200 Meter Run',
+                r'5000 Meter Run': '5000 Meter Run',
+                r'One Mile Run': 'One Mile Run',
+                r'2 Mile Run': '2 Mile Run',
+                r'100 Meter Hurdles': '100 Meter Hurdles',
+                r'110 Meter Hurdles': '110 Meter Hurdles',
+                r'300 Meter Hurdles': '300 Meter Hurdles',
+                r'400 Meter Hurdles': '400 Meter Hurdles',
+                r'High Jump': 'High Jump',
+                r'Long Jump': 'Long Jump',
+                r'Triple Jump': 'Triple Jump',
+                r'Pole Vault': 'Pole Vault',
+                r'Discus': 'Discus',
+                r'Shot Put': 'Shot Put',
+                r'Javelin': 'Javelin',
+                r'Hammer Throw': 'Hammer Throw',
+                r'100 Meter Wheelchair Race': '100 Meter Wheelchair Race',
+                r'200 Meter Wheelchair Race': '200 Meter Wheelchair Race',
+                r'2000 Meter Steeplechase': '2000 Meter Steeplechase',
+                r'3000 Meter Racewalk': '3000 Meter Racewalk',
+            }
+            for re_event, replace in re_event_strings.items():
+                if re.search(re_event, event):
+                    event = f"{gender} {replace}"
+                    break
+            else:
+                raise ValueError(f"EVENT UNKNOWN: {event}")
 
             # Graduation Year
             if year:
