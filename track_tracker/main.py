@@ -2,7 +2,7 @@ import os
 import json
 
 from fastapi import FastAPI, Query, Request, HTTPException, Body
-from fastapi.responses import HTMLResponse, ORJSONResponse
+from fastapi.responses import HTMLResponse, ORJSONResponse, FileResponse
 from fastapi.middleware.cors import CORSMiddleware
 
 from models import (
@@ -32,6 +32,8 @@ from html import project_base_page
 # Service Info
 with open(os.path.join(os.path.dirname(os.getcwd()), 'info.json'), 'r') as jf:
     app_info = json.load(jf)
+FAVICON_PATH = 'favicon.ico'
+ROBOTS_PATH = 'robots.txt'
 
 app = FastAPI(
     title=app_info['service_name'],
@@ -78,6 +80,18 @@ async def root(request: Request):
         return HTMLResponse(content=project_page)
     elif header_details.response_type == ResponseTypes.JSON:
         return {'Hello': 'WORLD!'}
+
+# Favicon
+@app.get('/static/favicon.ico', include_in_schema=False)
+@app.get('/favicon.ico', include_in_schema=False)
+async def favicon():
+    return FileResponse(FAVICON_PATH)
+
+# Robots
+@app.get('/static/robots.txt', include_in_schema=False)
+@app.get('/robots.txt', include_in_schema=False)
+async def favicon():
+    return FileResponse(ROBOTS_PATH)
 
 # About
 @app.get('/about', status_code=200)
