@@ -28,6 +28,7 @@ async function pagination(target, page_size, page_count, update=false) {
     console.log('page_count: ' + page_count);
     if (max_page > min_page + 6) {
         max_page = min_page + 6;
+        max_page = Math.min(max_page, page_count);
     }
     // max_page = Math.max(min_page + 6, max_page);
     console.log('ADJ max_page: ' + max_page);
