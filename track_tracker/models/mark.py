@@ -302,7 +302,7 @@ class MarkFilter(BaseModel):
             fields['offset'] = fields['offset'][0]
         return fields
 
-    def apply_filters(self, database_object_class: MarkDBBase, query: select) -> select:
+    def apply_filters(self, database_object_class: MarkDBBase, query: select, count: bool = False) -> select:
         """Apply the filters to the query"""
         def apply_modifier(query, db_obj_cls, string):
             if string.startswith('='):
@@ -382,12 +382,13 @@ class MarkFilter(BaseModel):
                 elif meet_date.startswith('<='):
                     query = query.filter(database_object_class.meet_date <= datetime.strptime(meet_date[2:], "%Y-%m-%d"))
 
-        if self.limit:
-            query = query.limit(self.limit)
-        for order_by in self.order_by:
-            query = query.order_by(getattr(database_object_class, order_by))
-        if self.offset:
-            query = query.offset(self.offset)
+        if not count:
+            if self.limit:
+                query = query.limit(self.limit)
+            for order_by in self.order_by:
+                query = query.order_by(getattr(database_object_class, order_by))
+            if self.offset:
+                query = query.offset(self.offset)
 
         return query
 

@@ -84,8 +84,14 @@ class MarkHandler(BaseHandler):
                 mark = read_obj.cast_data_object()
                 marks.append(mark)
 
-            query_max_count = rows = session.exec(
-                select(func.count(MarkDB.uid))).one()
+            # COUNT DOESNT WORK IF THERE ARE FILTERS APPLIED. IT ONLY GETS MAX SIZE FOR ALL RECORDS
+            query_max_count = select(func.count(MarkDB.uid))
+            query_max_count = mark_filter.apply_filters(MarkDB, query_max_count, count=True)
+            query_max_count = session.exec(
+                query_max_count).one()
+
+            # query_max_count = rows = session.exec(
+            #     select(func.count(MarkDB.uid))).one()
 
         self.context.logger.info(f"Marks Filtered: {len(marks)}")
         display_marks = []

@@ -20,12 +20,12 @@ async function pagination(target, page_size, page_count, update=false) {
 
     // Middle
     // Math optomized for 5 results
-    var total_page_count = Math.ceil(page_count / page_size)
+    // var total_page_count = Math.ceil(page_count / page_size)
     var min_page = Math.max(1, target - 3);
-    var max_page = Math.min(target + 6, total_page_count);
+    var max_page = Math.min(target + 6, page_count);
     console.log('min_page: ' + min_page);
     console.log('max_page: ' + max_page);
-    console.log('total_page_count: ' + total_page_count);
+    console.log('page_count: ' + page_count);
     if (max_page > min_page + 6) {
         max_page = min_page + 6;
     }
