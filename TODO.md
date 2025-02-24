@@ -105,9 +105,87 @@ Thoughts
 - [ ] Verify it works on mobile
 
 
+# High importance
+- [ ] Verify it works on mobile
+- [ ] Date to American bullshit
+- [ ] Find a better final row for tables that display the records for the event
+- [ ] Move filters into Query section and move Request next to Apply for ease of readability. Maybe then change Apply to "Update Columns"
+- [ ] Better table color schema
+
+# Easy to implement
+- [ ] Remove I from descriptions.
+- [ ] Remove "query" from everywhere
+- [ ] Teams only show teams with over 25 results but allow for getting all
+- [ ] "sort item 1" to "sort column 1"
+
+# Important
+- [ ] Searching for meets or athletes need to accept case insensitive or maybe even wildcards
+- [ ] larger fonts for mobile
+- [ ] Fix the About
 
 
 
+
+
+
+
+- [x] Fix color from dark to FHS.
+    - [ ] Maybe even a light/dark mode
+- [ ] Remove I from descriptions.
+    - [ ] Maybe even do away with descriptions
+- [ ] Remove "query" from everywhere
+- [ ] Try to mentally search for use cases and see if its effective at providing data
+- [ ] Dropdowns for
+    - [ ] events
+    - [ ] teams
+    - [ ] meets
+    - [ ] Could have a '+' to add multiple OR operations
+- [ ] Verify it works on mobile
+- [X] Remove operators like "<=" for words like "Less than or equal to"
+- [ ] Date to American bullshit
+    - [x] Backend
+    - [ ] UI
+- [ ] Find a better final row for tables that display the records for the event
+    - [ ] This could even entail only showing this or not at all but allow users to filter by result value and thus the last row would be the current record
+- [X] link needs to be the whole tile not just text on main page
+- [ ] Move filters into Query section and move Request next to Apply for ease of readability. Maybe then change Apply to "Update Columns"
+- [ ] Units on wind
+- [ ] Add different ways to query, filter, and display results on Team and Athlete pages
+    - [ ] Maybe include hidden elements that can be toggled like the tables are
+    - [ ] Another idea is send a larger payload with lots of hidden data and you can select the display style. As long as the paylaods dont get too large
+- [ ] Searching for meets or athletes need to accept case insensitive or maybe even wildcards
+    - [ ] add search fields for names and teams that store all lowercase but only return the uppercase versions
+- [ ] For records save in memory the current everything and update periodicly
+- [ ] Add an endpoint to return the enums for Teams and Events
+    - [ ] This would need to be updated every so often on the backend
+- [ ] Better table color schema
+- [ ] May need to look into a way to pull to populate a page if it starts to take too long
+- [X] Home and about links need to be buttons and larger
+- [ ] separate results from record
+- [ ] Teams page add counts for each grade?
+- [ ] Teams only show teams with over 25 results but allow for getting all
+- [ ] larger fonts for mobile
+- [ ] For teams allow a user to order by Athlete Name, Graduation Year, Event, Meet, Gender
+- [ ] Maybe have the background of the table more muted and allow different meets to have different colors
+- [ ] Maybe sort by result or date
+- [ ] For athletes allow a user to order by Meet, Event. Then sort by Result speed or date
+- [X] Move results away from primary spot and drop the star. This should be very powerful but not the first page people should go to. Add a FHS team page direct link
+- [ ] Low data mode where minimal data is transfered. Maybe put the botton in the center of the header. "Low wifi mode"?
+- [ ] Put a Freshman, Sophomore, Junior, Senior indicator next to grad years?
+- [ ] "sort item 1" to "sort column 1"
+
+
+Concepts:
+- [ ] I want to see my personal best performance
+- [ ] I want to see how I improved throughout the year
+- [ ] I want to see which of my athletes is the best
+- [ ] I want to see how each athlete has been improving
+- [ ] I want to see how I or an athlete performed at all of their events on this meet
+- [ ] I want to see how each of my athletes performed at this meet
+
+
+
+Notes
 
 Hard to read too dark
 background could use color or pictures
@@ -128,6 +206,22 @@ Meet names need to accept non capital convention
 
 Concept: I want to see my best performers in a particular event
 
+For school or athlete filtering, save the raw and a lowercase version so you can filter on lowercase anything. 
+For records load the page and then sequentially get results for each event
+    This would also require an endpoint for all current events
+    This could also be taken care of as a background process. Something like every 10 minutes 
+        go through every result and store teams, events, and records in memory
+        or create a "current records" table but I dont like this idea
+    Idea. Every day medium speed go through every record and update the list of all events that is stored in memory. Then every 10 minutes go event by event to see if there are any updates. This could also be configured to only be every hour during the week but every 10 minutes on the weekends. 
+        This would be just so events could be added during a meet but if this isnt happening this really isnt required
+Find a better table color schema
+Find a better record color schema
+Maybe add a way to incrementally add results on things like the teams pages even so they load slightly faster
+For teams allow a user to order by Athlete Name, Graduation Year, Event, Meet
+Maybe have the background of the table more muted and allow different meets to have different colors
+Maybe sort by result or date
+For athletes allow a user to order by Meet, Event. Then sort by Result speed or date
+Move results away from primary spot and drop the star. This should be very powerful but not the first page people should go to. Add a FHS team page direct link
 
 Center Primary Page
 Fairview Colors?
@@ -140,7 +234,7 @@ pull up athletes by graduation year
 "sort item 1" to "sort column 1"
 
 
-
+Put a Freshman, Sophomore, Junior, Senior indicator next to grad years?
 
 
 

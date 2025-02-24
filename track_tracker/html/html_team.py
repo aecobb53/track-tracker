@@ -16,7 +16,7 @@ from .base_page import (
     FILTER_STYLES,
     TABLE_STYLES,
     )
-from .common import TEAM_FILTER_PARAMS, TEAM_ARRANGE_PARAMS, TEAM_DISPLAY_PARAMS
+from .common import TEAM_FILTER_PARAMS, TEAM_ARRANGE_PARAMS, TEAM_DISPLAY_PARAMS, display_date
 
 async def filter_teams_html_page():
     base_doc = await project_base_page()
@@ -297,7 +297,7 @@ async def find_team_html_page(athletes, results):
             event_table_row.add_element(
                 TableData(internal=f"{result.athlete.graduation_year}").add_class('event-table-data'))
             event_table_row.add_element(
-                TableData(internal=f"{datetime.strftime(result.meet_date, '%Y-%m-%d')}").add_class('event-table-data'))
+                TableData(internal=f"{display_date(result.meet_date)}").add_class('event-table-data'))
             event_table.add_element(event_table_row)
 
         # Final rows
@@ -324,7 +324,7 @@ async def find_team_html_page(athletes, results):
         event_table_row.add_element(
             TableData(internal=f"{result.athlete.graduation_year}").add_class('event-table-data'))
         event_table_row.add_element(
-            TableData(internal=f"{datetime.strftime(record_result.meet_date, '%Y-%m-%d')}").add_class('event-table-data'))
+            TableData(internal=f"{display_date(record_result.meet_date)}").add_class('event-table-data'))
         event_table.add_element(event_table_row)
 
         event_div.add_element(event_table)

@@ -126,18 +126,24 @@ async def project_home_page():
         grouping_div = Div(Header(level=1, internal=grouping)).add_class('page-group-div')
 
         for page, details in pages.items():
-            page_div = Div().add_class('page-div')
             content = [
                 Div(internal=Header(level=2, internal=page)).add_class('page-header'),
                 Div(internal=Paragraph(internal=details['description'])).add_class('page-paragraph'),
             ]
-            page_div.add_element(
-                Link(internal=content, href=f"/html/{details['endpoint']}").add_class('page-link')
-            )
-            grouping_div.add_element(page_div)
+            page_link = Link(internal=content, href=f"/html/{details['endpoint']}").add_class('page-link').add_class('page-div')
+            grouping_div.add_element(page_link)
         page_content.add_element(grouping_div)
 
     body_styles = [
+        StyleTag(name='.home-page-content', internal=f"""
+            color: {TEXT_COLOR_1};
+            margin: 10px;
+            padding: 0;
+        """),
+        StyleTag(name='.home-page-content h1', internal=f"""
+            margin: 0;
+            padding: 20px 40px;
+        """),
         StyleTag(name='.page-group-div', internal=f"""
             color: {TEXT_COLOR_1};
             margin: 0;
@@ -152,17 +158,14 @@ async def project_home_page():
             border: 3px solid black;
             border-radius: 15px;
             -moz-border-radius: 15px;
-            height: 175px;
-            width: 500px;
+            height: 100px;
+            width: 400px;
             display: inline-block;
             vertical-align: top;
-
         """),
 
         StyleTag(name='.page-link', internal=f"""
             color: {TEXT_COLOR_1};
-            margin: 0;
-            padding: 0;
             text-decoration: none;
         """),
 
@@ -175,6 +178,7 @@ async def project_home_page():
         StyleTag(name='.page-paragraph', internal="""
             margin: 10px;
             padding: 0;
+            text-align: center;
         """),
 
 

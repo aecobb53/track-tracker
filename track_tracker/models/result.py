@@ -10,6 +10,7 @@ from uuid import uuid4
 
 from .athlete import AthleteData
 from .event import EventParser
+from .common import apply_modifier
 
 
 class Result(BaseModel):
@@ -348,21 +349,21 @@ class ResultFilter(BaseModel):
 
     def apply_filters(self, database_object_class: ResultDBBase, query: select, count: bool = False) -> select:
         """Apply the filters to the query"""
-        def apply_modifier(query, db_obj_cls, string):
-            if string.startswith('='):
-                return query.filter(db_obj_cls == string[1:])
-            elif string.startswith('>='):
-                return query.filter(db_obj_cls >= string[2:])
-            elif string.startswith('>'):
-                return query.filter(db_obj_cls > string[1:])
-            elif string.startswith('<='):
-                return query.filter(db_obj_cls <= string[2:])
-            elif string.startswith('<'):
-                return query.filter(db_obj_cls < string[1:])
-            elif string.startswith('!='):
-                return query.filter(db_obj_cls != string[2:])
-            else:
-                return query.filter(db_obj_cls == string)
+        # def apply_modifier(query, db_obj_cls, string):
+        #     if string.startswith('='):
+        #         return query.filter(db_obj_cls == string[1:])
+        #     elif string.startswith('>='):
+        #         return query.filter(db_obj_cls >= string[2:])
+        #     elif string.startswith('>'):
+        #         return query.filter(db_obj_cls > string[1:])
+        #     elif string.startswith('<='):
+        #         return query.filter(db_obj_cls <= string[2:])
+        #     elif string.startswith('<'):
+        #         return query.filter(db_obj_cls < string[1:])
+        #     elif string.startswith('!='):
+        #         return query.filter(db_obj_cls != string[2:])
+        #     else:
+        #         return query.filter(db_obj_cls == string)
 
         if self.uid:
             query = query.filter(database_object_class.uid.in_(self.uid))

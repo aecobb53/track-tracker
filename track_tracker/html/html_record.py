@@ -17,6 +17,7 @@ from .base_page import (
     FILTER_STYLES,
     TABLE_STYLES,
     )
+from .common import display_date
 
 
 async def filter_records_html_page(event_details):
@@ -65,7 +66,7 @@ async def filter_records_html_page(event_details):
         event_table_row.add_element(
             TableData(internal=f"{result.athlete.graduation_year}").add_class('event-table-data'))
         event_table_row.add_element(
-            TableData(internal=f"{datetime.strftime(result.meet_date, '%Y-%m-%d')}").add_class('event-table-data'))
+            TableData(internal=f"{display_date(result.meet_date)}").add_class('event-table-data'))
         event_table.add_element(event_table_row)
         event_div.add_element(event_table)
         events_div.add_element(event_div)

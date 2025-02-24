@@ -27,12 +27,12 @@ filter:
             size: 5
             # required: true
             options:
-                - "="
-                - "<="
-                - ">="
-                - "<"
-                - ">"
-                - "!="
+                - is exactly
+                - less than or equal to
+                - greater than or equal to
+                - less than
+                - greater than
+                - is
         heat2:
             variable: heat
             display: Heat
@@ -41,11 +41,11 @@ filter:
             default_value: null
             size: 5
             options:
-                - "<="
-                - ">="
-                - "<"
-                - ">"
-                - "!="
+                - less than or equal to
+                - greater than or equal to
+                - less than
+                - greater than
+                - is
     Place:
         place1:
             variable: place
@@ -55,12 +55,12 @@ filter:
             default_value: null
             size: 5
             options:
-                - "="
-                - "<="
-                - ">="
-                - "<"
-                - ">"
-                - "!="
+                - is exactly
+                - less than or equal to
+                - greater than or equal to
+                - less than
+                - greater than
+                - is
         place2:
             variable: place
             display: Plate
@@ -69,11 +69,11 @@ filter:
             default_value: null
             size: 5
             options:
-                - "<="
-                - ">="
-                - "<"
-                - ">"
-                - "!="
+                - less than or equal to
+                - greater than or equal to
+                - less than
+                - greater than
+                - is
     Wind:
         wind1:
             variable: wind
@@ -83,12 +83,12 @@ filter:
             default_value: null
             size: 5
             options:
-                - "="
-                - "<="
-                - ">="
-                - "<"
-                - ">"
-                - "!="
+                - is exactly
+                - less than or equal to
+                - greater than or equal to
+                - less than
+                - greater than
+                - is
         wind2:
             variable: wind
             display: Wind
@@ -97,11 +97,11 @@ filter:
             default_value: null
             size: 5
             options:
-                - "<="
-                - ">="
-                - "<"
-                - ">"
-                - "!="
+                - less than or equal to
+                - greater than or equal to
+                - less than
+                - greater than
+                - is
     Team:
         team:
             variable: team
@@ -135,9 +135,9 @@ filter:
             datatype: date
             default_value: 2023-01-01
             options:
-                - ">="
-                - "<="
-                - "="
+                - greater than or equal to
+                - less than or equal to
+                - is exactly
         meet_date2:
             variable: meet_date
             display: Meet Date
@@ -145,8 +145,8 @@ filter:
             datatype: date
             default_value: null
             options:
-                - "<="
-                - ">="
+                - less than or equal to
+                - greater than or equal to
 arrange:
     Results:
         limit:
