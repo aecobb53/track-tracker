@@ -34,7 +34,7 @@ def parse_data_row(data_row: list[str], event: str, header: list[str], calendar_
             student_year = None
             year = None
             team = None
-            mark = None
+            result = None
             wind_sign = None
             wind = None
             heat = None
@@ -49,10 +49,10 @@ def parse_data_row(data_row: list[str], event: str, header: list[str], calendar_
             last = ' '.join(first_last[1:])
 
             if result_jump_re:
-                mark, wind_sign, wind, heat = result_jump_re.groups()
+                result, wind_sign, wind, heat = result_jump_re.groups()
                 team = data_row[-1][:result_jump_re.start(0)].strip()
             elif result_run_re:
-                mark, wind_sign, wind, heat = result_run_re.groups()
+                result, wind_sign, wind, heat = result_run_re.groups()
                 team = data_row[-1][:result_run_re.start(0)].strip()
             else:
                 x=1
@@ -146,25 +146,25 @@ def parse_data_row(data_row: list[str], event: str, header: list[str], calendar_
             if any([True for v in interigate_data.values() if v is None]):
                 x=1
 
-            mark_data = {
+            result_data = {
                 'event': event,
                 'heat': heat,
                 'place': place,
                 'wind': wind,
                 'team': team,
                 'meet_date': meet_date,
-                'mark': mark,
+                'result': result,
                 'meet': meet_name,
                 'gender': gender,
             }
 
-            interigate_data = {k: v for k, v in mark_data.items() if k not in ['year']}
+            interigate_data = {k: v for k, v in result_data.items() if k not in ['year']}
             if any([True for v in interigate_data.values() if v is None]):
                 x=1
 
             data_obj = {
                 'athlete': athlete_data,
-                'mark': mark_data,
+                'result': result_data,
             }
             return data_obj
         else:
@@ -176,12 +176,12 @@ def parse_data_row(data_row: list[str], event: str, header: list[str], calendar_
             wind = None
             team = None
             meet_date = None
-            mark = None
+            result = None
             gender = None
 
             result_relay_re = re.search(r'((\d+:)?\d+\.?\d*)[\s\t]+(\d+)', data_row[-1])
             if result_relay_re:
-                mark, _, heat = result_relay_re.groups()
+                result, _, heat = result_relay_re.groups()
             else:
                 x=1
             team = data_row[-2]
@@ -205,7 +205,7 @@ def parse_data_row(data_row: list[str], event: str, header: list[str], calendar_
             #     'place': data_row[0],
             #     'calendar_year': calendar_year,
             #     'team': team,
-            #     'mark': mark,
+            #     'result': result,
             #     'heat': heat,
             #     'event': event,
             #     'meet_metadata': meet_metadata,
@@ -224,25 +224,25 @@ def parse_data_row(data_row: list[str], event: str, header: list[str], calendar_
                 'graduation_year': calendar_year,
             }
 
-            mark_data = {
+            result_data = {
                 'event': event,
                 'heat': heat,
                 'place': place,
                 'wind': wind,
                 'team': team,
                 'meet_date': meet_date,
-                'mark': mark,
+                'result': result,
                 'meet': meet_name,
                 'gender': gender,
             }
 
-            interigate_data = {k: v for k, v in mark_data.items() if k not in ['wind']}
+            interigate_data = {k: v for k, v in result_data.items() if k not in ['wind']}
             if any([True for v in interigate_data.values() if v is None]):
                 x=1
 
             data_obj = {
                 'athlete': athlete_data,
-                'mark': mark_data,
+                'result': result_data,
             }
 
             return data_obj
@@ -319,9 +319,9 @@ def parse_meet_file(path: str, meet_name: str, meet_dates: dict):
 
     output_data = {}
     for record in meet_data:
-        if record['mark']['event'] not in output_data:
-            output_data[record['mark']['event']] = []
-        output_data[record['mark']['event']].append(record)
+        if record['result']['event'] not in output_data:
+            output_data[record['result']['event']] = []
+        output_data[record['result']['event']].append(record)
     return output_data
 
 meets_dirs = []

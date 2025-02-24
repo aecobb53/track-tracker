@@ -20,7 +20,7 @@ YEAR_MAP = {
 }
 
 
-# resp = requests.get(f"{SERVER_URL}/mark/")
+# resp = requests.get(f"{SERVER_URL}/result/")
 # content= resp.json()
 # x=1
 
@@ -58,17 +58,17 @@ for year, meets in data.items():
             x=1
             for result in results:
                 athlete = result.get('athlete')
-                mark = result['mark']
+                result = result['result']
 
                 event_query_params = {
-                    'meet': mark['meet'],
-                    'event': mark['event'],
-                    'place': mark['place'],
-                    'team': mark['team'],
+                    'meet': result['meet'],
+                    'event': result['event'],
+                    'place': result['place'],
+                    'team': result['team'],
                 }
-                existing_event_resp = requests.get(f"{SERVER_URL}/mark/", params=event_query_params)
+                existing_event_resp = requests.get(f"{SERVER_URL}/result/", params=event_query_params)
                 existing_event_content = existing_event_resp.json()
-                if existing_event_content.get('marks') != []:
+                if existing_event_content.get('results') != []:
                     continue
 
                 if athlete:
@@ -94,11 +94,11 @@ for year, meets in data.items():
                         update = False
                         for key, value in athlete.items():
                             if athlete_content[key] != value:
-                                if key != 'graduation_year':
-                                    print('')
-                                    print('compared athletes but are different')
-                                    print(athlete_content)
-                                    print(athlete)
+                                # if key != 'graduation_year':
+                                #     print('')
+                                #     print('compared athletes but are different')
+                                #     print(athlete_content)
+                                #     print(athlete)
                                 update = True
                                 athlete_content[key] = value
                                 x=1
@@ -119,16 +119,16 @@ for year, meets in data.items():
                         print(f"RESPONSE BODY: {athlete_content}")
                         raise ValueError('Athlete content does not have uid')
                     athlete_uid = athlete_content['uid']
-                    mark['athlete_uid'] = athlete_uid
-                    mark['athlete_first_name'] = first
-                    mark['athlete_last_name'] = last
+                    result['athlete_uid'] = athlete_uid
+                    result['athlete_first_name'] = first
+                    result['athlete_last_name'] = last
                     x=1
                 else:
                     # No athlete (Relay)
                     x=1
-                mark_resp = requests.post(f"{SERVER_URL}/mark/", json=mark)
-                mark_content = mark_resp.json()
-                if not mark_resp.ok and mark_resp.status_code != 409:
+                result_resp = requests.post(f"{SERVER_URL}/result/", json=result)
+                result_content = result_resp.json()
+                if not result_resp.ok and result_resp.status_code != 409:
                     x=1
                 x=1
             progress_tracking[year][meet_name][event_name] = True
@@ -198,7 +198,7 @@ x=1
 #                 athlete_uid = athlete_content['uid']
 #             else:
 #                 athlete_uid = None
-#             mark_post_body = {
+#             result_post_body = {
 #                 'event': event_name,
 #                 'heat': result['heat'],
 #                 'place': result['place'],
@@ -208,22 +208,22 @@ x=1
 #                 'athlete_last_name': last,
 #                 'team': result['team'],
 #                 'meet_date': meet_date,
-#                 'mark': result['mark'],
+#                 'result': result['result'],
 #                 'meet': meet,
 #             }
-#             mark_resp = requests.post(f"{SERVER_URL}/mark", json=mark_post_body)
-#             mark_content = mark_resp.json()
-#             if not mark_resp.ok and not mark_resp.status_code == 409:
-#                 print(mark_content)
+#             result_resp = requests.post(f"{SERVER_URL}/result", json=result_post_body)
+#             result_content = result_resp.json()
+#             if not result_resp.ok and not result_resp.status_code == 409:
+#                 print(result_content)
 #                 x=1
 #             if athlete_content.get('gender') is None:
-#                 mark_params = {
+#                 result_params = {
 #                     'athlete_uid': athlete_uid,
 #                 }
-#                 mark_filter_resp = requests.get(f"{SERVER_URL}/mark", params=mark_params)
-#                 mark_filter_content = mark_filter_resp.json()
+#                 result_filter_resp = requests.get(f"{SERVER_URL}/result", params=result_params)
+#                 result_filter_content = result_filter_resp.json()
 
-#                 athlete_content['gender'] = mark_filter_content['marks'][0]['gender']
+#                 athlete_content['gender'] = result_filter_content['results'][0]['gender']
 #                 athlete_resp = requests.put(f"{SERVER_URL}/athlete", json=athlete_content)
 #                 athlete_content = athlete_resp.json()
 #             x=1

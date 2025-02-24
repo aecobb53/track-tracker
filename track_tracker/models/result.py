@@ -12,9 +12,9 @@ from .athlete import AthleteData
 from .event import EventParser
 
 
-class Mark(BaseModel):
+class Result(BaseModel):
     event_str: str
-    mark_str: str
+    result_str: str
     minutes: int | None = None
     seconds: int | None = None
     subsecond: float | None = None
@@ -23,11 +23,11 @@ class Mark(BaseModel):
     fractions: float | None = None
 
     @classmethod
-    def parse_event_mark(cls, event: str, mark: str):
-        minutes, seconds, subsecond, feet, inches, fractions = EventParser.parse_event_mark(event_s=event, mark_s=mark)
+    def parse_event_result(cls, event: str, result: str):
+        minutes, seconds, subsecond, feet, inches, fractions = EventParser.parse_event_result(event_s=event, result_s=result)
         obj = cls(
             event_str=event,
-            mark_str=mark,
+            result_str=result,
             minutes=minutes,
             seconds=seconds,
             subsecond=subsecond,
@@ -58,13 +58,13 @@ class Mark(BaseModel):
 
     @property
     def put(self):
-        output = f"{self.event_str}::{self.mark_str}"
+        output = f"{self.event_str}::{self.result_str}"
         return output
 
     @classmethod
     def build(cls, input):
-        event, mark = input.split('::')
-        return cls.parse_event_mark(event=event, mark=mark)
+        event, result = input.split('::')
+        return cls.parse_event_result(event=event, result=result)
 
     def __gt__(self, other):
         if self.seconds is not None and self.subsecond is not None and other.seconds is not None and other.subsecond is not None:
@@ -103,17 +103,17 @@ class Mark(BaseModel):
                 return True
         else:
             print(f"event_str: {self.event_str}, {other.event_str}")
-            print(f"mark_str: {self.mark_str}, {other.mark_str}")
+            print(f"result_str: {self.result_str}, {other.result_str}")
             print(f"minutes: {self.minutes}, {other.minutes}")
             print(f"seconds: {self.seconds}, {other.seconds}")
             print(f"subsecond: {self.subsecond}, {other.subsecond}")
             print(f"feet: {self.feet}, {other.feet}")
             print(f"inches: {self.inches}, {other.inches}")
             print(f"fractions: {self.fractions}, {other.fractions}")
-            raise ValueError('Invalid Mark')
+            raise ValueError('Invalid Result')
 
 
-class MarkData(BaseModel):
+class ResultData(BaseModel):
     uid: str
     update_datetime: datetime
 
@@ -125,7 +125,7 @@ class MarkData(BaseModel):
     athlete_uid: str | None = None
     team: str | None = None
     meet_date: datetime
-    mark: Mark
+    result: Result
     meet: str
     gender: str | None = None
 
@@ -145,7 +145,7 @@ class MarkData(BaseModel):
         return output
 
 
-class MarkApiCreate(BaseModel):
+class ResultApiCreate(BaseModel):
     event: str
     heat: int
     place: int
@@ -155,7 +155,7 @@ class MarkApiCreate(BaseModel):
     athlete_last_name: str | None = None
     team: str | None = None
     meet_date: datetime
-    mark: Mark
+    result: Result
     meet: str
     gender: str | None = None
 
@@ -166,19 +166,19 @@ class MarkApiCreate(BaseModel):
         if not fields.get('wind'):
             fields['wind'] = 0.0
         fields['athlete'] = None
-        mark = Mark.parse_event_mark(event=fields['event'], mark=fields['mark'])
-        fields['mark'] = mark
+        result = Result.parse_event_result(event=fields['event'], result=fields['result'])
+        fields['result'] = result
         fields['gender'] = EventParser.parse_event_gender(event_s=fields['event'])
         if not any([fields.get('athlete_uid'), fields.get('athlete_first_name'), fields.get('athlete_last_name')]):
             raise ValueError("Must provide either athlete_uid or athlete_first_name and athlete_last_name")
         return fields
 
-    def cast_data_object(self) -> MarkData:
-        """Return a data object based on the MarkData class"""
+    def cast_data_object(self) -> ResultData:
+        """Return a data object based on the ResultData class"""
         content = self.model_dump()
         content['uid'] = str(uuid4())
         content['update_datetime'] = datetime.now(timezone.utc)
-        data_obj = MarkData(**content)
+        data_obj = ResultData(**content)
         return data_obj
 
     @property
@@ -187,7 +187,7 @@ class MarkApiCreate(BaseModel):
         return output
 
 
-class MarkDBBase(SQLModel):
+class ResultDBBase(SQLModel):
     id: int | None = Field(primary_key=True, default=None)
     uid: str = Field(unique=True)
     update_datetime: datetime | None = None
@@ -199,7 +199,7 @@ class MarkDBBase(SQLModel):
     athlete_uid: str = Field(foreign_key="athlete.uid")
     team: str | None = None
     meet_date: datetime
-    mark: Dict | None = Field(default_factory=dict, sa_column=Column(JSON))
+    result: Dict | None = Field(default_factory=dict, sa_column=Column(JSON))
     meet: str
     gender: str | None = None
 
@@ -207,14 +207,14 @@ class MarkDBBase(SQLModel):
     def validate_fields(cls, fields):
         return fields
 
-    def cast_data_object(self) -> MarkData:
-        """Return a data object based on the MarkData class"""
+    def cast_data_object(self) -> ResultData:
+        """Return a data object based on the ResultData class"""
         content = self.model_dump()
-        data_obj = MarkData(**content)
+        data_obj = ResultData(**content)
         return data_obj
 
 
-class MarkDBCreate(MarkDBBase):
+class ResultDBCreate(ResultDBBase):
     @model_validator(mode='before')
     def validate_fields(cls, fields):
         if not isinstance(fields, dict):
@@ -223,15 +223,15 @@ class MarkDBCreate(MarkDBBase):
         return fields
 
 
-class MarkDBRead(MarkDBBase):
+class ResultDBRead(ResultDBBase):
     pass
 
 
-class MarkDB(MarkDBBase, table=True):
-    __tablename__ = "mark"
+class ResultDB(ResultDBBase, table=True):
+    __tablename__ = "result"
 
 
-class MarkFilter(BaseModel):
+class ResultFilter(BaseModel):
     uid: List[str] | None = None
 
     event: List[str] = []
@@ -248,7 +248,7 @@ class MarkFilter(BaseModel):
     gender: List[str] = []
 
     meet_date: List[str] = []
-    # mark: Dict | None = Field(default_factory=dict, sa_column=Column(JSON))
+    # result: Dict | None = Field(default_factory=dict, sa_column=Column(JSON))
 
     limit: int = 1000
     order_by: List[str] = ['event', 'place']
@@ -346,7 +346,7 @@ class MarkFilter(BaseModel):
             fields['offset'] = fields['offset'][0]
         return fields
 
-    def apply_filters(self, database_object_class: MarkDBBase, query: select, count: bool = False) -> select:
+    def apply_filters(self, database_object_class: ResultDBBase, query: select, count: bool = False) -> select:
         """Apply the filters to the query"""
         def apply_modifier(query, db_obj_cls, string):
             if string.startswith('='):
@@ -436,6 +436,6 @@ class MarkFilter(BaseModel):
 
         return query
 
-    def count_applicable(self, database_object_class: MarkDBBase, query: select) -> select:
+    def count_applicable(self, database_object_class: ResultDBBase, query: select) -> select:
         count = query
         x=1

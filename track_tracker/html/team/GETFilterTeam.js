@@ -1,6 +1,6 @@
 async function GETFilterTeam(params) {
     console.log('GETing to /team/display');
-    // var url = '/mark/display';
+    // var url = '/result/display';
     var url = '/team/display?' + new URLSearchParams(params).toString();
     console.log('url: ' + url);
 

@@ -122,14 +122,14 @@ class AthleteHandler(BaseHandler):
         self.context.logger.info(f"Athletes Filtered: {len(athletes)}")
         display_athletes = []
         for athlete in athletes:
-            marks = {}
+            results = {}
             records = {}
             display_athletes.append({
                 'First Name': athlete.first_name,
                 'Last Name': athlete.last_name,
                 'Team': athlete.team,
                 'Graduation Year': athlete.graduation_year,
-                'marks': marks,
+                'results': results,
                 'records': records,
                 'uid': athlete.uid,
             })

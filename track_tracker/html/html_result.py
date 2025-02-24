@@ -3,24 +3,40 @@ from re import L
 
 from phtml import *
 from my_base_html_lib import MyBaseDocument, NavigationContent, SidebarContent, BodyContent, FooterContent
-from .base_page import project_base_page
+from .base_page import (
+    project_base_page,
+    BACKGROUND_COLOR,
+    SECONDARY_COLOR,
+    ACCENT_COLOR,
+    TEXT_COLOR_1,
+    TEXT_COLOR_2,
+    ROW_BACKGROUND_COLOR_1,
+    ROW_BACKGROUND_COLOR_2,
+    PAGE_STYLES,
+    FILTER_STYLES,
+    TABLE_STYLES,
+    )
 from .common import MARK_FILTER_PARAMS, MARK_ARRANGE_PARAMS, MARK_DISPLAY_PARAMS
 
-async def filter_marks_html_page():
+async def filter_results_html_page():
+    base_doc = await project_base_page()
+
+    # Body
     page_content = Div().add_class('page-content')
+
 
     # Filter Form
     filter_form_div = Div()
-    filter_form_div.add_element(Header(level=1, internal='Mark Results'))
+    filter_form_div.add_element(Header(level=1, internal='Result Results'))
     filter_form_div.add_element(Paragraph(internal='''
-    Marks are the results of a race, jump, or throw. I use mark to avoid overloading other common phrases. You can use 
+    Results are the results of a race, jump, or throw. I use result to avoid overloading other common phrases. You can use 
     this page to filter criteria. The filters are partial as in you can query for the Team "Fairview" to get all 
-    Fairview High School marks. Some have additional dropdowns. For example, you can filter for Heats <= 3. 
+    Fairview High School results. Some have additional dropdowns. For example, you can filter for Heats <= 3. 
     Table columns can be toggled with the checkboxes to make viewing easier.
     '''))
     filter_form_div.add_element(Paragraph(
         internal='For multiple items separate with a comma. Ex "Fairview, Boulder"'))
-    filter_form = Form(action=f"/mark", method='get').add_class('filter-form')
+    filter_form = Form(action=f"/result", method='get').add_class('filter-form')
     filter_groupings = {}
     for grouping in MARK_FILTER_PARAMS.keys():
         if grouping not in filter_groupings:
@@ -68,7 +84,7 @@ async def filter_marks_html_page():
     # Arrange
     arrange_div = Div()
     arrange_div.add_element(Header(level=1, internal='Filter Results'))
-    arrange_form = Form(action=f"/mark", method='get').add_class('arrange-form')
+    arrange_form = Form(action=f"/result", method='get').add_class('arrange-form')
     arrange_groupings = {}
     for grouping in MARK_ARRANGE_PARAMS.keys():
         if grouping not in arrange_groupings:
@@ -124,7 +140,7 @@ async def filter_marks_html_page():
     # Display Form
     display_form_div = Div()
     display_form_div.add_element(Header(level=1, internal='Table Columns'))
-    display_form = Form(action=f"/mark", method='get').add_class('display-form')
+    display_form = Form(action=f"/result", method='get').add_class('display-form')
     display_groupings = {}
     for grouping in MARK_DISPLAY_PARAMS.keys():
         if grouping not in display_groupings:
@@ -174,30 +190,15 @@ async def filter_marks_html_page():
 
     # Pagination
     pagination_div = Div().add_class('pagination-div')
-    # pagination_div.add_element(Link(href='#', internal='&laquo;'))
-    # pagination_div.add_element(Link(href='#', internal='-'))
-    # # pagination_div.add_element(Link(href='#', internal='1').add_class('active'))
-    # # pagination_div.add_element(Link(href='#', internal='2'))
-    # # pagination_div.add_element(Link(href='#', internal='3'))
-    # pagination_div.add_element(Link(href='#', internal='&raquo;'))
-
-    #   <a href="#">&laquo;</a>
-    #   <a href="#">1</a>
-    #   <a href="#" class="active">2</a>
-    #   <a href="#">3</a>
-    #   <a href="#">4</a>
-    #   <a href="#">5</a>
-    #   <a href="#">6</a>
-    #   <a href="#">&raquo;</a>
     page_content.add_element(pagination_div)
 
     # JS Files
     js_files = [
-        os.path.join('mark', 'applyFilterForm.js'),
-        os.path.join('mark', 'GETFilterMark.js'),
-        os.path.join('mark', 'populateMarkTable.js'),
-        os.path.join('mark', 'applyDisplayFilters.js'),
-        os.path.join('mark', 'toggleCheckboxes.js'),
+        os.path.join('result', 'applyFilterForm.js'),
+        os.path.join('result', 'GETFilterResult.js'),
+        os.path.join('result', 'populateResultTable.js'),
+        os.path.join('result', 'applyDisplayFilters.js'),
+        os.path.join('result', 'toggleCheckboxes.js'),
         os.path.join('common', 'pagination.js'),
     ]
     for fl in js_files:
@@ -205,62 +206,30 @@ async def filter_marks_html_page():
             # line = line.replace('SERVICE_URL', service_url)
             js_lines = jf.readlines()
             js_lines[-1] += '\n'  # In case there is not a newline at the end of the file
+            # js_script = [l[:-1] for l in js_lines]
+            # js_script = []
+            # for line in [l[:-1] for l in js_lines]:
+            #     line = line.replace('ROW_BACKGROUND_COLOR_1', 'black')
+            #     line = line.replace('ROW_BACKGROUND_COLOR_2', 'red')
+            #     js_script.append(line)
             page_content.add_element(
                 Script(internal=[l[:-1] for l in js_lines])
             )
+            # page_content.add_element(
+            #     Script(internal=js_script)
+            # )
+    body_content = BodyContent(body_content=[page_content])
 
     # Styles
-    document_style = [
-        StyleTag(name='.page-content', internal="""
-            display: block;
-            color: #949ba4;
-            margin: 10px;
-        """),
-        StyleTag(name='.filter-checkbox-input', internal="""
-            margin: 0;
-        """),
-        StyleTag(name='.big-button', internal="""
-            margin: 10px;
-            padding: 5px;
-            font-size: 120%;
-            font-weight: bold;
-            text-decoration: underline;
-        """),
-        StyleTag(name='.small-button', internal="""
-            margin: 5px;
-            padding: 5px;
-            font-size: 100%;
-            font-weight: bold;
-        """),
+    for style in PAGE_STYLES:
+        body_content.add_body_styles(style)
+    for style in FILTER_STYLES:
+        body_content.add_body_styles(style)
+    for style in TABLE_STYLES:
+        body_content.add_body_styles(style)
 
-        StyleTag(name='.pagination-div', internal="""
-            display: inline-block;
-            font-size: 300%;
-            color: #949ba4;
-            margin: 10px;
-            text-decoration: none;
-            text-align: center;
-            width: 100%;
-        """),
-        StyleTag(name='.pagination-div button', internal="""
-            border-radius: 5px;
-            margin: 4px;
-            padding: 5px;
-            text-decoration: none;
-        """),
-        StyleTag(name='.pagination-div button.active', internal="""
-            color: #000000;
-            background-color: green;
-        """),
-    ]
-
-    base_doc = await project_base_page()
-    base_doc.body_content.body_content.append(page_content)
-    for style in document_style:
-        base_doc.document.add_head_element(style)
+    base_doc.body_content = body_content
     return base_doc.return_document
-
-
 
 """
 https://www.w3schools.com/css/css3_pagination.asp

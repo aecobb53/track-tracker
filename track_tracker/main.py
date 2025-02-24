@@ -11,12 +11,34 @@ from models import (
     ContextSingleton)
 from handlers import DatabaseHandler, init_logger
 from html import project_home_page, unimplemented_page
+
+
+
+
+
+
+from html import (
+    project_base_page, project_home_page,
+    unimplemented_page,
+    filter_results_html_page,
+    filter_athletes_html_page, find_athletes_html_page,
+    filter_teams_html_page, find_team_html_page,
+    filter_records_html_page,
+)
+
+
+
+
+
+
+
+
 from routs import (
-    mark_router,
+    result_router,
     athlete_router,
     team_router,
     record_router,
-    mark_html_router,
+    result_html_router,
     athlete_html_router,
     team_html_router,
     record_html_router,
@@ -51,11 +73,11 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-app.include_router(mark_router)
+app.include_router(result_router)
 app.include_router(athlete_router)
 app.include_router(team_router)
 app.include_router(record_router)
-app.include_router(mark_html_router)
+app.include_router(result_html_router)
 app.include_router(athlete_html_router)
 app.include_router(team_html_router)
 app.include_router(record_html_router)
@@ -69,6 +91,21 @@ async def startup_event():
     context = ContextSingleton()
     context.database = db
     context.logger = init_logger()
+
+
+
+
+
+# Root
+@app.get('/ht', status_code=200)
+async def root(request: Request):
+    """HTML PAGE TESTING"""
+    project_page = await filter_athletes_html_page()
+    return HTMLResponse(content=project_page)
+
+
+
+
 
 
 # Root

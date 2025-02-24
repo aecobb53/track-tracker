@@ -33,7 +33,7 @@ def parse_data_row(data_row: list[str], event: str, header: list[str], calendar_
         if header == ['PLACE', 'VIDEO', 'ATHLETE', 'TEAM', 'MARK', 'WIND', 'HEAT']:
             year = None
             team = None
-            mark = None
+            result = None
             wind_sign = None
             wind = None
             heat = None
@@ -47,10 +47,10 @@ def parse_data_row(data_row: list[str], event: str, header: list[str], calendar_
 
 
             if result_jump_re:
-                mark, wind_sign, wind, heat = result_jump_re.groups()
+                result, wind_sign, wind, heat = result_jump_re.groups()
                 team = data_row[-1][:result_jump_re.start(0)].strip()
             elif result_run_re:
-                mark, wind_sign, wind, heat = result_run_re.groups()
+                result, wind_sign, wind, heat = result_run_re.groups()
                 team = data_row[-1][:result_run_re.start(0)].strip()
             else:
                 x=1
@@ -74,7 +74,7 @@ def parse_data_row(data_row: list[str], event: str, header: list[str], calendar_
                 'year': year,
                 'calendar_year': calendar_year,
                 'team': team,
-                'mark': mark,
+                'result': result,
                 'wind': wind,
                 'heat': heat,
                 'event': event,
@@ -83,12 +83,12 @@ def parse_data_row(data_row: list[str], event: str, header: list[str], calendar_
             return data_obj
     elif len(header) == 5 and len(data_row) == 3:
         if header == ['PLACE', 'VIDEO', 'TEAM', 'MARK', 'HEAT']:
-            mark = None
+            result = None
             heat = None
 
             result_relay_re = re.search(r'((\d+:)?\d+\.?\d*)[\s\t]+(\d+)', data_row[-1])
             if result_relay_re:
-                mark, _, heat = result_relay_re.groups()
+                result, _, heat = result_relay_re.groups()
             else:
                 x=1
             team = data_row[-2]
@@ -99,7 +99,7 @@ def parse_data_row(data_row: list[str], event: str, header: list[str], calendar_
                 'place': int(data_row[0]),
                 'calendar_year': calendar_year,
                 'team': team,
-                'mark': mark,
+                'result': result,
                 'heat': heat,
                 'event': event,
                 'meet_metadata': meet_metadata,

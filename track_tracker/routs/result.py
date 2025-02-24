@@ -1,11 +1,11 @@
 from fastapi import APIRouter, HTTPException, Request, Response, Depends
 
-# from models import Mark, MarkFilter
-# # from handlers import MarkHandler
-from handlers import AthleteHandler, MarkHandler, parse_query_params, DuplicateRecordsException, MissingRecordException
+# from models import Result, ResultFilter
+# # from handlers import ResultHandler
+from handlers import AthleteHandler, ResultHandler, parse_query_params, DuplicateRecordsException, MissingRecordException
 # # from utils import parse_query_params, parse_header, MissingRecordException, DuplicateRecordsException
-# from models import MarkData, MarkApiCreate, MarkFilter
-from models import MarkData, MarkApiCreate, MarkFilter, AthleteFilter
+# from models import ResultData, ResultApiCreate, ResultFilter
+from models import ResultData, ResultApiCreate, ResultFilter, AthleteFilter
 from models import ContextSingleton
 
 from typing import Annotated
@@ -13,36 +13,36 @@ from typing import Annotated
 context = ContextSingleton()
 
 router = APIRouter(
-    prefix='/mark',
-    tags=['mark'],
+    prefix='/result',
+    tags=['result'],
 )
 
 
 @router.post('/', status_code=201)
-async def create_mark(mark: MarkApiCreate):
+async def create_result(result: ResultApiCreate):
     try:
         ah = AthleteHandler()
         athlete = await ah.find_athlete(AthleteFilter(
-            first_name=[mark.athlete_first_name],
-            last_name=[mark.athlete_last_name],
-            team=[mark.team],
+            first_name=[result.athlete_first_name],
+            last_name=[result.athlete_last_name],
+            team=[result.team],
         ))
-        mark.athlete = athlete
-        mark_data = mark.cast_data_object()
-        mh = MarkHandler()
+        result.athlete = athlete
+        result_data = result.cast_data_object()
+        mh = ResultHandler()
 
-        existing_mark_filter = MarkFilter(
-            event=[mark_data.event],
-            athlete_uid=[mark.athlete.uid],
-            team=[mark_data.team],
-            meet=[mark_data.meet],
+        existing_result_filter = ResultFilter(
+            event=[result_data.event],
+            athlete_uid=[result.athlete.uid],
+            team=[result_data.team],
+            meet=[result_data.meet],
         )
-        existing_mark = await mh.find_marks(mark_filter=existing_mark_filter, silence_missing=True)
-        if existing_mark:
+        existing_result = await mh.find_results(result_filter=existing_result_filter, silence_missing=True)
+        if existing_result:
             # Verify the record doesnt already exist
-            raise DuplicateRecordsException(f"event={mark_data.event}, athlete_uid={mark.athlete.uid}, team={mark_data.team}")
-        created_mark = await mh.create_mark(mark=mark_data)
-        return created_mark.put
+            raise DuplicateRecordsException(f"event={result_data.event}, athlete_uid={result.athlete.uid}, team={result_data.team}")
+        created_result = await mh.create_result(result=result_data)
+        return created_result.put
     except MissingRecordException as err:
         message = f"No record found: [{err}]"
         context.logger.error(message)
@@ -57,28 +57,28 @@ async def create_mark(mark: MarkApiCreate):
 
 
 @router.get('/', status_code=200)
-async def filter_mark(request: Request):
+async def filter_result(request: Request):
     try:
-        mark_filter = parse_query_params(request=request, query_class=MarkFilter)
+        result_filter = parse_query_params(request=request, query_class=ResultFilter)
         print(' I AM RUN ')
-        mh = MarkHandler()
-        marks = await mh.filter_marks(mark_filter=mark_filter)
+        mh = ResultHandler()
+        results = await mh.filter_results(result_filter=result_filter)
         ah = AthleteHandler()
-        for mark in marks:
-            athlete = await ah.find_athlete(AthleteFilter(uid=[mark.athlete_uid]))
-            mark.athlete = athlete
-        return {'marks': marks}
+        for result in results:
+            athlete = await ah.find_athlete(AthleteFilter(uid=[result.athlete_uid]))
+            result.athlete = athlete
+        return {'results': results}
     except Exception as err:
         context.logger.warning(f'ERROR: {err}')
         raise HTTPException(status_code=500, detail='Internal Service Error')
 
 
 @router.put('/', status_code=200)
-async def update_mark(mark: MarkData):
+async def update_result(result: ResultData):
     try:
         mh = AthleteHandler()
-        created_mark = await mh.update_mark(mark=mark)
-        return created_mark.put
+        created_result = await mh.update_result(result=result)
+        return created_result.put
     except DuplicateRecordsException as err:
         message = f"Dupe record attempt: {err}"
         context.logger.warning(message)
@@ -89,17 +89,17 @@ async def update_mark(mark: MarkData):
 
 
 @router.get('/display', status_code=200)
-async def filter_mark(request: Request):
+async def filter_result(request: Request):
     try:
-        mark_filter = parse_query_params(request=request, query_class=MarkFilter)
-        mh = MarkHandler()
-        marks, query_max_count = await mh.filter_marks_display(mark_filter=mark_filter)
+        result_filter = parse_query_params(request=request, query_class=ResultFilter)
+        mh = ResultHandler()
+        results, query_max_count = await mh.filter_results_display(result_filter=result_filter)
         ah = AthleteHandler()
-        for mark in marks:
-            athlete = await ah.find_athlete(AthleteFilter(uid=[mark['Athlete']]))
-            mark['Athlete'] = f"{athlete.first_name} {athlete.last_name}"
+        for result in results:
+            athlete = await ah.find_athlete(AthleteFilter(uid=[result['Athlete']]))
+            result['Athlete'] = f"{athlete.first_name} {athlete.last_name}"
         response = {
-            'marks': marks,
+            'results': results,
             'query_max_count': query_max_count,
         }
         return response
@@ -108,11 +108,11 @@ async def filter_mark(request: Request):
         raise HTTPException(status_code=500, detail='Internal Service Error')
 
 
-# @router.put('/{mark_id}', status_code=200)
-# async def update_mark(mark_id: str, mark: Mark):
-#     rh = MarkHandler()
+# @router.put('/{result_id}', status_code=200)
+# async def update_result(result_id: str, result: Result):
+#     rh = ResultHandler()
 #     try:
-#         updated_mark = await rh.update_mark(mark_uid=mark_id, mark=mark)
+#         updated_result = await rh.update_result(result_uid=result_id, result=result)
 #     # except MissingRecordException as err:
 #     #     message = f"Record not found: [{err}]"
 #     #     context.logger.warning(message)
@@ -124,14 +124,14 @@ async def filter_mark(request: Request):
 #     except Exception as err:
 #         context.logger.warning(f'ERROR: {err}')
 #         raise HTTPException(status_code=500, detail='Internal Service Error')
-#     return updated_mark
+#     return updated_result
 
 
-# @router.get('/{mark_id}', status_code=200)
-# async def find_mark(mark_id: str):
-#     rh = MarkHandler()
+# @router.get('/{result_id}', status_code=200)
+# async def find_result(result_id: str):
+#     rh = ResultHandler()
 #     try:
-#         mark = await rh.find_mark(mark_uid=mark_id)
+#         result = await rh.find_result(result_uid=result_id)
 #     # except MissingRecordException as err:
 #     #     message = f"Record not found: [{err}]"
 #     #     context.logger.warning(message)
@@ -143,14 +143,14 @@ async def filter_mark(request: Request):
 #     except Exception as err:
 #         context.logger.warning(f'ERROR: {err}')
 #         raise HTTPException(status_code=500, detail='Internal Service Error')
-#     return mark
+#     return result
 
 
-# @router.put('/{mark_id}/activate', status_code=200)
-# async def activate_mark(mark_id: str):
-#     rh = MarkHandler()
+# @router.put('/{result_id}/activate', status_code=200)
+# async def activate_result(result_id: str):
+#     rh = ResultHandler()
 #     try:
-#         updated_mark = await rh.set_activation(mark_uid=mark_id, active_state=True)
+#         updated_result = await rh.set_activation(result_uid=result_id, active_state=True)
 #     # except MissingRecordException as err:
 #     #     message = f"Record not found: [{err}]"
 #     #     context.logger.warning(message)
@@ -158,14 +158,14 @@ async def filter_mark(request: Request):
 #     except Exception as err:
 #         context.logger.warning(f'ERROR: {err}')
 #         raise HTTPException(status_code=500, detail='Internal Service Error')
-#     return updated_mark
+#     return updated_result
 
 
-# @router.put('/{mark_id}/deactivate', status_code=200)
-# async def deactivate_mark(mark_id: str):
-#     rh = MarkHandler()
+# @router.put('/{result_id}/deactivate', status_code=200)
+# async def deactivate_result(result_id: str):
+#     rh = ResultHandler()
 #     try:
-#         updated_mark = await rh.set_activation(mark_uid=mark_id, active_state=False)
+#         updated_result = await rh.set_activation(result_uid=result_id, active_state=False)
 #     # except MissingRecordException as err:
 #     #     message = f"Record not found: [{err}]"
 #     #     context.logger.warning(message)
@@ -173,14 +173,14 @@ async def filter_mark(request: Request):
 #     except Exception as err:
 #         context.logger.warning(f'ERROR: {err}')
 #         raise HTTPException(status_code=500, detail='Internal Service Error')
-#     return updated_mark
+#     return updated_result
 
 
-# @router.delete('/{mark_id}', status_code=200)
-# async def delete_mark(mark_id: str):
-#     rh = MarkHandler()
+# @router.delete('/{result_id}', status_code=200)
+# async def delete_result(result_id: str):
+#     rh = ResultHandler()
 #     try:
-#         updated_mark = await rh.delete_mark(mark_uid=mark_id)
+#         updated_result = await rh.delete_result(result_uid=result_id)
 #     # except MissingRecordException as err:
 #     #     message = f"Record not found: [{err}]"
 #     #     context.logger.warning(message)
@@ -188,4 +188,4 @@ async def filter_mark(request: Request):
 #     except Exception as err:
 #         context.logger.warning(f'ERROR: {err}')
 #         raise HTTPException(status_code=500, detail='Internal Service Error')
-#     return updated_mark
+#     return updated_result

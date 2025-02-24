@@ -80,7 +80,7 @@ a.sort()
 for i in a:
     print(i)
 
-csv = ['Name,Event,Mark,Wind,Attempt,Year,Date,Meet']
+csv = ['Name,Event,Result,Wind,Attempt,Year,Date,Meet']
 for athlete, events in athletes.items():
     if athlete == 'Relay':
         continue
@@ -94,7 +94,7 @@ for athlete, events in athletes.items():
                 date = None
             data = [athlete]
             data.append(event_name)
-            data.append(str(result['mark']))
+            data.append(str(result['result']))
             data.append(str(result['wind']))
             data.append(str(result['calendar_year']))
             data.append(str(date))

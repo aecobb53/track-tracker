@@ -1,15 +1,15 @@
 Primary Pages:
-    Marks ★:
-        endpoint: mark
-        description: This is the main page for results. In an attempt to avoid overloading phrases, I consider each race, jump, or throw a "mark". 
+    Results ★:
+        endpoint: result
+        description: This is the main page for results. In an attempt to avoid overloading phrases, I consider each race, jump, or throw a "result". 
             Following this link will take you to a page that lets you sort by different criteria like event, heat, place, team and more. 
             There are also column toggles. Check which columns you want and then hit apply. 
     Athletes:
         endpoint: athlete
-        description: This page focuses on athletes. Each athlete's marks, PRs, and other information is listed here.
+        description: This page focuses on athletes. Each athlete's results, PRs, and other information is listed here.
     Teams:
         endpoint: team
-        description: This page focuses on teams. Each team's athletes, records, marks, and other information is listed here.
+        description: This page focuses on teams. Each team's athletes, records, results, and other information is listed here.
     Records:
         endpoint: record
         description: This page focuses on state records. I may add a way to compare athltes or teams to state records.
@@ -27,7 +27,7 @@ Extra Pages:
         endpoint: request-data
         description: Are there meets, results, or any other data im missing. Let me know and I will try to add it when I get a chance.
             You can also reach out if you want me to start tracking other data as well. I want to start tracking weather for each 
-            mark if I can but adding new datasets takes time. Don't hesitate to reach out though.
+            result if I can but adding new datasets takes time. Don't hesitate to reach out though.
     About:
         endpoint: about
         description: About this service. Im also using this as a resume booster so check out my service info if you would like. 

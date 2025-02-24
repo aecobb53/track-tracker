@@ -2,9 +2,9 @@ from fastapi import APIRouter, HTTPException, Request, Response, Depends
 
 # from models import Athlete, AthleteFilter
 # # from handlers import AthleteHandler
-from handlers import AthleteHandler, MarkHandler, parse_query_params, DuplicateRecordsException, MissingRecordException
+from handlers import AthleteHandler, ResultHandler, parse_query_params, DuplicateRecordsException, MissingRecordException
 # # from utils import parse_query_params, parse_header, MissingRecordException, DuplicateRecordsException
-from models import AthleteData, AthleteApiCreate, AthleteFilter, MarkFilter, ContextSingleton, RestHeaders
+from models import AthleteData, AthleteApiCreate, AthleteFilter, ResultFilter, ContextSingleton, RestHeaders
 
 from typing import Annotated
 
@@ -90,16 +90,16 @@ async def filter_athlete(request: Request):
         athlete_filter = parse_query_params(request=request, query_class=AthleteFilter)
         ah = AthleteHandler()
         athletes, query_max_count = await ah.filter_athletes_display(athlete_filter=athlete_filter)
-        mh = MarkHandler()
+        mh = ResultHandler()
         for athlete in athletes:
-            marks, _ = await mh.filter_marks_display(MarkFilter(athlete_uid=[athlete['uid']]))
-            athlete_marks = {}
-            for mark in marks:
-                event = mark['Event']
-                if event not in athlete_marks:
-                    athlete_marks[event] = []
-                athlete_marks[event].append(mark)
-            athlete['marks'] = athlete_marks
+            results, _ = await mh.filter_results_display(ResultFilter(athlete_uid=[athlete['uid']]))
+            athlete_results = {}
+            for result in results:
+                event = result['Event']
+                if event not in athlete_results:
+                    athlete_results[event] = []
+                athlete_results[event].append(result)
+            athlete['results'] = athlete_results
         response = {
             'athletes': athletes,
             'query_max_count': query_max_count,

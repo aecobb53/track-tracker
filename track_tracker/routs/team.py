@@ -1,7 +1,7 @@
 from fastapi import APIRouter, HTTPException, Request, Response, Depends
 
-from handlers import AthleteHandler, MarkHandler, parse_query_params, DuplicateRecordsException, MissingRecordException
-from models import AthleteData, AthleteApiCreate, AthleteFilter, MarkFilter, ContextSingleton, RestHeaders
+from handlers import AthleteHandler, ResultHandler, parse_query_params, DuplicateRecordsException, MissingRecordException
+from models import AthleteData, AthleteApiCreate, AthleteFilter, ResultFilter, ContextSingleton, RestHeaders
 
 from typing import Annotated
 

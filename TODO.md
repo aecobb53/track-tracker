@@ -29,12 +29,12 @@ Trying to get to a useful level.
     - [ ] Fix prod data
     - [ ] Upload the rest of the data
 
-- IMPLEMENTATION THOUGHT - Add a dudner eq and dudner gt... functions to the mark class so you can compare and sort by marks
+- IMPLEMENTATION THOUGHT - Add a dudner eq and dudner gt... functions to the result class so you can compare and sort by results
 
 
 
 Thoughts
-- [ ] Marks
+- [ ] Results
     - [x] Needs a header to indicate its athlete data
     - [x] needs a left margin
     - [X] Needs a filter secion
@@ -85,8 +85,8 @@ Thoughts
     - [X] Dont forget about team specific page
 
 - [X] Athlete specific page
-    - [X] Add records based on mark values
-    - [X] I believe this means I need to implement records and mark comparison
+    - [X] Add records based on result values
+    - [X] I believe this means I need to implement records and result comparison
 
 - [X] record needs an unimplemented response
 - [X] resources needs an unimplemented response
@@ -113,12 +113,12 @@ Hard to read too dark
 background could use color or pictures
 Remove I from all descriptions
 Move query to search
-Double check marks are an effective way to explain things
+Double check results are an effective way to explain things
 	Maybe Results
 Dropdown for events?
 Ranges should be 'up to' 'equal to' instead of <=, =
 Date to American bullshit
-Dashis are kinda weird in the tables
+Dashes are kinda weird in the tables
 Filter sorted
 Units on Wind
 Meet lines could use different color hues for each meet or different data
@@ -197,7 +197,7 @@ pull up athletes by graduation year
     - [ ] Button on results to indicate bad data and request or implement an update
     - [ ] Change scaling based on screen size. Computer or phone?
     - [ ] Change default columns based on computer or phone
-    - [ ] Mark data as bad or update data on the spot
+    - [ ] Result data as bad or update data on the spot
     - [ ] Move `add_style` to style docs for more global application
     - [ ] On the team and probably also athlete pages add a way to select which years to show
         - [ ] By default age off old athletes from the team page

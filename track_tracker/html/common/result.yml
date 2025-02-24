@@ -180,7 +180,7 @@ arrange:
                 - Place
                 - Athlete
                 - Team
-                - Mark
+                - Result
                 - Wind
                 - Heat
                 - Mens/Womens
@@ -199,7 +199,7 @@ arrange:
                 - Event
                 - Athlete
                 - Team
-                - Mark
+                - Result
                 - Wind
                 - Heat
                 - Mens/Womens
@@ -217,7 +217,7 @@ arrange:
                 - Event
                 - Athlete
                 - Team
-                - Mark
+                - Result
                 - Wind
                 - Heat
                 - Mens/Womens
@@ -237,7 +237,7 @@ arrange:
                 - Event
                 - Athlete
                 - Team
-                - Mark
+                - Result
                 - Wind
                 - Heat
                 - Mens/Womens
@@ -256,7 +256,7 @@ arrange:
                 - Event
                 - Athlete
                 - Team
-                - Mark
+                - Result
                 - Wind
                 - Heat
                 - Mens/Womens
@@ -304,13 +304,13 @@ display:
                 checked: true
                 grouping_classes:
                     - Example
-        mark:
-            variable: mark
-            display: Mark
+        result:
+            variable: result
+            display: Result
             formatted_function: null
             html_display_filtering:
                 display_column: Common
-                description: Filter by mark.
+                description: Filter by result.
                 checked: true
                 grouping_classes:
                     - Example

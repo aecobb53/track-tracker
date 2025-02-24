@@ -175,9 +175,9 @@ display:
                 checked: true
                 grouping_classes:
                     - Example
-        # marks:
-        #     variable: marks
-        #     display: Mark Count
+        # results:
+        #     variable: results
+        #     display: Result Count
         #     formatted_function: null
         #     html_display_filtering:
         #         display_column: Common

@@ -9,13 +9,13 @@ from .athlete import (
     AthleteDB,
     AthleteFilter,
 )
-from .mark import (
-    Mark,
-    MarkData,
-    MarkApiCreate,
-    MarkDBBase,
-    MarkDBCreate,
-    MarkDBRead,
-    MarkDB,
-    MarkFilter,
+from .result import (
+    Result,
+    ResultData,
+    ResultApiCreate,
+    ResultDBBase,
+    ResultDBCreate,
+    ResultDBRead,
+    ResultDB,
+    ResultFilter,
 )

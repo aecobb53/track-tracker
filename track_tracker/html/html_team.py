@@ -3,10 +3,24 @@ import os
 from datetime import datetime
 from phtml import *
 from my_base_html_lib import MyBaseDocument, NavigationContent, SidebarContent, BodyContent, FooterContent
-from .base_page import project_base_page
+from .base_page import (
+    project_base_page,
+    BACKGROUND_COLOR,
+    SECONDARY_COLOR,
+    ACCENT_COLOR,
+    TEXT_COLOR_1,
+    TEXT_COLOR_2,
+    ROW_BACKGROUND_COLOR_1,
+    ROW_BACKGROUND_COLOR_2,
+    PAGE_STYLES,
+    FILTER_STYLES,
+    TABLE_STYLES,
+    )
 from .common import TEAM_FILTER_PARAMS, TEAM_ARRANGE_PARAMS, TEAM_DISPLAY_PARAMS
 
 async def filter_teams_html_page():
+    base_doc = await project_base_page()
+
     page_content = Div().add_class('page-content')
 
     # Filter Form
@@ -14,7 +28,7 @@ async def filter_teams_html_page():
     filter_form_div.add_element(Header(level=1, internal='Team Results'))
     filter_form_div.add_element(Paragraph(internal='''
     This page is for finding teams by filtering criteria. You can use it to get headcounts of athletes. The filters are partial as in you can query for the Team "Fairview" to get all 
-    Fairview High School marks. Some have additional dropdowns. For example, you can filter for Heats <= 3. 
+    Fairview High School results. Some have additional dropdowns. For example, you can filter for Heats <= 3. 
     Table columns can be toggled with the checkboxes to make viewing easier.
     '''))
     filter_form_div.add_element(Paragraph(
@@ -67,7 +81,7 @@ async def filter_teams_html_page():
     # Arrange
     arrange_div = Div()
     arrange_div.add_element(Header(level=1, internal='Filter Results'))
-    arrange_form = Form(action=f"/mark", method='get').add_class('arrange-form')
+    arrange_form = Form(action=f"/result", method='get').add_class('arrange-form')
     arrange_groupings = {}
     for grouping in TEAM_ARRANGE_PARAMS.keys():
         if grouping not in arrange_groupings:
@@ -190,63 +204,22 @@ async def filter_teams_html_page():
                 Script(internal=[l[:-1] for l in js_lines])
             )
 
+    body_content = BodyContent(body_content=[page_content])
+
     # Styles
-    document_style = [
-        StyleTag(name='.team-link', internal="""
-            color: #949ba4;
-            text-decoration: underline;
-        """),
+    for style in PAGE_STYLES:
+        body_content.add_body_styles(style)
+    for style in FILTER_STYLES:
+        body_content.add_body_styles(style)
+    for style in TABLE_STYLES:
+        body_content.add_body_styles(style)
 
-        StyleTag(name='.page-content', internal="""
-            display: block;
-            color: #949ba4;
-            margin: 10px;
-        """),
-        StyleTag(name='.filter-checkbox-input', internal="""
-            margin: 0;
-        """),
-        StyleTag(name='.big-button', internal="""
-            margin: 10px;
-            padding: 5px;
-            font-size: 120%;
-            font-weight: bold;
-            text-decoration: underline;
-        """),
-        StyleTag(name='.small-button', internal="""
-            margin: 5px;
-            padding: 5px;
-            font-size: 100%;
-            font-weight: bold;
-        """),
-
-        StyleTag(name='.pagination-div', internal="""
-            display: inline-block;
-            font-size: 300%;
-            color: #949ba4;
-            margin: 10px;
-            text-decoration: none;
-            text-align: center;
-            width: 100%;
-        """),
-        StyleTag(name='.pagination-div button', internal="""
-            border-radius: 5px;
-            margin: 4px;
-            padding: 5px;
-            text-decoration: none;
-        """),
-        StyleTag(name='.pagination-div button.active', internal="""
-            color: #000000;
-            background-color: green;
-        """),
-    ]
-
-    base_doc = await project_base_page()
-    base_doc.body_content.body_content.append(page_content)
-    for style in document_style:
-        base_doc.document.add_head_element(style)
+    base_doc.body_content = body_content
     return base_doc.return_document
 
-async def find_team_html_page(athletes, marks):
+async def find_team_html_page(athletes, results):
+    base_doc = await project_base_page()
+
     page_content = Div().add_class('page-content')
     page_content.add_element(Header(level=1, internal='Team Page'))
 
@@ -279,139 +252,93 @@ async def find_team_html_page(athletes, marks):
     page_content.add_element(Header(level=1, internal=f"Events"))
 
     events_dict = {}
-    for mark in marks:
-        if mark.event not in events_dict:
-            events_dict[mark.event] = []
+    for result in results:
+        if result.event not in events_dict:
+            events_dict[result.event] = []
         for athlete in athletes:
-            if athlete.uid == mark.athlete_uid:
-                mark.athlete = athlete
+            if athlete.uid == result.athlete_uid:
+                result.athlete = athlete
                 break
-        events_dict[mark.event].append(mark)
+        events_dict[result.event].append(result)
     events_div = Div()
-    column_names = ['Place', 'Meet', 'Athlete', 'Mark', 'Wind', 'Heat', 'Graduation', 'Date']
-    table_row_background_colors = ('#35363b', '#2c2d2e')
-    for event, marks in events_dict.items():
-        marks.sort(key=lambda x: x.meet_date)
-        record_mark = marks[0]
-        for mark in marks:
-            if mark.mark > record_mark.mark:
-                record_mark = mark
+    column_names = ['Place', 'Meet', 'Athlete', 'Result', 'Wind', 'Heat', 'Graduation', 'Date']
+    for event, results in events_dict.items():
+        results.sort(key=lambda x: x.meet_date)
+        record_result = results[0]
+        for result in results:
+            if result.result > record_result.result:
+                record_result = result
 
         event_div = Div().add_class('event-div')
         event_div.add_element(Header(level=3, internal=event))
         event_table = Table().add_class('event-table')
         event_table.add_element(TableRow(
             internal=[TableHeader(internal=col).add_class('event-table-header') for col in column_names]
-        ).add_style({'background-color': table_row_background_colors[1]})
-        )
+        ))
 
-
-        for index, mark in enumerate(marks):
-            event_table_row = TableRow().add_style({'background-color': table_row_background_colors[index % 2]})
+        for index, result in enumerate(results):
+            if index % 2:
+                event_table_row = TableRow().add_class('odd-row')
+            else:
+                event_table_row = TableRow().add_class('even-row')
             event_table_row.add_element(
-                TableData(internal=f"{mark.place}").add_class('event-table-data'))
+                TableData(internal=f"{result.place}").add_class('event-table-data'))
             event_table_row.add_element(
-                TableData(internal=f"{mark.meet}").add_class('event-table-data'))
-            athlete_name = f"{mark.athlete.first_name} {mark.athlete.last_name}"
+                TableData(internal=f"{result.meet}").add_class('event-table-data'))
+            athlete_name = f"{result.athlete.first_name} {result.athlete.last_name}"
             event_table_row.add_element(
                 TableData(internal=f"{athlete_name}").add_class('event-table-data'))
             event_table_row.add_element(
-                TableData(internal=f"{mark.mark.mark_str}").add_class('event-table-data'))
+                TableData(internal=f"{result.result.result_str}").add_class('event-table-data'))
             event_table_row.add_element(
-                TableData(internal=f"{mark.wind}").add_class('event-table-data'))
+                TableData(internal=f"{result.wind}").add_class('event-table-data'))
             event_table_row.add_element(
-                TableData(internal=f"{mark.heat}").add_class('event-table-data'))
+                TableData(internal=f"{result.heat}").add_class('event-table-data'))
             event_table_row.add_element(
-                TableData(internal=f"{mark.athlete.graduation_year}").add_class('event-table-data'))
+                TableData(internal=f"{result.athlete.graduation_year}").add_class('event-table-data'))
             event_table_row.add_element(
-                TableData(internal=f"{datetime.strftime(mark.meet_date, '%Y-%m-%d')}").add_class('event-table-data'))
+                TableData(internal=f"{datetime.strftime(result.meet_date, '%Y-%m-%d')}").add_class('event-table-data'))
             event_table.add_element(event_table_row)
 
         # Final rows
-        event_table_row = TableRow().add_style({'background-color': table_row_background_colors[0]})
+        event_table_row = TableRow().add_class('record-row')
         for _ in column_names:
             event_table_row.add_element(
-            TableData(internal=f"-").add_class('event-table-data'))
+            TableData(internal=f" ").add_class('event-table-data'))
         event_table.add_element(event_table_row)
 
-        event_table_row = TableRow().add_style({'background-color': table_row_background_colors[1]})
+        event_table_row = TableRow().add_class('record-row')
         event_table_row.add_element(
-            TableData(internal=f"{record_mark.place}").add_class('event-table-data'))
+            TableData(internal=f"{record_result.place}").add_class('event-table-data'))
         event_table_row.add_element(
-            TableData(internal=f"{record_mark.meet}").add_class('event-table-data'))
-        athlete_name = f"{record_mark.athlete.first_name} {record_mark.athlete.last_name}"
+            TableData(internal=f"{record_result.meet}").add_class('event-table-data'))
+        athlete_name = f"{record_result.athlete.first_name} {record_result.athlete.last_name}"
         event_table_row.add_element(
             TableData(internal=f"{athlete_name}").add_class('event-table-data'))
         event_table_row.add_element(
-            TableData(internal=f"{record_mark.mark.mark_str}").add_class('event-table-data'))
+            TableData(internal=f"{record_result.result.result_str}").add_class('event-table-data'))
         event_table_row.add_element(
-            TableData(internal=f"{record_mark.wind}").add_class('event-table-data'))
+            TableData(internal=f"{record_result.wind}").add_class('event-table-data'))
         event_table_row.add_element(
-            TableData(internal=f"{record_mark.heat}").add_class('event-table-data'))
+            TableData(internal=f"{record_result.heat}").add_class('event-table-data'))
         event_table_row.add_element(
-            TableData(internal=f"{mark.athlete.graduation_year}").add_class('event-table-data'))
+            TableData(internal=f"{result.athlete.graduation_year}").add_class('event-table-data'))
         event_table_row.add_element(
-            TableData(internal=f"{datetime.strftime(record_mark.meet_date, '%Y-%m-%d')}").add_class('event-table-data'))
+            TableData(internal=f"{datetime.strftime(record_result.meet_date, '%Y-%m-%d')}").add_class('event-table-data'))
         event_table.add_element(event_table_row)
 
         event_div.add_element(event_table)
         events_div.add_element(event_div)
     page_content.add_element(events_div)
-
+    body_content = BodyContent(body_content=[page_content])
 
     # Styles
-    document_style = [
-        StyleTag(name='h1', internal="""
-            margin: 20px;
-        """),
-        StyleTag(name='h2', internal="""
-            margin: 10px 30px;
-        """),
-        StyleTag(name='p', internal="""
-            margin: 20px 30px;
-        """),
-        # StyleTag(name='.events-div', internal="""
-        #     margin: 10px 40px;
-        # """),
+    for style in PAGE_STYLES:
+        body_content.add_body_styles(style)
+    for style in FILTER_STYLES:
+        body_content.add_body_styles(style)
+    for style in TABLE_STYLES:
+        body_content.add_body_styles(style)
 
-        # StyleTag(name='.events-div', internal="""
-        #     color: #c4cedb;
-        #     margin: 0;
-        #     padding: 0;
-        #     display: inline;
-        # """),
-
-        StyleTag(name='.event-div', internal="""
-            background-color: #393B41;
-            margin: 10px;
-            padding: 0px 5px 10px;
-            border: 3px solid black;
-            border-radius: 15px;
-            -moz-border-radius: 15px;
-            width: 97%;
-            display: inline-block;
-            vertical-align: top;
-        """),
-
-        # IM NOT SURE WHY IT IS NOT FITTING PROPPERLY AT 100% WIDTH
-
-        StyleTag(name='.event-div h3', internal="""
-            margin: 10px;
-            padding: 0;
-            text-align: center;
-        """),
-        StyleTag(name='.event-table', internal="""
-            width: 100%;
-            border: 5 solid black;
-        """),
-    ]
-
-    base_doc = await project_base_page()
-    base_doc.body_content.body_content.append(page_content)
-    for style in document_style:
-        base_doc.document.add_head_element(style)
+    base_doc.body_content = body_content
     return base_doc.return_document
-
-
-
-

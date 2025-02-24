@@ -1,7 +1,7 @@
 from fastapi import APIRouter, HTTPException, Request, Response, Depends
 
-from handlers import AthleteHandler, MarkHandler, parse_query_params, DuplicateRecordsException, MissingRecordException
-from models import AthleteData, AthleteApiCreate, AthleteFilter, MarkFilter, ContextSingleton, RestHeaders
+from handlers import AthleteHandler, ResultHandler, parse_query_params, DuplicateRecordsException, MissingRecordException
+from models import AthleteData, AthleteApiCreate, AthleteFilter, ResultFilter, ContextSingleton, RestHeaders
 
 context = ContextSingleton()
 
@@ -17,15 +17,15 @@ async def filter_team(request: Request):
         # athlete_filter = parse_query_params(request=request, query_class=AthleteFilter)
         # ah = AthleteHandler()
         # athletes = await ah.filter_athletes(AthleteFilter())
-        mh = MarkHandler()
+        mh = ResultHandler()
         offset = 0
         checking = True
-        size = MarkFilter().limit
-        marks = []
+        size = ResultFilter().limit
+        results = []
         while checking:
-            marks_l = await mh.filter_marks(MarkFilter(offset=offset))
-            marks.extend(marks_l)
-            if len(marks_l) < 1000:
+            results_l = await mh.filter_results(ResultFilter(offset=offset))
+            results.extend(results_l)
+            if len(results_l) < 1000:
                 checking = False
             offset += size
 
@@ -33,13 +33,13 @@ async def filter_team(request: Request):
         # DISPLAY HOW MANY STUDENTS ARE IN EACH GRADE?
 
         event_details = {}
-        for mark in marks:
-            if mark.event not in event_details:
-                event_details[mark.event] = mark
+        for result in results:
+            if result.event not in event_details:
+                event_details[result.event] = result
             else:
-                if mark.mark > event_details[mark.event].mark:
+                if result.result > event_details[result.event].result:
                     # New record
-                    event_details[mark.event] = mark
+                    event_details[result.event] = result
 
         return {'records': event_details}
     except Exception as err:

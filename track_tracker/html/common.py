@@ -11,12 +11,12 @@ with open(os.path.join(path, 'home_page_content.yml')) as yf:
 HOME_PAGE_LINK_CONTENT = home_page_content_file
 
 
-# Mark Filter Params
-with open(os.path.join(path, 'mark.yml')) as yf:
-    mark_file = yaml.safe_load(yf)
-MARK_FILTER_PARAMS = mark_file['filter']
-MARK_ARRANGE_PARAMS = mark_file['arrange']
-MARK_DISPLAY_PARAMS = mark_file['display']
+# Result Filter Params
+with open(os.path.join(path, 'result.yml')) as yf:
+    result_file = yaml.safe_load(yf)
+MARK_FILTER_PARAMS = result_file['filter']
+MARK_ARRANGE_PARAMS = result_file['arrange']
+MARK_DISPLAY_PARAMS = result_file['display']
 
 
 # Athlete Filter Params

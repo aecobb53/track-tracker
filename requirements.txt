@@ -45,4 +45,5 @@ lxml
 
 # My libraries
 git+https://github.com/aecobb53/phtml@main
-git+https://github.com/aecobb53/my_base_html_lib@main
+git+https://github.com/aecobb53/my_base_html_lib@refactor
+# git+https://github.com/aecobb53/my_base_html_lib@main

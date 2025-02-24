@@ -8,8 +8,8 @@ from fastapi.responses import HTMLResponse, ORJSONResponse
 # from handlers import EventHandler
 # from handlers import EventHandler, parse_query_params
 # from utils import parse_query_params, parse_header, MissingRecordException, DuplicateRecordsException
-from models import AthleteFilter, MarkFilter, ContextSingleton
-from handlers import AthleteHandler, MarkHandler, parse_query_params, DuplicateRecordsException, MissingRecordException
+from models import AthleteFilter, ResultFilter, ContextSingleton
+from handlers import AthleteHandler, ResultHandler, parse_query_params, DuplicateRecordsException, MissingRecordException
 
 
 from html import (
@@ -33,15 +33,15 @@ router = APIRouter(
 @router.get('/')
 async def html_record(request: Request):
     ah = AthleteHandler()
-    mh = MarkHandler()
+    mh = ResultHandler()
     offset = 0
     checking = True
-    size = MarkFilter().limit
-    marks = []
+    size = ResultFilter().limit
+    results = []
     while checking:
-        marks_l = await mh.filter_marks(MarkFilter(offset=offset))
-        marks.extend(marks_l)
-        if len(marks_l) < size:
+        results_l = await mh.filter_results(ResultFilter(offset=offset))
+        results.extend(results_l)
+        if len(results_l) < size:
             checking = False
         offset += size
         await asyncio.sleep(0)
@@ -50,16 +50,16 @@ async def html_record(request: Request):
     # DISPLAY HOW MANY STUDENTS ARE IN EACH GRADE?
 
     event_details = {}
-    for mark in marks:
-        if mark.event not in event_details:
-            athlete = await ah.find_athlete(AthleteFilter(uid=[mark.athlete_uid]))
-            mark.athlete = athlete
-            event_details[mark.event] = mark
+    for result in results:
+        if result.event not in event_details:
+            athlete = await ah.find_athlete(AthleteFilter(uid=[result.athlete_uid]))
+            result.athlete = athlete
+            event_details[result.event] = result
         else:
-            if mark.mark > event_details[mark.event].mark:
+            if result.result > event_details[result.event].result:
                 # New record
-                athlete = await ah.find_athlete(AthleteFilter(uid=[mark.athlete_uid]))
-                mark.athlete = athlete
-                event_details[mark.event] = mark
+                athlete = await ah.find_athlete(AthleteFilter(uid=[result.athlete_uid]))
+                result.athlete = athlete
+                event_details[result.event] = result
     record_page = await filter_records_html_page(event_details)
     return HTMLResponse(content=record_page, status_code=200)
