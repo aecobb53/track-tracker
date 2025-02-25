@@ -66,7 +66,7 @@ arrange:
     Sort:
         sort1:
             variable: sort
-            display: Sort Item 1
+            display: Sort Column 1
             description: What to sort by first.
             datatype: str
             default_value: Last Name
@@ -79,7 +79,7 @@ arrange:
                 - Graduation Year
         sort2:
             variable: sort
-            display: Sort Item 2
+            display: Sort Column 2
             description: What to sort by first.
             datatype: str
             default_value: First Name
@@ -93,7 +93,7 @@ arrange:
                 - '-'
         sort3:
             variable: sort
-            display: Sort Item 3
+            display: Sort Column 3
             description: What to sort by first.
             datatype: str
             default_value: Team
@@ -107,7 +107,7 @@ arrange:
                 - '-'
         sort4:
             variable: sort
-            display: Sort Item 4
+            display: Sort Column 4
             description: What to sort by first.
             datatype: str
             default_value: '-'
@@ -121,7 +121,7 @@ arrange:
                 - Graduation Year
         sort5:
             variable: sort
-            display: Sort Item 5
+            display: Sort Column 5
             description: What to sort by first.
             datatype: str
             default_value: '-'

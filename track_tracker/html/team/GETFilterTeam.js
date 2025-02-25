@@ -1,6 +1,13 @@
 async function GETFilterTeam(params) {
     console.log('GETing to /team/display');
     // var url = '/result/display';
+
+
+    // Fix this to a configurable thing later
+    params['min_athlete_count'] = 5;
+
+
+
     var url = '/team/display?' + new URLSearchParams(params).toString();
     console.log('url: ' + url);
 

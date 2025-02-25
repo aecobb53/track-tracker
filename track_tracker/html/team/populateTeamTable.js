@@ -53,23 +53,59 @@ async function populateTeamTable(filterResults, page, page_size, page_count) {
     table_header.appendChild(table_row);
     table_element.appendChild(table_header);
 
+    // console.log('HERE 1');
+    // console.log(filterResults.length);
+
+    // var condensed_list = {};
+    // for(var i = 0; i < condensed_list.length; i++) {
+    //     console.log('HERE 2');
+    //     console.log(filterResults[i]);
+    //     for (const [key, value] of Object.entries(filterResults[i])) {
+    //         if (key == 'Athlete Count') {
+    //             console.log('Athlete Count');
+    //             console.log(value);
+    //             if (value <= 10) {
+    //                 continue;
+    //             }
+    //         }
+    //         else {
+    //             condensed_list[key] = value;
+    //         }
+    //     }
+    // }
+
+    var condensed_list = [];
+    for(var i = 0; i < filterResults.length; i++) {
+        console.log('HERE 2');
+        console.log(filterResults[i]);
+        console.log(filterResults[i]['Athlete Count']);
+        if (filterResults[i]['Athlete Count'] >= 2) {
+            condensed_list.push(filterResults[i]);
+        }
+    }
+
+
+
+
     // BODY
     var table_body = document.createElement('tbody');
     for(var i = 0; i < filterResults.length; i++) {
+        // for(var i = 0; i < condensed_list.length; i++) {
         // ROW
         var table_row = document.createElement('tr');
         // table_row.style.padding = '5px';
 
         // Data
         for (const [key, value] of Object.entries(filterResults[i])) {
+        // for (const [key, value] of Object.entries(filterResults[i])) {
 
             if (skipColumnArray.includes(key)) {
                 break;
             }
             var class_name = key.toLowerCase().replaceAll(' ', '-') + '-data';
             var table_item = document.createElement('td');
-            // table_item.style.padding = '1px 25px';
             table_item.classList.add(class_name);
+
 
             if (key == 'Team') {
                 // Link to athlete page

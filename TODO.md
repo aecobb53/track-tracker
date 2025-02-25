@@ -106,23 +106,30 @@ Thoughts
 
 
 # High importance
-- [ ] Verify it works on mobile
-- [ ] Date to American bullshit
+- [X] Verify it works on mobile
+- [X] Date to American bullshit
 - [ ] Find a better final row for tables that display the records for the event
 - [ ] Move filters into Query section and move Request next to Apply for ease of readability. Maybe then change Apply to "Update Columns"
 - [ ] Better table color schema
+- [ ] Fix data loader where relays still arent fixing the event name
 
 # Easy to implement
 - [ ] Remove I from descriptions.
 - [ ] Remove "query" from everywhere
-- [ ] Teams only show teams with over 25 results but allow for getting all
-- [ ] "sort item 1" to "sort column 1"
+- [X] "sort item 1" to "sort column 1"
+- [X] Switch the firstname/lastname columns in athlete view since they are default sorted by last
 
 # Important
 - [ ] Searching for meets or athletes need to accept case insensitive or maybe even wildcards
 - [ ] larger fonts for mobile
 - [ ] Fix the About
+- [ ] Teams only show teams with over 25 results but allow for getting all
 
+# Mobile
+- [X] Pagination needs to be larger in general to be able to click easier
+- [ ] Banner needs to be larger
+- [ ] Unset form filling out as its stealing focus on a phone
+- [X] Make .big-button 's larger
 
 
 
@@ -142,9 +149,9 @@ Thoughts
     - [ ] Could have a '+' to add multiple OR operations
 - [ ] Verify it works on mobile
 - [X] Remove operators like "<=" for words like "Less than or equal to"
-- [ ] Date to American bullshit
+- [x] Date to American bullshit
     - [x] Backend
-    - [ ] UI
+    - [x] UI
 - [ ] Find a better final row for tables that display the records for the event
     - [ ] This could even entail only showing this or not at all but allow users to filter by result value and thus the last row would be the current record
 - [X] link needs to be the whole tile not just text on main page
@@ -173,6 +180,10 @@ Thoughts
 - [ ] Low data mode where minimal data is transfered. Maybe put the botton in the center of the header. "Low wifi mode"?
 - [ ] Put a Freshman, Sophomore, Junior, Senior indicator next to grad years?
 - [ ] "sort item 1" to "sort column 1"
+- [ ] Find a way to pursist the database
+- [ ] Look into having multiple heads running and what that will help with
+- [ ] "First Name", "Last Name", and "Graduation Year" not toggling correctly on athlete page
+- [ ] "Athlete Count" not a toggle on Team page
 
 
 Concepts:

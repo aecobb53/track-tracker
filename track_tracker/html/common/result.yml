@@ -27,12 +27,12 @@ filter:
             size: 5
             # required: true
             options:
-                - is exactly
-                - less than or equal to
-                - greater than or equal to
-                - less than
-                - greater than
-                - is
+                - Is exactly
+                - Less than or equal to
+                - Greater than or equal to
+                - Less than
+                - Greater than
+                - Is not
         heat2:
             variable: heat
             display: Heat
@@ -41,11 +41,11 @@ filter:
             default_value: null
             size: 5
             options:
-                - less than or equal to
-                - greater than or equal to
-                - less than
-                - greater than
-                - is
+                - Less than or equal to
+                - Greater than or equal to
+                - Less than
+                - Greater than
+                - Is not
     Place:
         place1:
             variable: place
@@ -55,12 +55,12 @@ filter:
             default_value: null
             size: 5
             options:
-                - is exactly
-                - less than or equal to
-                - greater than or equal to
-                - less than
-                - greater than
-                - is
+                - Is exactly
+                - Less than or equal to
+                - Greater than or equal to
+                - Less than
+                - Greater than
+                - Is not
         place2:
             variable: place
             display: Plate
@@ -69,11 +69,11 @@ filter:
             default_value: null
             size: 5
             options:
-                - less than or equal to
-                - greater than or equal to
-                - less than
-                - greater than
-                - is
+                - Less than or equal to
+                - Greater than or equal to
+                - Less than
+                - Greater than
+                - Is not
     Wind:
         wind1:
             variable: wind
@@ -83,12 +83,12 @@ filter:
             default_value: null
             size: 5
             options:
-                - is exactly
-                - less than or equal to
-                - greater than or equal to
-                - less than
-                - greater than
-                - is
+                - Is exactly
+                - Less than or equal to
+                - Greater than or equal to
+                - Less than
+                - Greater than
+                - Is not
         wind2:
             variable: wind
             display: Wind
@@ -97,11 +97,11 @@ filter:
             default_value: null
             size: 5
             options:
-                - less than or equal to
-                - greater than or equal to
-                - less than
-                - greater than
-                - is
+                - Less than or equal to
+                - Greater than or equal to
+                - Less than
+                - Greater than
+                - Is not
     Team:
         team:
             variable: team
@@ -135,9 +135,9 @@ filter:
             datatype: date
             default_value: 2023-01-01
             options:
-                - greater than or equal to
-                - less than or equal to
-                - is exactly
+                - After
+                - Before
+                - Is on
         meet_date2:
             variable: meet_date
             display: Meet Date
@@ -145,8 +145,8 @@ filter:
             datatype: date
             default_value: null
             options:
-                - less than or equal to
-                - greater than or equal to
+                - Before
+                - After
 arrange:
     Results:
         limit:
@@ -170,7 +170,7 @@ arrange:
     Sort:
         sort1:
             variable: sort
-            display: Sort Item 1
+            display: Sort Column 1
             description: What to sort by first.
             datatype: str
             default_value: Event
@@ -188,7 +188,7 @@ arrange:
                 - Date
         sort2:
             variable: sort
-            display: Sort Item 2
+            display: Sort Column 2
             description: What to sort by first.
             datatype: str
             default_value: Place
@@ -207,7 +207,7 @@ arrange:
                 - '-'
         sort3:
             variable: sort
-            display: Sort Item 3
+            display: Sort Column 3
             description: What to sort by first.
             datatype: str
             default_value: Place
@@ -226,7 +226,7 @@ arrange:
                 - '-'
         sort4:
             variable: sort
-            display: Sort Item 4
+            display: Sort Column 4
             description: What to sort by first.
             datatype: str
             default_value: '-'
@@ -245,7 +245,7 @@ arrange:
                 - Date
         sort5:
             variable: sort
-            display: Sort Item 5
+            display: Sort Column 5
             description: What to sort by first.
             datatype: str
             default_value: '-'

@@ -43,12 +43,18 @@ async def filter_team(request: Request):
 async def filter_athlete(request: Request):
     try:
         athlete_filter = parse_query_params(request=request, query_class=AthleteFilter)
+        params = parse_query_params(request=request)
+        print(f"PARAMS: {params}")
         ah = AthleteHandler()
         athletes = await ah.filter_athletes(athlete_filter=AthleteFilter(team=athlete_filter.team))
         offset = athlete_filter.offset
         limit = athlete_filter.limit
         start_index = offset
         stop_index = start_index + limit
+
+
+        # I believe this needs to be able to pull all athletes or better yet just have this data loaded into mem
+
 
         # APPLY A FILTER TO ONLY GET ACTIVE TEAM MEMEBRS
         # DISPLAY HOW MANY STUDENTS ARE IN EACH GRADE?
@@ -65,6 +71,14 @@ async def filter_athlete(request: Request):
         team_keys = list(team_details.keys())
         team_keys.sort()
         teams = [team_details[key] for key in team_keys]
+
+
+        # if params.get('min_athlete_count'):
+        #     teams = [t for t in teams if t['Athlete Count'] >= int(params['min_athlete_count'][0])]
+
+
+
+
         query_max_count = len(teams)
         response = {
             'teams': teams[start_index:stop_index],

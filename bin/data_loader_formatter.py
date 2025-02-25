@@ -201,20 +201,26 @@ def parse_data_row(data_row: list[str], event: str, header: list[str], calendar_
                     gender = gender_string
                     break
 
-            # data_obj = {
-            #     'place': data_row[0],
-            #     'calendar_year': calendar_year,
-            #     'team': team,
-            #     'result': result,
-            #     'heat': heat,
-            #     'event': event,
-            #     'meet_metadata': meet_metadata,
-            #     'wind': 0.0,
-            # }
-
-            # interigate_data = {k: v for k, v in data_obj.items() if k not in ['year']}
-            # if any([True for v in interigate_data.values() if v is None]):
-            #     x=1
+            # Event Rename
+            re_event_strings = {
+                r'4x100 Meter Relay': '4x100 Meter Relay',
+                r'4x200 Meter Relay': '4x200 Meter Relay',
+                r'4x400 Meter Relay': '4x400 Meter Relay',
+                r'4x800 Meter Relay': '4x800 Meter Relay',
+                r'Sprint Medley Relay': 'Sprint Medley Relay',
+                r'4xMile Relay': '4xMile Relay',
+                r'4x100 Meter Throwers Relay': '4x100 Meter Throwers Relay',
+                r'4x110 Shuttle Hurdle Relay': '4x110 Shuttle Hurdle Relay',
+                r'4x100 Shuttle Hurdle Relay': '4x100 Shuttle Hurdle Relay',
+                r'4x1600 Meter Relay': '4x1600 Meter Relay',
+                r'Distance Medley Relay': 'Distance Medley Relay',
+            }
+            for re_event, replace in re_event_strings.items():
+                if re.search(re_event, event):
+                    event = f"{gender} {replace}"
+                    break
+            else:
+                raise ValueError(f"EVENT UNKNOWN: {event}")
 
             athlete_data = {
                 'first_name': team,

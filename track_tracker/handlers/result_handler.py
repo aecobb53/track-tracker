@@ -12,6 +12,7 @@ from models import (
     ResultDB,
     ResultFilter,
 )
+from html import display_date
 
 from .exceptions import MissingRecordException, DuplicateRecordsException, DataIntegrityException
 
@@ -107,7 +108,7 @@ class ResultHandler(BaseHandler):
                 'Wind': result.wind,
                 'Heat': result.heat,
                 'Meet': result.meet,
-                'Date': datetime.strftime(result.meet_date, "%Y-%m-%d"),
+                'Date': display_date(result.meet_date),
                 'Gender': result.gender,
             })
         return display_results, query_max_count

@@ -27,15 +27,15 @@ async def filter_results_html_page():
 
     # Filter Form
     filter_form_div = Div()
-    filter_form_div.add_element(Header(level=1, internal='Result Results'))
-    filter_form_div.add_element(Paragraph(internal='''
-    Results are the results of a race, jump, or throw. I use result to avoid overloading other common phrases. You can use 
-    this page to filter criteria. The filters are partial as in you can query for the Team "Fairview" to get all 
-    Fairview High School results. Some have additional dropdowns. For example, you can filter for Heats <= 3. 
-    Table columns can be toggled with the checkboxes to make viewing easier.
-    '''))
-    filter_form_div.add_element(Paragraph(
-        internal='For multiple items separate with a comma. Ex "Fairview, Boulder"'))
+    filter_form_div.add_element(Header(level=1, internal='Results'))
+    # filter_form_div.add_element(Paragraph(internal='''
+    # Results are the results of a race, jump, or throw. I use result to avoid overloading other common phrases. You can use 
+    # this page to filter criteria. The filters are partial as in you can query for the Team "Fairview" to get all 
+    # Fairview High School results. Some have additional dropdowns. For example, you can filter for Heats <= 3. 
+    # Table columns can be toggled with the checkboxes to make viewing easier.
+    # '''))
+    # filter_form_div.add_element(Paragraph(
+    #     internal='For multiple items separate with a comma. Ex "Fairview, Boulder"'))
     filter_form = Form(action=f"/result", method='get').add_class('filter-form')
     filter_groupings = {}
     for grouping in MARK_FILTER_PARAMS.keys():
@@ -132,11 +132,6 @@ async def filter_results_html_page():
     arrange_div.add_element(arrange_form)
     page_content.add_element(arrange_div)
 
-
-    page_content.add_element(
-        Button(internal='Request', type='button', onclick='applyFilterForm()').add_class('big-button'))
-
-
     # Display Form
     display_form_div = Div()
     display_form_div.add_element(Header(level=1, internal='Table Columns'))
@@ -177,12 +172,15 @@ async def filter_results_html_page():
         display_form.add_element(grouping_div)
 
     display_form.add_element(
-        Button(internal='All', title='Toggle all checkboxes', type='button', onclick='toggleCheckboxesAll()').add_class('small-button'))
+        Button(internal='Toggle all checkboxes', title='Toggle all checkboxes', type='button', onclick='toggleCheckboxesAll()').add_class('small-button'))
     display_form_div.add_element(display_form)
     page_content.add_element(display_form_div)
 
     page_content.add_element(
-        Button(internal='Apply', type='button', onclick='applyDisplayFilters()').add_class('big-button'))
+        Button(internal='Request Data', type='button', onclick='applyFilterForm()').add_class('big-button').add_class('submit-button'))
+
+    page_content.add_element(
+        Button(internal='Apply Column Checkboxes', type='button', onclick='applyDisplayFilters()').add_class('big-button'))
 
     # Table
     table_div = Div(id='table-div')

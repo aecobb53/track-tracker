@@ -27,7 +27,7 @@ FILTER_STYLES = [
         margin: 0;
     """),
     StyleTag(name='.big-button', internal=f"""
-        margin: 10px;
+        margin: 20px;
         padding: 5px;
         font-size: 120%;
         font-weight: bold;
@@ -38,6 +38,9 @@ FILTER_STYLES = [
         padding: 5px;
         font-size: 100%;
         font-weight: bold;
+    """),
+    StyleTag(name='.submit-button', internal=f"""
+        background-color: green;
     """),
 
     StyleTag(name='.pagination-div', internal=f"""
@@ -51,9 +54,10 @@ FILTER_STYLES = [
     """),
     StyleTag(name='.pagination-div button', internal=f"""
         border-radius: 5px;
-        margin: 4px;
+        margin: 5px;
         padding: 5px;
         text-decoration: none;
+        font-size: 70%;
     """),
     StyleTag(name='.pagination-div button.active', internal=f"""
         color: {TEXT_COLOR_2};

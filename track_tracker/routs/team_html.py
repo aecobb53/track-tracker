@@ -33,6 +33,17 @@ async def html_teams(request: Request):
     return HTMLResponse(content=team_page, status_code=200)
 
 
+@router.get('/fhs')
+async def html_team(request: Request):
+    team_name = 'Fairview High School'
+    ah = AthleteHandler()
+    athletes = await ah.filter_athletes(AthleteFilter(team=[team_name]))
+    mh = ResultHandler()
+    results = await mh.filter_results(ResultFilter(team=[team_name]))
+    team_page = await find_team_html_page(athletes=athletes, results=results)
+    return HTMLResponse(content=team_page, status_code=200)
+
+
 @router.get('/{team_name}')
 async def html_team(team_name: str, request: Request):
     ah = AthleteHandler()

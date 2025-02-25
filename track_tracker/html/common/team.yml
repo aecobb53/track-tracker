@@ -20,16 +20,6 @@ arrange:
                 - '50'
                 - '100'
                 - '1000'
-    # Sort:
-    #     sort1:
-    #         variable: sort
-    #         display: Sort Item 1
-    #         description: What to sort by first.
-    #         datatype: str
-    #         default_value: Team
-    #         no_text_field: true
-    #         options:
-    #             - Team
 display:
     Team:
         team:

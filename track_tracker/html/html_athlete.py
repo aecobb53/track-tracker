@@ -26,14 +26,14 @@ async def filter_athletes_html_page():
     # Filter Form
     filter_form_div = Div()
     filter_form_div.add_element(Header(level=1, internal='Athlete Results'))
-    filter_form_div.add_element(Paragraph(internal='''
-    This page is for finding athletes by filtering criteria. You can use it to get headcounts of similar athletes or 
-    find similar athletes to compare. The filters are partial as in you can query for the Team "Fairview" to get all 
-    Fairview High School results. Some have additional dropdowns. For example, you can filter for Heats <= 3. 
-    Table columns can be toggled with the checkboxes to make viewing easier.
-    '''))
-    filter_form_div.add_element(Paragraph(
-        internal='For multiple items separate with a comma. Ex "Fairview, Boulder"'))
+    # filter_form_div.add_element(Paragraph(internal='''
+    # This page is for finding athletes by filtering criteria. You can use it to get headcounts of similar athletes or 
+    # find similar athletes to compare. The filters are partial as in you can query for the Team "Fairview" to get all 
+    # Fairview High School results. Some have additional dropdowns. For example, you can filter for Heats <= 3. 
+    # Table columns can be toggled with the checkboxes to make viewing easier.
+    # '''))
+    # filter_form_div.add_element(Paragraph(
+    #     internal='For multiple items separate with a comma. Ex "Fairview, Boulder"'))
     filter_form = Form(action=f"/athlete", method='get').add_class('filter-form')
     filter_groupings = {}
     for grouping in ATHLETE_FILTER_PARAMS.keys():
@@ -131,9 +131,6 @@ async def filter_athletes_html_page():
     arrange_div.add_element(arrange_form)
     page_content.add_element(arrange_div)
 
-    page_content.add_element(
-        Button(internal='Request', type='button', onclick='applyFilterForm()').add_class('big-button'))
-
     # Display Form
     display_form_div = Div()
     display_form_div.add_element(Header(level=1, internal='Table Columns'))
@@ -173,12 +170,15 @@ async def filter_athletes_html_page():
         display_form.add_element(grouping_div)
 
     display_form.add_element(
-        Button(internal='All', title='Toggle all checkboxes', type='button', onclick='toggleCheckboxesAll()').add_class('small-button'))
+        Button(internal='Toggle all checkboxes', title='Toggle all checkboxes', type='button', onclick='toggleCheckboxesAll()').add_class('small-button'))
     display_form_div.add_element(display_form)
     page_content.add_element(display_form_div)
 
     page_content.add_element(
-        Button(internal='Apply', type='button', onclick='applyDisplayFilters()').add_class('big-button'))
+        Button(internal='Request Data', type='button', onclick='applyFilterForm()').add_class('big-button').add_class('submit-button'))
+
+    page_content.add_element(
+        Button(internal='Apply Column Checkboxes', type='button', onclick='applyDisplayFilters()').add_class('big-button'))
 
     # Table
     table_div = Div(id='table-div')
@@ -225,10 +225,10 @@ async def find_athletes_html_page(athlete, results):
     page_content = Div().add_class('page-content')
     page_content.add_element(Header(level=1, internal='Athlete Page'))
 
-    page_content.add_element(Paragraph(internal='''
-    This page displays information about an athlete. Notice there is one final row in each table and that is the 
-    current PR for that event.
-    '''))
+    # page_content.add_element(Paragraph(internal='''
+    # This page displays information about an athlete. Notice there is one final row in each table and that is the 
+    # current PR for that event.
+    # '''))
 
     athlete_name = f"{athlete.first_name} {athlete.last_name}"
     page_content.add_element(Header(level=1, internal=f"{athlete_name}"))

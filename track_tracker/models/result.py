@@ -420,12 +420,12 @@ class ResultFilter(BaseModel):
 
         if self.meet_date:
             for meet_date in self.meet_date:
-                if meet_date.startswith('='):
-                    query = query.filter(database_object_class.meet_date == datetime.strptime(meet_date[1:], "%Y-%m-%d"))
-                elif meet_date.startswith('>='):
-                    query = query.filter(database_object_class.meet_date >= datetime.strptime(meet_date[2:], "%Y-%m-%d"))
-                elif meet_date.startswith('<='):
-                    query = query.filter(database_object_class.meet_date <= datetime.strptime(meet_date[2:], "%Y-%m-%d"))
+                if meet_date.startswith('Is on'):
+                    query = query.filter(database_object_class.meet_date == datetime.strptime(meet_date[5:], "%Y-%m-%d"))
+                elif meet_date.startswith('After'):
+                    query = query.filter(database_object_class.meet_date >= datetime.strptime(meet_date[5:], "%Y-%m-%d"))
+                elif meet_date.startswith('Before'):
+                    query = query.filter(database_object_class.meet_date <= datetime.strptime(meet_date[6:], "%Y-%m-%d"))
 
         if not count:
             if self.limit:

@@ -26,10 +26,10 @@ async def filter_records_html_page(event_details):
     page_content = Div().add_class('page-content')
     page_content.add_element(Header(level=1, internal='Team Page'))
 
-    page_content.add_element(Paragraph(internal='''
-    This page compares every record to see what the current best times or distances are. As a result it 
-    can take a bit to get results back so please be patient.
-    '''))
+    # page_content.add_element(Paragraph(internal='''
+    # This page compares every record to see what the current best times or distances are. As a result it 
+    # can take a bit to get results back so please be patient.
+    # '''))
 
     # athlete_name = f"{athlete.first_name} {athlete.last_name}"
     # page_content.add_element(Header(level=1, internal=f"{athlete_name}"))

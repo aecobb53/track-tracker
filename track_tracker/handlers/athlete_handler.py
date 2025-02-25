@@ -12,6 +12,7 @@ from models import (
     AthleteDB,
     AthleteFilter,
 )
+from html import display_date
 
 from .exceptions import MissingRecordException, DuplicateRecordsException, DataIntegrityException
 
@@ -125,8 +126,8 @@ class AthleteHandler(BaseHandler):
             results = {}
             records = {}
             display_athletes.append({
-                'First Name': athlete.first_name,
                 'Last Name': athlete.last_name,
+                'First Name': athlete.first_name,
                 'Team': athlete.team,
                 'Graduation Year': athlete.graduation_year,
                 'results': results,
