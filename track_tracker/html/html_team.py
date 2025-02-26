@@ -138,7 +138,6 @@ async def filter_teams_html_page():
         for details in TEAM_DISPLAY_PARAMS[grouping].values():
             display_groupings[grouping].append(details)
     for grouping in display_groupings.keys():
-        # print(f"GROUPING: {grouping}")
         params = display_groupings[grouping]
         grouping_div = Div()
         grouping_div.add_element(Header(level=3, internal=grouping))
@@ -227,7 +226,6 @@ async def find_team_html_page(athletes, results):
     # This page displays information about a team. Notice there is one final row in each table and that is 
     # the current record for the team for that event. 
     # '''))
-
 
     page_content.add_element(Header(level=1, internal=f"{athletes[0].team}"))
 

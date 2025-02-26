@@ -75,6 +75,10 @@ class AthleteDBBase(SQLModel):
     gender: str | None = None
     graduation_year: int | None = None
 
+    search_first_name: str | None = None
+    search_last_name: str | None = None
+    search_team: str | None = None
+
     # active: bool = True
 
     def cast_data_object(self) -> AthleteData:
@@ -87,8 +91,11 @@ class AthleteDBBase(SQLModel):
 class AthleteDBCreate(AthleteDBBase):
     @model_validator(mode='before')
     def validate_fields(cls, fields):
+        fields = fields.model_dump()
+        fields['search_first_name'] = fields['first_name'].lower()
+        fields['search_last_name'] = fields['last_name'].lower()
+        fields['search_team'] = fields['team'].lower()
         return fields
-
 
 
 class AthleteDBRead(AthleteDBBase):
@@ -116,17 +123,17 @@ class AthleteFilter(BaseModel):
     def validate_fields(cls, fields):
         if fields.get('first_name'):
             first_name = []
-            [first_name.extend(i.split(',')) for i in fields['first_name']]
+            [first_name.extend(i.lower().split(',')) for i in fields['first_name']]
             fields['first_name'] = [e.strip() for e in first_name]
 
         if fields.get('last_name'):
             last_name = []
-            [last_name.extend(i.split(',')) for i in fields['last_name']]
+            [last_name.extend(i.lower().split(',')) for i in fields['last_name']]
             fields['last_name'] = [e.strip() for e in last_name]
 
         if fields.get('team'):
             team = []
-            [team.extend(i.split(',')) for i in fields['team']]
+            [team.extend(i.lower().split(',')) for i in fields['team']]
             fields['team'] = [e.strip() for e in team]
 
         if fields.get('gender'):
@@ -165,35 +172,19 @@ class AthleteFilter(BaseModel):
 
     def apply_filters(self, database_object_class: AthleteDBBase, query: select, count: bool = False) -> select:
         """Apply the filters to the query"""
-        # def apply_modifier(query, db_obj_cls, string):
-        #     if string.startswith('='):
-        #         return query.filter(db_obj_cls == string[1:])
-        #     elif string.startswith('>='):
-        #         return query.filter(db_obj_cls >= string[2:])
-        #     elif string.startswith('>'):
-        #         return query.filter(db_obj_cls > string[1:])
-        #     elif string.startswith('<='):
-        #         return query.filter(db_obj_cls <= string[2:])
-        #     elif string.startswith('<'):
-        #         return query.filter(db_obj_cls < string[1:])
-        #     elif string.startswith('!='):
-        #         return query.filter(db_obj_cls != string[2:])
-        #     else:
-        #         return query.filter(db_obj_cls == string)
-
         if self.uid:
             query = query.filter(database_object_class.uid.in_(self.uid))
 
         if self.first_name:
-            filter_list = [database_object_class.first_name.contains(e) for e in self.first_name]
+            filter_list = [database_object_class.search_first_name.contains(e) for e in self.first_name]
             query = query.filter(or_(*filter_list))
 
         if self.last_name:
-            filter_list = [database_object_class.last_name.contains(e) for e in self.last_name]
+            filter_list = [database_object_class.search_last_name.contains(e) for e in self.last_name]
             query = query.filter(or_(*filter_list))
 
         if self.team:
-            filter_list = [database_object_class.team.contains(e) for e in self.team]
+            filter_list = [database_object_class.search_team.contains(e) for e in self.team]
             query = query.filter(or_(*filter_list))
 
         if self.graduation_year:

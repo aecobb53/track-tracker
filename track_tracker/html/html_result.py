@@ -143,7 +143,6 @@ async def filter_results_html_page():
         for details in MARK_DISPLAY_PARAMS[grouping].values():
             display_groupings[grouping].append(details)
     for grouping in display_groupings.keys():
-        # print(f"GROUPING: {grouping}")
         params = display_groupings[grouping]
         grouping_div = Div()
         grouping_div.add_element(Header(level=3, internal=grouping))

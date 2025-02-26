@@ -60,7 +60,6 @@ async def create_result(result: ResultApiCreate):
 async def filter_result(request: Request):
     try:
         result_filter = parse_query_params(request=request, query_class=ResultFilter)
-        print(' I AM RUN ')
         mh = ResultHandler()
         results = await mh.filter_results(result_filter=result_filter)
         ah = AthleteHandler()

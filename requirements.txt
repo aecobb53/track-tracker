@@ -19,19 +19,19 @@ jinja2
 pydantic
 python-multipart
 
-# Testing
-behave
-pycodestyle
-pytest
-pytest-cov
-pytest-flakes
-pytest-mock
-pytest-pep8
-pytest-pythonpath
-pytest-stub
+# # Testing
+# behave
+# pycodestyle
+# pytest
+# pytest-cov
+# pytest-flakes
+# pytest-mock
+# pytest-pep8
+# pytest-pythonpath
+# pytest-stub
 
-coverage
-pylint
+# coverage
+# pylint
 
 # Database
 # sqlalchemy

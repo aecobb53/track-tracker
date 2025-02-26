@@ -110,6 +110,7 @@ async def root(request: Request):
 
 # Root
 @app.get('/', status_code=200)
+@app.get('/home', status_code=200)
 async def root(request: Request):
     header_details = RestHeaders(request=request)
     if header_details.response_type == ResponseTypes.HTML:

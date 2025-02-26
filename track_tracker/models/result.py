@@ -204,6 +204,8 @@ class ResultDBBase(SQLModel):
     meet: str
     gender: str | None = None
 
+    search_team: str | None = None
+
     @model_validator(mode='before')
     def validate_fields(cls, fields):
         return fields
@@ -221,6 +223,7 @@ class ResultDBCreate(ResultDBBase):
         if not isinstance(fields, dict):
             fields = fields.model_dump()
         fields['athlete_uid'] = fields['athlete']['uid']
+        fields['search_team'] = fields['team'].lower()
         return fields
 
 
@@ -296,7 +299,7 @@ class ResultFilter(BaseModel):
         if fields.get('team'):
             team = []
             [team.extend(i.split(',')) for i in fields['team']]
-            fields['team'] = [t.strip() for t in team]
+            fields['team'] = [t.lower().strip() for t in team]
 
         if fields.get('meet'):
             meet = []
@@ -349,22 +352,6 @@ class ResultFilter(BaseModel):
 
     def apply_filters(self, database_object_class: ResultDBBase, query: select, count: bool = False) -> select:
         """Apply the filters to the query"""
-        # def apply_modifier(query, db_obj_cls, string):
-        #     if string.startswith('='):
-        #         return query.filter(db_obj_cls == string[1:])
-        #     elif string.startswith('>='):
-        #         return query.filter(db_obj_cls >= string[2:])
-        #     elif string.startswith('>'):
-        #         return query.filter(db_obj_cls > string[1:])
-        #     elif string.startswith('<='):
-        #         return query.filter(db_obj_cls <= string[2:])
-        #     elif string.startswith('<'):
-        #         return query.filter(db_obj_cls < string[1:])
-        #     elif string.startswith('!='):
-        #         return query.filter(db_obj_cls != string[2:])
-        #     else:
-        #         return query.filter(db_obj_cls == string)
-
         if self.uid:
             query = query.filter(database_object_class.uid.in_(self.uid))
 
@@ -391,15 +378,11 @@ class ResultFilter(BaseModel):
             query = query.filter(database_object_class.athlete_uid.in_(self.athlete_uid))
 
         if self.team:
-            filter_list = [database_object_class.team.contains(t) for t in self.team]
+            filter_list = [database_object_class.search_team.contains(t) for t in self.team]
             query = query.filter(or_(*filter_list))
 
         if self.meet:
             filter_list = [database_object_class.meet.contains(m) for m in self.meet]
-            query = query.filter(or_(*filter_list))
-
-        if self.team:
-            filter_list = [database_object_class.team.contains(t) for t in self.team]
             query = query.filter(or_(*filter_list))
 
         if self.first_name:

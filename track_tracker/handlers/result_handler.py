@@ -81,6 +81,7 @@ class ResultHandler(BaseHandler):
             rows = session.exec(query).all()
             results = []
             for row in rows:
+                print(f"ROW: {row}")
                 read_obj = ResultDBRead.model_validate(row)
                 result = read_obj.cast_data_object()
                 results.append(result)

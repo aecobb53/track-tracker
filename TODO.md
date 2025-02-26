@@ -109,9 +109,9 @@ Thoughts
 - [X] Verify it works on mobile
 - [X] Date to American bullshit
 - [ ] Find a better final row for tables that display the records for the event
-- [ ] Move filters into Query section and move Request next to Apply for ease of readability. Maybe then change Apply to "Update Columns"
+- [X] Move filters into Query section and move Request next to Apply for ease of readability. Maybe then change Apply to "Update Columns"
 - [ ] Better table color schema
-- [ ] Fix data loader where relays still arent fixing the event name
+- [X] Fix data loader where relays still arent fixing the event name
 
 # Easy to implement
 - [ ] Remove I from descriptions.
@@ -127,9 +127,10 @@ Thoughts
 
 # Mobile
 - [X] Pagination needs to be larger in general to be able to click easier
-- [ ] Banner needs to be larger
+- [X] Banner needs to be larger
 - [ ] Unset form filling out as its stealing focus on a phone
 - [X] Make .big-button 's larger
+- [X] Banner is good, maybe a bit large. Need to allow the home and about to go above the words. Maybe put them in first?
 
 
 
