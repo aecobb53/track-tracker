@@ -131,20 +131,26 @@ Thoughts
 - [ ] Unset form filling out as its stealing focus on a phone
 - [X] Make .big-button 's larger
 - [X] Banner is good, maybe a bit large. Need to allow the home and about to go above the words. Maybe put them in first?
-- [ ] Link colors clash with green as they are blue on green
+- [X] Link colors clash with green as they are blue on green
 
 
 
-- [ ] Default all Teams to fairview
-- [ ] Default date to this year
+- [X] Default all Teams to fairview
+- [X] Default date to this year
 - [x] event is time first and a different results first
 - [ ] filter by current students and look at their previous years
 - [ ] verify orders make sense in team view
-- [ ] verify colors are implemented on other pages
-- [ ] buttons stopped hilighting
-- [ ] add the ability to hide/unhide sections of very large documents
+- [X] verify colors are implemented on other pages
+- [X] buttons stopped hilighting
+- [ ] add the ability to hide/unhide sections of very large documents 
+    - like different events or meets so you can compare similar ones more easilly
 - [X] Switch Graduation to something like "Year" or better "Class"
-- [ ] Set up a SEASON_YEAR to be 2024 until we get 2025 data so that it can be referenced everywhere
+- [X] Set up a SEASON_YEAR to be 2024 until we get 2025 data so that it can be referenced everywhere
+- [ ] Individual team page needs a way to restrict Classes and by default dont include non active students
+    - [ ] Figure out a way to still indicate records or maybe add a team records page
+- [ ] Results page needs to include class sorting and column
+- [ ] Fix endpoint function names
+- [ ] Fix imports as they are sometimes not being added to init and whatnot
 
 
 - [x] Fix color from dark to FHS.
@@ -163,34 +169,37 @@ Thoughts
 - [x] Date to American bullshit
     - [x] Backend
     - [x] UI
-- [ ] Find a better final row for tables that display the records for the event
-    - [ ] This could even entail only showing this or not at all but allow users to filter by result value and thus the last row would be the current record
+- [X] Find a better final row for tables that display the records for the event
+    - [X] This could even entail only showing this or not at all but allow users to filter by result value and thus the last row would be the current record
 - [X] link needs to be the whole tile not just text on main page
-- [ ] Move filters into Query section and move Request next to Apply for ease of readability. Maybe then change Apply to "Update Columns"
-- [ ] Units on wind
-- [ ] Add different ways to query, filter, and display results on Team and Athlete pages
-    - [ ] Maybe include hidden elements that can be toggled like the tables are
-    - [ ] Another idea is send a larger payload with lots of hidden data and you can select the display style. As long as the paylaods dont get too large
-- [ ] Searching for meets or athletes need to accept case insensitive or maybe even wildcards
-    - [ ] add search fields for names and teams that store all lowercase but only return the uppercase versions
+- [X] Move filters into Query section and move Request next to Apply for ease of readability. Maybe then change Apply to "Update Columns"
+- [X] Units on wind
+- [X] Add different ways to query, filter, and display results on Team and Athlete pages
+    - [X] Maybe include hidden elements that can be toggled like the tables are
+    - [X] Another idea is send a larger payload with lots of hidden data and you can select the display style. As long as the paylaods dont get too large
+- [x] Searching for meets or athletes need to accept case insensitive or maybe even wildcards
+    - [X] add search fields for names and teams that store all lowercase but only return the uppercase versions
 - [ ] For records save in memory the current everything and update periodicly
 - [ ] Add an endpoint to return the enums for Teams and Events
     - [ ] This would need to be updated every so often on the backend
-- [ ] Better table color schema
+- [X] Better table color schema
 - [ ] May need to look into a way to pull to populate a page if it starts to take too long
 - [X] Home and about links need to be buttons and larger
 - [ ] separate results from record
 - [ ] Teams page add counts for each grade?
 - [ ] Teams only show teams with over 25 results but allow for getting all
 - [ ] larger fonts for mobile
-- [ ] For teams allow a user to order by Athlete Name, Graduation Year, Event, Meet, Gender
-- [ ] Maybe have the background of the table more muted and allow different meets to have different colors
-- [ ] Maybe sort by result or date
+- [ ] For teams allow a user to order by Athlete Name, Graduation Year, Event, Meet, Gender, Varsity/JV?
+    - [ ] Add to Season Selector Gender
+    - [ ] Add to Season Selector and Class?
+    - [ ] Is there a way to select JV/Varsity just Varsity or just JV?
+- [X] Maybe have the background of the table more muted and allow different meets to have different colors
+- [X] Maybe sort by result or date
 - [ ] For athletes allow a user to order by Meet, Event. Then sort by Result speed or date
 - [X] Move results away from primary spot and drop the star. This should be very powerful but not the first page people should go to. Add a FHS team page direct link
 - [ ] Low data mode where minimal data is transfered. Maybe put the botton in the center of the header. "Low wifi mode"?
-- [ ] Put a Freshman, Sophomore, Junior, Senior indicator next to grad years?
-- [ ] "sort item 1" to "sort column 1"
+- [X] Put a Freshman, Sophomore, Junior, Senior indicator next to grad years?
+- [X] "sort item 1" to "sort column 1"
 - [ ] Find a way to pursist the database
 - [ ] Look into having multiple heads running and what that will help with
 - [ ] "First Name", "Last Name", and "Graduation Year" not toggling correctly on athlete page

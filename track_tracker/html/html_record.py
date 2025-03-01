@@ -40,7 +40,7 @@ async def filter_records_html_page(event_details):
 
     events_div = Div()
     for event, result in event_details.items():
-        column_names = ['Place', 'Meet', 'Athlete', 'Team', 'Result', 'Wind', 'Heat', 'Graduation', 'Date']
+        column_names = ['Place', 'Meet', 'Athlete', 'Team', 'Result', 'Wind (m/s)', 'Heat', 'Graduation', 'Date']
         event_div = Div().add_class('event-div')
         event_div.add_element(Header(level=3, internal=event))
         event_table = Table().add_class('event-table')

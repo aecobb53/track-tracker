@@ -46,6 +46,7 @@ FILTER_STYLES = [
     """),
     StyleTag(name='.submit-button', internal=f"""
         background-color: green;
+        color: white;
     """),
 
     StyleTag(name='.pagination-div', internal=f"""

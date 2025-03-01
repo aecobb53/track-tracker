@@ -307,7 +307,7 @@ async def find_team_html_page(athletes, results, team_name, season_year=SEASON_Y
                 break
         event_dict[result.event].append(result)
     events_div = Div()
-    column_names = ['Place', 'Meet', 'Athlete', 'Result', 'Wind', 'Heat', 'Class', 'Date']
+    column_names = ['Place', 'Meet', 'Athlete', 'Result', 'Wind (m/s)', 'Heat', 'Class', 'Date']
     for event, event_results in event_dict.items():
         event_results.sort(key=lambda x: x.meet_date)
         record_result = event_results[0]
@@ -400,7 +400,7 @@ async def find_team_html_page(athletes, results, team_name, season_year=SEASON_Y
                 break
         event_dict[result.event].append(result)
     events_div = Div()
-    column_names = ['Place', 'Meet', 'Athlete', 'Result', 'Wind', 'Heat', 'Class', 'Date']
+    column_names = ['Place', 'Meet', 'Athlete', 'Result', 'Wind (m/s)', 'Heat', 'Class', 'Date']
     for event, event_results in event_dict.items():
         event_results.sort(key=lambda x: x.result.sort_value)
         record_result = event_results[0]
@@ -494,7 +494,7 @@ async def find_team_html_page(athletes, results, team_name, season_year=SEASON_Y
                 break
         meet_dict[result.meet][result.event].append(result)
     meets_div = Div()
-    column_names = ['Place', 'Athlete', 'Result', 'Wind', 'Heat', 'Class', 'Date']
+    column_names = ['Place', 'Athlete', 'Result', 'Wind (m/s)', 'Heat', 'Class', 'Date']
     for index, (meet, events_results) in enumerate(meet_dict.items()):
         if index % 2:
             meet_div = Div().add_class('odd-meet')
@@ -602,7 +602,7 @@ async def find_team_html_page(athletes, results, team_name, season_year=SEASON_Y
             athlete_dict[athlete_key][result.event] = []
         athlete_dict[athlete_key][result.event].append(result)
     athletes_div = Div()
-    column_names = ['Place', 'Meet', 'Athlete', 'Result', 'Wind', 'Heat', 'Class', 'Date']
+    column_names = ['Place', 'Meet', 'Athlete', 'Result', 'Wind (m/s)', 'Heat', 'Class', 'Date']
     athlete_keys = list(athlete_dict.keys())
     athlete_keys.sort()
     athlete_dict = {k: athlete_dict[k] for k in athlete_keys}
@@ -715,7 +715,7 @@ async def find_team_html_page(athletes, results, team_name, season_year=SEASON_Y
             athlete_dict[athlete_key][meet] = []
         athlete_dict[athlete_key][meet].append(result)
     athletes_div = Div()
-    column_names = ['Place', 'Event', 'Result', 'Wind', 'Heat', 'Class', 'Date']
+    column_names = ['Place', 'Event', 'Result', 'Wind (m/s)', 'Heat', 'Class', 'Date']
     athlete_keys = list(athlete_dict.keys())
     athlete_keys.sort()
     athlete_dict = {k: athlete_dict[k] for k in athlete_keys}

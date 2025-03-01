@@ -1,3 +1,4 @@
+from bdb import GENERATOR_AND_COROUTINE_FLAGS
 import json
 from datetime import datetime
 from sqlmodel import Session, select, func
@@ -13,6 +14,8 @@ from models import (
     ResultFilter,
 )
 from html import display_date
+from html.common import class_formatter
+from html.env import SEASON_YEAR
 
 from .exceptions import MissingRecordException, DuplicateRecordsException, DataIntegrityException
 
@@ -107,6 +110,7 @@ class ResultHandler(BaseHandler):
                 'Result': result.result.format,
                 'Wind': result.wind,
                 'Heat': result.heat,
+                'Class': SEASON_YEAR,
                 'Meet': result.meet,
                 'Date': display_date(result.meet_date),
                 'Gender': result.gender,

@@ -56,6 +56,7 @@ async function populateResultTable(filterResults, page, page_size, page_count) {
         // ROW
         var table_row = document.createElement('tr');
         // table_row.style.padding = '5px';
+        // var gender_class = undefined;
 
         // Data
         for (const [key, value] of Object.entries(filterResults[i])) {
@@ -64,32 +65,14 @@ async function populateResultTable(filterResults, page, page_size, page_count) {
             // table_item.style.padding = '1px 25px';
             table_item.classList.add(class_name);
             table_item.innerHTML = value;
-            // if (key == 'Ira' && value.substring(0, 3) == '$ (') {
-            //     table_item.style.color = 'red';
-            //     table_item.style.fontWeight = 'bold';
-            // }
-            // if (key == 'Roth' && value.substring(0, 3) == '$ (') {
-            //     table_item.style.color = 'red';
-            //     table_item.style.fontWeight = 'bold';
-            // }
-            // if (key == 'Brokerage' && value.substring(0, 3) == '$ (') {
-            //     table_item.style.color = 'red';
-            //     table_item.style.fontWeight = 'bold';
-            // }
-            // if (key == 'Total Retirement' && value.substring(0, 3) == '$ (') {
-            //     table_item.style.color = 'red';
-            //     table_item.style.fontWeight = 'bold';
-            // }
-            // if (key == 'Total Accounts' && value.substring(0, 3) == '$ (') {
-            //     table_item.style.color = 'red';
-            //     table_item.style.fontWeight = 'bold';
-            // }
-            // if (key == 'Net Worth' && value.substring(0, 3) == '$ (') {
-            //     table_item.style.color = 'red';
-            //     table_item.style.fontWeight = 'bold';
+            // if (key == 'Gender' && value.substring(0, 3) == 'Men') {
+            //     gender_class = 'mens-format'
+            // } else if (key == 'Gender' && value.substring(0, 5) == 'Women') {
+            //     gender_class = 'womens-format'
             // }
             table_row.appendChild(table_item);
         }
+        // table_row.classList.add(gender_class);
 
         // Additional Formatting
         if(i % 2 == 0) {

@@ -334,6 +334,16 @@ display:
                 checked: false
                 grouping_classes:
                     - Example
+        class:
+            variable: class
+            display: Class
+            formatted_function: null
+            html_display_filtering:
+                display_column: Common
+                description: Filter by class.
+                checked: false
+                grouping_classes:
+                    - Example
         gender:
             variable: gender
             display: "Mens/Women's"
@@ -341,7 +351,7 @@ display:
             html_display_filtering:
                 display_column: Common
                 description: Filter by gender.
-                checked: false
+                checked: True
                 grouping_classes:
                     - Example
     Meet:

@@ -9,6 +9,7 @@ from models import ResultData, ResultApiCreate, ResultFilter, AthleteFilter
 from models import ContextSingleton
 
 from typing import Annotated
+from html.common import class_formatter
 
 context = ContextSingleton()
 
@@ -97,6 +98,7 @@ async def filter_result(request: Request):
         for result in results:
             athlete = await ah.find_athlete(AthleteFilter(uid=[result['Athlete']]))
             result['Athlete'] = f"{athlete.first_name} {athlete.last_name}"
+            result['Class'] = class_formatter(athlete.graduation_year)[1]
         response = {
             'results': results,
             'query_max_count': query_max_count,

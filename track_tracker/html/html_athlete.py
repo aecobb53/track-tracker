@@ -252,7 +252,7 @@ async def find_athletes_html_page(athlete, results):
         events_dict[result.event].append(result)
 
     events_div = Div()
-    column_names = ['Place', 'Meet', 'Result', 'Wind', 'Heat', 'Date']
+    column_names = ['Place', 'Meet', 'Result', 'Wind (m/s)', 'Heat', 'Date']
     for event, results in events_dict.items():
         results.sort(key=lambda x: x.meet_date)
         record_result = results[0]
