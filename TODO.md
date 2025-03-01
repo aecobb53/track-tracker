@@ -1,5 +1,100 @@
 # TODO / Roadmap
 
+
+
+Old
+#FFFFFF
+#bf2420
+#eaeaea
+#000000
+#FFFFFF
+
+Comparing Light
+#ffffff
+#bf2420
+#66a162
+#8e94f2
+#2f6690
+
+
+Comparing Dark
+#000000
+#bf2420
+#5ef38c
+#b7fdfe
+#2b9720
+
+
+
+
+Colors Exploration1
+Black: #000000
+White: #ffffff
+Red  : #bf2420
+
+Selection 1:
+#66a162
+#8e94f2
+
+Selection 2:
+#70798c
+#2f6690
+
+Selection 3:
+#8884ff
+#9f9fed
+
+Selectin 4:
+#4f9d69
+#8d80ad
+
+
+Colors Exploration LIGHT
+White: #ffffff
+Red  : #bf2420
+
+
+Selection 1
+#691164
+#f361a0
+#7b8cde
+
+
+Selection 2
+#03256c
+#2541b2
+#1768ac
+
+
+Selection 3:
+#568259
+#464e47
+#542344
+
+
+Seleciton 4:
+#7a918d
+#0b0a07
+#202c39
+
+
+Colors Exploration DARK
+black: #000000
+Red  : #bf2420
+
+Selection 1:
+#b7fdfe
+#5ef38c
+#2b9720
+
+Selection 2:
+#eec170
+#f2a65a
+#735290
+
+
+
+
 ## MVP-2
 
 Trying to get to a useful level.

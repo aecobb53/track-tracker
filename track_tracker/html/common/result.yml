@@ -49,7 +49,7 @@ filter:
     Place:
         place1:
             variable: place
-            display: Plate
+            display: Place
             description: Filter by place.
             datatype: string
             default_value: null
@@ -63,7 +63,7 @@ filter:
                 - Is not
         place2:
             variable: place
-            display: Plate
+            display: Place
             description: Filter by place.
             datatype: string
             default_value: null

@@ -7,13 +7,13 @@ from my_base_html_lib import MyBaseDocument, NavigationContent, SidebarContent, 
 from .base_page import (
     project_base_page,
     SEASON_YEAR,
-    BACKGROUND_COLOR,
-    SECONDARY_COLOR,
-    ACCENT_COLOR,
-    TEXT_COLOR_1,
-    TEXT_COLOR_2,
-    ROW_BACKGROUND_COLOR_1,
-    ROW_BACKGROUND_COLOR_2,
+    # BACKGROUND_COLOR,
+    # SECONDARY_COLOR,
+    # ACCENT_COLOR,
+    # TEXT_COLOR_1,
+    # TEXT_COLOR_2,
+    # ROW_BACKGROUND_COLOR_1,
+    # ROW_BACKGROUND_COLOR_2,
     PAGE_STYLES,
     FILTER_STYLES,
     TABLE_STYLES,
@@ -262,7 +262,7 @@ async def find_team_html_page(athletes, results, team_name, season_year=SEASON_Y
         season_selector_link.add_class('button-activated')
     else:
         season_selector_link.add_class('button-deactivated')
-    season_selector.add_element(season_selector_link)
+    season_selector.add_element(Div(internal=season_selector_link).add_class('link-workaround-div'))
 
     season_selector_link = Link(internal=f'{SEASON_YEAR - 1}', href=f"/html/team/{team_name}/{SEASON_YEAR - 1}"
         ).add_class('team-season-selector').add_class('button-emulator-format')
@@ -270,7 +270,7 @@ async def find_team_html_page(athletes, results, team_name, season_year=SEASON_Y
         season_selector_link.add_class('button-activated')
     else:
         season_selector_link.add_class('button-deactivated')
-    season_selector.add_element(season_selector_link)
+    season_selector.add_element(Div(internal=season_selector_link).add_class('link-workaround-div'))
 
     season_selector_link = Link(internal=f'{SEASON_YEAR - 2}', href=f"/html/team/{team_name}/{SEASON_YEAR - 2}"
         ).add_class('team-season-selector').add_class('button-emulator-format')
@@ -278,8 +278,9 @@ async def find_team_html_page(athletes, results, team_name, season_year=SEASON_Y
         season_selector_link.add_class('button-activated')
     else:
         season_selector_link.add_class('button-deactivated')
-    season_selector.add_element(season_selector_link)
+    season_selector.add_element(Div(internal=season_selector_link).add_class('link-workaround-div'))
     page_content.add_element(season_selector)
+    # page_content.add_element(Div(internal=season_selector).add_class('link-workaround-div'))
 
 
     # Sorting (added in each section)
@@ -497,9 +498,9 @@ async def find_team_html_page(athletes, results, team_name, season_year=SEASON_Y
     column_names = ['Place', 'Athlete', 'Result', 'Wind (m/s)', 'Heat', 'Class', 'Date']
     for index, (meet, events_results) in enumerate(meet_dict.items()):
         if index % 2:
-            meet_div = Div().add_class('odd-meet')
+            meet_div = Div().add_class('odd-content-format')
         else:
-            meet_div = Div().add_class('even-meet')
+            meet_div = Div().add_class('even-content-format')
         event_results.sort(key=lambda x: x.place)
         meet_div.add_element(Header(level=1, internal=meet))
         for event, event_results in events_results.items():
@@ -608,9 +609,9 @@ async def find_team_html_page(athletes, results, team_name, season_year=SEASON_Y
     athlete_dict = {k: athlete_dict[k] for k in athlete_keys}
     for index, (athlete_id, events_results) in enumerate(athlete_dict.items()):
         if index % 2:
-            athlete_div = Div().add_class('odd-meet')
+            athlete_div = Div().add_class('odd-content-format')
         else:
-            athlete_div = Div().add_class('even-meet')
+            athlete_div = Div().add_class('even-content-format')
         athlete = events_results[list(events_results.keys())[0]][0].athlete
 #         event_results.sort(key=lambda x: x.place)
         athlete_div.add_element(Header(level=1, internal=athlete.name))
@@ -721,9 +722,9 @@ async def find_team_html_page(athletes, results, team_name, season_year=SEASON_Y
     athlete_dict = {k: athlete_dict[k] for k in athlete_keys}
     for index, (athlete_id, events_results) in enumerate(athlete_dict.items()):
         if index % 2:
-            athlete_div = Div().add_class('odd-meet')
+            athlete_div = Div().add_class('odd-content-format')
         else:
-            athlete_div = Div().add_class('even-meet')
+            athlete_div = Div().add_class('even-content-format')
         athlete = events_results[list(events_results.keys())[0]][0].athlete
 #         event_results.sort(key=lambda x: x.place)
         athlete_div.add_element(Header(level=1, internal=athlete.name))
@@ -790,34 +791,39 @@ async def find_team_html_page(athletes, results, team_name, season_year=SEASON_Y
             font-weight: bold;
             text-decoration: underline;
         """),
+        StyleTag(name='.link-workaround-div', internal=f"""
+            margin: 20px 0px;
+            padding: 0px;
+            display: inline-block;
+        """),
         StyleTag(name='.event-div', internal=f"""
             margin: 20px;
             padding: 20px;
         """),
-        StyleTag(name='.button-activated', internal="""
-            background-color: green;
-        """),
-        StyleTag(name='.button-deactivated', internal="""
-            background-color: #efefef;
-        """),
-        StyleTag(name='.button-emulator-format', internal="""
-            border: 2px solid black;
-            color: black;
-        """),
+        # StyleTag(name='.button-activated', internal="""
+        #     background-color: green;
+        # """),
+        # StyleTag(name='.button-deactivated', internal="""
+        #     background-color: #efefef;
+        # """),
+        # StyleTag(name='.button-emulator-format', internal="""
+        #     border: 2px solid black;
+        #     color: black;
+        # """),
         StyleTag(name='.team-info-tag', internal="""
             margin: 20px 50px;
             padding: 0;
         """),
-        StyleTag(name='.odd-meet', internal="""
-            background-color: #efc9ff;
-            padding: 30px;
-            margin: 20px;
-        """),
-        StyleTag(name='.even-meet', internal="""
-            background-color: #c9ffb6;
-            padding: 20px;
-            margin: 20px;
-        """),
+        # StyleTag(name='.odd-content-format', internal="""
+        #     background-color: #efc9ff;
+        #     padding: 30px;
+        #     margin: 20px;
+        # """),
+        # StyleTag(name='.even-content-format', internal="""
+        #     background-color: #c9ffb6;
+        #     padding: 20px;
+        #     margin: 20px;
+        # """),
     ]
 
     # JS Files
