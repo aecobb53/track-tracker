@@ -18,7 +18,7 @@ filter:
             display: Team
             description: Filter by team.
             datatype: string
-            default_value: null
+            default_value: Fairview
     Optional:
         # meet:
         #     variable: meet

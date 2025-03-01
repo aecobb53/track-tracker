@@ -18,7 +18,9 @@ from html import project_home_page, unimplemented_page
 
 
 from html import (
-    project_base_page, project_home_page,
+    project_base_page,
+    project_home_page,
+    project_about,
     unimplemented_page,
     filter_results_html_page,
     filter_athletes_html_page, find_athletes_html_page,
@@ -134,55 +136,54 @@ async def favicon():
 # About
 @app.get('/about', status_code=200)
 async def root(request: Request):
-    unimplemented_page_content = unimplemented_page()
-    return HTMLResponse(content=unimplemented_page_content)
+    about_page_content = await project_about()
+    return HTMLResponse(content=about_page_content)
 
 
-# About
-@app.get('/test', status_code=200)
-async def root(request: Request):
-    context = ContextSingleton()
-    context.logger.info(f'Request: {request}')
-    context.logger.info(f'Request Headers: {request.headers}')
-    header_details = RestHeaders(request=request)
-    context.logger.info(f'Header Details: {header_details}')
-    response_type = header_details.response_type
-    context.logger.info(f'Response Type: {response_type}')
+# @app.get('/test', status_code=200)
+# async def root(request: Request):
+#     context = ContextSingleton()
+#     context.logger.info(f'Request: {request}')
+#     context.logger.info(f'Request Headers: {request.headers}')
+#     header_details = RestHeaders(request=request)
+#     context.logger.info(f'Header Details: {header_details}')
+#     response_type = header_details.response_type
+#     context.logger.info(f'Response Type: {response_type}')
 
-    a = str(request.headers)[8:-1].replace('"', '\\"').replace("'", '"')
-    json_parsed_header = json.loads(a)
+#     a = str(request.headers)[8:-1].replace('"', '\\"').replace("'", '"')
+#     json_parsed_header = json.loads(a)
 
-    page_content = Div().add_style({'display': 'block', 'color': '#949ba4'})
-
-
-    page_content.add_element(
-        Header(level=1, internal='Request Header:')
-    )
-    header_json_element = Paragraph()
-    a = json.dumps(json_parsed_header, indent=4)
-    for i in a.split('\n'):
-        header_json_element.add_element(Paragraph(internal=i))
-    page_content.add_element(header_json_element)
+#     page_content = Div().add_style({'display': 'block', 'color': '#949ba4'})
 
 
-    page_content.add_element(
-        Header(level=1, internal='Rest Object:')
-    )
-    page_content.add_element(Paragraph(internal=f"host: {header_details.host}"))
-    page_content.add_element(Paragraph(internal=f"connection: {header_details.connection}"))
-    page_content.add_element(Paragraph(internal=f"accept: {header_details.accept}"))
-    page_content.add_element(Paragraph(internal=f"accept_encoding: {header_details.accept_encoding}"))
+#     page_content.add_element(
+#         Header(level=1, internal='Request Header:')
+#     )
+#     header_json_element = Paragraph()
+#     a = json.dumps(json_parsed_header, indent=4)
+#     for i in a.split('\n'):
+#         header_json_element.add_element(Paragraph(internal=i))
+#     page_content.add_element(header_json_element)
 
 
-    page_content.add_element(
-        Header(level=1, internal='Rest Object:')
-    )
-    page_content.add_element(Paragraph(internal=f"Response Type: {header_details.response_type}"))
+#     page_content.add_element(
+#         Header(level=1, internal='Rest Object:')
+#     )
+#     page_content.add_element(Paragraph(internal=f"host: {header_details.host}"))
+#     page_content.add_element(Paragraph(internal=f"connection: {header_details.connection}"))
+#     page_content.add_element(Paragraph(internal=f"accept: {header_details.accept}"))
+#     page_content.add_element(Paragraph(internal=f"accept_encoding: {header_details.accept_encoding}"))
 
 
-    base_doc = await project_base_page()
-    base_doc.body_content.body_content.append(page_content)
-    return HTMLResponse(content=base_doc.return_document)
+#     page_content.add_element(
+#         Header(level=1, internal='Rest Object:')
+#     )
+#     page_content.add_element(Paragraph(internal=f"Response Type: {header_details.response_type}"))
+
+
+#     base_doc = await project_base_page()
+#     base_doc.body_content.body_content.append(page_content)
+#     return HTMLResponse(content=base_doc.return_document)
 
 
 

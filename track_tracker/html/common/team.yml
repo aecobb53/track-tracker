@@ -5,7 +5,7 @@ filter:
             display: Team
             description: Filter by team.
             datatype: string
-            default_value: null
+            default_value: Fairview
 arrange:
     Results:
         limit:
@@ -42,3 +42,16 @@ display:
         #         checked: true
         #         grouping_classes:
         #             - Example
+# team_specific_display:
+#     Display Options:
+#         None:
+#             team:
+#             variable: team
+#             display: Team
+#             formatted_function: null
+#             html_display_filtering:
+#                 display_column: Common
+#                 description: Filter by team.
+#                 checked: true
+#                 grouping_classes:
+#                     - Example

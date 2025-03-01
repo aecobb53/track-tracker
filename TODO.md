@@ -114,15 +114,15 @@ Thoughts
 - [X] Fix data loader where relays still arent fixing the event name
 
 # Easy to implement
-- [ ] Remove I from descriptions.
-- [ ] Remove "query" from everywhere
+- [X] Remove I from descriptions.
+- [X] Remove "query" from everywhere
 - [X] "sort item 1" to "sort column 1"
 - [X] Switch the firstname/lastname columns in athlete view since they are default sorted by last
 
 # Important
-- [ ] Searching for meets or athletes need to accept case insensitive or maybe even wildcards
+- [X] Searching for meets or athletes need to accept case insensitive or maybe even wildcards
 - [ ] larger fonts for mobile
-- [ ] Fix the About
+- [X] Fix the About
 - [ ] Teams only show teams with over 25 results but allow for getting all
 
 # Mobile
@@ -131,10 +131,12 @@ Thoughts
 - [ ] Unset form filling out as its stealing focus on a phone
 - [X] Make .big-button 's larger
 - [X] Banner is good, maybe a bit large. Need to allow the home and about to go above the words. Maybe put them in first?
+- [ ] Link colors clash with green as they are blue on green
 
 
 
-
+- [ ] Default all Teams to fairview
+- [ ] Default date to this year
 
 
 - [x] Fix color from dark to FHS.

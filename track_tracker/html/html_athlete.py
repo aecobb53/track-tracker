@@ -82,7 +82,7 @@ async def filter_athletes_html_page():
 
     # Arrange
     arrange_div = Div()
-    arrange_div.add_element(Header(level=1, internal='Filter Results'))
+    # arrange_div.add_element(Header(level=1, internal='Filter Results'))
     arrange_form = Form(action=f"/athlete", method='get').add_class('arrange-form')
     arrange_groupings = {}
     for grouping in ATHLETE_ARRANGE_PARAMS.keys():

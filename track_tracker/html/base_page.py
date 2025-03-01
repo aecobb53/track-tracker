@@ -91,18 +91,17 @@ TABLE_STYLES = [
         """),
         StyleTag(name='.even-row', internal=f"""
             background-color: {ROW_BACKGROUND_COLOR_1};
-            color: white;
+            color: {TEXT_COLOR_2};
         """),
         StyleTag(name='.odd-row', internal=f"""
             background-color: {ROW_BACKGROUND_COLOR_2};
-            color: white;
+            color: {TEXT_COLOR_2};
         """),
         StyleTag(name='.record-row', internal=f"""
-            background-color: green;
-            color: white;
+            background-color: #7473ff;
+            color: {TEXT_COLOR_2};
         """),
 ]
-
 
 
 async def project_base_page():
@@ -200,6 +199,24 @@ async def project_home_page():
     for style in body_styles:
         body_content.add_body_styles(style)
 
+
+    base_doc.body_content = body_content
+
+    return base_doc.return_document
+
+async def project_about():
+    base_doc = await project_base_page()
+
+    # Body
+    page_content = Div().add_class('home-page-content')
+    page_content.add_element(
+        Paragraph(internal="""
+        This project is pretty simple in that it tracks data from Milesplit.com so that other coaches and athletes can 
+        view progress or stats as the season goes on. It is also used as a full stack project for employment purposes.
+        """)
+    ).add_style({'font-size': '2.0em', 'margin': '30px', 'padding': '0'})
+
+    body_content = BodyContent(body_content=[page_content])
 
     base_doc.body_content = body_content
 
