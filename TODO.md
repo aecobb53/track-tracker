@@ -137,6 +137,9 @@ Thoughts
 
 - [ ] Default all Teams to fairview
 - [ ] Default date to this year
+event is time first and a different results first
+filter by current students and look at their previous years
+
 
 
 - [x] Fix color from dark to FHS.

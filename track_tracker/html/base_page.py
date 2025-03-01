@@ -15,6 +15,11 @@ ROW_BACKGROUND_COLOR_1 = 'black'
 ROW_BACKGROUND_COLOR_2 = 'red'
 
 PAGE_STYLES = [
+    StyleTag(name='body', internal=f"""
+        margin: 0px;
+        padding: 0px;
+        font-family: Tahoma, sans-serif;
+    """),
     StyleTag(name='.page-content', internal=f"""
         display: block;
         color: {TEXT_COLOR_1};
@@ -69,16 +74,19 @@ TABLE_STYLES = [
             width: 100%;
             height: 100%;
             border: 5px solid black;
+            text-align: center;
         """),
         StyleTag(name='thead', internal=f"""
             width: 100%;
             fontWeight: bold;
             padding: 5px;
+            color: {TEXT_COLOR_1};
         """),
         StyleTag(name='tbody', internal=f"""
             width: 100%;
             height: 100%;
             border: 5px solid black;
+            color: {TEXT_COLOR_1};
         """),
         StyleTag(name='tr', internal=f"""
             padding: 5px;
@@ -90,18 +98,65 @@ TABLE_STYLES = [
         color: {TEXT_COLOR_2};
         """),
         StyleTag(name='.even-row', internal=f"""
-            background-color: {ROW_BACKGROUND_COLOR_1};
-            color: {TEXT_COLOR_2};
+            background-color: #9f9f9f;
+            color: #000000;
         """),
         StyleTag(name='.odd-row', internal=f"""
-            background-color: {ROW_BACKGROUND_COLOR_2};
-            color: {TEXT_COLOR_2};
+            background-color: #ffb4b4;
+            color: #000000;
         """),
         StyleTag(name='.record-row', internal=f"""
-            background-color: #7473ff;
-            color: {TEXT_COLOR_2};
+            background-color: #ffdda1;
+            color: black;
+            font-style: italic;
+        """),
+        StyleTag(name='.mens-format', internal=f"""
+            color: #07006b;
+        """),
+        StyleTag(name='.womens-format', internal=f"""
+            color: #ff6e87;
         """),
 ]
+
+
+"""
+body text
+font-family: Arial, Helvetica, sans-serif;
+font-family: Tahoma, sans-serif;
+
+
+background #9f9f9f
+text Black
+
+background #ffb4b4
+text black
+
+Record background
+ffdda1
+text black
+
+
+text-align: center;
+
+
+
+
+
+
+
+
+
+
+efc9ff
+
+
+
+
+
+
+
+
+"""
 
 
 async def project_base_page():

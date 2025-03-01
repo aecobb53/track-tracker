@@ -351,10 +351,8 @@ async def find_team_html_page(athletes, results):
         events_div.add_element(event_div)
 
     page_content_event.add_element(events_div)
-    page_content_event.attributes['hidden'] = None
+    # page_content_event.attributes['hidden'] = None
     display_different_content.add_element(page_content_event)
-
-
 
 
     page_content_meet = Div().add_class('display-item-deactivated').add_class('page-content-meet')
@@ -371,7 +369,7 @@ async def find_team_html_page(athletes, results):
                 break
         meet_dict[result.meet][result.event].append(result)
     meets_div = Div()
-    column_names = ['Place', 'Meet', 'Athlete', 'Result', 'Wind', 'Heat', 'Graduation', 'Date']
+    column_names = ['Place', 'Athlete', 'Result', 'Wind', 'Heat', 'Graduation', 'Date']
     for index, (meet, events_results) in enumerate(meet_dict.items()):
         if index % 2:
             meet_div = Div().add_class('odd-meet')
@@ -386,7 +384,13 @@ async def find_team_html_page(athletes, results):
                     record_result = result
 
             event_div = Div().add_class('event-div')
-            event_div.add_element(Header(level=4, internal=event))
+            if 'Men' in event:
+                event_div.add_class('mens-format')
+            elif 'Women' in event:
+                event_div.add_class('womens-format')
+            else:
+                raise ValueError(f"Event {event} is not configed")
+            event_div.add_element(Header(level=2, internal=event))
             event_table = Table().add_class('event-table')
             event_table.add_element(TableRow(
                 internal=[TableHeader(internal=col).add_class('event-table-header') for col in column_names]
@@ -399,8 +403,8 @@ async def find_team_html_page(athletes, results):
                     event_table_row = TableRow().add_class('even-row')
                 event_table_row.add_element(
                     TableData(internal=f"{result.place}").add_class('event-table-data'))
-                event_table_row.add_element(
-                    TableData(internal=f"{result.meet}").add_class('event-table-data'))
+                # event_table_row.add_element(
+                #     TableData(internal=f"{result.meet}").add_class('event-table-data'))
                 athlete_name = f"{result.athlete.first_name} {result.athlete.last_name}"
                 event_table_row.add_element(
                     TableData(internal=f"{athlete_name}").add_class('event-table-data'))
@@ -428,8 +432,8 @@ async def find_team_html_page(athletes, results):
             event_table_row = TableRow().add_class('record-row')
             event_table_row.add_element(
                 TableData(internal=f"{record_result.place}").add_class('event-table-data'))
-            event_table_row.add_element(
-                TableData(internal=f"{record_result.meet}").add_class('event-table-data'))
+            # event_table_row.add_element(
+            #     TableData(internal=f"{record_result.meet}").add_class('event-table-data'))
             athlete_name = f"{record_result.athlete.first_name} {record_result.athlete.last_name}"
             event_table_row.add_element(
                 TableData(internal=f"{athlete_name}").add_class('event-table-data'))
@@ -452,13 +456,6 @@ async def find_team_html_page(athletes, results):
     page_content_meet.add_element(meets_div)
     page_content_meet.attributes['hidden'] = None
     display_different_content.add_element(page_content_meet)
-
-
-
-
-
-
-
 
 
     page_content_athlete = Div().add_class('display-item-deactivated').add_class('page-content-athlete-events')
@@ -496,6 +493,12 @@ async def find_team_html_page(athletes, results):
                     record_result = result
 
             event_div = Div().add_class('event-div')
+            if 'Men' in event:
+                event_div.add_class('mens-format')
+            elif 'Women' in event:
+                event_div.add_class('womens-format')
+            else:
+                raise ValueError(f"Event {event} is not configed")
             event_div.add_element(Header(level=4, internal=event))
             event_table = Table().add_class('event-table')
             event_table.add_element(TableRow(
@@ -564,19 +567,6 @@ async def find_team_html_page(athletes, results):
     display_different_content.add_element(page_content_athlete)
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
     page_content_athlete = Div().add_class('display-item-deactivated').add_class('page-content-athlete-meets')
     page_content_athlete.add_element(Header(level=1, internal=f"Athletes"))
     athlete_dict = {}
@@ -641,55 +631,13 @@ async def find_team_html_page(athletes, results):
                     TableData(internal=f"{display_date(result.meet_date)}").add_class('event-table-data'))
                 event_table.add_element(event_table_row)
 
-        #     # Final rows
-        #     event_table_row = TableRow().add_class('record-row')
-        #     event_table_row.add_element(
-        #         TableData(internal=f"Current Best").add_class('event-table-data'))
-        #     for _ in column_names[1:]:
-        #         event_table_row.add_element(
-        #             TableData(internal=f" ").add_class('event-table-data'))
-        #     event_table.add_element(event_table_row)
-
-        #     event_table_row = TableRow().add_class('record-row')
-        #     event_table_row.add_element(
-        #         TableData(internal=f"{record_result.place}").add_class('event-table-data'))
-        #     event_table_row.add_element(
-        #         TableData(internal=f"{record_result.meet}").add_class('event-table-data'))
-        #     athlete_name = f"{record_result.athlete.first_name} {record_result.athlete.last_name}"
-        #     event_table_row.add_element(
-        #         TableData(internal=f"{athlete_name}").add_class('event-table-data'))
-        #     event_table_row.add_element(
-        #         TableData(internal=f"{record_result.result.result_str}").add_class('event-table-data'))
-        #     event_table_row.add_element(
-        #         TableData(internal=f"{record_result.wind}").add_class('event-table-data'))
-        #     event_table_row.add_element(
-        #         TableData(internal=f"{record_result.heat}").add_class('event-table-data'))
-        #     event_table_row.add_element(
-        #         TableData(internal=f"{result.athlete.graduation_year}").add_class('event-table-data'))
-        #     event_table_row.add_element(
-        #         TableData(internal=f"{display_date(record_result.meet_date)}").add_class('event-table-data'))
-        #     event_table.add_element(event_table_row)
-
             event_div.add_element(event_table)
             athlete_div.add_element(event_div)
         athletes_div.add_element(athlete_div)
 
     page_content_athlete.add_element(athletes_div)
-    # page_content_athlete.attributes['hidden'] = None
+    page_content_athlete.attributes['hidden'] = None
     display_different_content.add_element(page_content_athlete)
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     page_content.add_element(display_different_content)
@@ -710,6 +658,10 @@ async def find_team_html_page(athletes, results):
         # StyleTag(name='.display-item-deactivated', internal=f"""
         #     display: none;
         # """),
+        StyleTag(name='.event-div', internal=f"""
+            margin: 20px;
+            padding: 20px;
+        """),
         StyleTag(name='.button-activated', internal="""
             background-color: green;
         """),
@@ -721,12 +673,12 @@ async def find_team_html_page(athletes, results):
             padding: 0;
         """),
         StyleTag(name='.odd-meet', internal="""
-            background-color: #a7ffa7;
+            background-color: #efc9ff;
             padding: 30px;
             margin: 20px;
         """),
         StyleTag(name='.even-meet', internal="""
-            background-color: #ffc55a;
+            background-color: #c9ffb6;
             padding: 20px;
             margin: 20px;
         """),
