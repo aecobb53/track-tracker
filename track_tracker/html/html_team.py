@@ -18,7 +18,8 @@ from .base_page import (
     FILTER_STYLES,
     TABLE_STYLES,
     )
-from .common import TEAM_FILTER_PARAMS, TEAM_ARRANGE_PARAMS, TEAM_DISPLAY_PARAMS, display_date
+from .common import TEAM_FILTER_PARAMS, TEAM_ARRANGE_PARAMS, TEAM_DISPLAY_PARAMS, display_date, class_formatter
+
 
 async def filter_teams_html_page():
     base_doc = await project_base_page()
@@ -256,7 +257,7 @@ async def find_team_html_page(athletes, results, team_name, season_year=SEASON_Y
     season_selector.add_element(Header(level=2, internal='Season Selector'))
 
     season_selector_link = Link(internal=f'{SEASON_YEAR}', href=f"/html/team/{team_name}/{SEASON_YEAR}"
-        ).add_class('team-display-button').add_class('button-emulator-format')
+        ).add_class('team-season-selector').add_class('button-emulator-format')
     if season_year == SEASON_YEAR:
         season_selector_link.add_class('button-activated')
     else:
@@ -264,7 +265,7 @@ async def find_team_html_page(athletes, results, team_name, season_year=SEASON_Y
     season_selector.add_element(season_selector_link)
 
     season_selector_link = Link(internal=f'{SEASON_YEAR - 1}', href=f"/html/team/{team_name}/{SEASON_YEAR - 1}"
-        ).add_class('team-display-button').add_class('button-emulator-format')
+        ).add_class('team-season-selector').add_class('button-emulator-format')
     if season_year == SEASON_YEAR - 1:
         season_selector_link.add_class('button-activated')
     else:
@@ -272,7 +273,7 @@ async def find_team_html_page(athletes, results, team_name, season_year=SEASON_Y
     season_selector.add_element(season_selector_link)
 
     season_selector_link = Link(internal=f'{SEASON_YEAR - 2}', href=f"/html/team/{team_name}/{SEASON_YEAR - 2}"
-        ).add_class('team-display-button').add_class('button-emulator-format')
+        ).add_class('team-season-selector').add_class('button-emulator-format')
     if season_year == SEASON_YEAR - 2:
         season_selector_link.add_class('button-activated')
     else:
@@ -306,7 +307,7 @@ async def find_team_html_page(athletes, results, team_name, season_year=SEASON_Y
                 break
         event_dict[result.event].append(result)
     events_div = Div()
-    column_names = ['Place', 'Meet', 'Athlete', 'Result', 'Wind', 'Heat', 'Graduation', 'Date']
+    column_names = ['Place', 'Meet', 'Athlete', 'Result', 'Wind', 'Heat', 'Class', 'Date']
     for event, event_results in event_dict.items():
         event_results.sort(key=lambda x: x.meet_date)
         record_result = event_results[0]
@@ -340,7 +341,7 @@ async def find_team_html_page(athletes, results, team_name, season_year=SEASON_Y
             event_table_row.add_element(
                 TableData(internal=f"{result.heat}").add_class('event-table-data'))
             event_table_row.add_element(
-                TableData(internal=f"{result.athlete.graduation_year}").add_class('event-table-data'))
+                TableData(internal=f"{class_formatter(result.athlete.graduation_year)[0]}").add_class('event-table-data'))
             event_table_row.add_element(
                 TableData(internal=f"{display_date(result.meet_date)}").add_class('event-table-data'))
             event_table.add_element(event_table_row)
@@ -369,7 +370,7 @@ async def find_team_html_page(athletes, results, team_name, season_year=SEASON_Y
         event_table_row.add_element(
             TableData(internal=f"{record_result.heat}").add_class('event-table-data'))
         event_table_row.add_element(
-            TableData(internal=f"{result.athlete.graduation_year}").add_class('event-table-data'))
+            TableData(internal=f"{class_formatter(result.athlete.graduation_year)[0]}").add_class('event-table-data'))
         event_table_row.add_element(
             TableData(internal=f"{display_date(record_result.meet_date)}").add_class('event-table-data'))
         event_table.add_element(event_table_row)
@@ -399,7 +400,7 @@ async def find_team_html_page(athletes, results, team_name, season_year=SEASON_Y
                 break
         event_dict[result.event].append(result)
     events_div = Div()
-    column_names = ['Place', 'Meet', 'Athlete', 'Result', 'Wind', 'Heat', 'Graduation', 'Date']
+    column_names = ['Place', 'Meet', 'Athlete', 'Result', 'Wind', 'Heat', 'Class', 'Date']
     for event, event_results in event_dict.items():
         event_results.sort(key=lambda x: x.result.sort_value)
         record_result = event_results[0]
@@ -433,7 +434,7 @@ async def find_team_html_page(athletes, results, team_name, season_year=SEASON_Y
             event_table_row.add_element(
                 TableData(internal=f"{result.heat}").add_class('event-table-data'))
             event_table_row.add_element(
-                TableData(internal=f"{result.athlete.graduation_year}").add_class('event-table-data'))
+                TableData(internal=f"{class_formatter(result.athlete.graduation_year)[0]}").add_class('event-table-data'))
             event_table_row.add_element(
                 TableData(internal=f"{display_date(result.meet_date)}").add_class('event-table-data'))
             event_table.add_element(event_table_row)
@@ -462,7 +463,7 @@ async def find_team_html_page(athletes, results, team_name, season_year=SEASON_Y
         event_table_row.add_element(
             TableData(internal=f"{record_result.heat}").add_class('event-table-data'))
         event_table_row.add_element(
-            TableData(internal=f"{result.athlete.graduation_year}").add_class('event-table-data'))
+            TableData(internal=f"{class_formatter(result.athlete.graduation_year)[0]}").add_class('event-table-data'))
         event_table_row.add_element(
             TableData(internal=f"{display_date(record_result.meet_date)}").add_class('event-table-data'))
         event_table.add_element(event_table_row)
@@ -493,7 +494,7 @@ async def find_team_html_page(athletes, results, team_name, season_year=SEASON_Y
                 break
         meet_dict[result.meet][result.event].append(result)
     meets_div = Div()
-    column_names = ['Place', 'Athlete', 'Result', 'Wind', 'Heat', 'Graduation', 'Date']
+    column_names = ['Place', 'Athlete', 'Result', 'Wind', 'Heat', 'Class', 'Date']
     for index, (meet, events_results) in enumerate(meet_dict.items()):
         if index % 2:
             meet_div = Div().add_class('odd-meet')
@@ -539,7 +540,7 @@ async def find_team_html_page(athletes, results, team_name, season_year=SEASON_Y
                 event_table_row.add_element(
                     TableData(internal=f"{result.heat}").add_class('event-table-data'))
                 event_table_row.add_element(
-                    TableData(internal=f"{result.athlete.graduation_year}").add_class('event-table-data'))
+                    TableData(internal=f"{class_formatter(result.athlete.graduation_year)[0]}").add_class('event-table-data'))
                 event_table_row.add_element(
                     TableData(internal=f"{display_date(result.meet_date)}").add_class('event-table-data'))
                 event_table.add_element(event_table_row)
@@ -568,7 +569,7 @@ async def find_team_html_page(athletes, results, team_name, season_year=SEASON_Y
             event_table_row.add_element(
                 TableData(internal=f"{record_result.heat}").add_class('event-table-data'))
             event_table_row.add_element(
-                TableData(internal=f"{result.athlete.graduation_year}").add_class('event-table-data'))
+                TableData(internal=f"{class_formatter(result.athlete.graduation_year)[0]}").add_class('event-table-data'))
             event_table_row.add_element(
                 TableData(internal=f"{display_date(record_result.meet_date)}").add_class('event-table-data'))
             event_table.add_element(event_table_row)
@@ -601,7 +602,7 @@ async def find_team_html_page(athletes, results, team_name, season_year=SEASON_Y
             athlete_dict[athlete_key][result.event] = []
         athlete_dict[athlete_key][result.event].append(result)
     athletes_div = Div()
-    column_names = ['Place', 'Meet', 'Athlete', 'Result', 'Wind', 'Heat', 'Graduation', 'Date']
+    column_names = ['Place', 'Meet', 'Athlete', 'Result', 'Wind', 'Heat', 'Class', 'Date']
     athlete_keys = list(athlete_dict.keys())
     athlete_keys.sort()
     athlete_dict = {k: athlete_dict[k] for k in athlete_keys}
@@ -651,7 +652,7 @@ async def find_team_html_page(athletes, results, team_name, season_year=SEASON_Y
                 event_table_row.add_element(
                     TableData(internal=f"{result.heat}").add_class('event-table-data'))
                 event_table_row.add_element(
-                    TableData(internal=f"{result.athlete.graduation_year}").add_class('event-table-data'))
+                    TableData(internal=f"{class_formatter(result.athlete.graduation_year)[0]}").add_class('event-table-data'))
                 event_table_row.add_element(
                     TableData(internal=f"{display_date(result.meet_date)}").add_class('event-table-data'))
                 event_table.add_element(event_table_row)
@@ -680,7 +681,7 @@ async def find_team_html_page(athletes, results, team_name, season_year=SEASON_Y
             event_table_row.add_element(
                 TableData(internal=f"{record_result.heat}").add_class('event-table-data'))
             event_table_row.add_element(
-                TableData(internal=f"{result.athlete.graduation_year}").add_class('event-table-data'))
+                TableData(internal=f"{class_formatter(result.athlete.graduation_year)[0]}").add_class('event-table-data'))
             event_table_row.add_element(
                 TableData(internal=f"{display_date(record_result.meet_date)}").add_class('event-table-data'))
             event_table.add_element(event_table_row)
@@ -714,7 +715,7 @@ async def find_team_html_page(athletes, results, team_name, season_year=SEASON_Y
             athlete_dict[athlete_key][meet] = []
         athlete_dict[athlete_key][meet].append(result)
     athletes_div = Div()
-    column_names = ['Place', 'Event', 'Result', 'Wind', 'Heat', 'Graduation', 'Date']
+    column_names = ['Place', 'Event', 'Result', 'Wind', 'Heat', 'Class', 'Date']
     athlete_keys = list(athlete_dict.keys())
     athlete_keys.sort()
     athlete_dict = {k: athlete_dict[k] for k in athlete_keys}
@@ -755,7 +756,7 @@ async def find_team_html_page(athletes, results, team_name, season_year=SEASON_Y
                 event_table_row.add_element(
                     TableData(internal=f"{result.heat}").add_class('event-table-data'))
                 event_table_row.add_element(
-                    TableData(internal=f"{result.athlete.graduation_year}").add_class('event-table-data'))
+                    TableData(internal=f"{class_formatter(result.athlete.graduation_year)[0]}").add_class('event-table-data'))
                 event_table_row.add_element(
                     TableData(internal=f"{display_date(result.meet_date)}").add_class('event-table-data'))
                 event_table.add_element(event_table_row)
@@ -776,6 +777,13 @@ async def find_team_html_page(athletes, results, team_name, season_year=SEASON_Y
     # Styles
     document_styles = [
         StyleTag(name='.team-display-button', internal=f"""
+            margin: 20px;
+            padding: 15px;
+            font-size: 140%;
+            font-weight: bold;
+            text-decoration: underline;
+        """),
+        StyleTag(name='.team-season-selector', internal=f"""
             margin: 20px;
             padding: 15px;
             font-size: 140%;

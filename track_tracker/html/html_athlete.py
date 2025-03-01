@@ -16,7 +16,7 @@ from .base_page import (
     FILTER_STYLES,
     TABLE_STYLES,
     )
-from .common import ATHLETE_FILTER_PARAMS, ATHLETE_ARRANGE_PARAMS, ATHLETE_DISPLAY_PARAMS, display_date
+from .common import ATHLETE_FILTER_PARAMS, ATHLETE_ARRANGE_PARAMS, ATHLETE_DISPLAY_PARAMS, display_date, class_formatter
 
 async def filter_athletes_html_page():
     base_doc = await project_base_page()
@@ -223,7 +223,7 @@ async def find_athletes_html_page(athlete, results):
     base_doc = await project_base_page()
 
     page_content = Div().add_class('page-content')
-    page_content.add_element(Header(level=1, internal='Athlete Page'))
+    # page_content.add_element(Header(level=1, internal='Athlete Page'))
 
     # page_content.add_element(Paragraph(internal='''
     # This page displays information about an athlete. Notice there is one final row in each table and that is the 
@@ -231,9 +231,17 @@ async def find_athletes_html_page(athlete, results):
     # '''))
 
     athlete_name = f"{athlete.first_name} {athlete.last_name}"
-    page_content.add_element(Header(level=1, internal=f"{athlete_name}"))
-    page_content.add_element(Header(level=2, internal=f"{athlete.team} - {athlete.gender}"))
-    page_content.add_element(Header(level=2, internal=f"Graduation Year: {athlete.graduation_year}"))
+    athlete_info_div = Div()
+    athlete_info_div.add_element(Header(level=1, internal=f"{athlete_name}"))
+    athlete_info_div.add_element(Header(level=2, internal=f"{athlete.team} - {athlete.gender}"
+    ).add_class('athlete-info-tag'))
+    athlete_info_div.add_element(Header(level=2, internal=f"Class: {athlete.graduation_year} - {class_formatter(athlete.graduation_year)[0]}"
+    ).add_class('athlete-info-tag'))
+    if athlete.gender.startswith('M'):
+        athlete_info_div.add_class('mens-format')
+    else:
+        athlete_info_div.add_class('womens-format')
+    page_content.add_element(athlete_info_div)
 
     page_content.add_element(Header(level=1, internal=f"Events"))
 
@@ -306,11 +314,22 @@ async def find_athletes_html_page(athlete, results):
     body_content = BodyContent(body_content=[page_content])
 
     # Styles
+    document_styles = [
+        StyleTag(name='.athlete-info-tag', internal="""
+            margin: 20px 50px;
+            padding: 0;
+        """),
+    ]
+
+
+    # Styles
     for style in PAGE_STYLES:
         body_content.add_body_styles(style)
     for style in FILTER_STYLES:
         body_content.add_body_styles(style)
     for style in TABLE_STYLES:
+        body_content.add_body_styles(style)
+    for style in document_styles:
         body_content.add_body_styles(style)
 
     base_doc.body_content = body_content

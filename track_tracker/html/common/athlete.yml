@@ -1,5 +1,5 @@
 filter:
-    Required:
+    Optional:
         first_name:
             variable: first_name
             display: First Name
@@ -19,7 +19,7 @@ filter:
             description: Filter by team.
             datatype: string
             default_value: Fairview
-    Optional:
+    # Optional:
         # meet:
         #     variable: meet
         #     display: Meet - Not implemented yet
@@ -76,7 +76,7 @@ arrange:
                 - First Name
                 - Team
                 - Gender
-                - Graduation Year
+                - Class
         sort2:
             variable: sort
             display: Sort Column 2
@@ -89,7 +89,7 @@ arrange:
                 - Last Name
                 - Team
                 - Gender
-                - Graduation Year
+                - Class
                 - '-'
         sort3:
             variable: sort
@@ -103,7 +103,7 @@ arrange:
                 - First Name
                 - Last Name
                 - Gender
-                - Graduation Year
+                - Class
                 - '-'
         sort4:
             variable: sort
@@ -118,7 +118,7 @@ arrange:
                 - Last Name
                 - Team
                 - Gender
-                - Graduation Year
+                - Class
         sort5:
             variable: sort
             display: Sort Column 5
@@ -132,19 +132,9 @@ arrange:
                 - Last Name
                 - Team
                 - Gender
-                - Graduation Year
+                - Class
 display:
     Athlete:
-        first_name:
-            variable: first_name
-            display: First Name
-            formatted_function: null
-            html_display_filtering:
-                display_column: Common
-                description: Filter by first_name.
-                checked: true
-                grouping_classes:
-                    - Example
         last_name:
             variable: last_name
             display: Last Name
@@ -152,6 +142,16 @@ display:
             html_display_filtering:
                 display_column: Common
                 description: Filter by last_name.
+                checked: true
+                grouping_classes:
+                    - Example
+        first_name:
+            variable: first_name
+            display: First Name
+            formatted_function: null
+            html_display_filtering:
+                display_column: Common
+                description: Filter by first_name.
                 checked: true
                 grouping_classes:
                     - Example
@@ -165,23 +165,23 @@ display:
                 checked: true
                 grouping_classes:
                     - Example
-        graduation:
-            variable: graduation
-            display: Graduation Year
+        gender:
+            variable: gender
+            display: Gender
             formatted_function: null
             html_display_filtering:
                 display_column: Common
-                description: Filter by graduation.
+                description: Filter by gender.
                 checked: true
                 grouping_classes:
                     - Example
-        # results:
-        #     variable: results
-        #     display: Result Count
-        #     formatted_function: null
-        #     html_display_filtering:
-        #         display_column: Common
-        #         description: Filter by mar count.
-        #         checked: true
-        #         grouping_classes:
-        #             - Example
+        class:
+            variable: class
+            display: Class
+            formatted_function: null
+            html_display_filtering:
+                display_column: Common
+                description: Filter by class.
+                checked: true
+                grouping_classes:
+                    - Example

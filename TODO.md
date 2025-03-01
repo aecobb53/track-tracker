@@ -137,14 +137,14 @@ Thoughts
 
 - [ ] Default all Teams to fairview
 - [ ] Default date to this year
-event is time first and a different results first
-filter by current students and look at their previous years
-verify orders make sense in team view
-verify colors are implemented on other pages
-buttons stopped hilighting
-add the ability to hide/unhide sections of very large documents
-Switch Graduation to something like "Year" or better "Class"
-Set up a SEASON_YEAR to be 2024 until we get 2025 data so that it can be referenced everywhere
+- [x] event is time first and a different results first
+- [ ] filter by current students and look at their previous years
+- [ ] verify orders make sense in team view
+- [ ] verify colors are implemented on other pages
+- [ ] buttons stopped hilighting
+- [ ] add the ability to hide/unhide sections of very large documents
+- [X] Switch Graduation to something like "Year" or better "Class"
+- [ ] Set up a SEASON_YEAR to be 2024 until we get 2025 data so that it can be referenced everywhere
 
 
 - [x] Fix color from dark to FHS.

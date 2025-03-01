@@ -13,6 +13,7 @@ from models import (
     AthleteFilter,
 )
 from html import display_date
+from html.common import class_formatter
 
 from .exceptions import MissingRecordException, DuplicateRecordsException, DataIntegrityException
 
@@ -129,7 +130,8 @@ class AthleteHandler(BaseHandler):
                 'Last Name': athlete.last_name,
                 'First Name': athlete.first_name,
                 'Team': athlete.team,
-                'Graduation Year': athlete.graduation_year,
+                'Gender': athlete.gender,
+                'Class': class_formatter(athlete.graduation_year)[0],
                 'results': results,
                 'records': records,
                 'uid': athlete.uid,

@@ -3,17 +3,16 @@ import os
 from phtml import *
 from my_base_html_lib import MyBaseDocument, NavigationContent, SidebarContent, BodyContent, FooterContent
 from .common import HOME_PAGE_LINK_CONTENT
-
-SEASON_YEAR = 2024
-
-# service_url = os.environ.get('SERVICE_URL')
-BACKGROUND_COLOR = '#FFFFFF'
-SECONDARY_COLOR = '#bf2420'
-ACCENT_COLOR = '#eaeaea'
-TEXT_COLOR_1 = '#000000'
-TEXT_COLOR_2 = '#FFFFFF'
-ROW_BACKGROUND_COLOR_1 = 'black'
-ROW_BACKGROUND_COLOR_2 = 'red'
+from .env import (
+    SEASON_YEAR,
+    BACKGROUND_COLOR,
+    SECONDARY_COLOR,
+    ACCENT_COLOR,
+    TEXT_COLOR_1,
+    TEXT_COLOR_2,
+    ROW_BACKGROUND_COLOR_1,
+    ROW_BACKGROUND_COLOR_2,
+)
 
 PAGE_STYLES = [
     StyleTag(name='body', internal=f"""
@@ -96,7 +95,7 @@ TABLE_STYLES = [
             padding: 5px 25px;
         """),
         StyleTag(name='td a', internal=f"""
-        color: {TEXT_COLOR_2};
+        color: {TEXT_COLOR_1};
         """),
         StyleTag(name='.even-row', internal=f"""
             background-color: #9f9f9f;

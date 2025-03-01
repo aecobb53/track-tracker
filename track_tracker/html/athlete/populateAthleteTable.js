@@ -40,10 +40,17 @@ async function populateAthleteTable(filterResults, page, page_size, page_count) 
     // table_header.style.width = '100%';
     // table_header.style.fontWeight = 'bold';
     // table_header.style.padding = '5px';
+
+    console.log('Creating table header');
+    console.log(filterResults[0]);
+
+
     var header_values = Object.keys(filterResults[0]);
     var table_row = document.createElement('tr');
     for(var i = 0; i < header_values.length; i++) {
+        console.log('HEADER VALUE: ' + header_values[i]);
         if (skipColumnArray.includes(header_values[i])) {
+            console.log('Skipping column: ' + header_values[i]);
             break;
         }
         var class_name = header_values[i].toLowerCase().replaceAll(' ', '-') + '-data';
@@ -66,6 +73,7 @@ async function populateAthleteTable(filterResults, page, page_size, page_count) 
         for (const [key, value] of Object.entries(filterResults[i])) {
 
             if (skipColumnArray.includes(key)) {
+                // continue;
                 break;
             }
             var class_name = key.toLowerCase().replaceAll(' ', '-') + '-data';
