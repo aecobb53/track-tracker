@@ -3,26 +3,62 @@ import os
 from phtml import *
 from my_base_html_lib import MyBaseDocument, NavigationContent, SidebarContent, BodyContent, FooterContent
 from .common import HOME_PAGE_LINK_CONTENT
+# from .env import (
+#     SEASON_YEAR,
+#     BACKGROUND_COLOR,
+#     SECONDARY_COLOR,
+#     ACCENT_COLOR,
+#     TEXT_COLOR_ONE,
+#     TEXT_COLOR_TWO,
+#     ROW_BACKGROUND_COLOR_1,
+#     ROW_BACKGROUND_COLOR_2,
+# )
 from .env import (
     SEASON_YEAR,
+#     COLOR_ONE,
+#     COLOR_TWO,
+#     COLOR_THREE,
+#     COLOR_FOUR,
+#     COLOR_FIVE,
+)
+from .env import (
     BACKGROUND_COLOR,
-    SECONDARY_COLOR,
-    ACCENT_COLOR,
-    TEXT_COLOR_1,
-    TEXT_COLOR_2,
-    ROW_BACKGROUND_COLOR_1,
-    ROW_BACKGROUND_COLOR_2,
+    WHITE_COLOR,
+    BLACK_COLOR,
+    MEN_COLOR,
+    WOMEN_COLOR,
+)
+from .env import (
+    BODY_BACKGROUND_COLOR,
+    NAVIGATION_BACKGROUND_COLOR,
+    PRIMARY_SELECTION_COLOR,
+    SECONDARY_SELECTION_COLOR,
+    TABLE_BACKGROUND_COLOR_ONE,
+    TABLE_BACKGROUND_COLOR_TWO,
+    TABLE_COLOR_ONE,
+    CONTENT_COLOR_ONE,
+    CONTENT_COLOR_TWO,
+    TEXT_COLOR_ONE,
+    TEXT_COLOR_TWO,
 )
 
+
 PAGE_STYLES = [
+    # StyleTag(name='*', internal=f"""
+    #     margin: 0px;
+    #     padding: 0px;
+    #     font-family: Tahoma;
+    # """),
     StyleTag(name='body', internal=f"""
         margin: 0px;
         padding: 0px;
-        font-family: Tahoma, sans-serif;
+        font-family: Tahoma;
+        background-color: {BACKGROUND_COLOR};
+        color: {TEXT_COLOR_ONE};
     """),
     StyleTag(name='.page-content', internal=f"""
         display: block;
-        color: {TEXT_COLOR_1};
+        color: {TEXT_COLOR_ONE};
         margin: 10px;
     """),
 
@@ -45,14 +81,14 @@ FILTER_STYLES = [
         font-weight: bold;
     """),
     StyleTag(name='.submit-button', internal=f"""
-        background-color: green;
-        color: white;
+        background-color: {SECONDARY_SELECTION_COLOR};
+        color: {TEXT_COLOR_TWO};
     """),
 
     StyleTag(name='.pagination-div', internal=f"""
         display: inline-block;
         font-size: 300%;
-        color: {TEXT_COLOR_1};
+        color: {TEXT_COLOR_ONE};
         margin: 10px;
         text-decoration: none;
         text-align: center;
@@ -66,9 +102,28 @@ FILTER_STYLES = [
         font-size: 70%;
     """),
     StyleTag(name='.pagination-div button.active', internal=f"""
-        color: {TEXT_COLOR_2};
-        background-color: green;
+        color: {TEXT_COLOR_TWO};
+        background-color: {SECONDARY_SELECTION_COLOR};
     """),
+
+
+
+
+
+    StyleTag(name='.button-activated', internal=f"""
+        background-color: {SECONDARY_SELECTION_COLOR};
+    """),
+    StyleTag(name='.button-deactivated', internal=f"""
+        background-color: {PRIMARY_SELECTION_COLOR};
+    """),
+    StyleTag(name='.button-emulator-format', internal=f"""
+        border: 2px solid black;
+        color: {TEXT_COLOR_ONE};
+    """),
+
+
+
+
 ]
 TABLE_STYLES = [
         StyleTag(name='table', internal=f"""
@@ -81,13 +136,13 @@ TABLE_STYLES = [
             width: 100%;
             fontWeight: bold;
             padding: 5px;
-            color: {TEXT_COLOR_1};
+            color: {TEXT_COLOR_ONE};
         """),
         StyleTag(name='tbody', internal=f"""
             width: 100%;
             height: 100%;
             border: 5px solid black;
-            color: {TEXT_COLOR_1};
+            color: {TEXT_COLOR_ONE};
         """),
         StyleTag(name='tr', internal=f"""
             padding: 5px;
@@ -96,27 +151,45 @@ TABLE_STYLES = [
             padding: 5px 25px;
         """),
         StyleTag(name='td a', internal=f"""
-        color: {TEXT_COLOR_1};
+            color: {TEXT_COLOR_ONE};
         """),
         StyleTag(name='.even-row', internal=f"""
-            background-color: #9f9f9f;
-            color: #000000;
+            background-color: {TABLE_BACKGROUND_COLOR_ONE};
+            color: {TABLE_COLOR_ONE};
         """),
         StyleTag(name='.odd-row', internal=f"""
-            background-color: #ffb4b4;
-            color: #000000;
+            background-color: {TABLE_BACKGROUND_COLOR_TWO};
+            color: {TABLE_COLOR_ONE};
         """),
         StyleTag(name='.record-row', internal=f"""
-            background-color: #ffdda1;
-            color: black;
+            background-color: {PRIMARY_SELECTION_COLOR};
+            color: {TEXT_COLOR_ONE};
             font-style: italic;
         """),
         StyleTag(name='.mens-format', internal=f"""
-            color: #0b00ab;
+            color: {MEN_COLOR};
         """),
         StyleTag(name='.womens-format', internal=f"""
-            color: #ff6e87;
+            color: {WOMEN_COLOR};
         """),
+
+
+
+        StyleTag(name='.odd-content-format', internal=f"""
+            background-color: {CONTENT_COLOR_ONE};
+            padding: 30px;
+            margin: 20px;
+        """),
+        StyleTag(name='.even-content-format', internal=f"""
+            background-color: {CONTENT_COLOR_TWO};
+            padding: 20px;
+            margin: 20px;
+        """),
+
+
+
+
+
 ]
 
 
@@ -175,12 +248,13 @@ async def project_base_page():
     navigation_content = NavigationContent(
         webpage_name="Fairview Track Results",
         webpage_name_link='/',
-        background_color=SECONDARY_COLOR,
-        text_color=TEXT_COLOR_2,
+        background_color=NAVIGATION_BACKGROUND_COLOR,
+        text_color=TEXT_COLOR_TWO,
         )
 
     doc = MyBaseDocument(
         navigation_content=navigation_content,
+        document_style=PAGE_STYLES
     )
     return doc
 
@@ -205,7 +279,7 @@ async def project_home_page():
 
     body_styles = [
         StyleTag(name='.home-page-content', internal=f"""
-            color: {TEXT_COLOR_1};
+            color: {TEXT_COLOR_ONE};
             margin: 10px;
             padding: 0;
         """),
@@ -214,14 +288,14 @@ async def project_home_page():
             padding: 20px 40px;
         """),
         StyleTag(name='.page-group-div', internal=f"""
-            color: {TEXT_COLOR_1};
+            color: {TEXT_COLOR_ONE};
             margin: 0;
             padding: 0;
             display: inline;
         """),
 
         StyleTag(name='.page-div', internal=f"""
-            background-color: {ACCENT_COLOR};
+            background-color: {PRIMARY_SELECTION_COLOR};
             margin: 20px;
             padding: 0;
             border: 3px solid black;
@@ -234,36 +308,47 @@ async def project_home_page():
         """),
 
         StyleTag(name='.page-link', internal=f"""
-            color: {TEXT_COLOR_1};
+            color: {TEXT_COLOR_ONE};
             text-decoration: none;
         """),
 
 
-        StyleTag(name='.page-header', internal="""
+        StyleTag(name='.page-header', internal=f"""
             margin: 10px;
             padding: 0;
             text-align: center;
         """),
-        StyleTag(name='.page-paragraph', internal="""
+        StyleTag(name='.page-paragraph', internal=f"""
             margin: 10px;
             padding: 0;
             text-align: center;
         """),
 
 
-        StyleTag(name='.page-link h2', internal="""
+        StyleTag(name='.page-link h2', internal=f"""
             margin: 15px;
             padding: 0;
         """),
-        StyleTag(name='.page-link p', internal="""
+        StyleTag(name='.page-link p', internal=f"""
             margin: 0;
             padding: 0;
         """),
     ]
 
-    body_content = BodyContent(body_content=[page_content])
+    body_content = BodyContent(
+        body_content=[page_content],
+        body_styles=PAGE_STYLES,)
+    # print(f"BODY_STYLES: {body_content.body_styles}")
+    # body_content.body_styles = []
+    # print(f"BODY_STYLES: {body_content.body_styles}")
+    # for style in PAGE_STYLES:
+    #     # print(f"STYLES: {style.return_document}")
+    #     body_content.add_body_styles(style)
+    print(f"BODY_STYLES: {body_content.body_styles}")
     for style in body_styles:
         body_content.add_body_styles(style)
+    print(f"BODY_STYLES: {body_content.body_styles}")
+    print(f"BODY_STYLES: {body_content.body_styles[0].return_document}")
 
 
     base_doc.body_content = body_content
@@ -276,7 +361,7 @@ async def project_about():
     # Body
     page_content = Div().add_class('home-page-content')
     page_content.add_element(
-        Paragraph(internal="""
+        Paragraph(internal=f"""
         This project is pretty simple in that it tracks data from Milesplit.com so that other coaches and athletes can 
         view progress or stats as the season goes on. It is also used as a full stack project for employment purposes.
         """)
