@@ -1,7 +1,7 @@
-async function GETFilterMark(params) {
-    console.log('GETing to /mark/display');
-    // var url = '/mark/display';
-    var url = '/mark/display?' + new URLSearchParams(params).toString();
+async function GETFilterResult(params) {
+    console.log('GETing to /result/display');
+    // var url = '/result/display';
+    var url = '/result/display?' + new URLSearchParams(params).toString();
     console.log('url: ' + url);
 
     console.log('params: ' + JSON.stringify(params));

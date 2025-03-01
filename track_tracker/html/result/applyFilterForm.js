@@ -59,15 +59,15 @@ async function applyFilterForm(page=1, page_size=null, record_size=null) {
     offset = offset * page_size;
     params['offset'] = offset
 
-    const queryResults = await GETFilterMark(params);
+    const queryResults = await GETFilterResult(params);
 
-    filterResults = queryResults['marks'];
+    filterResults = queryResults['results'];
     query_max_count = queryResults['query_max_count'];
     console.log('Max result count:' + query_max_count);
     console.log('len: ' + filterResults.length);
     page_count = Math.round(query_max_count / page_size);
     console.log('Page count: ' + page_count);
 
-    populateMarkTable(filterResults, page, page_size, page_count);
+    populateResultTable(filterResults, page, page_size, page_count);
     applyDisplayFilters();
 }

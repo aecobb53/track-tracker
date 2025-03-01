@@ -1,6 +1,6 @@
 
 Athlete
-Mark
+Result
 School?
 Meet?
 Event?

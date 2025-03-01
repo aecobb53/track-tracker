@@ -19,19 +19,19 @@ jinja2
 pydantic
 python-multipart
 
-# Testing
-behave
-pycodestyle
-pytest
-pytest-cov
-pytest-flakes
-pytest-mock
-pytest-pep8
-pytest-pythonpath
-pytest-stub
+# # Testing
+# behave
+# pycodestyle
+# pytest
+# pytest-cov
+# pytest-flakes
+# pytest-mock
+# pytest-pep8
+# pytest-pythonpath
+# pytest-stub
 
-coverage
-pylint
+# coverage
+# pylint
 
 # Database
 # sqlalchemy
@@ -45,4 +45,5 @@ lxml
 
 # My libraries
 git+https://github.com/aecobb53/phtml@main
-git+https://github.com/aecobb53/my_base_html_lib@main
+git+https://github.com/aecobb53/my_base_html_lib@refactor
+# git+https://github.com/aecobb53/my_base_html_lib@main

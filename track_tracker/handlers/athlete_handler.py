@@ -12,6 +12,8 @@ from models import (
     AthleteDB,
     AthleteFilter,
 )
+from html import display_date
+from html.common import class_formatter
 
 from .exceptions import MissingRecordException, DuplicateRecordsException, DataIntegrityException
 
@@ -122,14 +124,15 @@ class AthleteHandler(BaseHandler):
         self.context.logger.info(f"Athletes Filtered: {len(athletes)}")
         display_athletes = []
         for athlete in athletes:
-            marks = {}
+            results = {}
             records = {}
             display_athletes.append({
-                'First Name': athlete.first_name,
                 'Last Name': athlete.last_name,
+                'First Name': athlete.first_name,
                 'Team': athlete.team,
-                'Graduation Year': athlete.graduation_year,
-                'marks': marks,
+                'Gender': athlete.gender,
+                'Class': class_formatter(athlete.graduation_year)[0],
+                'results': results,
                 'records': records,
                 'uid': athlete.uid,
             })

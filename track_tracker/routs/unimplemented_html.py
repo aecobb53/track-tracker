@@ -12,11 +12,11 @@ from models import ContextSingleton
 
 
 from html import (
-    # create_mark_html_page,
-    # filter_marks_html_page,
-    # find_mark_html_page,
-    # mark_base_page,
-    filter_marks_html_page,
+    # create_result_html_page,
+    # filter_results_html_page,
+    # find_result_html_page,
+    # result_base_page,
+    filter_results_html_page,
     unimplemented_page
     )
 
@@ -28,8 +28,8 @@ router = APIRouter(
 )
 
 
-# @router.get('/mark')
-# async def html_mark():
+# @router.get('/result')
+# async def html_result():
 #     return HTMLResponse(content=unimplemented_page(), status_code=200)
 
 # @router.get('/athlete')

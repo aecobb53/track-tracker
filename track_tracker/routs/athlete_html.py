@@ -9,8 +9,8 @@ from fastapi.responses import HTMLResponse, ORJSONResponse
 # from handlers import EventHandler, parse_query_params
 # from utils import parse_query_params, parse_header, MissingRecordException, DuplicateRecordsException
 from models import ContextSingleton
-from handlers import AthleteHandler, MarkHandler
-from models import AthleteFilter, MarkFilter
+from handlers import AthleteHandler, ResultHandler
+from models import AthleteFilter, ResultFilter
 # from .html.unimplemented_page import unimplemented_page
 
 
@@ -39,9 +39,9 @@ async def html_athletes(request: Request):
 async def html_athlete(athlete_uid: str, request: Request):
     ah = AthleteHandler()
     athlete = await ah.find_athlete(AthleteFilter(uid=[athlete_uid]))
-    mh = MarkHandler()
-    marks = await mh.filter_marks(MarkFilter(athlete_uid=[athlete_uid]))
-    athlete_page = await find_athletes_html_page(athlete=athlete, marks=marks)
+    mh = ResultHandler()
+    results = await mh.filter_results(ResultFilter(athlete_uid=[athlete_uid]))
+    athlete_page = await find_athletes_html_page(athlete=athlete, results=results)
     return HTMLResponse(content=athlete_page, status_code=200)
 
 # path = '/today'

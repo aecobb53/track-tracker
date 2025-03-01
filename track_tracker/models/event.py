@@ -27,8 +27,8 @@ class EventParser:
             x=1
         return self.gender
 
-    def parse_mark(self, mark_s: str):
-        re_s = re.search(self.re_s, mark_s)
+    def parse_result(self, result_s: str):
+        re_s = re.search(self.re_s, result_s)
         if re_s:
             minutes = seconds = subsecond = feet = inches = fractions = None
             try:
@@ -58,9 +58,9 @@ class EventParser:
 
 
             if not any([minutes, seconds, subsecond, feet, inches, fractions]):
-                raise ValueError(f"Mark {mark_s} is not valid for event {self.event_s} [{minutes, seconds, subsecond, feet, inches, fractions}]")
+                raise ValueError(f"Result {result_s} is not valid for event {self.event_s} [{minutes, seconds, subsecond, feet, inches, fractions}]")
             # if not all([seconds, subsecond, subsecond]) and not all([feet, inches, fractions]):
-            #     raise ValueError(f"Mark {mark_s} is not valid for event {self.event_s} [{minutes, seconds, subsecond, feet, inches, fractions}]")
+            #     raise ValueError(f"Result {result_s} is not valid for event {self.event_s} [{minutes, seconds, subsecond, feet, inches, fractions}]")
             if minutes is not None:
                 minutes = int(minutes[:-1])
             if seconds is not None:
@@ -78,10 +78,10 @@ class EventParser:
             return None
 
     @classmethod
-    def parse_event_mark(cls, event_s: str, mark_s: str):
+    def parse_event_result(cls, event_s: str, result_s: str):
         ep = cls(event_s)
-        result = ep.parse_mark(mark_s)
-        assert result is not None, f"Mark {mark_s} is not valid for event {event_s}"
+        result = ep.parse_result(result_s)
+        assert result is not None, f"Result {result_s} is not valid for event {event_s}"
         return result
 
     @classmethod
@@ -108,7 +108,7 @@ class EventParser:
 #             if event == 'raw':
 #                 continue
 #             ep = EventParser(event)
-#             ep.parse_mark(entry['mark'])
+#             ep.parse_result(entry['result'])
 # events_l = list(events)
 # events_l.sort()
 # for i in events_l:

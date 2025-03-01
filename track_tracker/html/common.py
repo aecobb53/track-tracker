@@ -1,7 +1,8 @@
 import yaml
 import json
-
 import os
+from .env import SEASON_YEAR
+
 
 path = os.path.join(os.getcwd(), 'html', 'common')
 
@@ -11,12 +12,12 @@ with open(os.path.join(path, 'home_page_content.yml')) as yf:
 HOME_PAGE_LINK_CONTENT = home_page_content_file
 
 
-# Mark Filter Params
-with open(os.path.join(path, 'mark.yml')) as yf:
-    mark_file = yaml.safe_load(yf)
-MARK_FILTER_PARAMS = mark_file['filter']
-MARK_ARRANGE_PARAMS = mark_file['arrange']
-MARK_DISPLAY_PARAMS = mark_file['display']
+# Result Filter Params
+with open(os.path.join(path, 'result.yml')) as yf:
+    result_file = yaml.safe_load(yf)
+MARK_FILTER_PARAMS = result_file['filter']
+MARK_ARRANGE_PARAMS = result_file['arrange']
+MARK_DISPLAY_PARAMS = result_file['display']
 
 
 # Athlete Filter Params
@@ -32,3 +33,20 @@ with open(os.path.join(path, 'team.yml')) as yf:
 TEAM_FILTER_PARAMS = team_file['filter']
 TEAM_ARRANGE_PARAMS = team_file['arrange']
 TEAM_DISPLAY_PARAMS = team_file['display']
+
+def display_date(date):
+    return date.strftime('%m/%d/%y')
+
+def class_formatter(graduation_year):
+    if graduation_year - SEASON_YEAR == 0:
+        return 'Senior', 'Sr'
+    elif graduation_year - SEASON_YEAR == 1:
+        return 'Junior', 'Jr'
+    elif graduation_year - SEASON_YEAR == 2:
+        return 'Sophomore', 'So'
+    elif graduation_year - SEASON_YEAR == 3:
+        return 'Freshman', 'Fr'
+    elif graduation_year - SEASON_YEAR < 0:
+        return 'Graduated', 'Gr'
+    elif graduation_year - SEASON_YEAR > 3:
+        return 'Underclass', 'Uc'
