@@ -52,3 +52,13 @@ async def html_team(team_name: str, request: Request):
     results = await mh.filter_results(ResultFilter(team=[team_name]))
     team_page = await find_team_html_page(athletes=athletes, results=results)
     return HTMLResponse(content=team_page, status_code=200)
+
+@router.get('/{team_name}/{season_year}')
+async def html_team(team_name: str, season_year: int, request: Request):
+    ah = AthleteHandler()
+    athletes = await ah.filter_athletes(AthleteFilter(team=[team_name]))
+    mh = ResultHandler()
+    result_filter = ResultFilter(team=[team_name], meet_date=[f"After{season_year}-01-01", f"Before{season_year}-12-31"])
+    results = await mh.filter_results(result_filter)
+    team_page = await find_team_html_page(athletes=athletes, results=results, team_name=team_name, season_year=season_year)
+    return HTMLResponse(content=team_page, status_code=200)

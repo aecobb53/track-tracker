@@ -62,6 +62,21 @@ class Result(BaseModel):
         output = f"{self.event_str}::{self.result_str}"
         return output
 
+    @property
+    def sort_value(self):
+        if self.minutes or self.seconds or self.subsecond:
+            minutes = self.minutes or 0
+            seconds = self.seconds or 0
+            subsecond = self.subsecond or 0
+            return minutes * 60 + seconds + subsecond
+        elif self.feet or self.inches or self.fractions:
+            feet = self.feet or 0
+            inches = self.inches or 0
+            fractions = self.fractions or 0
+            return feet * 12 + inches + fractions
+        else:
+            raise ValueError('Unable to give a Sort Value')
+
     @classmethod
     def build(cls, input):
         event, result = input.split('::')

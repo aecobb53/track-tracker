@@ -4,6 +4,7 @@ from phtml import *
 from my_base_html_lib import MyBaseDocument, NavigationContent, SidebarContent, BodyContent, FooterContent
 from .common import HOME_PAGE_LINK_CONTENT
 
+SEASON_YEAR = 2024
 
 # service_url = os.environ.get('SERVICE_URL')
 BACKGROUND_COLOR = '#FFFFFF'
@@ -111,7 +112,7 @@ TABLE_STYLES = [
             font-style: italic;
         """),
         StyleTag(name='.mens-format', internal=f"""
-            color: #07006b;
+            color: #0b00ab;
         """),
         StyleTag(name='.womens-format', internal=f"""
             color: #ff6e87;
@@ -120,6 +121,16 @@ TABLE_STYLES = [
 
 
 """
+
+font-style: normal|italic|oblique|initial|inherit;
+
+old mens
+07006b
+new mens
+0b00ab
+
+
+
 body text
 font-family: Arial, Helvetica, sans-serif;
 font-family: Tahoma, sans-serif;

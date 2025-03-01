@@ -6,6 +6,7 @@ from phtml import *
 from my_base_html_lib import MyBaseDocument, NavigationContent, SidebarContent, BodyContent, FooterContent
 from .base_page import (
     project_base_page,
+    SEASON_YEAR,
     BACKGROUND_COLOR,
     SECONDARY_COLOR,
     ACCENT_COLOR,
@@ -217,7 +218,7 @@ async def filter_teams_html_page():
     base_doc.body_content = body_content
     return base_doc.return_document
 
-async def find_team_html_page(athletes, results):
+async def find_team_html_page(athletes, results, team_name, season_year=SEASON_YEAR):
     base_doc = await project_base_page()
 
     page_content = Div().add_class('page-content')
@@ -228,6 +229,7 @@ async def find_team_html_page(athletes, results):
     # the current record for the team for that event. 
     # '''))
 
+    # Team Info
     page_content.add_element(Header(level=1, internal=f"{athletes[0].team}"))
 
     men = [a for a in athletes if a.gender == 'Mens']
@@ -240,34 +242,59 @@ async def find_team_html_page(athletes, results):
     seniors = [a for a in athletes if a.graduation_year == current_year]
 
 
-    page_content.add_element(Header(level=2, internal=f"Athletes: {len(athletes)}").add_class('team-info-tag'))
-    page_content.add_element(Header(level=2, internal=f"Men: {len(men)}").add_class('team-info-tag'))
-    page_content.add_element(Header(level=2, internal=f"Women: {len(women)}").add_class('team-info-tag'))
+    page_content.add_element(Header(level=2, internal=f"Athlete count: {len(athletes)}").add_class('team-info-tag'))
+    page_content.add_element(Header(level=2, internal=f"Men: {len(men)}").add_class('team-info-tag').add_class('mens-format'))
+    page_content.add_element(Header(level=2, internal=f"Women: {len(women)}").add_class('team-info-tag').add_class('womens-format'))
     page_content.add_element(Header(level=2, internal=f"Freshmen: {len(freshmen)}").add_class('team-info-tag'))
     page_content.add_element(Header(level=2, internal=f"Sophomore: {len(sophomore)}").add_class('team-info-tag'))
     page_content.add_element(Header(level=2, internal=f"Juniors: {len(juniors)}").add_class('team-info-tag'))
     page_content.add_element(Header(level=2, internal=f"Seniors: {len(seniors)}").add_class('team-info-tag'))
 
-    # Sorting
+
+    # Pulled Content
+    season_selector = Div().add_class('season-selector-div')
+    season_selector.add_element(Header(level=2, internal='Season Selector'))
+
+    season_selector_link = Link(internal=f'{SEASON_YEAR}', href=f"/html/team/{team_name}/{SEASON_YEAR}"
+        ).add_class('team-display-button').add_class('button-emulator-format')
+    if season_year == SEASON_YEAR:
+        season_selector_link.add_class('button-activated')
+    else:
+        season_selector_link.add_class('button-deactivated')
+    season_selector.add_element(season_selector_link)
+
+    season_selector_link = Link(internal=f'{SEASON_YEAR - 1}', href=f"/html/team/{team_name}/{SEASON_YEAR - 1}"
+        ).add_class('team-display-button').add_class('button-emulator-format')
+    if season_year == SEASON_YEAR - 1:
+        season_selector_link.add_class('button-activated')
+    else:
+        season_selector_link.add_class('button-deactivated')
+    season_selector.add_element(season_selector_link)
+
+    season_selector_link = Link(internal=f'{SEASON_YEAR - 2}', href=f"/html/team/{team_name}/{SEASON_YEAR - 2}"
+        ).add_class('team-display-button').add_class('button-emulator-format')
+    if season_year == SEASON_YEAR - 2:
+        season_selector_link.add_class('button-activated')
+    else:
+        season_selector_link.add_class('button-deactivated')
+    season_selector.add_element(season_selector_link)
+    page_content.add_element(season_selector)
+
+
+    # Sorting (added in each section)
     display_form = Form(action=f"/result", method='get').add_class('display-form')
-    display_form.add_element(
-        Header(level=2, internal='Display Options'))
-    display_form.add_element(
-        Button(internal='Event', type='button', onclick="teamDisplay('Event')").add_class('button-item-event').add_class('team-display-button').add_class('button-activated'))
-    display_form.add_element(
-        Button(internal='Meet', type='button', onclick="teamDisplay('Meet')").add_class('button-item-meet').add_class('team-display-button').add_class('button-deactivated'))
-    display_form.add_element(
-        Button(internal='Athlete Events', type='button', onclick="teamDisplay('Athlete-events')").add_class('button-item-athlete').add_class('team-display-button').add_class('button-deactivated'))
-    display_form.add_element(
-        Button(internal='Athlete Meets', type='button', onclick="teamDisplay('Athlete-meets')").add_class('button-item-athlete').add_class('team-display-button').add_class('button-deactivated'))
-    page_content.add_element(display_form)
+    display_form.add_element(Header(level=2, internal='Display Options'))
 
-
+    # Primary Content
     display_different_content = Div().add_class('page-content-divs')
 
 
-    page_content_event = Div().add_class('display-item-activated').add_class('page-content-event')
-    page_content_event.add_element(Header(level=1, internal=f"Events"))
+    # Events - Chronological
+    display_form.add_element(
+        Button(internal='Events Chronological', type='button', onclick="teamDisplay('Events-chronological')"
+        ).add_class('button-item-events-chronological').add_class('team-display-button').add_class('button-activated'))
+    page_content_event = Div().add_class('display-item-activated').add_class('page-content-events-chronological')
+    page_content_event.add_element(Header(level=1, internal=f"Events Chronological"))
     event_dict = {}
 
     for result in results:
@@ -355,7 +382,104 @@ async def find_team_html_page(athletes, results):
     display_different_content.add_element(page_content_event)
 
 
-    page_content_meet = Div().add_class('display-item-deactivated').add_class('page-content-meet')
+    # Events - Results
+    display_form.add_element(
+        Button(internal='Events Results', type='button', onclick="teamDisplay('Events-results')"
+        ).add_class('button-item-events-results').add_class('team-display-button').add_class('button-deactivated'))
+    page_content_event = Div().add_class('display-item-activated').add_class('page-content-events-results')
+    page_content_event.add_element(Header(level=1, internal=f"Events Results"))
+    event_dict = {}
+
+    for result in results:
+        if result.event not in event_dict:
+            event_dict[result.event] = []
+        for athlete in athletes:
+            if athlete.uid == result.athlete_uid:
+                result.athlete = athlete
+                break
+        event_dict[result.event].append(result)
+    events_div = Div()
+    column_names = ['Place', 'Meet', 'Athlete', 'Result', 'Wind', 'Heat', 'Graduation', 'Date']
+    for event, event_results in event_dict.items():
+        event_results.sort(key=lambda x: x.result.sort_value)
+        record_result = event_results[0]
+        for result in event_results:
+            if result.result > record_result.result:
+                record_result = result
+
+        event_div = Div().add_class('event-div')
+        event_div.add_element(Header(level=3, internal=event))
+        event_table = Table().add_class('event-table')
+        event_table.add_element(TableRow(
+            internal=[TableHeader(internal=col).add_class('event-table-header') for col in column_names]
+        ))
+
+        for index, result in enumerate(event_results):
+            if index % 2:
+                event_table_row = TableRow().add_class('odd-row')
+            else:
+                event_table_row = TableRow().add_class('even-row')
+            event_table_row.add_element(
+                TableData(internal=f"{result.place}").add_class('event-table-data'))
+            event_table_row.add_element(
+                TableData(internal=f"{result.meet}").add_class('event-table-data'))
+            athlete_name = f"{result.athlete.first_name} {result.athlete.last_name}"
+            event_table_row.add_element(
+                TableData(internal=f"{athlete_name}").add_class('event-table-data'))
+            event_table_row.add_element(
+                TableData(internal=f"{result.result.result_str}").add_class('event-table-data'))
+            event_table_row.add_element(
+                TableData(internal=f"{result.wind}").add_class('event-table-data'))
+            event_table_row.add_element(
+                TableData(internal=f"{result.heat}").add_class('event-table-data'))
+            event_table_row.add_element(
+                TableData(internal=f"{result.athlete.graduation_year}").add_class('event-table-data'))
+            event_table_row.add_element(
+                TableData(internal=f"{display_date(result.meet_date)}").add_class('event-table-data'))
+            event_table.add_element(event_table_row)
+
+        # Final rows
+        event_table_row = TableRow().add_class('record-row')
+        event_table_row.add_element(
+            TableData(internal=f"Current Best").add_class('event-table-data'))
+        for _ in column_names[1:]:
+            event_table_row.add_element(
+                TableData(internal=f" ").add_class('event-table-data'))
+        event_table.add_element(event_table_row)
+
+        event_table_row = TableRow().add_class('record-row')
+        event_table_row.add_element(
+            TableData(internal=f"{record_result.place}").add_class('event-table-data'))
+        event_table_row.add_element(
+            TableData(internal=f"{record_result.meet}").add_class('event-table-data'))
+        athlete_name = f"{record_result.athlete.first_name} {record_result.athlete.last_name}"
+        event_table_row.add_element(
+            TableData(internal=f"{athlete_name}").add_class('event-table-data'))
+        event_table_row.add_element(
+            TableData(internal=f"{record_result.result.result_str}").add_class('event-table-data'))
+        event_table_row.add_element(
+            TableData(internal=f"{record_result.wind}").add_class('event-table-data'))
+        event_table_row.add_element(
+            TableData(internal=f"{record_result.heat}").add_class('event-table-data'))
+        event_table_row.add_element(
+            TableData(internal=f"{result.athlete.graduation_year}").add_class('event-table-data'))
+        event_table_row.add_element(
+            TableData(internal=f"{display_date(record_result.meet_date)}").add_class('event-table-data'))
+        event_table.add_element(event_table_row)
+
+        event_div.add_element(event_table)
+        events_div.add_element(event_div)
+
+    page_content_event.add_element(events_div)
+    page_content_event.attributes['hidden'] = None
+    display_different_content.add_element(page_content_event)
+
+
+    # Meets
+    display_form.add_element(
+        Button(internal='Meets', type='button', onclick="teamDisplay('Meets')"
+        ).add_class('button-item-meets').add_class('team-display-button').add_class('button-deactivated'))
+    page_content_meet = Div().add_class('display-item-deactivated').add_class('page-content-meets')
     page_content_meet.add_element(Header(level=1, internal=f"Meets"))
     meet_dict = {}
     for result in results:
@@ -458,6 +582,10 @@ async def find_team_html_page(athletes, results):
     display_different_content.add_element(page_content_meet)
 
 
+    # Athletes - Events
+    display_form.add_element(
+        Button(internal='Athlete Events', type='button', onclick="teamDisplay('Athlete-events')"
+        ).add_class('button-item-athlete-events').add_class('team-display-button').add_class('button-deactivated'))
     page_content_athlete = Div().add_class('display-item-deactivated').add_class('page-content-athlete-events')
     page_content_athlete.add_element(Header(level=1, internal=f"Athletes"))
     athlete_dict = {}
@@ -474,7 +602,6 @@ async def find_team_html_page(athletes, results):
         athlete_dict[athlete_key][result.event].append(result)
     athletes_div = Div()
     column_names = ['Place', 'Meet', 'Athlete', 'Result', 'Wind', 'Heat', 'Graduation', 'Date']
-    # SORT BY ATHLETE NAME
     athlete_keys = list(athlete_dict.keys())
     athlete_keys.sort()
     athlete_dict = {k: athlete_dict[k] for k in athlete_keys}
@@ -567,6 +694,10 @@ async def find_team_html_page(athletes, results):
     display_different_content.add_element(page_content_athlete)
 
 
+    # Athletes - Meets
+    display_form.add_element(
+        Button(internal='Athlete Meets', type='button', onclick="teamDisplay('Athlete-meets')"
+        ).add_class('button-item-athlete-meets').add_class('team-display-button').add_class('button-deactivated'))
     page_content_athlete = Div().add_class('display-item-deactivated').add_class('page-content-athlete-meets')
     page_content_athlete.add_element(Header(level=1, internal=f"Athletes"))
     athlete_dict = {}
@@ -584,9 +715,7 @@ async def find_team_html_page(athletes, results):
         athlete_dict[athlete_key][meet].append(result)
     athletes_div = Div()
     column_names = ['Place', 'Event', 'Result', 'Wind', 'Heat', 'Graduation', 'Date']
-    # SORT BY ATHLETE NAME
     athlete_keys = list(athlete_dict.keys())
-    # athlete_keys.sort(key=lambda x: athlete.last_name)
     athlete_keys.sort()
     athlete_dict = {k: athlete_dict[k] for k in athlete_keys}
     for index, (athlete_id, events_results) in enumerate(athlete_dict.items()):
@@ -640,6 +769,7 @@ async def find_team_html_page(athletes, results):
     display_different_content.add_element(page_content_athlete)
 
 
+    page_content.add_element(display_form)
     page_content.add_element(display_different_content)
     body_content = BodyContent(body_content=[page_content])
 
@@ -652,12 +782,6 @@ async def find_team_html_page(athletes, results):
             font-weight: bold;
             text-decoration: underline;
         """),
-        # StyleTag(name='.display-item-activated', internal=f"""
-        #     display: block;
-        # """),
-        # StyleTag(name='.display-item-deactivated', internal=f"""
-        #     display: none;
-        # """),
         StyleTag(name='.event-div', internal=f"""
             margin: 20px;
             padding: 20px;
@@ -667,6 +791,10 @@ async def find_team_html_page(athletes, results):
         """),
         StyleTag(name='.button-deactivated', internal="""
             background-color: #efefef;
+        """),
+        StyleTag(name='.button-emulator-format', internal="""
+            border: 2px solid black;
+            color: black;
         """),
         StyleTag(name='.team-info-tag', internal="""
             margin: 20px 50px;
