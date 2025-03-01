@@ -1,6 +1,6 @@
 Primary Pages:
     Fairview:
-        endpoint: team/fhs
+        endpoint: "team/Fairview%20High%20School"
         description: Straight to the FHS page.
     Athletes:
         endpoint: athlete
