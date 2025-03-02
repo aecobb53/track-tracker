@@ -11,3 +11,4 @@ from .record_html import router as record_html_router
 # from .record_html import router as record_html_router
 
 from .unimplemented_html import router as unimplemented_html_router
+from .dev_html import router as dev_html_router

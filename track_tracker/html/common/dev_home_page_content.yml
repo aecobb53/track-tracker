@@ -1,25 +1,16 @@
 Primary Pages:
-    Fairview:
-        endpoint: team/Fairview%20High%20School
-        description: Straight to the FHS page.
-    Athletes:
-        endpoint: athlete
-        description: Find Athletes then view their page.
-    Teams:
-        endpoint: team
-        description: Find Teams then view their page.
-    # Records:
-    #     endpoint: record
-    #     description: All current state or Fairview records.
-    # Schedule:
-    #     endpoint: schedule
-    #     description: Team schedule.
-    # Resources:
-    #     endpoint: resource
-    #     description: Team resources.
-    Results:
-        endpoint: result
-        description: Detailed result filtering.
+    Main Website:
+        endpoint: home
+        description: Straight to the actual webpage.
+    Tech Stack:
+        endpoint: dev/tech-stack
+        description: Info about how the service is put together.
+    Development Roadmap:
+        endpoint: dev/roadmap
+        description: Upcoming work.
+    Service Health:
+        endpoint: dev/service-info
+        description: Service Info.
 
 # Extra Pages:
 #     Video:

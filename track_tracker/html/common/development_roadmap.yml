@@ -1,0 +1,53 @@
+Current Roadmap:
+    Expected Release Version: 1.3
+    Roadmap:
+        Data Pages:
+        UI:
+            - Task: A way to notify data is wrong (in line with data)?
+              Completed: False
+            - Task: When no results found, inform the user
+              Completed: False
+            - Task: On the team and probably also athlete pages add a way to select which years to show
+              Completed: False
+              Sub Tasks:
+                - Task: By default age off old athletes from the team page
+                  Completed: False
+                - Task: While im at it, age off old results from all pages except athlete specific pages at least by default
+                  Completed: False
+            - Task: Explore dropdowns to see if its tenable 
+              Completed: False
+            - Task: Verify sorting is working
+              Completed: False
+            - Task: Verify margins are set and look nice
+              Completed: False
+        Backend:
+            - Task: /service-info
+              Completed: False
+            - Task: Persist some data like different events, teams etc.
+              Completed: False
+              Sub Tasks:
+                - Task: Return data from an endpoint
+                  Completed: False
+            - Task: Only return data for active students unless asking for everything
+              Completed: False
+            - Task: Generally clean up the code
+              Completed: False
+        Data:
+            - Task: Pull historic records for state and FHS
+              Completed: False
+            - Task: Upload the rest of the data
+              Completed: False
+            - Task: Two meets arent loading. Fix
+              Completed: False
+        Mobile:
+            - Task: Verify readable in different light levels
+              Completed: False
+            - Task: Verify useful at different screen sizes
+              Completed: False
+        Dev Pages:
+            - Task: Dev dashboard `/dev/`?
+              Completed: False
+            - Task: Health of service page or endpoint from UI?
+              Completed: False
+            - Task: Recruiter
+              Completed: False

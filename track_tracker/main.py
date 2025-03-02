@@ -10,7 +10,7 @@ from models import (
     RestHeaders,
     ContextSingleton)
 from handlers import DatabaseHandler, init_logger
-from html import project_home_page, unimplemented_page
+from html import project_home_page, unimplemented_page, unimplemented_dev_page
 
 
 
@@ -45,6 +45,7 @@ from routs import (
     team_html_router,
     record_html_router,
     unimplemented_html_router,
+    dev_html_router
 )
 
 # Can delete after done testing rest calls from different sources
@@ -84,6 +85,7 @@ app.include_router(athlete_html_router)
 app.include_router(team_html_router)
 app.include_router(record_html_router)
 app.include_router(unimplemented_html_router)
+app.include_router(dev_html_router)
 
 
 @app.on_event("startup")
@@ -113,6 +115,8 @@ async def root(request: Request):
 # Root
 @app.get('/', status_code=200)
 @app.get('/home', status_code=200)
+@app.get('/html/home', status_code=200)
+@app.get('/html/home', status_code=200)
 async def root(request: Request):
     header_details = RestHeaders(request=request)
     if header_details.response_type == ResponseTypes.HTML:
@@ -188,7 +192,10 @@ async def root(request: Request):
 
 
 # @app.get('/service-info', status_code=200)
+# @app.get('/html/service-info', status_code=200)
 # async def service_info(request: Request):
+#     service_info_page = await unimplemented_dev_page()
+#     return HTMLResponse(content=service_info_page)
 #     # logger.debug('GET on /service-info')
 #     file_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'info.json')
 #     header_details = RestHeaders(request=request)
