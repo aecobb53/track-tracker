@@ -21,6 +21,10 @@ class AthleteData(BaseModel):
     gender: str | None = None
     graduation_year: int | None = None
 
+    # aliases: List[str] = []
+    # tags: List[str] = []
+    # active: bool = True
+
     # @model_validator(mode='before')
     # def validate_fields(cls, fields):
 

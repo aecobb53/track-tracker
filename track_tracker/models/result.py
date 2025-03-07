@@ -58,6 +58,71 @@ class Result(BaseModel):
             return f"{feet}-{inches}"
 
     @property
+    def format_smaller_value(self):
+        """
+        Force results in terms of seconds or inches
+        """
+        """
+        tmp = timedelta(
+            minutes=minutes or 0,
+            seconds=seconds or 0,
+            milliseconds=subsecond or 0,
+        )
+        tmp_min = tmp.seconds // 60
+        tmp_sec = tmp.seconds % 60
+        tmp_microseconds = tmp.microseconds
+        tmp_format = f"{tmp_min}:{tmp_sec}.{tmp_microseconds}"
+        print(f"tmp: {tmp}, tmp_min: {tmp_min}, tmp_sec: {tmp_sec}, tmp_microseconds: {tmp_microseconds}, tmp_format: {tmp_format}")
+
+        """
+        if self.minutes or self.seconds or self.subsecond:
+            minutes = self.minutes or 0
+            seconds = self.seconds or 0
+            subsecond = self.subsecond or 0
+            seconds += subsecond
+            value = timedelta(minutes=minutes, seconds=seconds)
+            formatted = float(value.total_seconds())
+            return formatted
+        elif self.feet or self.inches or self.fractions:
+            feet = self.feet or 0
+            inches = self.inches or 0
+            fractions = self.fractions or 0
+            return feet * 12 + inches + fractions
+        else:
+            raise ValueError('Unable to give a Sort Value')
+
+    # @property
+    # def format_padded_value(self):
+    #     """
+    #     Pad results with minutes and feet even if there are none
+    #     """
+    #     """
+    #     tmp = timedelta(
+    #         minutes=minutes or 0,
+    #         seconds=seconds or 0,
+    #         milliseconds=subsecond or 0,
+    #     )
+    #     tmp_min = tmp.seconds // 60
+    #     tmp_sec = tmp.seconds % 60
+    #     tmp_microseconds = tmp.microseconds
+    #     tmp_format = f"{tmp_min}:{tmp_sec}.{tmp_microseconds}"
+    #     print(f"tmp: {tmp}, tmp_min: {tmp_min}, tmp_sec: {tmp_sec}, tmp_microseconds: {tmp_microseconds}, tmp_format: {tmp_format}")
+
+    #     """
+    #     if self.minutes or self.seconds or self.subsecond:
+    #         minutes = self.minutes or 0
+    #         seconds = self.seconds or 0
+    #         subsecond = self.subsecond or 0
+    #         return minutes * 60 + seconds + subsecond
+    #     elif self.feet or self.inches or self.fractions:
+    #         feet = self.feet or 0
+    #         inches = self.inches or 0
+    #         fractions = self.fractions or 0
+    #         return feet * 12 + inches + fractions
+    #     else:
+    #         raise ValueError('Unable to give a Sort Value')
+
+    @property
     def put(self):
         output = f"{self.event_str}::{self.result_str}"
         return output

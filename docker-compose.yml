@@ -22,6 +22,7 @@ services:
         environment:
             DATABASE_URL: postgresql://example:example@db:5432/example_db
             PYTHONUNBUFFERED: 1
+            LOGICAL_ENV: "${LOGICAL_ENV}"
         command: bash /entrypoint.sh
         volumes:  # This allows uvicorn to reload
             - .:/app

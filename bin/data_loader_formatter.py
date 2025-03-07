@@ -30,7 +30,7 @@ def parse_data_row(data_row: list[str], event: str, header: list[str], calendar_
     A_header_len = len(header)
     A_row_len = len(data_row)
     if len(header) == 7 and len(data_row) == 3:
-        if header == ['PLACE', 'VIDEO', 'ATHLETE', 'TEAM', 'MARK', 'WIND', 'HEAT']:
+        if header == ['PLACE', 'VIDEO', 'ATHLETE', 'TEAM', 'RESULT', 'WIND', 'HEAT']:
             student_year = None
             year = None
             team = None
@@ -170,7 +170,7 @@ def parse_data_row(data_row: list[str], event: str, header: list[str], calendar_
         else:
             x=1
     elif len(header) == 5 and len(data_row) == 3:
-        if header == ['PLACE', 'VIDEO', 'TEAM', 'MARK', 'HEAT']:
+        if header == ['PLACE', 'VIDEO', 'TEAM', 'RESULT', 'HEAT']:
             heat = None
             place = None
             wind = None

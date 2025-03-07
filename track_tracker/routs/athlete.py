@@ -63,7 +63,7 @@ async def find_athlete(request: Request, first: str, last: str, team: str):
     except DuplicateRecordsException as err:
         message = f"Duplicate records found: [{err}]"
         context.logger.error(message)
-        raise HTTPException(status_code=409, detail=message)
+        raise HTTPException(status_code=400, detail=message)
     except Exception as err:
         context.logger.warning(f'ERROR: {err}')
         raise HTTPException(status_code=500, detail='Internal Service Error')
@@ -87,9 +87,12 @@ async def update_athlete(athlete: AthleteData):
 @router.get('/display', status_code=200)
 async def filter_athlete(request: Request):
     try:
+        print('ZERO')
         athlete_filter = parse_query_params(request=request, query_class=AthleteFilter)
+        print('ONE')
         ah = AthleteHandler()
         athletes, query_max_count = await ah.filter_athletes_display(athlete_filter=athlete_filter)
+        print('TWO')
         mh = ResultHandler()
         for athlete in athletes:
             results, _ = await mh.filter_results_display(ResultFilter(athlete_uid=[athlete['uid']]))

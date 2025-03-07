@@ -131,7 +131,7 @@ class AthleteHandler(BaseHandler):
                 'First Name': athlete.first_name,
                 'Team': athlete.team,
                 'Gender': athlete.gender,
-                'Class': class_formatter(athlete.graduation_year)[0],
+                'Class': class_formatter(athlete.graduation_year, allow_none=True)[0],
                 'results': results,
                 'records': records,
                 'uid': athlete.uid,

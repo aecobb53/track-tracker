@@ -2,6 +2,7 @@ import os
 import json
 import requests
 from datetime import datetime, timezone
+from time import sleep
 
 
 etc_dir = 'etc'
@@ -131,9 +132,11 @@ for year, meets in data.items():
                 if not result_resp.ok and result_resp.status_code != 409:
                     x=1
                 x=1
+                # print(f"Iteration: ")
             progress_tracking[year][meet_name][event_name] = True
             with open(COMPLETED_STEPS, 'w') as jf:
                 jf.write(json.dumps(progress_tracking, indent=4))
+            sleep(1)
         x=1
         progress_pointer += 1
         percent_complete = int(progress_pointer / progress_count * 10000) / 100

@@ -19,3 +19,12 @@ from .result import (
     ResultDB,
     ResultFilter,
 )
+from .workout import (
+    WorkoutData,
+    WorkoutApiCreate,
+    WorkoutDBBase,
+    WorkoutDBCreate,
+    WorkoutDBRead,
+    WorkoutDB,
+    WorkoutFilter,
+)

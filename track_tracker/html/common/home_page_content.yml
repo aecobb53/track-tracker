@@ -1,6 +1,6 @@
 Primary Pages:
     Fairview:
-        endpoint: "team/Fairview%20High%20School"
+        endpoint: team/Fairview%20High%20School/2024
         description: Straight to the FHS page.
     Athletes:
         endpoint: athlete
@@ -8,6 +8,9 @@ Primary Pages:
     Teams:
         endpoint: team
         description: Find Teams then view their page.
+    Workouts:
+        endpoint: workout
+        description: Practice Data.
     # Records:
     #     endpoint: record
     #     description: All current state or Fairview records.
