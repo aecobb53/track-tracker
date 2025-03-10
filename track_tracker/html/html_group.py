@@ -143,12 +143,12 @@ async def sprint_html_page(athletes_dict):
 
     display_details_list = sorted(display_details_list, key=lambda x: _sort_function(x['200m']))
 
-    for details in display_details_list:
-        # print('')
-        # print(f'TEAM: {athlete.team}')
-        # print(f'ATHLETE: {athlete}')
-        # print(f'DETAILS: {details}')
-        sprinters_table_row = TableRow().add_class('sprinters-table-row')
+    for index, details in enumerate(display_details_list):
+        if index % 2:
+            sprinters_table_row = TableRow().add_class('odd-row')
+        else:
+            sprinters_table_row = TableRow().add_class('even-row')
+
         sprinters_table_row.add_element(
             TableData(internal=details['first_name']).add_class('sprinters-table-data'))
         sprinters_table_row.add_element(
@@ -237,9 +237,11 @@ async def hurlde_html_page(athletes_dict):
 
     # display_details_list = sorted(display_details_list, key=lambda x: _sort_function(x['200m']))
 
-    for details in display_details_list:
-        print(f"D: {details}")
-        sprinters_table_row = TableRow().add_class('sprinters-table-row')
+    for index, details in enumerate(display_details_list):
+        if index % 2:
+            sprinters_table_row = TableRow().add_class('odd-row')
+        else:
+            sprinters_table_row = TableRow().add_class('even-row')
         sprinters_table_row.add_element(
             TableData(internal=details['first_name']).add_class('sprinters-table-data'))
         sprinters_table_row.add_element(
@@ -253,118 +255,11 @@ async def hurlde_html_page(athletes_dict):
 
         sprinters_table_row.add_element(
             TableData(internal=details['takeoff']).add_class('sprinters-table-data'))
-
-        # if details['100m_assumed']:
-        #     sprinters_table_row.add_element(
-        #         TableData(internal=str(details['100m']) + '*').add_class('sprinters-table-data'))
-        # else:
-        #     sprinters_table_row.add_element(
-        #         TableData(internal=details['100m']).add_class('sprinters-table-data'))
-
-        # if details['200m_assumed']:
-        #     sprinters_table_row.add_element(
-        #         TableData(internal=str(details['200m']) + '*').add_class('sprinters-table-data'))
-        # else:
-        #     sprinters_table_row.add_element(
-        #         TableData(internal=details['200m']).add_class('sprinters-table-data'))
-
-        # if details['400m_assumed']:
-        #     sprinters_table_row.add_element(
-        #         TableData(internal=str(details['400m']) + '*').add_class('sprinters-table-data'))
-        # else:
-        #     sprinters_table_row.add_element(
-        #         TableData(internal=details['400m']).add_class('sprinters-table-data'))
-
-        
         sprinters_table.add_element(sprinters_table_row)
 
     sprinters_div.add_element(sprinters_table)
     page_content.add_element(sprinters_div)
 
-
-
-
-    # Workout Content
-    # Workout Dates
-    # page_content_workout = Div().add_class('display-item')
-    # workouts_dict = {}
-    # for workout in workouts:
-    #     workout_datetime = datetime.strftime(workout.workout_date, "%a %b %d")
-    #     workout_name = workout.workout
-    #     if workout_datetime not in workouts_dict:
-    #         workouts_dict[workout_datetime] = {}
-    #     if workout_name not in workouts_dict[workout_datetime]:
-    #         workouts_dict[workout_datetime][workout_name] = []
-    #     workouts_dict[workout_datetime][workout_name].append(workout)
-
-    # workout_dates_div = Div().add_class('workout-dates-div')
-    # for date , workout_details in workouts_dict.items():
-    #     for workout_name, workout_list in workout_details.items():
-    #         column_names = ['First', 'Last'] + [k for k in workout_list[0].results.keys()]
-    #         workout_div = Div().add_class('workout-div')
-
-    #         workout_div.add_element(Header(level=3, internal=f"{date} - {workout_name}"))
-    #         workout_dates_table = Table().add_class('workout-dates-table')
-    #         workout_dates_table.add_element(TableRow(
-    #             internal=[TableHeader(internal=col).add_class('event-table-header') for col in column_names]
-    #         ))
-    #         for index, workout in enumerate(workout_list):
-    #             if index % 2:
-    #                 workout_table_row = TableRow().add_class('odd-row')
-    #             else:
-    #                 workout_table_row = TableRow().add_class('even-row')
-    #             workout_table_row.add_element(
-    #                 TableData(internal=f"{workout.athlete.first_name}").add_class('event-table-data'))
-    #             workout_table_row.add_element(
-    #                 TableData(internal=f"{workout.athlete.last_name}").add_class('event-table-data'))
-    #             for result in workout.results.values():
-    #                 if isinstance(result, Result):
-    #                     value = result.format_smaller_value
-    #                 else:
-    #                     value = result
-    #                 workout_table_row.add_element(
-    #                     TableData(internal=f"{value}").add_class('event-table-data'))
-    #             workout_dates_table.add_element(workout_table_row)
-
-    #         workout_div.add_element(workout_dates_table)
-    #     workout_dates_div.add_element(workout_div)
-    # page_content.add_element(workout_dates_div)
-
-
-    # # Table
-    # table_div = Div(id='table-div')
-    # page_content.add_element(table_div)
-
-    # # Pagination
-    # pagination_div = Div().add_class('pagination-div')
-    # page_content.add_element(pagination_div)
-
-    # # JS Files
-    # js_files = [
-    #     os.path.join('workout', 'applyFilterForm.js'),
-    #     os.path.join('workout', 'GETFilterWorkout.js'),
-    #     os.path.join('workout', 'populateWorkoutTable.js'),
-    #     os.path.join('workout', 'applyDisplayFilters.js'),
-    #     os.path.join('workout', 'toggleCheckboxes.js'),
-    #     os.path.join('common', 'pagination.js'),
-    # ]
-    # for fl in js_files:
-    #     with open(os.path.join('html', fl), 'r') as jf:
-    #         # line = line.replace('SERVICE_URL', service_url)
-    #         js_lines = jf.readlines()
-    #         js_lines[-1] += '\n'  # In case there is not a newline at the end of the file
-    #         # js_script = [l[:-1] for l in js_lines]
-    #         # js_script = []
-    #         # for line in [l[:-1] for l in js_lines]:
-    #         #     line = line.replace('ROW_BACKGROUND_COLOR_1', 'black')
-    #         #     line = line.replace('ROW_BACKGROUND_COLOR_2', 'red')
-    #         #     js_script.append(line)
-    #         page_content.add_element(
-    #             Script(internal=[l[:-1] for l in js_lines])
-    #         )
-    #         # page_content.add_element(
-    #         #     Script(internal=js_script)
-    #         # )
     body_content = BodyContent(body_content=[page_content])
 
     # Styles
