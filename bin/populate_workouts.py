@@ -10,7 +10,7 @@ etc_workouts = os.path.join(etc_dir, 'workouts')
 BIG_ASS_JSON_PATH = os.path.join(etc_tmp, 'upload_file.json')
 COMPLETED_STEPS = os.path.join(etc_tmp, 'workfile_deleteme3.json')
 SERVER_URL = 'http://localhost:8205'
-# SERVER_URL = 'https://fhs-track.nax.lol'
+SERVER_URL = 'https://fhs-track.nax.lol'
 TEAM = 'Fairview High School'
 
 
@@ -57,10 +57,11 @@ def upload_data(workout_results, workout_date, workout_name, workout_description
         last = row['last_name']
         if not last:
             last = 'Doe'
-        athlete_resp = requests.get(f"{SERVER_URL}/athlete/{first}/{last}/{TEAM}/")
-        athlete_content = athlete_resp.json()
+        athlete_resp = requests.get(f"{SERVER_URL}/athlete/{first}/{last}/{TEAM}")
+        # print(athlete_resp.content)
+        # athlete_content = athlete_resp.json()
         if athlete_resp.status_code == 400:
-            resp = requests.get(f"{SERVER_URL}/athlete", params={
+            resp = requests.get(f"{SERVER_URL}/athlete/", params={
                 'first_name': first,
                 'last_name': last,
                 'team': TEAM,
@@ -75,9 +76,10 @@ def upload_data(workout_results, workout_date, workout_name, workout_description
                 'last_name': last,
                 'team': TEAM,
             }
-            athlete_resp = requests.post(f"{SERVER_URL}/athlete", json=athlete_payload)
+            athlete_resp = requests.post(f"{SERVER_URL}/athlete/", json=athlete_payload)
             athlete_content = athlete_resp.json()
         elif athlete_resp.ok:
+            athlete_content = athlete_resp.json()
             for tag in tags:
                 if tag not in athlete_content['tags']:
                     x=1
@@ -86,6 +88,8 @@ def upload_data(workout_results, workout_date, workout_name, workout_description
                     athlete_content = athlete_resp.json()
                     break
             x=1
+        else:
+            athlete_content = athlete_resp.json()
 
         skip_keys = ['first_name', 'last_name', 'First', 'Last', 'First Name', 'Last Name']
         results = {}
@@ -101,7 +105,7 @@ def upload_data(workout_results, workout_date, workout_name, workout_description
             'athlete_first_name': athlete_content['first_name'],
             'athlete_last_name': athlete_content['last_name'],
         }
-        workout_resp = requests.post(f"{SERVER_URL}/workout", json=workout_payload)
+        workout_resp = requests.post(f"{SERVER_URL}/workout/", json=workout_payload)
         if workout_resp.status_code == 409:
             params = {
                 'workout': workout_name,
@@ -111,7 +115,7 @@ def upload_data(workout_results, workout_date, workout_name, workout_description
                 ],
                 'athlete_uid': [athlete_content['uid']],
             }
-            workout_resp = requests.get(f"{SERVER_URL}/workout", params=params)
+            workout_resp = requests.get(f"{SERVER_URL}/workout/", params=params)
             if workout_resp.json().get('workouts'):
                 workout_content = workout_resp.json()['workouts'][0]
         elif not workout_resp.ok:
@@ -122,7 +126,7 @@ def upload_data(workout_results, workout_date, workout_name, workout_description
             workout_content = workout_resp.json()
     x=1
 
-workout_resp = requests.get(f"{SERVER_URL}/workout")
+workout_resp = requests.get(f"{SERVER_URL}/workout/")
 workout_content = workout_resp.json()
 # with open('deleteme.json', 'w') as f:
 #     f.write(json.dumps(workout_content, indent=4))
