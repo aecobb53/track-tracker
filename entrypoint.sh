@@ -1,7 +1,6 @@
 #!/bin/bash
 
 cd track_tracker/
-
 echo "${LOGICAL_ENV}"
 
 if [ "${LOGICAL_ENV}" == "DEV" ]; then
@@ -14,3 +13,4 @@ else
     echo "UNKNOWN LOGICAL_ENV - EXITING"
     exit 1
 fi
+
