@@ -46,11 +46,12 @@ filter:
             no_text_field: true
             options:
                 - "All"
-                - "Sprints"
-                - "Sprints/Fields"
+                - "Sprint"
+                - "Sprint,Fields"
                 - "Fields"
-                - "Throws"
                 - "Distance"
+                - "Distance,Fields"
+                - "Sprint,Distance"
         current:
             variable: current
             display: Current Student
@@ -93,11 +94,11 @@ arrange:
             display: Sort Column 1
             description: What to sort by first.
             datatype: str
-            default_value: Last Name
+            default_value: First Name
             no_text_field: true
             options:
-                - Last Name
                 - First Name
+                - Last Name
                 - Team
                 - Gender
                 - Class
@@ -106,11 +107,11 @@ arrange:
             display: Sort Column 2
             description: What to sort by first.
             datatype: str
-            default_value: First Name
+            default_value: Last Name
             no_text_field: true
             options:
-                - First Name
                 - Last Name
+                - First Name
                 - Team
                 - Gender
                 - Class

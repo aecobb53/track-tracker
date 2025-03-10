@@ -3,6 +3,7 @@ import json
 import requests
 from datetime import datetime, timezone
 from time import sleep
+import re
 
 
 etc_dir = 'etc'
@@ -10,7 +11,7 @@ etc_tmp = os.path.join(etc_dir, 'tmp')
 BIG_ASS_JSON_PATH = os.path.join(etc_tmp, 'upload_file.json')
 COMPLETED_STEPS = os.path.join(etc_tmp, 'workfile_deleteme_2025.json')
 SERVER_URL = 'http://localhost:8205'
-SERVER_URL = 'https://fhs-track.nax.lol'
+# SERVER_URL = 'https://fhs-track.nax.lol'
 CURRENT_YEAR = 2025
 
 YEAR_MAP = {
@@ -19,7 +20,25 @@ YEAR_MAP = {
     11: 'Junior',
     12: 'Senior',
 }
-
+sprint = {
+    r'60 Meter': 'Sprint',
+    r'100 Meter': 'Sprint',
+    r'200 Meter': 'Sprint',
+    r'400 Meter': 'Sprint',
+    r'110 Meter': 'Sprint',
+    r'300 Meter': 'Sprint',
+}
+distance = {
+    r'800 Meter': 'Distance',
+    r'1600 Meter': 'Distance',
+    r'3200 Meter': 'Distance',
+}
+field = {
+    r'Jump': 'Field',
+    r'Discus': 'Field',
+    r'Shot Put': 'Field',
+    r'Vault': 'Field',
+}
 
 # resp = requests.get(f"{SERVER_URL}/result/")
 # content= resp.json()
@@ -36,6 +55,17 @@ if os.path.exists(COMPLETED_STEPS):
         progress_tracking = json.load(jf)
 else:
     progress_tracking = {}
+
+
+
+
+
+
+progress_tracking = {}
+
+
+
+
 
 
 progress_count = sum([len(m) for y, m in data.items()])
@@ -87,6 +117,22 @@ for year, meets in data.items():
                     first = athlete['first_name']
                     last = athlete['last_name']
                     team = athlete['team']
+                    # Tags
+                    x=1
+                    athlete_tags = []
+                    for i, j in sprint.items():
+                        if re.search(i, result['event']):
+                            athlete_tags.append(j)
+                            break
+                    for i, j in distance.items():
+                        if re.search(i, result['event']):
+                            athlete_tags.append(j)
+                            break
+                    for i, j in field.items():
+                        if re.search(i, result['event']):
+                            athlete_tags.append(j)
+                            break
+                    athlete['tags'] = athlete.get('tags', []) + athlete_tags
                     athlete_resp = requests.get(f"{SERVER_URL}/athlete/{first}/{last}/{team}/")
                     if athlete_resp.status_code == 404:
                         # Post new athlete
@@ -106,13 +152,11 @@ for year, meets in data.items():
                         update = False
                         for key, value in athlete.items():
                             if athlete_content[key] != value:
-                                # if key != 'graduation_year':
-                                #     print('')
-                                #     print('compared athletes but are different')
-                                #     print(athlete_content)
-                                #     print(athlete)
                                 update = True
-                                athlete_content[key] = value
+                                if key == 'tags':
+                                    athlete_content[key] = athlete_content[key] + value
+                                else:
+                                    athlete_content[key] = value
                                 x=1
                         if update:
                             x=1

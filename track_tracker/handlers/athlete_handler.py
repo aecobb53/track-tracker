@@ -25,6 +25,7 @@ class AthleteHandler(BaseHandler):
     async def create_athlete(self, athlete: AthleteData) -> AthleteData:
         self.context.logger.info(f"Creating athlete: {athlete.model_dump_json()}")
         with Session(self.context.database.engine) as session:
+            print(f"ATHLETE TAGS: {athlete.tags}")
             create_obj = AthleteDBCreate.model_validate(athlete)
             create_obj = AthleteDB.model_validate(create_obj)
             session.add(create_obj)
@@ -91,6 +92,8 @@ class AthleteHandler(BaseHandler):
             for key in AthleteData.__fields__.keys():
                 if key not in skip_fields:
                     try:
+                        if key in ['aliases', 'tags', 'athlete_metadata']:
+                            setattr(athlete, key, json.dumps(getattr(athlete, key)))
                         if getattr(row, key) != getattr(athlete, key):
                             setattr(row, key, getattr(athlete, key))
                     except AttributeError:
@@ -127,8 +130,8 @@ class AthleteHandler(BaseHandler):
             results = {}
             records = {}
             display_athletes.append({
-                'Last Name': athlete.last_name,
                 'First Name': athlete.first_name,
+                'Last Name': athlete.last_name,
                 'Nickname': athlete.aliases,
                 'Event Class': athlete.tags,
                 'Team': athlete.team,

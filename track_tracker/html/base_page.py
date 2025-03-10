@@ -151,7 +151,7 @@ TABLE_STYLES = [
             padding: 5px 25px;
         """),
         StyleTag(name='td a', internal=f"""
-            color: {TEXT_COLOR_ONE};
+            color: {TEXT_COLOR_TWO};
         """),
         StyleTag(name='.even-row', internal=f"""
             background-color: {TABLE_BACKGROUND_COLOR_ONE};
@@ -338,17 +338,11 @@ async def project_home_page():
     body_content = BodyContent(
         body_content=[page_content],
         body_styles=PAGE_STYLES,)
-    # print(f"BODY_STYLES: {body_content.body_styles}")
     # body_content.body_styles = []
-    # print(f"BODY_STYLES: {body_content.body_styles}")
     # for style in PAGE_STYLES:
-    #     # print(f"STYLES: {style.return_document}")
     #     body_content.add_body_styles(style)
-    print(f"BODY_STYLES: {body_content.body_styles}")
     for style in body_styles:
         body_content.add_body_styles(style)
-    print(f"BODY_STYLES: {body_content.body_styles}")
-    print(f"BODY_STYLES: {body_content.body_styles[0].return_document}")
 
 
     base_doc.body_content = body_content

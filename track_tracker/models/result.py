@@ -210,6 +210,8 @@ class ResultData(BaseModel):
     meet: str
     gender: str | None = None
 
+    result_metadata: Dict[str, str] | None = None
+
     @model_validator(mode='before')
     def validate_fields(cls, fields):
         x=1
@@ -240,7 +242,10 @@ class ResultApiCreate(BaseModel):
     meet: str
     gender: str | None = None
 
+    result_metadata: Dict[str, str] | None = None
+
     athlete: AthleteData | None = None
+
 
     @model_validator(mode='before')
     def validate_fields(cls, fields):
@@ -283,6 +288,8 @@ class ResultDBBase(SQLModel):
     result: Dict | None = Field(default_factory=dict, sa_column=Column(JSON))
     meet: str
     gender: str | None = None
+
+    result_metadata: str | None = None
 
     search_team: str | None = None
 

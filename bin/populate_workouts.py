@@ -10,7 +10,7 @@ etc_workouts = os.path.join(etc_dir, 'workouts')
 BIG_ASS_JSON_PATH = os.path.join(etc_tmp, 'upload_file.json')
 COMPLETED_STEPS = os.path.join(etc_tmp, 'workfile_deleteme3.json')
 SERVER_URL = 'http://localhost:8205'
-SERVER_URL = 'https://fhs-track.nax.lol'
+# SERVER_URL = 'https://fhs-track.nax.lol'
 TEAM = 'Fairview High School'
 
 
@@ -132,7 +132,7 @@ workout_content = workout_resp.json()
 #     f.write(json.dumps(workout_content, indent=4))
 x=1
 
-tags = ['Sprints']
+tags = ['Sprint']
 
 # Workout 1
 workout_date = datetime.strftime(datetime(2025,2,24), "%Y-%m-%d")

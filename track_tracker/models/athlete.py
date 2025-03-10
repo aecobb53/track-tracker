@@ -25,6 +25,8 @@ class AthleteData(BaseModel):
     tags: List[str] = []
     active: bool = True
 
+    athlete_metadata: Dict[str, str] = {}
+
     # @model_validator(mode='before')
     # def validate_fields(cls, fields):
 
@@ -45,10 +47,8 @@ class AthleteData(BaseModel):
                 output['current_year'] = f'Freshman'
             elif year > 3:
                 output['current_year'] = f'Not in HS yet'
-        output['aliases'] = ','.join(self.aliases)
-        print(f"SELF TAGS: {self.tags}")
-        output['tags'] = ','.join(self.tags)
-        print(f"OUTPUT TAGS: {output['tags']}")
+        # output['aliases'] = self.aliases
+        # output['tags'] = self.tags
         return output
 
     @property
@@ -66,13 +66,14 @@ class AthleteApiCreate(BaseModel):
     aliases: List[str] = []
     tags: List[str] = []
 
+    athlete_metadata: Dict[str, str] = {}
+
     def cast_data_object(self) -> AthleteData:
         """Return a data object based on the AthleteData class"""
         content = self.model_dump()
         content['uid'] = str(uuid4())
         content['update_datetime'] = datetime.now(timezone.utc)
         content['active'] = True
-        print(f"Casting data object: {content}")
         data_obj = AthleteData(**content)
         return data_obj
 
@@ -96,19 +97,24 @@ class AthleteDBBase(SQLModel):
     tags: str | None = None
     active: bool | None = True
 
+    athlete_metadata: str | None = None
+
     def cast_data_object(self) -> AthleteData:
         """Return a data object based on the AthleteData class"""
         content = self.model_dump()
-        if self.aliases:
-            content['aliases'] = self.aliases[1:-1].split(',')
-        else:
-            content['aliases'] = []
-        if self.tags:
-            content['tags'] = self.tags[1:-1].split(',')
-        else:
-            content['tags'] = []
-        if self.active is None:
-            content['active'] = True
+        # if self.aliases:
+        #     content['aliases'] = self.aliases[1:-1].split(',')
+        # else:
+        #     content['aliases'] = []
+        # if self.tags:
+        #     content['tags'] = self.tags[1:-1].split(',')
+        # else:
+        #     content['tags'] = []
+        # if self.active is None:
+        #     content['active'] = True
+        content['aliases'] = json.loads(self.aliases)
+        content['tags'] = json.loads(self.tags)
+        content['athlete_metadata'] = json.loads(self.athlete_metadata)
         data_obj = AthleteData(**content)
         return data_obj
 
@@ -120,8 +126,9 @@ class AthleteDBCreate(AthleteDBBase):
         fields['search_first_name'] = fields['first_name'].lower()
         fields['search_last_name'] = fields['last_name'].lower()
         fields['search_team'] = fields['team'].lower()
-        fields['aliases'] = ','.join(fields['aliases'])
-        fields['tags'] = ','.join(fields['tags'])
+        fields['aliases'] = json.dumps(fields['aliases'])
+        fields['tags'] = json.dumps(fields['tags'])
+        fields['athlete_metadata'] = json.dumps(fields['athlete_metadata'])
         return fields
 
 
@@ -184,7 +191,7 @@ class AthleteFilter(BaseModel):
 
         if fields.get('event_class'):
             event_class = fields.pop('event_class')
-            if event_class == 'All':
+            if event_class == ['All']:
                 del event_class
             else:
                 tags = []
@@ -239,7 +246,7 @@ class AthleteFilter(BaseModel):
             query = query.filter(or_(*filter_list))
 
         if self.tags:
-            filter_list = [database_object_class.search_team.contains(e) for e in self.tags]
+            filter_list = [database_object_class.tags.contains(e) for e in self.tags]
             query = query.filter(or_(*filter_list))
 
         if self.graduation_year:
