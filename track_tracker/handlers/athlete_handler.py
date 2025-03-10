@@ -25,7 +25,6 @@ class AthleteHandler(BaseHandler):
     async def create_athlete(self, athlete: AthleteData) -> AthleteData:
         self.context.logger.info(f"Creating athlete: {athlete.model_dump_json()}")
         with Session(self.context.database.engine) as session:
-            print(f"ATHLETE TAGS: {athlete.tags}")
             create_obj = AthleteDBCreate.model_validate(athlete)
             create_obj = AthleteDB.model_validate(create_obj)
             session.add(create_obj)
