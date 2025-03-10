@@ -21,23 +21,23 @@ YEAR_MAP = {
     12: 'Senior',
 }
 sprint = {
-    r'60 Meter': 'Sprint',
-    r'100 Meter': 'Sprint',
-    r'200 Meter': 'Sprint',
-    r'400 Meter': 'Sprint',
-    r'110 Meter': 'Sprint',
-    r'300 Meter': 'Sprint',
+    r' 60 Meter': 'Sprint',
+    r' 100 Meter': 'Sprint',
+    r' 200 Meter': 'Sprint',
+    r' 400 Meter': 'Sprint',
+    r' 110 Meter': 'Sprint',
+    r' 300 Meter': 'Sprint',
 }
 distance = {
-    r'800 Meter': 'Distance',
-    r'1600 Meter': 'Distance',
-    r'3200 Meter': 'Distance',
+    r' 800 Meter': 'Distance',
+    r' 1600 Meter': 'Distance',
+    r' 3200 Meter': 'Distance',
 }
 field = {
-    r'Jump': 'Field',
-    r'Discus': 'Field',
-    r'Shot Put': 'Field',
-    r'Vault': 'Field',
+    r' Jump': 'Field',
+    r' Discus': 'Field',
+    r' Shot Put': 'Field',
+    r' Vault': 'Field',
 }
 
 # resp = requests.get(f"{SERVER_URL}/result/")
@@ -117,6 +117,10 @@ for year, meets in data.items():
                     first = athlete['first_name']
                     last = athlete['last_name']
                     team = athlete['team']
+
+                    if first == 'Pietro':
+                        x=1
+
                     # Tags
                     x=1
                     athlete_tags = []
@@ -190,7 +194,7 @@ for year, meets in data.items():
             progress_tracking[year][meet_name][event_name] = True
             with open(COMPLETED_STEPS, 'w') as jf:
                 jf.write(json.dumps(progress_tracking, indent=4))
-            sleep(1)
+            # sleep(1)
         x=1
         progress_pointer += 1
         percent_complete = int(progress_pointer / progress_count * 10000) / 100

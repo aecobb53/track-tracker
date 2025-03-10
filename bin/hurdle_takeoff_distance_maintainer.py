@@ -5,6 +5,7 @@ import json
 
 TEAM = 'Fairview High School'
 URL = 'http://localhost:8205'
+# URL = 'https://fhs-track.nax.lol'
 
 data = [
     {

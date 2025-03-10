@@ -9,6 +9,7 @@ from .athlete_html import router as athlete_html_router
 from .team_html import router as team_html_router
 from .record_html import router as record_html_router
 from .workout_html import router as workout_html_router
+from .group_html import router as group_html_router
 # from .record_html import router as record_html_router
 
 from .unimplemented_html import router as unimplemented_html_router

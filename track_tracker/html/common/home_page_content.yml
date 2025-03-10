@@ -2,6 +2,9 @@ Primary Pages:
     Fairview:
         endpoint: team/Fairview%20High%20School/2025
         description: Straight to the FHS page.
+    Sprints:
+        endpoint: groups/sprint
+        description: Sprint coach page.
     Athletes:
         endpoint: athlete
         description: Find Athletes then view their page.
