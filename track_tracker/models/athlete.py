@@ -21,9 +21,9 @@ class AthleteData(BaseModel):
     gender: str | None = None
     graduation_year: int | None = None
 
-    # aliases: List[str] = []
-    # tags: List[str] = []
-    # active: bool = True
+    aliases: List[str] = []
+    tags: List[str] = []
+    active: bool = True
 
     # @model_validator(mode='before')
     # def validate_fields(cls, fields):
@@ -45,6 +45,10 @@ class AthleteData(BaseModel):
                 output['current_year'] = f'Freshman'
             elif year > 3:
                 output['current_year'] = f'Not in HS yet'
+        output['aliases'] = ','.join(self.aliases)
+        print(f"SELF TAGS: {self.tags}")
+        output['tags'] = ','.join(self.tags)
+        print(f"OUTPUT TAGS: {output['tags']}")
         return output
 
     @property
@@ -59,11 +63,16 @@ class AthleteApiCreate(BaseModel):
     team: str
     gender: str | None = None
 
+    aliases: List[str] = []
+    tags: List[str] = []
+
     def cast_data_object(self) -> AthleteData:
         """Return a data object based on the AthleteData class"""
         content = self.model_dump()
         content['uid'] = str(uuid4())
         content['update_datetime'] = datetime.now(timezone.utc)
+        content['active'] = True
+        print(f"Casting data object: {content}")
         data_obj = AthleteData(**content)
         return data_obj
 
@@ -83,11 +92,23 @@ class AthleteDBBase(SQLModel):
     search_last_name: str | None = None
     search_team: str | None = None
 
-    # active: bool = True
+    aliases: str | None = None
+    tags: str | None = None
+    active: bool | None = True
 
     def cast_data_object(self) -> AthleteData:
         """Return a data object based on the AthleteData class"""
         content = self.model_dump()
+        if self.aliases:
+            content['aliases'] = self.aliases[1:-1].split(',')
+        else:
+            content['aliases'] = []
+        if self.tags:
+            content['tags'] = self.tags[1:-1].split(',')
+        else:
+            content['tags'] = []
+        if self.active is None:
+            content['active'] = True
         data_obj = AthleteData(**content)
         return data_obj
 
@@ -99,6 +120,8 @@ class AthleteDBCreate(AthleteDBBase):
         fields['search_first_name'] = fields['first_name'].lower()
         fields['search_last_name'] = fields['last_name'].lower()
         fields['search_team'] = fields['team'].lower()
+        fields['aliases'] = ','.join(fields['aliases'])
+        fields['tags'] = ','.join(fields['tags'])
         return fields
 
 
@@ -115,9 +138,16 @@ class AthleteFilter(BaseModel):
 
     first_name: List[str] | None = None
     last_name: List[str] | None = None
+    # aliases: List[str] | None = None
     team: List[str] | None = None
     gender: List[str] | None = None
-    graduation_year: List[int] | None = None
+    graduation_year: List[str] | None = None
+
+    current: List[str] | None = None
+    event_class: str | None = None
+    tags: List[str] | None = None
+
+    # active: bool
 
     limit: int = 1000
     order_by: List[str] = ['last_name', 'first_name']
@@ -146,6 +176,23 @@ class AthleteFilter(BaseModel):
             fields['gender'] = [g.strip() for g in gender]
             if fields['gender'] == ['All']:
                 fields['gender'] = []
+
+        if fields.get('current'):
+            if fields['current'] == ['Current']:
+                year = datetime.now(timezone.utc).year
+                fields['graduation_year'] = [f"Greater than or equal to{year}", f"Less than or equal to{year+3}"]
+
+        if fields.get('event_class'):
+            event_class = fields.pop('event_class')
+            if event_class == 'All':
+                del event_class
+            else:
+                tags = []
+                for ec in event_class:
+                    tags.extend(ec.split(','))
+                if 'tags' not in fields:
+                    fields['tags'] = []
+                fields['tags'].extend(tags)
 
         if fields.get('graduation_year'):
             graduation_year = []
@@ -189,6 +236,10 @@ class AthleteFilter(BaseModel):
 
         if self.team:
             filter_list = [database_object_class.search_team.contains(e) for e in self.team]
+            query = query.filter(or_(*filter_list))
+
+        if self.tags:
+            filter_list = [database_object_class.search_team.contains(e) for e in self.tags]
             query = query.filter(or_(*filter_list))
 
         if self.graduation_year:

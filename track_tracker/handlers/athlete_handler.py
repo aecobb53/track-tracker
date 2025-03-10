@@ -129,6 +129,8 @@ class AthleteHandler(BaseHandler):
             display_athletes.append({
                 'Last Name': athlete.last_name,
                 'First Name': athlete.first_name,
+                'Nickname': athlete.aliases,
+                'Event Class': athlete.tags,
                 'Team': athlete.team,
                 'Gender': athlete.gender,
                 'Class': class_formatter(athlete.graduation_year, allow_none=True)[0],

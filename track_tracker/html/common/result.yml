@@ -8,15 +8,15 @@ filter:
             default_value: null
         gender:
             variable: gender
-            display: "Mens/Women's"
+            display: "Boys/Girls"
             description: Filter by gender.
             datatype: string
             default_value: null
             no_text_field: true
             options:
                 - "All"
-                - "Mens"
-                - "Womens"
+                - "Boys"
+                - "Girls"
     Heat:
         heat1:
             variable: heat
@@ -183,7 +183,7 @@ arrange:
                 - Result
                 - Wind
                 - Heat
-                - Mens/Womens
+                - Boys/Womens
                 - Meet
                 - Date
         sort2:
@@ -202,7 +202,7 @@ arrange:
                 - Result
                 - Wind
                 - Heat
-                - Mens/Womens
+                - Boys/Womens
                 - Date
                 - '-'
         sort3:
@@ -220,7 +220,7 @@ arrange:
                 - Result
                 - Wind
                 - Heat
-                - Mens/Womens
+                - Boys/Womens
                 - Meet
                 - Date
                 - '-'
@@ -240,7 +240,7 @@ arrange:
                 - Result
                 - Wind
                 - Heat
-                - Mens/Womens
+                - Boys/Womens
                 - Meet
                 - Date
         sort5:
@@ -259,7 +259,7 @@ arrange:
                 - Result
                 - Wind
                 - Heat
-                - Mens/Womens
+                - Boys/Womens
                 - Meet
                 - Date
 display:
@@ -346,7 +346,7 @@ display:
                     - Example
         gender:
             variable: gender
-            display: "Mens/Women's"
+            display: "Boys/Girls"
             formatted_function: null
             html_display_filtering:
                 display_column: Common
@@ -354,7 +354,7 @@ display:
                 checked: True
                 grouping_classes:
                     - Example
-    Meet:
+    Girls:
         meet:
             variable: meet
             display: Meet

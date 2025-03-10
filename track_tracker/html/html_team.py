@@ -233,8 +233,8 @@ async def find_team_html_page(athletes, results, team_name, season_year=SEASON_Y
     # Team Info
     page_content.add_element(Header(level=1, internal=f"{athletes[0].team}"))
 
-    men = [a for a in athletes if a.gender == 'Mens']
-    women = [a for a in athletes if a.gender == 'Womens']
+    boys = [a for a in athletes if a.gender == 'Boys']
+    girls = [a for a in athletes if a.gender == 'Girls']
 
     current_year = datetime.now().year
     freshmen = [a for a in athletes if a.graduation_year == current_year + 3]
@@ -244,8 +244,8 @@ async def find_team_html_page(athletes, results, team_name, season_year=SEASON_Y
 
 
     page_content.add_element(Header(level=2, internal=f"Athlete count: {len(athletes)}").add_class('team-info-tag'))
-    page_content.add_element(Header(level=2, internal=f"Men: {len(men)}").add_class('team-info-tag').add_class('mens-format'))
-    page_content.add_element(Header(level=2, internal=f"Women: {len(women)}").add_class('team-info-tag').add_class('womens-format'))
+    page_content.add_element(Header(level=2, internal=f"Boys: {len(boys)}").add_class('team-info-tag').add_class('mens-format'))
+    page_content.add_element(Header(level=2, internal=f"Girls: {len(girls)}").add_class('team-info-tag').add_class('womens-format'))
     page_content.add_element(Header(level=2, internal=f"Freshmen: {len(freshmen)}").add_class('team-info-tag'))
     page_content.add_element(Header(level=2, internal=f"Sophomore: {len(sophomore)}").add_class('team-info-tag'))
     page_content.add_element(Header(level=2, internal=f"Juniors: {len(juniors)}").add_class('team-info-tag'))
@@ -510,9 +510,9 @@ async def find_team_html_page(athletes, results, team_name, season_year=SEASON_Y
                     record_result = result
 
             event_div = Div().add_class('event-div')
-            if 'Men' in event:
+            if 'Boys' in event:
                 event_div.add_class('mens-format')
-            elif 'Women' in event:
+            elif 'Girls' in event:
                 event_div.add_class('womens-format')
             else:
                 raise ValueError(f"Event {event} is not configed")
@@ -622,9 +622,9 @@ async def find_team_html_page(athletes, results, team_name, season_year=SEASON_Y
                     record_result = result
 
             event_div = Div().add_class('event-div')
-            if 'Men' in event:
+            if 'Boys' in event:
                 event_div.add_class('mens-format')
-            elif 'Women' in event:
+            elif 'Girls' in event:
                 event_div.add_class('womens-format')
             else:
                 raise ValueError(f"Event {event} is not configed")

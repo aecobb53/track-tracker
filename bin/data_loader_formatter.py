@@ -30,7 +30,7 @@ def parse_data_row(data_row: list[str], event: str, header: list[str], calendar_
     A_header_len = len(header)
     A_row_len = len(data_row)
     if len(header) == 7 and len(data_row) == 3:
-        if header == ['PLACE', 'VIDEO', 'ATHLETE', 'TEAM', 'RESULT', 'WIND', 'HEAT']:
+        if header == ['PLACE', 'VIDEO', 'ATHLETE', 'TEAM', 'MARK', 'WIND', 'HEAT']:
             student_year = None
             year = None
             team = None
@@ -56,6 +56,7 @@ def parse_data_row(data_row: list[str], event: str, header: list[str], calendar_
                 team = data_row[-1][:result_run_re.start(0)].strip()
             else:
                 x=1
+                return
 
             year_re = re.search(r'(\d+)', team)
             if year_re:
@@ -74,8 +75,8 @@ def parse_data_row(data_row: list[str], event: str, header: list[str], calendar_
 
             # Gender
             re_gender_strings = {
-                r'(Boys?|Mens?)': 'Mens',
-                r'(Girls?|Womens?)': 'Womens',
+                r'(Boys?|Mens?)': 'Boys',
+                r'(Girls?|Womens?)': 'Girls',
             }
             for re_string, gender_string in re_gender_strings.items():
                 if re.search(re_string, event):
@@ -170,7 +171,7 @@ def parse_data_row(data_row: list[str], event: str, header: list[str], calendar_
         else:
             x=1
     elif len(header) == 5 and len(data_row) == 3:
-        if header == ['PLACE', 'VIDEO', 'TEAM', 'RESULT', 'HEAT']:
+        if header == ['PLACE', 'VIDEO', 'TEAM', 'MARK', 'HEAT']:
             heat = None
             place = None
             wind = None
@@ -193,8 +194,8 @@ def parse_data_row(data_row: list[str], event: str, header: list[str], calendar_
 
             # Gender
             re_strings = {
-                r'(Boys?|Mens?)': 'Mens',
-                r'(Girls?|Womens?)': 'Womens',
+                r'(Boys?|Mens?)': 'Boys',
+                r'(Girls?|Womens?)': 'Girls',
             }
             for re_string, gender_string in re_strings.items():
                 if re.search(re_string, event):
@@ -333,6 +334,13 @@ def parse_meet_file(path: str, meet_name: str, meet_dates: dict):
 meets_dirs = []
 for item in os.listdir(etc_dir):
     if item.endswith('_results'):
+
+
+        x=1
+        # REMOVE THIS ITS JUST TO SPEED IT UP TONIGHT
+        if '2025' not in item:
+            continue
+        x=1
         meets_dirs.append(os.path.join(etc_dir, item))
 
 with open(MEET_DATES_PATH, 'r') as jf:
@@ -343,7 +351,7 @@ for meets in meets_dirs:
     for meet in os.listdir(meets):
         meet_filepath = os.path.join(meets, meet)
         meet_name = meet.replace('.txt','').strip()
-        meet_year = int(meet_filepath.split('/')[-2][:4])
+        meet_year = int(meet_filepath.split('/')[-2][5:9])
         results = parse_meet_file(path=meet_filepath, meet_name=meet_name, meet_dates=meet_dates)
         if meet_year not in meets_results:
             meets_results[meet_year] = {}

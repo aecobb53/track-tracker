@@ -28,15 +28,39 @@ filter:
         #     default_value: null
         gender:
             variable: gender
-            display: Mens/Womens
+            display: Boys/Girls
             description: Filter by gender.
             datatype: string
             default_value: null
             no_text_field: true
             options:
                 - "All"
-                - "Mens"
-                - "Womens"
+                - "Boys"
+                - "Girls"
+        event_class:
+            variable: event_class
+            display: Event Classification
+            description: Focus on event classifications.
+            datatype: string
+            default_value: All
+            no_text_field: true
+            options:
+                - "All"
+                - "Sprints"
+                - "Sprints/Fields"
+                - "Fields"
+                - "Throws"
+                - "Distance"
+        current:
+            variable: current
+            display: Current Student
+            description: Only grab current students.
+            datatype: string
+            default_value: Current
+            no_text_field: true
+            options:
+                - "Current"
+                - "All"
         # event:
         #     variable: event
         #     display: Event - Not implemented yet
