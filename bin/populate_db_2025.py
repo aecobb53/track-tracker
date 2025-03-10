@@ -10,7 +10,7 @@ etc_tmp = os.path.join(etc_dir, 'tmp')
 BIG_ASS_JSON_PATH = os.path.join(etc_tmp, 'upload_file.json')
 COMPLETED_STEPS = os.path.join(etc_tmp, 'workfile_deleteme_2025.json')
 SERVER_URL = 'http://localhost:8205'
-# SERVER_URL = 'https://fhs-track.nax.lol'
+SERVER_URL = 'https://fhs-track.nax.lol'
 CURRENT_YEAR = 2025
 
 YEAR_MAP = {
