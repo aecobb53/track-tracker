@@ -17,4 +17,4 @@ from .common import (
     TEAM_DISPLAY_PARAMS,
     display_date,
 )
-from .html_group import sprint_html_page
+from .html_group import sprint_html_page, hurlde_html_page

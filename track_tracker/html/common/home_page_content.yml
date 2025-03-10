@@ -5,6 +5,9 @@ Primary Pages:
     Sprints:
         endpoint: groups/sprint
         description: Sprint coach page.
+    Hurdles:
+        endpoint: groups/hurdle
+        description: Hurlde coach page.
     Athletes:
         endpoint: athlete
         description: Find Athletes then view their page.
