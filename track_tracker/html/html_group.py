@@ -292,6 +292,7 @@ async def points_html_page(athletes_dict, meet_name_list):
     relay_details_list = []
     girls_meet_points = {}
     boys_meet_points = {}
+    top_scorers = {}
     for _, details in athletes_dict.items():
         athlete = details['athlete']
         # results = details['results']
@@ -302,8 +303,10 @@ async def points_html_page(athletes_dict, meet_name_list):
 
         points_dict = {k: 0 for k in meet_name_list}
         for result in details['results']:
+            # Meet points
             points_dict[result.meet] += result.points
 
+            # Relays
             if 'Relay' not in result.event:
                 if athlete.gender == 'Girls':
                     if result.meet not in girls_meet_points:
@@ -314,17 +317,19 @@ async def points_html_page(athletes_dict, meet_name_list):
                         boys_meet_points[result.meet] = 0
                     boys_meet_points[result.meet] += result.points
 
-
         total_points = sum(points_dict.values())
+        athlete_name = f"{athlete.first_name} {athlete.last_name}"
 
-        # display_details_list.append({
-        #     'first_name': athlete.first_name,
-        #     'last_name': athlete.last_name,
-        #     'gender': athlete.gender,
-        #     'class': graduation_year,
-        #     'total_points': total_points,
-        #     'points_dict': points_dict,
-        #     })
+        # Top Scorers
+        if 'Relay' not in athlete.first_name and not 'Relay' in athlete.last_name:
+            if result.meet not in top_scorers:
+                top_scorers[result.meet] = {'Girls': [], 'Boys': []}
+            if not top_scorers[result.meet][athlete.gender]:
+                top_scorers[result.meet][athlete.gender] = [(athlete_name, total_points)]
+            else:
+                if total_points > top_scorers[result.meet][athlete.gender][0][1]:
+                    top_scorers[result.meet][athlete.gender] = [(athlete_name, total_points)]
+
         if 'Relay' in athlete.first_name or 'Relay' in athlete.last_name:
             relay_details_list.append({
                 'first_name': athlete.first_name,
@@ -343,8 +348,6 @@ async def points_html_page(athletes_dict, meet_name_list):
                 'total_points': total_points,
                 'points_dict': points_dict,
                 })
-
-    # display_details_list = sorted(display_details_list, key=lambda x: _sort_function(x['200m']))
 
     for index, details in enumerate(display_details_list):
         if index % 2:
@@ -384,6 +387,17 @@ async def points_html_page(athletes_dict, meet_name_list):
         points_table_row.add_element(
         TableData(internal=f" ").add_class('event-table-data'))
     points_table.add_element(points_table_row)
+
+    # total best scorers
+    total_top_scorer = {'Girls': [], 'Boys': []}
+    for athlete in display_details_list:
+        athlete_name = f"{athlete['first_name']} {athlete['last_name']}"
+        total_points = athlete['total_points']
+        if not total_top_scorer[athlete['gender']]:
+            total_top_scorer[athlete['gender']] = [(athlete_name, total_points)]
+        else:
+            if total_points > total_top_scorer[athlete['gender']][0][1]:
+                total_top_scorer[athlete['gender']] = [(athlete_name, total_points)]
 
     # Girls
     points_table_row = TableRow().add_class('record-row')
@@ -445,7 +459,48 @@ async def points_html_page(athletes_dict, meet_name_list):
         points_table.add_element(points_table_row)
 
 
+    # Top Scorers
+    # print(f"TOP SCORERS: {top_scorers}")
+    for index, meet_name in enumerate(top_scorers.keys()):
+        # print(f"DETAILS: {details}")
+        top_scorer = top_scorers[meet_name]
+        points_table_row = TableRow().add_class('record-row')
+        points_table_row.add_element(
+            TableData(internal=f"Girls Top Scorer").add_class('points-table-data'))
+        points_table_row.add_element(
+            TableData(internal=' ').add_class('points-table-data'))
+        points_table_row.add_element(
+            TableData(internal='Girls').add_class('points-table-data'))
+        points_table_row.add_element(
+            TableData(internal=' ').add_class('points-table-data'))
 
+        girl_scorer = total_top_scorer['Girls'][0]
+        points_table_row.add_element(
+            TableData(internal=f"{girl_scorer[0]} ({girl_scorer[1]})").add_class('points-table-data'))
+
+        girl_scorer = top_scorer['Girls'][0]
+        points_table_row.add_element(
+            TableData(internal=f"{girl_scorer[0]} ({girl_scorer[1]})").add_class('points-table-data'))
+        points_table.add_element(points_table_row)
+
+        points_table_row = TableRow().add_class('record-row')
+        points_table_row.add_element(
+            TableData(internal=f"Boys Top Scorer").add_class('points-table-data'))
+        points_table_row.add_element(
+            TableData(internal=' ').add_class('points-table-data'))
+        points_table_row.add_element(
+            TableData(internal='Boys').add_class('points-table-data'))
+        points_table_row.add_element(
+            TableData(internal=' ').add_class('points-table-data'))
+
+        boy_scorer = total_top_scorer['Boys'][0]
+        points_table_row.add_element(
+            TableData(internal=f"{boy_scorer[0]} ({boy_scorer[1]})").add_class('points-table-data'))
+
+        boy_scorer = top_scorer['Boys'][0]
+        points_table_row.add_element(
+            TableData(internal=f"{boy_scorer[0]} ({boy_scorer[1]})").add_class('points-table-data'))
+        points_table.add_element(points_table_row)
 
 
     points_div.add_element(points_table)
