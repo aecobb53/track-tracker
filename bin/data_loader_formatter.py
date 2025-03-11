@@ -7,7 +7,19 @@ etc_dir = 'etc'
 etc_tmp = os.path.join(etc_dir, 'tmp')
 MEET_DATES_PATH = os.path.join(etc_tmp, 'meet_dates.json')
 OUTPUT_PATH = os.path.join(etc_tmp, 'upload_file.json')
-
+INDIVIDUAL_POINTS = [
+    10,
+    8,
+    6,
+    4,
+    2,
+    1
+]
+RELAY_POINTS = [
+    10,
+    8,
+    6
+]
 
 def parse_data_row(data_row: list[str], event: str, header: list[str], calendar_year: int, meet_name: str, meet_metadata: dict):
     # New result indicator
@@ -147,12 +159,18 @@ def parse_data_row(data_row: list[str], event: str, header: list[str], calendar_
             if any([True for v in interigate_data.values() if v is None]):
                 x=1
 
+            if place < len(INDIVIDUAL_POINTS) + 1:
+                points = INDIVIDUAL_POINTS[place - 1]
+            else:
+                points = 0
+
             result_data = {
                 'event': event,
                 'heat': heat,
                 'place': place,
                 'wind': wind,
                 'team': team,
+                'points': points,
                 'meet_date': meet_date,
                 'result': result,
                 'meet': meet_name,
@@ -231,12 +249,18 @@ def parse_data_row(data_row: list[str], event: str, header: list[str], calendar_
                 'graduation_year': calendar_year,
             }
 
+            if place < len(INDIVIDUAL_POINTS) + 1:
+                points = INDIVIDUAL_POINTS[place - 1]
+            else:
+                points = 0
+
             result_data = {
                 'event': event,
                 'heat': heat,
                 'place': place,
                 'wind': wind,
                 'team': team,
+                'points': points,
                 'meet_date': meet_date,
                 'result': result,
                 'meet': meet_name,

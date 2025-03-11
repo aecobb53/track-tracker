@@ -37,7 +37,7 @@ TEAM_DISPLAY_PARAMS = team_file['display']
 def display_date(date):
     return date.strftime('%m/%d/%y')
 
-def class_formatter(graduation_year, allow_none=False):
+def class_formatter(graduation_year, allow_none=True):
     if allow_none and graduation_year is None:
         return 'Unknown', 'Un'
     if graduation_year - SEASON_YEAR == 0:

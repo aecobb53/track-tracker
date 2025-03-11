@@ -7,6 +7,24 @@ etc_dir = 'etc'
 etc_tmp = os.path.join(etc_dir, 'tmp')
 MEET_DATES_PATH = os.path.join(etc_tmp, 'meet_dates.json')
 BIG_ASS_JSON_PATH = os.path.join(etc_tmp, 'BIG_ASS_JSON.json')
+# points = [  # For meets with three or less teams
+#     5,
+#     3,
+#     1
+# ]
+INDIVIDUAL_POINTS = [
+    10,
+    8,
+    6,
+    4,
+    2,
+    1
+]
+RELAY_POINTS = [
+    10,
+    8,
+    6
+]
 
 
 def parse_data_row(data_row: list[str], event: str, header: list[str], calendar_year: int, meet_name: str, meet_metadata: dict):
@@ -30,7 +48,7 @@ def parse_data_row(data_row: list[str], event: str, header: list[str], calendar_
     A_header_len = len(header)
     A_row_len = len(data_row)
     if len(header) == 7 and len(data_row) == 3:
-        if header == ['PLACE', 'VIDEO', 'ATHLETE', 'TEAM', 'RESULT', 'WIND', 'HEAT']:
+        if header == ['PLACE', 'VIDEO', 'ATHLETE', 'TEAM', 'MARK', 'WIND', 'HEAT']:
             year = None
             team = None
             result = None
@@ -54,6 +72,8 @@ def parse_data_row(data_row: list[str], event: str, header: list[str], calendar_
                 team = data_row[-1][:result_run_re.start(0)].strip()
             else:
                 x=1
+                if ' 9:54:' in data_row[2]:
+                    return
 
             year_re = re.search(r'(\d+)', team)
             if year_re:
@@ -68,8 +88,14 @@ def parse_data_row(data_row: list[str], event: str, header: list[str], calendar_
             if heat:
                 heat = int(heat)
 
+            place = int(data_row[0])
+            if place < len(INDIVIDUAL_POINTS) + 1:
+                points = INDIVIDUAL_POINTS[place - 1]
+            else:
+                points = 0
+
             data_obj = {
-                'place': int(data_row[0]),
+                'place': place,
                 'athlete': data_row[1],
                 'year': year,
                 'calendar_year': calendar_year,
@@ -78,11 +104,12 @@ def parse_data_row(data_row: list[str], event: str, header: list[str], calendar_
                 'wind': wind,
                 'heat': heat,
                 'event': event,
+                'points': points,
                 'meet_metadata': meet_metadata,
             }
             return data_obj
     elif len(header) == 5 and len(data_row) == 3:
-        if header == ['PLACE', 'VIDEO', 'TEAM', 'RESULT', 'HEAT']:
+        if header == ['PLACE', 'VIDEO', 'TEAM', 'MARK', 'HEAT']:
             result = None
             heat = None
 
@@ -95,15 +122,23 @@ def parse_data_row(data_row: list[str], event: str, header: list[str], calendar_
 
             if heat:
                 heat = int(heat)
+
+            place = int(data_row[0])
+            if place < len(RELAY_POINTS) + 1:
+                points = RELAY_POINTS[place - 1]
+            else:
+                points = 0
+
             data_obj = {
-                'place': int(data_row[0]),
+                'place': place,
                 'calendar_year': calendar_year,
                 'team': team,
                 'result': result,
                 'heat': heat,
                 'event': event,
-                'meet_metadata': meet_metadata,
                 'wind': 0.0,
+                'points': points,
+                'meet_metadata': meet_metadata,
             }
             return data_obj
         else:

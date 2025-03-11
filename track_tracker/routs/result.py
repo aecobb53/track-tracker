@@ -61,9 +61,16 @@ async def create_result(result: ResultApiCreate):
 async def filter_result(request: Request):
     try:
         result_filter = parse_query_params(request=request, query_class=ResultFilter)
+        ah = AthleteHandler()
+        if result_filter.first_name or result_filter.last_name and not result_filter.athlete_uid:
+            athlete_filter = AthleteFilter(
+                first_name=result_filter.first_name,
+                last_name=result_filter.last_name,
+            )
+            athlete = await ah.find_athlete(athlete_filter)
+            result_filter.athlete_uid = [athlete.uid]
         mh = ResultHandler()
         results = await mh.filter_results(result_filter=result_filter)
-        ah = AthleteHandler()
         for result in results:
             athlete = await ah.find_athlete(AthleteFilter(uid=[result.athlete_uid]))
             result.athlete = athlete

@@ -274,6 +274,201 @@ async def hurlde_html_page(athletes_dict):
     return base_doc.return_document
 
 
+async def points_html_page(athletes_dict, meet_name_list):
+    base_doc = await project_base_page()
+
+    # Body
+    page_content = Div().add_class('page-content')
+    page_content.add_element(Header(level=2, internal='Team Points').add_class('page-header'))
+
+    points_div = Div().add_class('points')
+    points_table = Table().add_class('points-table')
+    column_names = ['First', 'Last', 'Gender', 'Class', 'Total'] + meet_name_list
+    points_table.add_element(TableRow(
+            internal=[TableHeader(internal=col).add_class('points-table-header') for col in column_names]
+        ))
+
+    display_details_list = []
+    relay_details_list = []
+    girls_meet_points = {}
+    boys_meet_points = {}
+    for _, details in athletes_dict.items():
+        athlete = details['athlete']
+        # results = details['results']
+        if athlete.graduation_year:
+            graduation_year = class_formatter(athlete.graduation_year)[0]
+        else:
+            graduation_year = '-'
+
+        points_dict = {k: 0 for k in meet_name_list}
+        for result in details['results']:
+            points_dict[result.meet] += result.points
+
+            if 'Relay' not in result.event:
+                if athlete.gender == 'Girls':
+                    if result.meet not in girls_meet_points:
+                        girls_meet_points[result.meet] = 0
+                    girls_meet_points[result.meet] += result.points
+                elif athlete.gender == 'Boys':
+                    if result.meet not in boys_meet_points:
+                        boys_meet_points[result.meet] = 0
+                    boys_meet_points[result.meet] += result.points
+
+
+        total_points = sum(points_dict.values())
+
+        # display_details_list.append({
+        #     'first_name': athlete.first_name,
+        #     'last_name': athlete.last_name,
+        #     'gender': athlete.gender,
+        #     'class': graduation_year,
+        #     'total_points': total_points,
+        #     'points_dict': points_dict,
+        #     })
+        if 'Relay' in athlete.first_name or 'Relay' in athlete.last_name:
+            relay_details_list.append({
+                'first_name': athlete.first_name,
+                'last_name': athlete.last_name,
+                'gender': athlete.gender,
+                'class': graduation_year,
+                'total_points': total_points,
+                'points_dict': points_dict,
+                })
+        else:
+            display_details_list.append({
+                'first_name': athlete.first_name,
+                'last_name': athlete.last_name,
+                'gender': athlete.gender,
+                'class': graduation_year,
+                'total_points': total_points,
+                'points_dict': points_dict,
+                })
+
+    # display_details_list = sorted(display_details_list, key=lambda x: _sort_function(x['200m']))
+
+    for index, details in enumerate(display_details_list):
+        if index % 2:
+            points_table_row = TableRow().add_class('odd-row')
+        else:
+            points_table_row = TableRow().add_class('even-row')
+        points_table_row.add_element(
+            TableData(internal=details['first_name']).add_class('points-table-data'))
+        points_table_row.add_element(
+            TableData(internal=details['last_name']).add_class('points-table-data'))
+        points_table_row.add_element(
+            TableData(internal=details['gender']).add_class('points-table-data'))
+        points_table_row.add_element(
+            TableData(internal=details['class']).add_class('points-table-data'))
+
+        points_table_row.add_element(
+            TableData(internal=details['total_points']).add_class('points-table-data'))
+
+        for meet_name, points in details['points_dict'].items():
+            points_table_row.add_element(
+                TableData(internal=points).add_class('points-table-data'))
+
+        points_table.add_element(points_table_row)
+
+    # Relay management
+    relay_details_list = sorted(relay_details_list, key=lambda x: x['gender'], reverse=True)
+    for index, details in enumerate(relay_details_list):
+        for meet, points in details['points_dict'].items():
+            if details['gender'] == 'Girls':
+                girls_meet_points[meet] += points
+            if details['gender'] == 'Boys':
+                boys_meet_points[meet] += points
+
+    # Final Rows
+    points_table_row = TableRow().add_class('record-row')
+    for _ in column_names:
+        points_table_row.add_element(
+        TableData(internal=f" ").add_class('event-table-data'))
+    points_table.add_element(points_table_row)
+
+    # Girls
+    points_table_row = TableRow().add_class('record-row')
+    points_table_row.add_element(
+        TableData(internal='Girls Team').add_class('points-table-data'))
+    points_table_row.add_element(
+        TableData(internal=' ').add_class('points-table-data'))
+    points_table_row.add_element(
+        TableData(internal='Girls').add_class('points-table-data'))
+    points_table_row.add_element(
+        TableData(internal=' ').add_class('points-table-data'))
+
+    points_table_row.add_element(
+        TableData(internal=sum([i for i in girls_meet_points.values()])).add_class('points-table-data'))
+
+    for meet_name, points in girls_meet_points.items():
+        points_table_row.add_element(
+            TableData(internal=points).add_class('points-table-data'))
+    points_table.add_element(points_table_row)
+
+    # Boys
+    points_table_row = TableRow().add_class('record-row')
+    points_table_row.add_element(
+        TableData(internal='Boys Team').add_class('points-table-data'))
+    points_table_row.add_element(
+        TableData(internal=' ').add_class('points-table-data'))
+    points_table_row.add_element(
+        TableData(internal='Boys').add_class('points-table-data'))
+    points_table_row.add_element(
+        TableData(internal=' ').add_class('points-table-data'))
+
+    points_table_row.add_element(
+        TableData(internal=sum([i for i in boys_meet_points.values()])).add_class('points-table-data'))
+
+    for meet_name, points in boys_meet_points.items():
+        points_table_row.add_element(
+            TableData(internal=points).add_class('points-table-data'))
+    points_table.add_element(points_table_row)
+
+    # Relays
+    for index, details in enumerate(relay_details_list):
+        points_table_row = TableRow().add_class('record-row')
+        points_table_row.add_element(
+            TableData(internal=f"{details['gender']} Relays").add_class('points-table-data'))
+        points_table_row.add_element(
+            TableData(internal=' ').add_class('points-table-data'))
+        points_table_row.add_element(
+            TableData(internal=details['gender']).add_class('points-table-data'))
+        points_table_row.add_element(
+            TableData(internal=' ').add_class('points-table-data'))
+
+        points_table_row.add_element(
+            TableData(internal=details['total_points']).add_class('points-table-data'))
+
+        for meet_name, points in details['points_dict'].items():
+            points_table_row.add_element(
+                TableData(internal=points).add_class('points-table-data'))
+
+        points_table.add_element(points_table_row)
+
+
+
+
+
+    points_div.add_element(points_table)
+    page_content.add_element(points_div)
+
+    body_content = BodyContent(body_content=[page_content])
+
+    # Styles
+    for style in PAGE_STYLES:
+        body_content.add_body_styles(style)
+    for style in FILTER_STYLES:
+        body_content.add_body_styles(style)
+    for style in TABLE_STYLES:
+        body_content.add_body_styles(style)
+
+    base_doc.body_content = body_content
+    return base_doc.return_document
+
+
+
+
+
+
 """
 https://www.w3schools.com/css/css3_pagination.asp
 """

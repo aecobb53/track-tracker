@@ -22,6 +22,7 @@ from html import (
     # filter_workouts_html_page,
     sprint_html_page,
     hurlde_html_page,
+    points_html_page,
     unimplemented_page
     )
 
@@ -113,4 +114,39 @@ async def html_sprint(request: Request):
     #     workout.athlete = athlete
     # workout_page = await filter_workouts_html_page(workouts=workouts)
     workout_page = await unimplemented_page()
+    return HTMLResponse(content=workout_page, status_code=200)
+
+@router.get('/points')
+async def html_points(request: Request):
+    rh = ResultHandler()
+    ah = AthleteHandler()
+    athlete_filter = AthleteFilter(team=['Fairview High School'], order_by=['last_name', 'first_name'])
+    athletes = await ah.filter_athletes(athlete_filter=athlete_filter)
+    athletes_dict = {}
+    meet_name_list = []
+    for athlete in athletes:
+        result_filter = ResultFilter(athlete_uid=[athlete.uid])
+        results = await rh.filter_results(result_filter=result_filter)
+        valid_athlete = False
+
+        for result in results:
+            if result.meet not in meet_name_list:
+                meet_name_list.append(result.meet)
+            if result.points > 0:
+                valid_athlete = True
+                break
+        if not valid_athlete:
+            continue
+
+        athletes_dict[athlete.uid] = {
+            'athlete': athlete,
+            'results': results}
+    for athlete_uid in list(athletes_dict.keys()):
+        # This is to pull out the relays and add to the ned of the list of relays
+        athlete = athletes_dict[athlete_uid]
+        if 'Relay' in athlete['athlete'].first_name or 'Relay' in athlete['athlete'].last_name:
+            relay = athletes_dict.pop(athlete_uid)
+            athletes_dict[athlete_uid] = relay
+
+    workout_page = await points_html_page(athletes_dict, meet_name_list)
     return HTMLResponse(content=workout_page, status_code=200)

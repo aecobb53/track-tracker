@@ -252,7 +252,7 @@ async def find_athletes_html_page(athlete, results):
         events_dict[result.event].append(result)
 
     events_div = Div()
-    column_names = ['Place', 'Meet', 'Result', 'Wind (m/s)', 'Heat', 'Date']
+    column_names = ['Place', 'Points', 'Meet', 'Result', 'Wind (m/s)', 'Heat', 'Date']
     for event, results in events_dict.items():
         results.sort(key=lambda x: x.meet_date)
         record_result = results[0]
@@ -275,6 +275,8 @@ async def find_athletes_html_page(athlete, results):
             event_table_row.add_element(
                 TableData(internal=f"{result.place}").add_class('event-table-data'))
             event_table_row.add_element(
+                TableData(internal=f"{result.points}").add_class('event-table-data'))
+            event_table_row.add_element(
                 TableData(internal=f"{result.meet}").add_class('event-table-data'))
             event_table_row.add_element(
                 TableData(internal=f"{result.result.result_str}").add_class('event-table-data'))
@@ -296,6 +298,8 @@ async def find_athletes_html_page(athlete, results):
         event_table_row = TableRow().add_class('record-row')
         event_table_row.add_element(
             TableData(internal=f"{record_result.place}").add_class('event-table-data'))
+        event_table_row.add_element(
+                TableData(internal=f"{result.points}").add_class('event-table-data'))
         event_table_row.add_element(
             TableData(internal=f"{record_result.meet}").add_class('event-table-data'))
         event_table_row.add_element(

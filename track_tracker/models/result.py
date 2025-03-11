@@ -209,6 +209,7 @@ class ResultData(BaseModel):
     result: Result
     meet: str
     gender: str | None = None
+    points: float | None = None
 
     result_metadata: Dict[str, str] | None = None
 
@@ -241,6 +242,7 @@ class ResultApiCreate(BaseModel):
     result: Result
     meet: str
     gender: str | None = None
+    points: float | None = None
 
     result_metadata: Dict[str, str] | None = None
 
@@ -288,6 +290,7 @@ class ResultDBBase(SQLModel):
     result: Dict | None = Field(default_factory=dict, sa_column=Column(JSON))
     meet: str
     gender: str | None = None
+    points: float | None = None
 
     result_metadata: str | None = None
 
@@ -337,6 +340,7 @@ class ResultFilter(BaseModel):
     last_name: List[str] = []
     meet: List[str] = []
     gender: List[str] = []
+    points: List[str] = []
 
     meet_date: List[str] = []
     # result: Dict | None = Field(default_factory=dict, sa_column=Column(JSON))
@@ -420,6 +424,11 @@ class ResultFilter(BaseModel):
             [meet_date.extend(i.split(',')) for i in fields['meet_date']]
             fields['meet_date'] = [m.strip() for m in meet_date]
 
+        if fields.get('points'):
+            points = []
+            [points.extend(i.split(',')) for i in fields['points']]
+            fields['points'] = [f.strip() for f in points]
+
         if fields.get('sort'):
             order_by = fields.get('order_by', [])
             for sort in fields['sort']:
@@ -472,13 +481,13 @@ class ResultFilter(BaseModel):
             filter_list = [database_object_class.meet.contains(m) for m in self.meet]
             query = query.filter(or_(*filter_list))
 
-        if self.first_name:
-            filter_list = [database_object_class.first_name.contains(f) for f in self.first_name]
-            query = query.filter(or_(*filter_list))
+        # if self.first_name:
+        #     filter_list = [database_object_class.first_name.contains(f) for f in self.first_name]
+        #     query = query.filter(or_(*filter_list))
 
-        if self.last_name:
-            filter_list = [database_object_class.last_name.contains(l) for l in self.last_name]
-            query = query.filter(or_(*filter_list))
+        # if self.last_name:
+        #     filter_list = [database_object_class.last_name.contains(l) for l in self.last_name]
+        #     query = query.filter(or_(*filter_list))
 
         if self.athlete_uid:
             filter_list = [database_object_class.athlete_uid.contains(a) for a in self.athlete_uid]

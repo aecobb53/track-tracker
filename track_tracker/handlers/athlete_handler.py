@@ -56,7 +56,7 @@ class AthleteHandler(BaseHandler):
         """
         Find single matching athlete or error
         """
-        # self.context.logger.info(f"Filtering athletes: {athlete_filter.model_dump_json()}")
+        self.context.logger.info(f"Filtering athletes: {athlete_filter.model_dump_json()}")
         with Session(self.context.database.engine) as session:
             query = select(AthleteDB)
             query = athlete_filter.apply_filters(AthleteDB, query)

@@ -81,6 +81,8 @@ async function populateAthleteTable(filterResults, page, page_size, page_count) 
             // table_item.style.padding = '1px 25px';
             table_item.classList.add(class_name);
 
+            console.log(filterResults[i]);
+
             if (key == 'First Name') {
                 // Link to athlete page
                 table_item.innerHTML = '<a class="athlete-link" href="' + filterResults[i]['uid'] + '">' +
