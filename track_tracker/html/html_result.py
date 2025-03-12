@@ -1,5 +1,4 @@
 import os
-from re import L
 
 from phtml import *
 from my_base_html_lib import MyBaseDocument, NavigationContent, SidebarContent, BodyContent, FooterContent
@@ -16,7 +15,7 @@ from .base_page import (
     FILTER_STYLES,
     TABLE_STYLES,
     )
-from .common import MARK_FILTER_PARAMS, MARK_ARRANGE_PARAMS, MARK_DISPLAY_PARAMS
+from .common import RESULT_FILTER_PARAMS, RESULT_ARRANGE_PARAMS, RESULT_DISPLAY_PARAMS
 
 async def filter_results_html_page():
     base_doc = await project_base_page()
@@ -38,10 +37,10 @@ async def filter_results_html_page():
     #     internal='For multiple items separate with a comma. Ex "Fairview, Boulder"'))
     filter_form = Form(action=f"/result", method='get').add_class('filter-form')
     filter_groupings = {}
-    for grouping in MARK_FILTER_PARAMS.keys():
+    for grouping in RESULT_FILTER_PARAMS.keys():
         if grouping not in filter_groupings:
             filter_groupings[grouping] = []
-        for details in MARK_FILTER_PARAMS[grouping].values():
+        for details in RESULT_FILTER_PARAMS[grouping].values():
             filter_groupings[grouping].append(details)
     for grouping in filter_groupings.keys():
         params = filter_groupings[grouping]
@@ -86,10 +85,10 @@ async def filter_results_html_page():
     # arrange_div.add_element(Header(level=1, internal='Filter Results'))
     arrange_form = Form(action=f"/result", method='get').add_class('arrange-form')
     arrange_groupings = {}
-    for grouping in MARK_ARRANGE_PARAMS.keys():
+    for grouping in RESULT_ARRANGE_PARAMS.keys():
         if grouping not in arrange_groupings:
             arrange_groupings[grouping] = []
-        for details in MARK_ARRANGE_PARAMS[grouping].values():
+        for details in RESULT_ARRANGE_PARAMS[grouping].values():
             arrange_groupings[grouping].append(details)
     for grouping in arrange_groupings.keys():
         params = arrange_groupings[grouping]
@@ -137,10 +136,10 @@ async def filter_results_html_page():
     display_form_div.add_element(Header(level=1, internal='Table Columns'))
     display_form = Form(action=f"/result", method='get').add_class('display-form')
     display_groupings = {}
-    for grouping in MARK_DISPLAY_PARAMS.keys():
+    for grouping in RESULT_DISPLAY_PARAMS.keys():
         if grouping not in display_groupings:
             display_groupings[grouping] = []
-        for details in MARK_DISPLAY_PARAMS[grouping].values():
+        for details in RESULT_DISPLAY_PARAMS[grouping].values():
             display_groupings[grouping].append(details)
     for grouping in display_groupings.keys():
         params = display_groupings[grouping]

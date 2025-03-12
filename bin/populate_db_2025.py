@@ -3,14 +3,15 @@ import json
 import requests
 from datetime import datetime, timezone
 from time import sleep
+import re
 
 
 etc_dir = 'etc'
 etc_tmp = os.path.join(etc_dir, 'tmp')
 BIG_ASS_JSON_PATH = os.path.join(etc_tmp, 'upload_file.json')
-COMPLETED_STEPS = os.path.join(etc_tmp, 'workfile_deleteme.json')
+COMPLETED_STEPS = os.path.join(etc_tmp, 'workfile_deleteme_2025.json')
 SERVER_URL = 'http://localhost:8205'
-SERVER_URL = 'https://fhs-track.nax.lol'
+# SERVER_URL = 'https://fhs-track.nax.lol'
 CURRENT_YEAR = 2025
 
 YEAR_MAP = {
@@ -19,7 +20,25 @@ YEAR_MAP = {
     11: 'Junior',
     12: 'Senior',
 }
-
+sprint = {
+    r' 60 Meter': 'Sprint',
+    r' 100 Meter': 'Sprint',
+    r' 200 Meter': 'Sprint',
+    r' 400 Meter': 'Sprint',
+    r' 110 Meter': 'Sprint',
+    r' 300 Meter': 'Sprint',
+}
+distance = {
+    r' 800 Meter': 'Distance',
+    r' 1600 Meter': 'Distance',
+    r' 3200 Meter': 'Distance',
+}
+field = {
+    r' Jump': 'Field',
+    r' Discus': 'Field',
+    r' Shot Put': 'Field',
+    r' Vault': 'Field',
+}
 
 # resp = requests.get(f"{SERVER_URL}/result/")
 # content= resp.json()
@@ -38,10 +57,21 @@ else:
     progress_tracking = {}
 
 
+
+
+
+
+progress_tracking = {}
+
+
+
+
 progress_count = sum([len(m) for y, m in data.items()])
 progress_pointer = 0
 x=1
 for year, meets in data.items():
+    if int(year) < 2025:
+        continue
     if year not in progress_tracking:
         progress_tracking[year] = {}
     for meet_name, events in meets.items():
@@ -59,6 +89,15 @@ for year, meets in data.items():
             x=1
             for result in results:
                 athlete = result.get('athlete')
+
+
+                # Speeding up data uplaod
+                if 'Fairview' not in athlete['team']:
+                    continue
+
+
+
+
                 result = result['result']
 
                 event_query_params = {
@@ -76,6 +115,23 @@ for year, meets in data.items():
                     first = athlete['first_name']
                     last = athlete['last_name']
                     team = athlete['team']
+
+                    # Tags
+                    x=1
+                    athlete_tags = []
+                    for i, j in sprint.items():
+                        if re.search(i, result['event']):
+                            athlete_tags.append(j)
+                            break
+                    for i, j in distance.items():
+                        if re.search(i, result['event']):
+                            athlete_tags.append(j)
+                            break
+                    for i, j in field.items():
+                        if re.search(i, result['event']):
+                            athlete_tags.append(j)
+                            break
+                    athlete['tags'] = athlete.get('tags', []) + athlete_tags
                     athlete_resp = requests.get(f"{SERVER_URL}/athlete/{first}/{last}/{team}/")
                     if athlete_resp.status_code == 404:
                         # Post new athlete
@@ -95,13 +151,11 @@ for year, meets in data.items():
                         update = False
                         for key, value in athlete.items():
                             if athlete_content[key] != value:
-                                # if key != 'graduation_year':
-                                #     print('')
-                                #     print('compared athletes but are different')
-                                #     print(athlete_content)
-                                #     print(athlete)
                                 update = True
-                                athlete_content[key] = value
+                                if key == 'tags':
+                                    athlete_content[key] = athlete_content[key] + value
+                                else:
+                                    athlete_content[key] = value
                                 x=1
                         if update:
                             x=1
@@ -127,16 +181,16 @@ for year, meets in data.items():
                 else:
                     # No athlete (Relay)
                     x=1
+
                 result_resp = requests.post(f"{SERVER_URL}/result/", json=result)
                 result_content = result_resp.json()
                 if not result_resp.ok and result_resp.status_code != 409:
                     x=1
                 x=1
-                # print(f"Iteration: ")
             progress_tracking[year][meet_name][event_name] = True
             with open(COMPLETED_STEPS, 'w') as jf:
                 jf.write(json.dumps(progress_tracking, indent=4))
-            sleep(1)
+            # sleep(1)
         x=1
         progress_pointer += 1
         percent_complete = int(progress_pointer / progress_count * 10000) / 100

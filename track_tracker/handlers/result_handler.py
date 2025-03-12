@@ -77,7 +77,7 @@ class ResultHandler(BaseHandler):
         return result
 
     async def filter_results_display(self, result_filter: ResultFilter) -> list[dict]:
-        self.context.logger.info(f"Filtering results for display: {result_filter.model_dump_json()}")
+        # self.context.logger.info(f"Filtering results for display: {result_filter.model_dump_json()}")
         with Session(self.context.database.engine) as session:
             query = select(ResultDB)
             query = result_filter.apply_filters(ResultDB, query)
@@ -97,7 +97,7 @@ class ResultHandler(BaseHandler):
             # query_max_count = rows = session.exec(
             #     select(func.count(ResultDB.uid))).one()
 
-        self.context.logger.info(f"Results Filtered: {len(results)}")
+        # self.context.logger.info(f"Results Filtered: {len(results)}")
         display_results = []
         for result in results:
             athlete = result.athlete_uid

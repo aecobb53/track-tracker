@@ -14,9 +14,9 @@ HOME_PAGE_LINK_CONTENT = home_page_content_file
 # Result Filter Params
 with open(os.path.join(path, 'result.yml')) as yf:
     result_file = yaml.safe_load(yf)
-MARK_FILTER_PARAMS = result_file['filter']
-MARK_ARRANGE_PARAMS = result_file['arrange']
-MARK_DISPLAY_PARAMS = result_file['display']
+RESULT_FILTER_PARAMS = result_file['filter']
+RESULT_ARRANGE_PARAMS = result_file['arrange']
+RESULT_DISPLAY_PARAMS = result_file['display']
 
 
 # Athlete Filter Params
@@ -46,7 +46,9 @@ DEV_ROADMAP = dev_roadmap
 def display_date(date):
     return date.strftime('%m/%d/%y')
 
-def class_formatter(graduation_year):
+def class_formatter(graduation_year, allow_none=True):
+    if allow_none and graduation_year is None:
+        return 'Unknown', 'Un'
     if graduation_year - SEASON_YEAR == 0:
         return 'Senior', 'Sr'
     elif graduation_year - SEASON_YEAR == 1:

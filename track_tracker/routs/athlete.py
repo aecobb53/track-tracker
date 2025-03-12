@@ -63,7 +63,7 @@ async def find_athlete(request: Request, first: str, last: str, team: str):
     except DuplicateRecordsException as err:
         message = f"Duplicate records found: [{err}]"
         context.logger.error(message)
-        raise HTTPException(status_code=409, detail=message)
+        raise HTTPException(status_code=400, detail=message)
     except Exception as err:
         context.logger.warning(f'ERROR: {err}')
         raise HTTPException(status_code=500, detail='Internal Service Error')

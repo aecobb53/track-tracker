@@ -20,9 +20,9 @@ class EventParser:
 
     def parse_gender(self, event_s: str):
         if re.search(r'(Boys?|Mens?)', event_s):
-            self.gender = 'Mens'
+            self.gender = 'Boys'
         elif re.search(r'(Girls?|Womens?)', event_s):
-            self.gender = 'Womens'
+            self.gender = 'Girls'
         else:
             x=1
         return self.gender

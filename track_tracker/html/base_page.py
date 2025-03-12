@@ -151,7 +151,7 @@ TABLE_STYLES = [
             padding: 5px 25px;
         """),
         StyleTag(name='td a', internal=f"""
-            color: {TEXT_COLOR_ONE};
+            color: {TEXT_COLOR_TWO};
         """),
         StyleTag(name='.even-row', internal=f"""
             background-color: {TABLE_BACKGROUND_COLOR_ONE};

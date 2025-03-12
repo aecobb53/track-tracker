@@ -28,15 +28,40 @@ filter:
         #     default_value: null
         gender:
             variable: gender
-            display: Mens/Womens
+            display: Boys/Girls
             description: Filter by gender.
             datatype: string
             default_value: null
             no_text_field: true
             options:
                 - "All"
-                - "Mens"
-                - "Womens"
+                - "Boys"
+                - "Girls"
+        event_class:
+            variable: event_class
+            display: Event Classification
+            description: Focus on event classifications.
+            datatype: string
+            default_value: All
+            no_text_field: true
+            options:
+                - "All"
+                - "Sprint"
+                - "Sprint,Fields"
+                - "Fields"
+                - "Distance"
+                - "Distance,Fields"
+                - "Sprint,Distance"
+        current:
+            variable: current
+            display: Current Student
+            description: Only grab current students.
+            datatype: string
+            default_value: Current
+            no_text_field: true
+            options:
+                - "Current"
+                - "All"
         # event:
         #     variable: event
         #     display: Event - Not implemented yet
@@ -69,11 +94,11 @@ arrange:
             display: Sort Column 1
             description: What to sort by first.
             datatype: str
-            default_value: Last Name
+            default_value: First Name
             no_text_field: true
             options:
-                - Last Name
                 - First Name
+                - Last Name
                 - Team
                 - Gender
                 - Class
@@ -82,11 +107,11 @@ arrange:
             display: Sort Column 2
             description: What to sort by first.
             datatype: str
-            default_value: First Name
+            default_value: Last Name
             no_text_field: true
             options:
-                - First Name
                 - Last Name
+                - First Name
                 - Team
                 - Gender
                 - Class

@@ -45,7 +45,10 @@ from routs import (
     team_html_router,
     record_html_router,
     unimplemented_html_router,
-    dev_html_router
+    dev_html_router,
+    workout_router,
+    workout_html_router,
+    group_html_router
 )
 
 # Can delete after done testing rest calls from different sources
@@ -80,10 +83,13 @@ app.include_router(result_router)
 app.include_router(athlete_router)
 app.include_router(team_router)
 app.include_router(record_router)
+app.include_router(workout_router)
 app.include_router(result_html_router)
 app.include_router(athlete_html_router)
 app.include_router(team_html_router)
 app.include_router(record_html_router)
+app.include_router(workout_html_router)
+app.include_router(group_html_router)
 app.include_router(unimplemented_html_router)
 app.include_router(dev_html_router)
 

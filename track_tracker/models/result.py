@@ -58,6 +58,71 @@ class Result(BaseModel):
             return f"{feet}-{inches}"
 
     @property
+    def format_smaller_value(self):
+        """
+        Force results in terms of seconds or inches
+        """
+        """
+        tmp = timedelta(
+            minutes=minutes or 0,
+            seconds=seconds or 0,
+            milliseconds=subsecond or 0,
+        )
+        tmp_min = tmp.seconds // 60
+        tmp_sec = tmp.seconds % 60
+        tmp_microseconds = tmp.microseconds
+        tmp_format = f"{tmp_min}:{tmp_sec}.{tmp_microseconds}"
+        print(f"tmp: {tmp}, tmp_min: {tmp_min}, tmp_sec: {tmp_sec}, tmp_microseconds: {tmp_microseconds}, tmp_format: {tmp_format}")
+
+        """
+        if self.minutes or self.seconds or self.subsecond:
+            minutes = self.minutes or 0
+            seconds = self.seconds or 0
+            subsecond = self.subsecond or 0
+            seconds += subsecond
+            value = timedelta(minutes=minutes, seconds=seconds)
+            formatted = float(value.total_seconds())
+            return formatted
+        elif self.feet or self.inches or self.fractions:
+            feet = self.feet or 0
+            inches = self.inches or 0
+            fractions = self.fractions or 0
+            return feet * 12 + inches + fractions
+        else:
+            raise ValueError('Unable to give a Sort Value')
+
+    # @property
+    # def format_padded_value(self):
+    #     """
+    #     Pad results with minutes and feet even if there are none
+    #     """
+    #     """
+    #     tmp = timedelta(
+    #         minutes=minutes or 0,
+    #         seconds=seconds or 0,
+    #         milliseconds=subsecond or 0,
+    #     )
+    #     tmp_min = tmp.seconds // 60
+    #     tmp_sec = tmp.seconds % 60
+    #     tmp_microseconds = tmp.microseconds
+    #     tmp_format = f"{tmp_min}:{tmp_sec}.{tmp_microseconds}"
+    #     print(f"tmp: {tmp}, tmp_min: {tmp_min}, tmp_sec: {tmp_sec}, tmp_microseconds: {tmp_microseconds}, tmp_format: {tmp_format}")
+
+    #     """
+    #     if self.minutes or self.seconds or self.subsecond:
+    #         minutes = self.minutes or 0
+    #         seconds = self.seconds or 0
+    #         subsecond = self.subsecond or 0
+    #         return minutes * 60 + seconds + subsecond
+    #     elif self.feet or self.inches or self.fractions:
+    #         feet = self.feet or 0
+    #         inches = self.inches or 0
+    #         fractions = self.fractions or 0
+    #         return feet * 12 + inches + fractions
+    #     else:
+    #         raise ValueError('Unable to give a Sort Value')
+
+    @property
     def put(self):
         output = f"{self.event_str}::{self.result_str}"
         return output
@@ -144,6 +209,9 @@ class ResultData(BaseModel):
     result: Result
     meet: str
     gender: str | None = None
+    points: float | None = None
+
+    result_metadata: Dict[str, Any] | None = None
 
     @model_validator(mode='before')
     def validate_fields(cls, fields):
@@ -174,8 +242,12 @@ class ResultApiCreate(BaseModel):
     result: Result
     meet: str
     gender: str | None = None
+    points: float | None = None
+
+    result_metadata: Dict[str, Any] | None = None
 
     athlete: AthleteData | None = None
+
 
     @model_validator(mode='before')
     def validate_fields(cls, fields):
@@ -218,6 +290,9 @@ class ResultDBBase(SQLModel):
     result: Dict | None = Field(default_factory=dict, sa_column=Column(JSON))
     meet: str
     gender: str | None = None
+    points: float | None = None
+
+    result_metadata: str | None = None
 
     search_team: str | None = None
 
@@ -228,6 +303,7 @@ class ResultDBBase(SQLModel):
     def cast_data_object(self) -> ResultData:
         """Return a data object based on the ResultData class"""
         content = self.model_dump()
+        content['result_metadata'] = json.loads(content['result_metadata'])
         data_obj = ResultData(**content)
         return data_obj
 
@@ -239,6 +315,7 @@ class ResultDBCreate(ResultDBBase):
             fields = fields.model_dump()
         fields['athlete_uid'] = fields['athlete']['uid']
         fields['search_team'] = fields['team'].lower()
+        fields['result_metadata'] = json.dumps(fields['result_metadata'])
         return fields
 
 
@@ -265,6 +342,7 @@ class ResultFilter(BaseModel):
     last_name: List[str] = []
     meet: List[str] = []
     gender: List[str] = []
+    points: List[str] = []
 
     meet_date: List[str] = []
     # result: Dict | None = Field(default_factory=dict, sa_column=Column(JSON))
@@ -348,6 +426,11 @@ class ResultFilter(BaseModel):
             [meet_date.extend(i.split(',')) for i in fields['meet_date']]
             fields['meet_date'] = [m.strip() for m in meet_date]
 
+        if fields.get('points'):
+            points = []
+            [points.extend(i.split(',')) for i in fields['points']]
+            fields['points'] = [f.strip() for f in points]
+
         if fields.get('sort'):
             order_by = fields.get('order_by', [])
             for sort in fields['sort']:
@@ -400,13 +483,13 @@ class ResultFilter(BaseModel):
             filter_list = [database_object_class.meet.contains(m) for m in self.meet]
             query = query.filter(or_(*filter_list))
 
-        if self.first_name:
-            filter_list = [database_object_class.first_name.contains(f) for f in self.first_name]
-            query = query.filter(or_(*filter_list))
+        # if self.first_name:
+        #     filter_list = [database_object_class.first_name.contains(f) for f in self.first_name]
+        #     query = query.filter(or_(*filter_list))
 
-        if self.last_name:
-            filter_list = [database_object_class.last_name.contains(l) for l in self.last_name]
-            query = query.filter(or_(*filter_list))
+        # if self.last_name:
+        #     filter_list = [database_object_class.last_name.contains(l) for l in self.last_name]
+        #     query = query.filter(or_(*filter_list))
 
         if self.athlete_uid:
             filter_list = [database_object_class.athlete_uid.contains(a) for a in self.athlete_uid]

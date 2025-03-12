@@ -1,13 +1,11 @@
-async function populateAthleteTable(filterResults, page, page_size, page_count) {
-    console.log('Populating Athlete table');
-
-    // var tracking_project_name_hashtable = {};
-
-    var skipColumnArray = ['results', 'records', 'uid'];
+async function populateResultTable(filterResults, page, page_size, page_count) {
+    console.log('Populating Result table');
 
     // DIV
     console.log('Clearing table...');
     var table_div = document.getElementById('table-div');
+    // table_div.classList.add('sticky');
+    // table_div.classList.add('fixTableHead');
     table_div.innerHTML = '';
 
     // TABLE
@@ -40,19 +38,9 @@ async function populateAthleteTable(filterResults, page, page_size, page_count) 
     // table_header.style.width = '100%';
     // table_header.style.fontWeight = 'bold';
     // table_header.style.padding = '5px';
-
-    console.log('Creating table header');
-    console.log(filterResults[0]);
-
-
     var header_values = Object.keys(filterResults[0]);
     var table_row = document.createElement('tr');
     for(var i = 0; i < header_values.length; i++) {
-        console.log('HEADER VALUE: ' + header_values[i]);
-        if (skipColumnArray.includes(header_values[i])) {
-            console.log('Skipping column: ' + header_values[i]);
-            break;
-        }
         var class_name = header_values[i].toLowerCase().replaceAll(' ', '-') + '-data';
         var table_item = document.createElement('th');
         table_item.innerHTML = header_values[i];
@@ -68,44 +56,34 @@ async function populateAthleteTable(filterResults, page, page_size, page_count) 
         // ROW
         var table_row = document.createElement('tr');
         // table_row.style.padding = '5px';
+        // var gender_class = undefined;
 
         // Data
         for (const [key, value] of Object.entries(filterResults[i])) {
-
-            if (skipColumnArray.includes(key)) {
-                // continue;
-                break;
-            }
             var class_name = key.toLowerCase().replaceAll(' ', '-') + '-data';
             var table_item = document.createElement('td');
             // table_item.style.padding = '1px 25px';
             table_item.classList.add(class_name);
-
-            console.log(filterResults[i]);
-
-            if (key == 'First Name') {
-                // Link to athlete page
-                table_item.innerHTML = '<a class="athlete-link" href="' + filterResults[i]['uid'] + '">' +
-                value + '</a>';
-                // table_item.classList.add('athlete-link');
-            } else if (key == 'Last Name') {
-                // Link to athlete page
-                table_item.innerHTML = '<a class="athlete-link" href="' + filterResults[i]['uid'] + '">' +
-                value + '</a>';
-            } else {
-                table_item.innerHTML = value;
-            }
+            table_item.innerHTML = value;
+            // if (key == 'Gender' && value.substring(0, 3) == 'Men') {
+            //     gender_class = 'mens-format'
+            // } else if (key == 'Gender' && value.substring(0, 5) == 'Women') {
+            //     gender_class = 'womens-format'
+            // }
             table_row.appendChild(table_item);
         }
+        // table_row.classList.add(gender_class);
 
         // Additional Formatting
         if(i % 2 == 0) {
+            // table_row.style.backgroundColor = 'ROW_BACKGROUND_COLOR_1';
             table_row.classList.add('even-row');
             // table_row.style.backgroundColor = '#2c2d2e';
         }
         else {
-            // table_row.style.backgroundColor = '#35363b';
+            // table_row.style.backgroundColor = 'ROW_BACKGROUND_COLOR_2';
             table_row.classList.add('odd-row');
+            // table_row.style.backgroundColor = '#35363b';
         }
         table_body.appendChild(table_row);
     }
@@ -115,5 +93,6 @@ async function populateAthleteTable(filterResults, page, page_size, page_count) 
 
     // Pagination
     pagination(page, page_size, page_count, false);
+
 }
 // window.onload = populateTable();

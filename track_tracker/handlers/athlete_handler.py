@@ -56,7 +56,7 @@ class AthleteHandler(BaseHandler):
         """
         Find single matching athlete or error
         """
-        # self.context.logger.info(f"Filtering athletes: {athlete_filter.model_dump_json()}")
+        self.context.logger.info(f"Filtering athletes: {athlete_filter.model_dump_json()}")
         with Session(self.context.database.engine) as session:
             query = select(AthleteDB)
             query = athlete_filter.apply_filters(AthleteDB, query)
@@ -91,6 +91,8 @@ class AthleteHandler(BaseHandler):
             for key in AthleteData.__fields__.keys():
                 if key not in skip_fields:
                     try:
+                        if key in ['aliases', 'tags', 'athlete_metadata']:
+                            setattr(athlete, key, json.dumps(getattr(athlete, key)))
                         if getattr(row, key) != getattr(athlete, key):
                             setattr(row, key, getattr(athlete, key))
                     except AttributeError:
@@ -127,11 +129,13 @@ class AthleteHandler(BaseHandler):
             results = {}
             records = {}
             display_athletes.append({
-                'Last Name': athlete.last_name,
                 'First Name': athlete.first_name,
+                'Last Name': athlete.last_name,
+                'Nickname': athlete.aliases,
+                'Event Class': athlete.tags,
                 'Team': athlete.team,
                 'Gender': athlete.gender,
-                'Class': class_formatter(athlete.graduation_year)[0],
+                'Class': class_formatter(athlete.graduation_year, allow_none=True)[0],
                 'results': results,
                 'records': records,
                 'uid': athlete.uid,

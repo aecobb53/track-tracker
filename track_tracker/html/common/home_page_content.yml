@@ -1,13 +1,28 @@
 Primary Pages:
     Fairview:
-        endpoint: team/Fairview%20High%20School
+        endpoint: team/Fairview%20High%20School/2025
         description: Straight to the FHS page.
+    Points:
+        endpoint: groups/points
+        description: Athlete point standings.
+Coaching Pages:
+    Sprints:
+        endpoint: groups/sprint
+        description: Sprint coach page.
+    Hurdles:
+        endpoint: groups/hurdle
+        description: Hurlde coach page.
+    Sprint Workouts:
+        endpoint: workout
+        description: Practice Data.
+Searching Pages:
     Athletes:
         endpoint: athlete
         description: Find Athletes then view their page.
     Teams:
         endpoint: team
         description: Find Teams then view their page.
+
     # Records:
     #     endpoint: record
     #     description: All current state or Fairview records.
