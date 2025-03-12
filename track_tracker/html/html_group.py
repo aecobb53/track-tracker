@@ -52,6 +52,9 @@ async def sprint_html_page(athletes_dict):
         m400_assumed = False
 
         for result in results:
+            if result.result_metadata:
+                if result.result_metadata.get('split'):
+                    continue
             if '100 Meter' in result.event:
                 if m100 is None:
                     m100 = result

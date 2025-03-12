@@ -27,11 +27,15 @@ sprint_tags = {
     r' 400 Meter': 'Sprint',
     r' 110 Meter': 'Sprint',
     r' 300 Meter': 'Sprint',
+    r' 4x100 Meter': 'Sprint',
+    r' 4x200 Meter': 'Sprint',
+    r' 4x400 Meter': 'Sprint',
 }
 distance_tags = {
     r' 800 Meter': 'Distance',
     r' 1600 Meter': 'Distance',
     r' 3200 Meter': 'Distance',
+    r' 4x800 Meter': 'Distance',
 }
 field_tags = {
     r' Jump': 'Field',
@@ -39,6 +43,18 @@ field_tags = {
     r' Shot Put': 'Field',
     r' Vault': 'Field',
 }
+relay_tags = {
+    r' 4x100 Meter': 'Relay',
+    r' 4x200 Meter': 'Relay',
+    r' 4x400 Meter': 'Relay',
+    r' 4x800 Meter': 'Relay',
+}
+tags_list = [
+    sprint_tags,
+    distance_tags,
+    field_tags,
+    relay_tags,
+]
 
 runtime_start = datetime.now(timezone.utc)
 
@@ -53,24 +69,17 @@ else:
 progress_tracking = {}
 
 
-def upload_athlete(athlete):
+def upload_athlete(athlete, result):
     first = athlete['first_name']
     last = athlete['last_name']
     team = athlete['team']
     # Tags
     athlete_tags = []
-    for i, j in sprint_tags.items():
-        if re.search(i, result['event']):
-            athlete_tags.append(j)
-            break
-    for i, j in distance_tags.items():
-        if re.search(i, result['event']):
-            athlete_tags.append(j)
-            break
-    for i, j in field_tags.items():
-        if re.search(i, result['event']):
-            athlete_tags.append(j)
-            break
+    for tag_group in tags_list:
+        for i, j in tag_group.items():
+            if re.search(i, result['event']):
+                athlete_tags.append(j)
+                break
     athlete['tags'] = athlete.get('tags', []) + athlete_tags
     athlete_resp = requests.get(f"{SERVER_URL}/athlete/{first}/{last}/{team}/")
     if athlete_resp.status_code == 404:
@@ -130,7 +139,7 @@ def upload_splits(relay_athletes):
     for item in relay_athletes:
         athlete = item['athlete']
         result = item['result']
-        athlete_content = upload_athlete(athlete=athlete)
+        athlete_content = upload_athlete(athlete=athlete, result=result)
         result_content = upload_result(athlete_content=athlete_content, result=result)
         splits_content.append({
             'athlete_content': athlete_content,
@@ -191,7 +200,7 @@ for year, meets in data.items():
                     # Event already uploaded
                     continue
 
-                athlete_content = upload_athlete(athlete=athlete)
+                athlete_content = upload_athlete(athlete=athlete, result=result)
                 result_content = upload_result(athlete_content=athlete_content, result=result)
                 x=1
 

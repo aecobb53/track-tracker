@@ -47,6 +47,8 @@ async def html_sprint(request: Request):
         result_filter = ResultFilter(athlete_uid=[athlete.uid])
         results = await rh.filter_results(result_filter=result_filter)
         valid_athlete = False
+        if 'Relay' in athlete.last_name:
+            continue
         for result in results:
             if ' 100' in result.event:
                 valid_athlete = True

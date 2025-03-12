@@ -315,6 +315,9 @@ def parse_data_row(
                                     'result': str(athlete['split']),
                                     'meet': meet_name,
                                     'gender': gender,
+                                    'result_metadata': {
+                                        'split': True,
+                                    }
                                 },
                             })
                         break

@@ -211,7 +211,7 @@ class ResultData(BaseModel):
     gender: str | None = None
     points: float | None = None
 
-    result_metadata: Dict[str, str] | None = None
+    result_metadata: Dict[str, Any] | None = None
 
     @model_validator(mode='before')
     def validate_fields(cls, fields):
@@ -244,7 +244,7 @@ class ResultApiCreate(BaseModel):
     gender: str | None = None
     points: float | None = None
 
-    result_metadata: Dict[str, str] | None = None
+    result_metadata: Dict[str, Any] | None = None
 
     athlete: AthleteData | None = None
 
@@ -303,6 +303,7 @@ class ResultDBBase(SQLModel):
     def cast_data_object(self) -> ResultData:
         """Return a data object based on the ResultData class"""
         content = self.model_dump()
+        content['result_metadata'] = json.loads(content['result_metadata'])
         data_obj = ResultData(**content)
         return data_obj
 
@@ -314,6 +315,7 @@ class ResultDBCreate(ResultDBBase):
             fields = fields.model_dump()
         fields['athlete_uid'] = fields['athlete']['uid']
         fields['search_team'] = fields['team'].lower()
+        fields['result_metadata'] = json.dumps(fields['result_metadata'])
         return fields
 
 

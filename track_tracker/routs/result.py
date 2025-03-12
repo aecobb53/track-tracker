@@ -67,8 +67,9 @@ async def filter_result(request: Request):
                 first_name=result_filter.first_name,
                 last_name=result_filter.last_name,
             )
-            athlete = await ah.find_athlete(athlete_filter)
-            result_filter.athlete_uid = [athlete.uid]
+            athlete = await ah.find_athlete(athlete_filter, silence_missing=True)
+            if athlete:
+                result_filter.athlete_uid = [athlete.uid]
         mh = ResultHandler()
         results = await mh.filter_results(result_filter=result_filter)
         for result in results:

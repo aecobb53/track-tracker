@@ -25,7 +25,7 @@ class AthleteData(BaseModel):
     tags: List[str] = []
     active: bool = True
 
-    athlete_metadata: Dict[str, str] = {}
+    athlete_metadata: Dict[str, Any] = {}
 
     # @model_validator(mode='before')
     # def validate_fields(cls, fields):
@@ -66,7 +66,7 @@ class AthleteApiCreate(BaseModel):
     aliases: List[str] = []
     tags: List[str] = []
 
-    athlete_metadata: Dict[str, str] = {}
+    athlete_metadata: Dict[str, Any] = {}
 
     def cast_data_object(self) -> AthleteData:
         """Return a data object based on the AthleteData class"""
