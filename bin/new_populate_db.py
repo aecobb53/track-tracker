@@ -11,7 +11,7 @@ etc_tmp = os.path.join(etc_dir, 'tmp')
 UPLOAD_DATA_PATH = os.path.join(etc_tmp, 'upload_file.json')
 COMPLETED_STEPS = os.path.join(etc_tmp, 'workfile_deleteme_2025.json')
 SERVER_URL = 'http://localhost:8205'
-# SERVER_URL = 'https://fhs-track.nax.lol'
+SERVER_URL = 'https://fhs-track.nax.lol'
 CURRENT_YEAR = 2025
 
 YEAR_MAP = {
@@ -210,7 +210,7 @@ for year, meets in data.items():
             progress_tracking[year][meet_name][event_name] = True
             with open(COMPLETED_STEPS, 'w') as jf:
                 jf.write(json.dumps(progress_tracking, indent=4))
-            # sleep(1)
+            sleep(1)
         x=1
         progress_pointer += 1
         percent_complete = int(progress_pointer / progress_count * 10000) / 100
