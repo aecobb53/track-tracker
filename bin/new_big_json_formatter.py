@@ -24,17 +24,18 @@ NORMAL_POINTS = [
     4,
     3,
     2,
-    1
+    1,
 ]
 SMALL_POINTS = [
-    10,
-    8,
-    6
+    5,
+    3,
+    1,
 ]
 
 def assess_points(event: str, place: int, tri_meet: bool = False):
     if tri_meet:
-        x=1
+        if place < len(SMALL_POINTS) + 1:
+            return SMALL_POINTS[place - 1]
     else:
         if place < len(NORMAL_POINTS) + 1:
             return NORMAL_POINTS[place - 1]
@@ -56,7 +57,8 @@ def parse_data_row(
     calendar_year: int,
     meet_name: str,
     meet_metadata: dict,
-    relay_data: dict,):
+    relay_data: dict,
+    tri_meet):
     # New result indicator
     if len(data_row) == 5 and data_row[-1] == '':
         data_row.pop(-1)
@@ -187,7 +189,7 @@ def parse_data_row(
                 'graduation_year': graduation_year,
             }
 
-            points = assess_points(event=event, place=place)
+            points = assess_points(event=event, place=place, tri_meet=tri_meet)
 
             result_data = {
                 'event': event,
@@ -270,10 +272,10 @@ def parse_data_row(
                 'graduation_year': calendar_year,
             }
 
-            points = assess_points(event=event, place=place)
+            points = assess_points(event=event, place=place, tri_meet=tri_meet)
             # Add data for relay legs
             relay_athletes_dict = []
-            if team == TEAM:
+            if team == TEAM and relay_data:
                 for relay_i in range(len(relay_data[gender])):
                     relay = relay_data[gender][relay_i]
                     if relay['relay'] in event:
@@ -373,6 +375,7 @@ def parse_meet_file(path: str, meet_name: str, meet_dates: dict, calendar_year: 
                 'location': deets['location'],
                 'small_meet': deets.get('small_meet', False),
             }
+            tri_meet = deets.get('small_meet', False)
             break
     else:
         print(f"FAILED TO FIND MEET DATA FOR {path}")
@@ -391,7 +394,8 @@ def parse_meet_file(path: str, meet_name: str, meet_dates: dict, calendar_year: 
                 calendar_year=calendar_year,
                 meet_name=meet_name,
                 meet_metadata=meet_metadata,
-                relay_data=relay_data)
+                relay_data=relay_data,
+                tri_meet=tri_meet)
             if row:
                 meet_data.append(row)
             data_row = []
@@ -423,7 +427,8 @@ def parse_meet_file(path: str, meet_name: str, meet_dates: dict, calendar_year: 
                 calendar_year=calendar_year,
                 meet_name=meet_name,
                 meet_metadata=meet_metadata,
-                relay_data=relay_data)
+                relay_data=relay_data,
+                tri_meet=tri_meet)
             if row:
                 meet_data.append(row)
             data_row = []
@@ -452,7 +457,7 @@ def parse_meet_file(path: str, meet_name: str, meet_dates: dict, calendar_year: 
                 # Share places
                 assigned_points = 0
                 for tmp_place in range(len(lagging_place)):
-                    assigned_points += assess_points(event=event, place=lagging_place[0][1] + tmp_place)
+                    assigned_points += assess_points(event=event, place=lagging_place[0][1] + tmp_place, tri_meet=tri_meet)
                 assigned_points = round(assigned_points / len(lagging_place), 3)
                 for index, place in lagging_place:
                     a = results[index]

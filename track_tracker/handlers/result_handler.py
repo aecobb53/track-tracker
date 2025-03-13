@@ -38,7 +38,7 @@ class ResultHandler(BaseHandler):
         return result
 
     async def filter_results(self, result_filter: ResultFilter) -> list[ResultData]:
-        self.context.logger.info(f"Filtering results: {result_filter.model_dump_json()}")
+        # self.context.logger.info(f"Filtering results: {result_filter.model_dump_json()}")
         with Session(self.context.database.engine) as session:
             query = select(ResultDB)
             query = result_filter.apply_filters(ResultDB, query)
@@ -48,14 +48,14 @@ class ResultHandler(BaseHandler):
                 read_obj = ResultDBRead.model_validate(row)
                 result = read_obj.cast_data_object()
                 results.append(result)
-        self.context.logger.info(f"Results Filtered: {len(results)}")
+        # self.context.logger.info(f"Results Filtered: {len(results)}")
         return results
 
     async def find_results(self, result_filter: ResultFilter, silence_missing=False) -> ResultData:
         """
         Find single matching result or error
         """
-        self.context.logger.info(f"Filtering results: {result_filter.model_dump_json()}")
+        # self.context.logger.info(f"Filtering results: {result_filter.model_dump_json()}")
         with Session(self.context.database.engine) as session:
             query = select(ResultDB)
             query = result_filter.apply_filters(ResultDB, query)
@@ -97,7 +97,7 @@ class ResultHandler(BaseHandler):
             # query_max_count = rows = session.exec(
             #     select(func.count(ResultDB.uid))).one()
 
-        # self.context.logger.info(f"Results Filtered: {len(results)}")
+        self.context.logger.info(f"Results Filtered: {len(results)}")
         display_results = []
         for result in results:
             athlete = result.athlete_uid
