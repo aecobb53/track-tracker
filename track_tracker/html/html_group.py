@@ -284,7 +284,7 @@ async def points_html_page(athletes_dict, meet_name_list):
     # Body
     page_content = Div().add_class('page-content')
     page_content.add_element(Header(level=1, internal='Team Points').add_class('page-header'))
-    page_content.add_element(Paragraph(internal='PARAGRAPH here'))
+    # page_content.add_element(Paragraph(internal='This is the team points page. A'))
 
     points_div = Div().add_class('points')
     points_table = Table().add_class('points-table')
@@ -307,9 +307,12 @@ async def points_html_page(athletes_dict, meet_name_list):
             graduation_year = '-'
 
         points_dict = {k: 0 for k in meet_name_list}
+        description_dict = {k: [] for k in meet_name_list}
         for result in details['results']:
             # Meet points
             points_dict[result.meet] += result.points
+            print(f"RESULT: {result}")
+            description_dict[result.meet].append((result.event, result.points))
 
             # Relays
             if 'Relay' not in result.event:
@@ -323,21 +326,6 @@ async def points_html_page(athletes_dict, meet_name_list):
                     boys_meet_points[result.meet] += result.points
 
         total_points = sum(points_dict.values())
-        # athlete_name = f"{athlete.first_name} {athlete.last_name}"
-        # meet = result.meet
-
-        # # Top Scorers
-        # if 'Relay' not in athlete.first_name and not 'Relay' in athlete.last_name:
-        #     print(f"ATHLETE NAME: {athlete_name}, MEET: {meet}, TOTAL POINTS: {total_points}")
-        #     if not top_scorers[result.meet][athlete.gender]:
-        #         top_scorers[result.meet][athlete.gender] = [(athlete_name, total_points)]
-        #     #     print(f"TOP SCORERS: {top_scorers}")
-        #     else:
-        #         print(f"  TOTAL POINTS: {total_points}, TOP SCORER POINTS: {top_scorers[result.meet][athlete.gender][0][1]}")
-        #         if total_points > top_scorers[result.meet][athlete.gender][0][1]:
-        #             top_scorers[result.meet][athlete.gender] = [(athlete_name, total_points)]
-        #             print(f'    REPLACING')
-        #     #         print(f"TOP SCORERS: {top_scorers}")
 
         if 'Relay' in athlete.first_name or 'Relay' in athlete.last_name:
             relay_details_list.append({
@@ -347,6 +335,7 @@ async def points_html_page(athletes_dict, meet_name_list):
                 'class': graduation_year,
                 'total_points': total_points,
                 'points_dict': points_dict,
+                'point_description_dict': description_dict,
                 })
         else:
             display_details_list.append({
@@ -356,6 +345,7 @@ async def points_html_page(athletes_dict, meet_name_list):
                 'class': graduation_year,
                 'total_points': total_points,
                 'points_dict': points_dict,
+                'point_description_dict': description_dict,
                 })
 
     for index, details in enumerate(display_details_list):
@@ -376,8 +366,10 @@ async def points_html_page(athletes_dict, meet_name_list):
             TableData(internal=details['total_points']).add_class('points-table-data'))
 
         for meet_name, points in details['points_dict'].items():
+            description = details['point_description_dict'][meet_name]
+            description = ', '.join([f"{k}: {v}" for k, v in details['point_description_dict'][meet_name]])
             points_table_row.add_element(
-                TableData(internal=points).add_class('points-table-data'))
+                TableData(internal=points, title=description).add_class('points-table-data'))
 
         points_table.add_element(points_table_row)
 

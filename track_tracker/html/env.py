@@ -1,4 +1,9 @@
-SEASON_YEAR = 2025
+# SEASON_YEAR = 2025
+from datetime import datetime, timezone
+
+
+SEASON_YEAR = datetime.now(timezone.utc).year
+TEAM = 'Fairview High School'
 
 WHITE_COLOR = '#ffffff'
 BLACK_COLOR = '#000000'

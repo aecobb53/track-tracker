@@ -80,7 +80,9 @@ def upload_athlete(athlete, result):
             if re.search(i, result['event']):
                 athlete_tags.append(j)
                 break
-    athlete['tags'] = athlete.get('tags', []) + athlete_tags
+    athlete_tags = list(set(athlete.get('tags', []) + athlete_tags))
+    athlete_tags.sort()
+    athlete['tags'] = athlete_tags
     athlete_resp = requests.get(f"{SERVER_URL}/athlete/{first}/{last}/{team}/")
     if athlete_resp.status_code == 404:
         # Post new athlete

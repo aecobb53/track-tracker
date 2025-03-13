@@ -230,6 +230,11 @@ async def find_athletes_html_page(athlete, results):
     # current PR for that event.
     # '''))
 
+    print(f"ATHLETE: {athlete}")
+
+    #TAGS
+    #METADATA?
+
     athlete_name = f"{athlete.first_name} {athlete.last_name}"
     athlete_info_div = Div()
     athlete_info_div.add_element(Header(level=1, internal=f"{athlete_name}"))
@@ -241,6 +246,25 @@ async def find_athletes_html_page(athlete, results):
         athlete_info_div.add_class('mens-format')
     else:
         athlete_info_div.add_class('womens-format')
+
+    athlete_info_div.add_element(Header(level=2, internal=f"Tags: {', '.join(athlete.tags)}").add_class('athlete-info-tag'))
+    if 'Takeoff' in athlete.athlete_metadata:
+        athlete_info_div.add_element(Header(level=2, internal=f"Takeoff: {athlete.athlete_metadata['Takeoff']}").add_class('athlete-info-tag'))
+    
+    season_points = {}
+    # print(f"RESULTS: {results}")
+    for result in results:
+        if result.points:
+            if result.meet_date.year not in season_points:
+                season_points[result.meet_date.year] = 0
+            season_points[result.meet_date.year] += result.points
+    if season_points:
+        athlete_info_div.add_element(Header(level=2, internal=f"Varsity Points").add_class('athlete-info-tag'))
+
+        season_points = dict(sorted(season_points.items(), key=lambda x: x[0], reverse=False))
+    for year, points in season_points.items():
+        athlete_info_div.add_element(Header(level=3, internal=f"    {year}: {points}").add_class('athlete-info-tag'))
+
     page_content.add_element(athlete_info_div)
 
     page_content.add_element(Header(level=1, internal=f"Events"))

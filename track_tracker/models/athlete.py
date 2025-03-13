@@ -102,16 +102,6 @@ class AthleteDBBase(SQLModel):
     def cast_data_object(self) -> AthleteData:
         """Return a data object based on the AthleteData class"""
         content = self.model_dump()
-        # if self.aliases:
-        #     content['aliases'] = self.aliases[1:-1].split(',')
-        # else:
-        #     content['aliases'] = []
-        # if self.tags:
-        #     content['tags'] = self.tags[1:-1].split(',')
-        # else:
-        #     content['tags'] = []
-        # if self.active is None:
-        #     content['active'] = True
         content['aliases'] = json.loads(self.aliases)
         content['tags'] = json.loads(self.tags)
         content['athlete_metadata'] = json.loads(self.athlete_metadata)
@@ -127,7 +117,7 @@ class AthleteDBCreate(AthleteDBBase):
         fields['search_last_name'] = fields['last_name'].lower()
         fields['search_team'] = fields['team'].lower()
         fields['aliases'] = json.dumps(fields['aliases'])
-        fields['tags'] = json.dumps(fields['tags'])
+        fields['tags'] = json.dumps(list(set(fields['tags'])))
         fields['athlete_metadata'] = json.dumps(fields['athlete_metadata'])
         return fields
 
@@ -267,3 +257,7 @@ class AthleteFilter(BaseModel):
                 query = query.offset(self.offset)
 
         return query
+
+    # def add_current_students_for_year(self, year):
+    #     print(f"ADdING STUDENTS ACTIVE IN {year}")
+    #     x=1

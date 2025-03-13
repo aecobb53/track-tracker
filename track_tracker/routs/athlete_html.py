@@ -39,10 +39,8 @@ async def html_athletes(request: Request):
 async def html_athlete(athlete_uid: str, request: Request):
     ah = AthleteHandler()
     athlete = await ah.find_athlete(AthleteFilter(uid=[athlete_uid]))
-    print(f"ATHLETE: {athlete}")
     mh = ResultHandler()
     results = await mh.filter_results(ResultFilter(athlete_uid=[athlete_uid]))
-    print(f"RESULTS: {results}")
     athlete_page = await find_athletes_html_page(athlete=athlete, results=results)
     return HTMLResponse(content=athlete_page, status_code=200)
 

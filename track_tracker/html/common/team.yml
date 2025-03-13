@@ -5,7 +5,7 @@ filter:
             display: Team
             description: Filter by team.
             datatype: string
-            default_value: Fairview
+            default_value: 
 arrange:
     Results:
         limit:

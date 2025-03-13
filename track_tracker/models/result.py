@@ -421,6 +421,11 @@ class ResultFilter(BaseModel):
             if fields['gender'] == ['All']:
                 fields['gender'] = []
 
+        if fields.get('current'):
+            if fields['current'] == ['Current']:
+                year = datetime.now(timezone.utc).year
+                fields['meet_date'] = [f"After{year}-01-01", f"Before{year+1}-01-01"]
+
         if fields.get('meet_date'):
             meet_date = []
             [meet_date.extend(i.split(',')) for i in fields['meet_date']]

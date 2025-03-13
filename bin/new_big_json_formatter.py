@@ -58,7 +58,8 @@ def parse_data_row(
     meet_name: str,
     meet_metadata: dict,
     relay_data: dict,
-    tri_meet):
+    tri_meet: bool  = False,
+    allow_points: bool=True):
     # New result indicator
     if len(data_row) == 5 and data_row[-1] == '':
         data_row.pop(-1)
@@ -108,6 +109,13 @@ def parse_data_row(
             if year_re:
                 year = int(year_re.groups()[0])
                 team = team.replace(str(year), '').strip()
+
+
+            x=1
+            # For faster data upload
+            if 'Fairview' not in team:
+                return
+            x=1
 
             if wind:
                 wind = float(wind)
@@ -228,6 +236,14 @@ def parse_data_row(
                 x=1
             team = data_row[-2]
 
+            x=1
+            # For faster data upload
+            if 'Fairview' not in team:
+                return
+            x=1
+
+
+
             if heat:
                 heat = int(heat)
             place = int(data_row[0])
@@ -273,6 +289,8 @@ def parse_data_row(
             }
 
             points = assess_points(event=event, place=place, tri_meet=tri_meet)
+            if not allow_points:
+                points = 0
             # Add data for relay legs
             relay_athletes_dict = []
             if team == TEAM and relay_data:
@@ -367,6 +385,7 @@ def parse_meet_file(path: str, meet_name: str, meet_dates: dict, calendar_year: 
     header = []
     meet_data = []
     data_row = []
+    tri_meet_relay_points_tracking = []
     for _, deets in meet_dates.get(str(calendar_year), {}).items():
         if os.path.basename(path) == deets['filename']:
             meet_metadata = {
@@ -387,6 +406,10 @@ def parse_meet_file(path: str, meet_name: str, meet_dates: dict, calendar_year: 
             continue
         newline_re = re.search(r'^\d+$', line.strip())
         if newline_re:
+            allow_points = True
+            if tri_meet_relay_points_tracking:
+                if any([t in data_row[1] for t in tri_meet_relay_points_tracking]):
+                    allow_points = False
             row = parse_data_row(
                 data_row=data_row,
                 event=event,
@@ -395,9 +418,12 @@ def parse_meet_file(path: str, meet_name: str, meet_dates: dict, calendar_year: 
                 meet_name=meet_name,
                 meet_metadata=meet_metadata,
                 relay_data=relay_data,
-                tri_meet=tri_meet)
+                tri_meet=tri_meet, 
+                allow_points=allow_points,)
             if row:
                 meet_data.append(row)
+                if 'Relay' in event and tri_meet:
+                    tri_meet_relay_points_tracking.append(row['result']['team'])
             data_row = []
 
         if event and header:
@@ -420,6 +446,10 @@ def parse_meet_file(path: str, meet_name: str, meet_dates: dict, calendar_year: 
             if data_row:
                 data_row.pop(-1)
 
+            allow_points = True
+            if tri_meet_relay_points_tracking:
+                if any([t in data_row[1] for t in tri_meet_relay_points_tracking]):
+                    allow_points = False
             row = parse_data_row(
                 data_row=data_row,
                 event=event,
@@ -428,11 +458,16 @@ def parse_meet_file(path: str, meet_name: str, meet_dates: dict, calendar_year: 
                 meet_name=meet_name,
                 meet_metadata=meet_metadata,
                 relay_data=relay_data,
-                tri_meet=tri_meet)
+                tri_meet=tri_meet,
+                allow_points=allow_points,)
             if row:
                 meet_data.append(row)
+                if 'Relay' in event and tri_meet:
+                    tri_meet_relay_points_tracking.append(row['athlete']['team'])
+                # OR SHOULD I BE REMOVING THE LINE?
             data_row = []
             event = line
+            tri_meet_relay_points_tracking = []
         if line.strip().lower().startswith(('place')):
             header = [l.strip() for l in line.split(' ')]
 
@@ -442,8 +477,9 @@ def parse_meet_file(path: str, meet_name: str, meet_dates: dict, calendar_year: 
             output_data[record['result']['event']] = []
         output_data[record['result']['event']].append(record)
 
-    if relay_data['Boys'] or relay_data['Girls']:
-        x=1  # Did i get all the relay data?
+    if relay_data:
+        if relay_data['Boys'] or relay_data['Girls']:
+            x=1  # Did i get all the relay data?
 
     for event, results in output_data.items():
         shared_places = []
@@ -460,9 +496,9 @@ def parse_meet_file(path: str, meet_name: str, meet_dates: dict, calendar_year: 
                     assigned_points += assess_points(event=event, place=lagging_place[0][1] + tmp_place, tri_meet=tri_meet)
                 assigned_points = round(assigned_points / len(lagging_place), 3)
                 for index, place in lagging_place:
-                    a = results[index]
-                    a_athlete = a['athlete']
-                    a_result = a['result']
+                    # a = results[index]
+                    # a_athlete = a['athlete']
+                    # a_result = a['result']
                     results[index]['result']['points'] = assigned_points
                 lagging_place = [(None, None)]
             else:
@@ -479,15 +515,17 @@ for item in os.listdir(etc_dir):
     if item.endswith('_results'):
 
 
-        x=1
-        # REMOVE THIS ITS JUST TO SPEED IT UP TONIGHT
-        if '2025' not in item:
-            continue
-        x=1
+        # x=1
+        # # REMOVE THIS ITS JUST TO SPEED IT UP TONIGHT
+        # if '2025' not in item:
+        #     continue
+        # x=1
         meets_dirs.append(os.path.join(etc_dir, item))
 
 with open(MEET_DATES_PATH, 'r') as jf:
     meet_dates = json.loads(jf.read())
+
+meets_dirs.sort(reverse=True)
 
 meets_results = {}
 for meets in meets_dirs:
@@ -506,7 +544,7 @@ for meets in meets_dirs:
 
 # Ordering
 years = list(meets_results.keys())
-years.sort()
+years.sort(reverse=True)
 data_to_dump = {year: meets_results[year] for year in years}
 
 with open(OUTPUT_PATH, 'w') as jf:

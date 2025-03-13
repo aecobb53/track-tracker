@@ -11,6 +11,7 @@ from models import ContextSingleton
 # from .html.unimplemented_page import unimplemented_page
 from handlers import ResultHandler, AthleteHandler
 from models import ResultFilter, AthleteFilter
+from html import TEAM
 
 
 from html import (
@@ -40,11 +41,13 @@ async def html_sprint(request: Request):
     # workouts = await mh.filter_workouts(workout_filter=WorkoutFilter())
     rh = ResultHandler()
     ah = AthleteHandler()
-    athlete_filter = AthleteFilter(tags=['Sprint'])
+    # athlete_filter = AthleteFilter(tags=['Sprint'], current=['Current'])
+    athlete_filter = AthleteFilter(tags=['Sprint'], team=[TEAM])
     athletes = await ah.filter_athletes(athlete_filter=athlete_filter)
     athletes_dict = {}
     for athlete in athletes:
-        result_filter = ResultFilter(athlete_uid=[athlete.uid])
+        # result_filter = ResultFilter(athlete_uid=[athlete.uid])
+        result_filter = ResultFilter(athlete_uid=[athlete.uid], current=['Current'])
         results = await rh.filter_results(result_filter=result_filter)
         valid_athlete = False
         if 'Relay' in athlete.last_name:
@@ -72,13 +75,13 @@ async def html_sprint(request: Request):
 async def html_sprint(request: Request):
     rh = ResultHandler()
     ah = AthleteHandler()
-    athlete_filter = AthleteFilter(tags=['Sprint'])
+    athlete_filter = AthleteFilter(tags=['Sprint'], team=[TEAM])
     athletes = await ah.filter_athletes(athlete_filter=athlete_filter)
     athletes_dict = {}
     for athlete in athletes:
         if not athlete.athlete_metadata:
             continue
-        result_filter = ResultFilter(athlete_uid=[athlete.uid])
+        result_filter = ResultFilter(athlete_uid=[athlete.uid], current=['Current'])
         results = await rh.filter_results(result_filter=result_filter)
         # valid_athlete = False
         # for result in results:
@@ -122,12 +125,12 @@ async def html_sprint(request: Request):
 async def html_points(request: Request):
     rh = ResultHandler()
     ah = AthleteHandler()
-    athlete_filter = AthleteFilter(team=['Fairview High School'], order_by=['last_name', 'first_name'])
+    athlete_filter = AthleteFilter(team=[TEAM], order_by=['last_name', 'first_name'])
     athletes = await ah.filter_athletes(athlete_filter=athlete_filter)
     athletes_dict = {}
     meet_name_list = []
     for athlete in athletes:
-        result_filter = ResultFilter(athlete_uid=[athlete.uid])
+        result_filter = ResultFilter(athlete_uid=[athlete.uid], current=['Current'])
         results = await rh.filter_results(result_filter=result_filter)
         valid_athlete = False
 

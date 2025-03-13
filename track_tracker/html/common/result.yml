@@ -133,7 +133,7 @@ filter:
             display: Meet Date
             description: Filter by date of meet.
             datatype: date
-            default_value: 2023-01-01
+            default_value: 2024-01-01
             options:
                 - After
                 - Before
