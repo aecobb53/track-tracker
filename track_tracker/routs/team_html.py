@@ -21,8 +21,8 @@ from html import (
 context = ContextSingleton()
 
 router = APIRouter(
-    prefix='/html/team',
-    tags=['team', 'html'],
+    prefix='/team',
+    tags=['team'],
 )
 '''HTML pages for viewing and filtering different teams or results based on team.'''
 

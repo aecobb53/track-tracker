@@ -1,6 +1,4 @@
-from calendar import month
 from datetime import date, datetime, timedelta
-from re import A
 from fastapi import APIRouter, HTTPException, Request, Response, Depends
 from fastapi.responses import HTMLResponse, ORJSONResponse
 
@@ -23,8 +21,8 @@ from html import (
 context = ContextSingleton()
 
 router = APIRouter(
-    prefix='/html/athlete',
-    tags=['athlete', 'html'],
+    prefix='/athlete',
+    tags=['athlete'],
 )
 '''HTML pages for viewing and filtering different athletes.'''
 

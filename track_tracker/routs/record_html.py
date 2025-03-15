@@ -24,8 +24,8 @@ from html import (
 context = ContextSingleton()
 
 router = APIRouter(
-    prefix='/html/record',
-    tags=['record', 'html'],
+    prefix='/record',
+    tags=['record'],
 )
 '''HTML pages for viewing and filtering different results for school or state records.'''
 

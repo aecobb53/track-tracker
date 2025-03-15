@@ -26,19 +26,19 @@ from html import (
 context = ContextSingleton()
 
 router = APIRouter(
-    prefix='/workout',
-    tags=['workout'],
+    prefix='/html/workout',
+    tags=['workout', 'html'],
 )
 
 
 @router.get('/')
 async def html_workout(request: Request):
-    mh = WorkoutHandler()
-    workouts = await mh.filter_workouts(workout_filter=WorkoutFilter())
-    ah = AthleteHandler()
-    for workout in workouts:
-        athlete = await ah.find_athlete(AthleteFilter(uid=[workout.athlete_uid]))
-        workout.athlete = athlete
-    workout_page = await filter_workouts_html_page(workouts=workouts)
-    # workout_page = await unimplemented_page()
+    # mh = WorkoutHandler()
+    # workouts = await mh.filter_workouts(workout_filter=WorkoutFilter())
+    # ah = AthleteHandler()
+    # for workout in workouts:
+    #     athlete = await ah.find_athlete(AthleteFilter(uid=[workout.athlete_uid]))
+    #     workout.athlete = athlete
+    # workout_page = await filter_workouts_html_page(workouts=workouts)
+    workout_page = await unimplemented_page()
     return HTMLResponse(content=workout_page, status_code=200)

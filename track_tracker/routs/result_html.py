@@ -23,8 +23,8 @@ from html import (
 context = ContextSingleton()
 
 router = APIRouter(
-    prefix='/html/result',
-    tags=['result', 'html'],
+    prefix='/result',
+    tags=['result'],
 )
 
 

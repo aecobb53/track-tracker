@@ -20,8 +20,8 @@ from html import (
 context = ContextSingleton()
 
 router = APIRouter(
-    prefix='/html/dev',
-    tags=['dev', 'html'],
+    prefix='/dev',
+    tags=['dev'],
 )
 '''HTML pages for developer involvement.'''
 

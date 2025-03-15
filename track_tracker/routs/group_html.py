@@ -30,8 +30,8 @@ from html import (
 context = ContextSingleton()
 
 router = APIRouter(
-    prefix='/html/groups',
-    tags=['groups', 'html'],
+    prefix='/groups',
+    tags=['groups'],
 )
 
 
