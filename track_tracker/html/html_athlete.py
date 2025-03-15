@@ -225,15 +225,6 @@ async def find_athletes_html_page(athlete, results):
     page_content = Div().add_class('page-content')
     # page_content.add_element(Header(level=1, internal='Athlete Page'))
 
-    # page_content.add_element(Paragraph(internal='''
-    # This page displays information about an athlete. Notice there is one final row in each table and that is the 
-    # current PR for that event.
-    # '''))
-
-    print(f"ATHLETE: {athlete}")
-
-    #TAGS
-    #METADATA?
 
     athlete_name = f"{athlete.first_name} {athlete.last_name}"
     athlete_info_div = Div()
@@ -250,9 +241,8 @@ async def find_athletes_html_page(athlete, results):
     athlete_info_div.add_element(Header(level=2, internal=f"Tags: {', '.join(athlete.tags)}").add_class('athlete-info-tag'))
     if 'Takeoff' in athlete.athlete_metadata:
         athlete_info_div.add_element(Header(level=2, internal=f"Takeoff: {athlete.athlete_metadata['Takeoff']}").add_class('athlete-info-tag'))
-    
+
     season_points = {}
-    # print(f"RESULTS: {results}")
     for result in results:
         if result.points:
             if result.meet_date.year not in season_points:
