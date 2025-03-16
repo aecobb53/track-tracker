@@ -11,6 +11,19 @@ from .event import EventParser
 from .common import apply_modifier
 
 
+class Meet(BaseModel):
+    name: str
+    csv: list
+
+    @model_validator(mode='before')
+    def validate_fields(cls, fields):
+        print(f"FIELDS: {fields}")
+        if not fields.get('csv'):
+            fields['csv'] = []
+        return fields
+
+
+
 class MeetDay(BaseModel):
     date: str
     name: str

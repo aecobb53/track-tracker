@@ -28,4 +28,4 @@ from .workout import (
     WorkoutDB,
     WorkoutFilter,
 )
-from .meetday import MeetDay
+from .meetday import MeetDay, Meet

@@ -1,7 +1,6 @@
-async function GETCSV(date, name, csv) {
+async function GETMeetCSV(name, csv) {
     console.log('GETing to /meetday');
     var body = {
-        date: date,
         name: name,
         csv: csv
     };

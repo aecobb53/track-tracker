@@ -20,6 +20,7 @@ from html import (
     # meetday_base_page,
     # filter_meetdays_html_page,
     # filter_meetdays_html_page,
+    find_meet_html_page,
     filter_meetdays_html_page,
     unimplemented_page
     )
@@ -32,8 +33,22 @@ router = APIRouter(
 )
 
 
-@router.get('/')
-async def html_meetday(request: Request):
+# @router.get('/')
+# async def html_meetday(request: Request):
+#     # mh = WorkoutHandler()
+#     # meetdays = await mh.filter_meetdays(meetday_filter=WorkoutFilter())
+#     # ah = AthleteHandler()
+#     # for meetday in meetdays:
+#     #     athlete = await ah.find_athlete(AthleteFilter(uid=[meetday.athlete_uid]))
+#     #     meetday.athlete = athlete
+#     # meetday_page = await filter_meetdays_html_page(meetdays=meetdays)
+#     meetday_page = await find_meet_html_page()
+#     return HTMLResponse(content=meetday_page, status_code=200)
+
+
+@router.get('/{meet_name}')
+async def html_meetday(meet_name: str, request: Request):
+    print(f'PAGE MEET: {meet_name}')
     # mh = WorkoutHandler()
     # meetdays = await mh.filter_meetdays(meetday_filter=WorkoutFilter())
     # ah = AthleteHandler()
@@ -41,5 +56,18 @@ async def html_meetday(request: Request):
     #     athlete = await ah.find_athlete(AthleteFilter(uid=[meetday.athlete_uid]))
     #     meetday.athlete = athlete
     # meetday_page = await filter_meetdays_html_page(meetdays=meetdays)
-    meetday_page = await filter_meetdays_html_page()
+    meetday_page = await find_meet_html_page(meet_name)
     return HTMLResponse(content=meetday_page, status_code=200)
+
+
+# @router.get('/')
+# async def html_meetday(request: Request):
+#     # mh = WorkoutHandler()
+#     # meetdays = await mh.filter_meetdays(meetday_filter=WorkoutFilter())
+#     # ah = AthleteHandler()
+#     # for meetday in meetdays:
+#     #     athlete = await ah.find_athlete(AthleteFilter(uid=[meetday.athlete_uid]))
+#     #     meetday.athlete = athlete
+#     # meetday_page = await filter_meetdays_html_page(meetdays=meetdays)
+#     meetday_page = await filter_meetdays_html_page()
+#     return HTMLResponse(content=meetday_page, status_code=200)

@@ -215,6 +215,70 @@ CSV_STYLES = [
         StyleTag(name='.data-div input', internal=f"""
             font-size: 200%;
         """),
+
+
+
+
+
+        StyleTag(name='.meet-table', internal=f"""
+            padding: 0;
+            margin: 0;
+            display: block;
+        """),
+        StyleTag(name='.meet-row', internal=f"""
+            padding: 0;
+            margin: 0;
+            display: inline-block;
+            width: 100%;
+            height: 100%;
+            border: 1px solid black;
+        """),
+        StyleTag(name='.meet-item', internal=f"""
+            padding: 0;
+            margin: 0;
+            display: inline-block;
+            height: 100%;
+        """),
+        StyleTag(name='.meet-multiline-item', internal=f"""
+            padding: 0;
+            margin: 0;
+            display: block;
+        """),
+
+        # StyleTag(name='.col-width', internal=f"""
+        #     width : 100px
+        # """),
+        StyleTag(name='.col-width-time input, .col-width-time div', internal=f"""
+            width: 60px;
+        """),
+        StyleTag(name='.col-width-event input, .col-width-event div', internal=f"""
+            width: 135px;
+        """),
+        StyleTag(name='.col-width-athlete input, .col-width-athlete div', internal=f"""
+            width: 170px;
+        """),
+        StyleTag(name='.col-width-heat input, .col-width-heat div', internal=f"""
+            width: 130px;
+        """),
+        StyleTag(name='.col-width-seed input, .col-width-seed div', internal=f"""
+            width: 150px;
+        """),
+        StyleTag(name='.col-width-result input, .col-width-result div', internal=f"""
+            width: 150px;
+        """),
+        StyleTag(name='.col-width-place input, .col-width-place div', internal=f"""
+            width: 60px;
+        """),
+        StyleTag(name='.col-width-pr div', internal=f"""
+            width: 70px;
+            height: 22px;
+            padding: 0px 10px;
+        """),
+        StyleTag(name='.col-width-pr points', internal=f"""
+            width: 70px;
+            height: 22px;
+            padding: 0px 10px;
+        """),
 ]
 
 """

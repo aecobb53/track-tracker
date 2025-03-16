@@ -12,7 +12,7 @@ COPY entrypoint.sh .
 COPY info.json .
 
 RUN mkdir /db
-COPY etc/testing_db /db
+COPY persisted_db /db
 
 # COPY . .
 

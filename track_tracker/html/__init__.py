@@ -26,4 +26,4 @@ from .html_dev import (
     )
 from .html_group import sprint_html_page, hurlde_html_page, points_html_page
 from .env import TEAM
-from .html_meetday import filter_meetdays_html_page
+from .html_meetday import filter_meetdays_html_page, find_meet_html_page
