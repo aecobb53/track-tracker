@@ -274,7 +274,7 @@ CSV_STYLES = [
             height: 22px;
             padding: 0px 10px;
         """),
-        StyleTag(name='.col-width-pr points', internal=f"""
+        StyleTag(name='.col-width-points div', internal=f"""
             width: 70px;
             height: 22px;
             padding: 0px 10px;

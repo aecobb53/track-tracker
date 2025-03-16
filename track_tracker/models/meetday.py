@@ -13,13 +13,14 @@ from .common import apply_modifier
 
 class Meet(BaseModel):
     name: str
-    csv: list
+    events: list
+    data_time_version: str | None = None
 
     @model_validator(mode='before')
     def validate_fields(cls, fields):
-        print(f"FIELDS: {fields}")
-        if not fields.get('csv'):
-            fields['csv'] = []
+        # print(f"FIELDS: {fields}")
+        if not fields.get('events'):
+            fields['events'] = []
         return fields
 
 

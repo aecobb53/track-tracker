@@ -26,6 +26,7 @@ services:
         command: bash /entrypoint.sh
         volumes:  # This allows uvicorn to reload
             - .:/app
+            - ./persisted_db:/db
         ports:
             - 8205:8000
         links:

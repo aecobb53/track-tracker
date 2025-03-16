@@ -1,8 +1,12 @@
-async function GETMeetCSV(name, csv) {
+async function GETMeetCSV(name, events, data_time_version=null) {
     console.log('GETing to /meetday');
+    // Get updated time
+    var udpate_datetime_div = document.getElementById('page-identifier-update-time');
+
     var body = {
         name: name,
-        csv: csv
+        events: events,
+        data_time_version: udpate_datetime_div.innerHTML
     };
     // var url = '/meetday?' + new URLSearchParams(body).toString();
     var url = '/meetday';

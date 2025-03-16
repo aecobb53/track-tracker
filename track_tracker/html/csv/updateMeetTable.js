@@ -10,7 +10,7 @@ function createMeetInputItem(value, added_class) {
 }
 
 function createMeetDivItem(value, added_class) {
-    console.log('Creating meet input item: ' + value);
+    // console.log('Creating meet input item: ' + value);
     var input_div = document.createElement('div');
     var input = document.createElement('div');
     // input.type = 'text';
@@ -47,8 +47,8 @@ function createMeetItem(value, input=true) {
 }
 
 function createMeetRow(event) {
-    console.log('');
-    console.log('Creating meet row');
+    // console.log('');
+    // console.log('Creating meet row');
     var table_row = document.createElement('div');
     table_row.className = 'meet-row';
 
@@ -101,19 +101,17 @@ function createMeetRow(event) {
 }
 
 async function updateMeetTable(meet_data) {
-    console.log('Populating Meet table');
+    // console.log('Populating Meet table');
     var data_timestamp = meet_data['data_timestamp'];
     var meet_specific_data = meet_data['meet_data'];
     var event_header = meet_data['event_header'];
     var event_data = meet_data['event_data'];
     var meet_data_update = meet_data['meet_data_update'];
 
-    console.log('data_timestamp' + data_timestamp);
-    console.log('meet_specific_data' + meet_specific_data);
-    console.log('event_header' + event_header);
-    console.log('event_data' + event_data);
-    console.log('meet_data_update' + meet_data_update);
-
+    // DIV
+    var udpate_datetime_element = document.getElementById('page-identifier-update-time');
+    udpate_datetime_element.innerHTML = data_timestamp;
+    udpate_datetime_element.setAttribute('hidden', '');
 
 
     // var csv = csv_data['csv'];
@@ -124,7 +122,7 @@ async function updateMeetTable(meet_data) {
         console.log('Populating CSV');
 
         // DIV
-        console.log('Clearing table...');
+        // console.log('Clearing table...');
         var table_div = document.getElementById('meet-table');
         table_div.innerHTML = '';
 
@@ -140,7 +138,7 @@ async function updateMeetTable(meet_data) {
 
         // Data
         for (var i = 0; i < event_data.length; i++) {
-            console.log(event_data[i]);
+            // console.log(event_data[i]);
             row = createMeetRow(event_data[i]);
             table_div.appendChild(row);
         }
