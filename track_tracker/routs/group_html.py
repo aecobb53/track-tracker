@@ -37,16 +37,12 @@ router = APIRouter(
 
 @router.get('/sprint')
 async def html_sprint(request: Request):
-    # mh = WorkoutHandler()
-    # workouts = await mh.filter_workouts(workout_filter=WorkoutFilter())
     rh = ResultHandler()
     ah = AthleteHandler()
-    # athlete_filter = AthleteFilter(tags=['Sprint'], current=['Current'])
     athlete_filter = AthleteFilter(tags=['Sprint'], team=[TEAM])
     athletes = await ah.filter_athletes(athlete_filter=athlete_filter)
     athletes_dict = {}
     for athlete in athletes:
-        # result_filter = ResultFilter(athlete_uid=[athlete.uid])
         result_filter = ResultFilter(athlete_uid=[athlete.uid], current=['Current'])
         results = await rh.filter_results(result_filter=result_filter)
         valid_athlete = False

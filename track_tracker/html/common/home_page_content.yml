@@ -5,6 +5,9 @@ Primary Pages:
     Points:
         endpoint: groups/points
         description: Athlete point standings.
+    Meets:
+        endpoint: meetday
+        description: Meet centered pages.
 Coaching Pages:
     Sprints:
         endpoint: groups/sprint

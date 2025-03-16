@@ -185,13 +185,37 @@ TABLE_STYLES = [
             padding: 20px;
             margin: 20px;
         """),
-
-
-
-
-
 ]
 
+
+CSV_STYLES = [
+        StyleTag(name='.csv-input', internal=f"""
+            width: 100%;
+            height: 100%;
+            padding: 0;
+            margin: 0;
+            color: {TEXT_COLOR_ONE};
+            background-color: {BACKGROUND_COLOR};
+        """),
+        StyleTag(name='td', internal=f"""
+            padding: 0;
+            margin: 0;
+        """),
+        StyleTag(name='.data-div', internal=f"""
+            padding: 10px 10px;
+            margin: 10px 10px;
+        """),
+        StyleTag(name='.data-div span', internal=f"""
+            padding: 0;
+            margin: 0;
+        """),
+        StyleTag(name='.data-div label', internal=f"""
+            font-size: 200%;
+        """),
+        StyleTag(name='.data-div input', internal=f"""
+            font-size: 200%;
+        """),
+]
 
 """
 
@@ -243,7 +267,7 @@ efc9ff
 """
 
 
-async def project_base_page():
+async def project_base_page(onload_function=None):
     # Navigation
     navigation_content = NavigationContent(
         webpage_name="Fairview Track Results",
@@ -252,10 +276,17 @@ async def project_base_page():
         text_color=TEXT_COLOR_TWO,
         )
 
-    doc = MyBaseDocument(
-        navigation_content=navigation_content,
-        document_style=PAGE_STYLES
-    )
+    if onload_function:
+        doc = MyBaseDocument(
+            navigation_content=navigation_content,
+            document_style=PAGE_STYLES,
+            onload_function=onload_function,
+        )
+    else:
+        doc = MyBaseDocument(
+            navigation_content=navigation_content,
+            document_style=PAGE_STYLES,
+        )
     return doc
 
 

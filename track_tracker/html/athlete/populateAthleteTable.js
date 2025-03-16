@@ -37,9 +37,6 @@ async function populateAthleteTable(filterResults, page, page_size, page_count) 
 
     // HEADER
     var table_header = document.createElement('thead');
-    // table_header.style.width = '100%';
-    // table_header.style.fontWeight = 'bold';
-    // table_header.style.padding = '5px';
 
     console.log('Creating table header');
     console.log(filterResults[0]);
