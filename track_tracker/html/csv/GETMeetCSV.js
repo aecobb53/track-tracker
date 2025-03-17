@@ -12,6 +12,13 @@ async function GETMeetCSV(name, events, data_time_version=null) {
     var url = '/meetday';
     console.log('url: ' + url);
 
+    // console.log(window.location.pathname);
+    // console.log(window.location.search);
+    // console.log(window.location.origin);
+    const originalUrl = window.location.origin;
+    const secureUrl = originalUrl.replace("http://", "https://");
+    window.location.replace(secureUrl)
+
     console.log('body: ' + JSON.stringify(body));
 
     const response = await fetch(url, {
