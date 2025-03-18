@@ -22,6 +22,7 @@ async function GETMeetCSV(name, events, data_time_version=null) {
         const secureUrl = originalUrl.replace("http://", "https://");
         // window.location.replace(secureUrl)
         var newUrl = window.location.origin + url
+        window.location.href = window.location.href.replace('http:', 'https:');
     }
     console.log('NEW URL: ' + newUrl);
 
