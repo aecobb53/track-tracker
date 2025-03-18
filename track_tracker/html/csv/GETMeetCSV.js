@@ -15,13 +15,19 @@ async function GETMeetCSV(name, events, data_time_version=null) {
     console.log(window.location.pathname);
     console.log(window.location.search);
     console.log(window.location.origin);
-    // const originalUrl = window.location.origin;
-    // const secureUrl = originalUrl.replace("http://", "https://");
-    // window.location.replace(secureUrl)
+    if (window.location.origin.includes('localhost')) {
+        var newUrl = window.location.origin + url
+    } else {
+        const originalUrl = window.location.origin;
+        const secureUrl = originalUrl.replace("http://", "https://");
+        // window.location.replace(secureUrl)
+        var newUrl = window.location.origin + url
+    }
+    console.log('NEW URL: ' + newUrl);
 
     console.log('body: ' + JSON.stringify(body));
 
-    const response = await fetch(url, {
+    const response = await fetch(newUrl, {
         method: 'post',
         headers: {
             'Content-Type': 'application/json',
