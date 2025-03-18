@@ -39,7 +39,7 @@ class AthleteHandler(BaseHandler):
         """
         Return matching athletes
         """
-        self.context.logger.info(f"Filtering athletes: {athlete_filter.model_dump_json()}")
+        # self.context.logger.info(f"Filtering athletes: {athlete_filter.model_dump_json()}")
         with Session(self.context.database.engine) as session:
             query = select(AthleteDB)
             query = athlete_filter.apply_filters(AthleteDB, query)
@@ -49,14 +49,14 @@ class AthleteHandler(BaseHandler):
                 read_obj = AthleteDBRead.model_validate(row)
                 athlete = read_obj.cast_data_object()
                 athletes.append(athlete)
-        self.context.logger.info(f"Athletes Filtered: {len(athletes)}")
+        # self.context.logger.info(f"Athletes Filtered: {len(athletes)}")
         return athletes
 
-    async def find_athlete(self, athlete_filter: AthleteFilter, silence_missing=False) -> AthleteData:
+    async def find_athlete(self, athlete_filter: AthleteFilter, silence_missing=False, silence_dupe=False) -> AthleteData:
         """
         Find single matching athlete or error
         """
-        self.context.logger.info(f"Filtering athletes: {athlete_filter.model_dump_json()}")
+        # self.context.logger.info(f"Filtering athletes: {athlete_filter.model_dump_json()}")
         with Session(self.context.database.engine) as session:
             query = select(AthleteDB)
             query = athlete_filter.apply_filters(AthleteDB, query)
@@ -71,7 +71,10 @@ class AthleteHandler(BaseHandler):
                     return None
                 raise MissingRecordException(f"No records found for filter: [{athlete_filter.model_dump_json()}]")
             elif len(athletes) > 1:
-                raise DuplicateRecordsException(f"Multiple records found for filter: [{athlete_filter.model_dump_json()}]")
+                if silence_dupe:
+                    athlete = athletes[0]
+                else:
+                    raise DuplicateRecordsException(f"Multiple records found for filter: [{athlete_filter.model_dump_json()}]")
             else:
                 athlete = athletes[0]
         # self.context.logger.info(f"Athlete found")
@@ -107,7 +110,7 @@ class AthleteHandler(BaseHandler):
         return athlete
 
     async def filter_athletes_display(self, athlete_filter: AthleteFilter) -> list[dict]:
-        self.context.logger.info(f"Filtering athletes for display: {athlete_filter.model_dump_json()}")
+        # self.context.logger.info(f"Filtering athletes for display: {athlete_filter.model_dump_json()}")
         with Session(self.context.database.engine) as session:
             query = select(AthleteDB)
             query = athlete_filter.apply_filters(AthleteDB, query)
@@ -123,7 +126,7 @@ class AthleteHandler(BaseHandler):
             query_max_count = session.exec(
                 query_max_count).one()
 
-        self.context.logger.info(f"Athletes Filtered: {len(athletes)}")
+        # self.context.logger.info(f"Athletes Filtered: {len(athletes)}")
         display_athletes = []
         for athlete in athletes:
             results = {}

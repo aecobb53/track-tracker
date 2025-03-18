@@ -78,7 +78,7 @@ function createMeetRow(event) {
     table_row.appendChild(athlete_item);
 
     // Time/Mark
-    var athlete_item = createMeetItem(event['athletes'].map(a => a['time/mark']));
+    var athlete_item = createMeetItem(event['athletes'].map(a => a['result']));
     athlete_item.classList.add('col-width-result');
     table_row.appendChild(athlete_item);
 

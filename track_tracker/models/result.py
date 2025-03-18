@@ -142,6 +142,17 @@ class Result(BaseModel):
         else:
             raise ValueError('Unable to give a Sort Value')
 
+    @property
+    def is_none(self):
+        return not any([
+            self.minutes,
+            self.seconds,
+            self.subsecond,
+            self.feet,
+            self.inches,
+            self.fractions,
+        ])
+
     @classmethod
     def build(cls, input):
         event, result = input.split('::')
@@ -161,7 +172,9 @@ class Result(BaseModel):
                 other.subsecond or 0
             ]
             other_time = timedelta(minutes=other_time[0], seconds=other_time[1], milliseconds=other_time[2] * 1000)
-            if self_time < other_time:
+            if other_time == timedelta(seconds=0) and self_time != timedelta(seconds=0):
+                return True
+            elif self_time < other_time:
                 return True
             else:
                 return False
@@ -178,10 +191,10 @@ class Result(BaseModel):
                 other.fractions or 0
             ]
             other_distance = other_distance[0] * 12 + other_distance[1] + other_distance[2]
-            if self_distance < other_distance:
-                return False
-            else:
+            if self_distance > other_distance:
                 return True
+            else:
+                return False
         else:
             print(f"event_str: {self.event_str}, {other.event_str}")
             print(f"result_str: {self.result_str}, {other.result_str}")

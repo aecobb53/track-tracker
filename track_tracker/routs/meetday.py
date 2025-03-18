@@ -7,15 +7,17 @@ from fastapi.responses import HTMLResponse, ORJSONResponse
 import os
 import json
 import yaml
+import re
 # from models import Event, EventFilter
 # from handlers import EventHandler
 # from handlers import EventHandler, parse_query_params
 # from utils import parse_query_params, parse_header, MissingRecordException, DuplicateRecordsException
 from models import ContextSingleton
-from models import MeetDay, Meet
+from models import MeetDay, Meet, Result
 # from .html.unimplemented_page import unimplemented_page
-from handlers import WorkoutHandler, AthleteHandler
-from models import WorkoutFilter, AthleteFilter
+from handlers import AthleteHandler, ResultHandler
+from models import AthleteFilter, ResultFilter
+from html import TEAM
 
 
 from html import (
@@ -35,6 +37,50 @@ router = APIRouter(
     prefix='/meetday',
     tags=['meetday'],
 )
+
+
+def compare_results(event_str, old, new):
+    """
+    Return PR?, old_result, new_result
+    """
+    event_str = interpret_event(event_str)
+    print(f"    COMPARING OLD: {old}, NEW: {new} FOR EVENT: {event_str}")
+    result_old = Result.parse_event_result(event=event_str, result=old)
+    print(f"    RESULT old: {result_old}")
+    result_new = Result.parse_event_result(event=event_str, result=new)
+    print(f"    RESULT new: {result_new}")
+    if result_new.is_none and result_old.is_none:
+        return False, '-', '-'
+    elif result_new > result_old:
+        return True, result_old, result_new
+    else:
+        return False, result_old, result_new
+
+
+def interpret_event(event):
+    re_match_1_s = r'(\d ?[mM])$'
+    re_match_2_s = r'(\d ?[mM] ?)'
+
+    re_match_1 = re.search(re_match_1_s, event)
+    re_match_2 = re.search(re_match_2_s, event)
+    if re_match_1:
+        event_l = [
+            event[:re_match_1.start()+1],
+            ' Meter',
+            event[re_match_1.end():]]
+        # print(f"OLD STRING: {event}")
+        event = re.sub(r"\s+", ' ', ''.join(event_l)).strip()
+        # print(f"NEW STRING: {event}")
+    elif re_match_2:
+        event_l = [
+            event[:re_match_2.start()+1],
+            ' Meter',
+            event[re_match_2.end()-1:]]
+        # print(f"OLD STRING: {event}")
+        event = re.sub(r"\s+", ' ', ''.join(event_l)).strip()
+        # print(f"NEW STRING: {event}")
+
+    return event
 
 
 def temp_function_compare_meet_data(local_meet_events, remote_meet_events, local_file_last_update_datetime, remote_file_last_update_datetime):
@@ -60,34 +106,44 @@ def temp_function_compare_meet_data(local_meet_events, remote_meet_events, local
         local and remote are ahead of each other in different ways and both need to be updated
         local and remote have different athletes that conflict and remote needs to reset to local
         """
-    
-        for local_event, remote_event in zip(local_meet_events, remote_meet_events):
-            if local_event['Event'] != remote_event['event'][0]:
+        print('CHECKING FOR UPDATES')
+
+        for index1, (local_event, remote_event) in enumerate(zip(local_meet_events, remote_meet_events)):
+            if local_event['Event'] != remote_event['event'][0].strip():
                 local_changed = True
-                local_event['Event'] = remote_event['event'][0]
-            if local_event['Event Time'] != remote_event['time'][0]:
+                local_event['Event'] = remote_event['event'][0].strip()
+            if local_event['Event Time'] != remote_event['time'][0].strip():
                 local_changed = True
-                local_event['Event Time'] = remote_event['time'][0]
-            for local_athlete, remote_athlete in zip(local_event.get('athletes', []), remote_event.get('athletes', [])):
-                if local_athlete['name'] != remote_athlete:
+                local_event['Event Time'] = remote_event['time'][0].strip()
+            for index2, (local_athlete, remote_athlete) in enumerate(zip(local_event.get('athletes', []), remote_event.get('athletes', []))):
+                if local_athlete['name'] != remote_athlete.strip():
                     local_changed = True
-                    local_athlete['name'] = remote_athlete
-            for local_athlete, remote_athlete in zip(local_event.get('athletes', []), remote_event.get('heats', [])):
-                if local_athlete['Heat/Lane/Flight'] != remote_athlete:
+                    local_athlete['name'] = remote_athlete.strip()
+            for index2, (local_athlete, remote_athlete) in enumerate(zip(local_event.get('athletes', []), remote_event.get('heats', []))):
+                if local_athlete['Heat/Lane/Flight'] != remote_athlete.strip():
                     local_changed = True
-                    local_athlete['Heat/Lane/Flight'] = remote_athlete
-            for local_athlete, remote_athlete in zip(local_event.get('athletes', []), remote_event.get('seeds', [])):
-                if local_athlete['seed'] != remote_athlete:
+                    local_athlete['Heat/Lane/Flight'] = remote_athlete.strip()
+            for index2, (local_athlete, remote_athlete) in enumerate(zip(local_event.get('athletes', []), remote_event.get('seeds', []))):
+                if local_athlete['seed'] != remote_athlete.strip():
                     local_changed = True
-                    local_athlete['seed'] = remote_athlete
-            for local_athlete, remote_athlete in zip(local_event.get('athletes', []), remote_event.get('result', [])):
-                if local_athlete.get('result') != remote_athlete:
+                    local_athlete['seed'] = remote_athlete.strip()
+                    # FIND A WAY TO UPDATE THE PR IF THE SEED CHANGES AND IS NOW BELOW THE RESULT
+            for index2, (local_athlete, remote_athlete) in enumerate(zip(local_event.get('athletes', []), remote_event.get('result', []))):
+                if local_athlete.get('result') != remote_athlete.strip():
+                    old = local_athlete['seed']
                     local_changed = True
-                    local_athlete['result'] = remote_athlete
-            for local_athlete, remote_athlete in zip(local_event.get('athletes', []), remote_event.get('place', [])):
-                if local_athlete.get('place') != remote_athlete:
+                    local_athlete['result'] = remote_athlete.strip()
+                    pr, result_old, result_new = compare_results(local_event['Event'], old, local_athlete['result'])
+                    print(f"    THING: {pr, result_old, result_new}")
+                    if pr:
+                        local_athlete['pr'] = result_new.format
+                    else:
+                        local_athlete['pr'] = '-'
+                    local_meet_events[index1]['athletes'][index2] = local_athlete
+            for index2, (local_athlete, remote_athlete) in enumerate(zip(local_event.get('athletes', []), remote_event.get('place', []))):
+                if local_athlete.get('place') != remote_athlete.strip():
                     local_changed = True
-                    local_athlete['place'] = remote_athlete
+                    local_athlete['place'] = remote_athlete.strip()
     else:
         print('INVALID UPDATE, skipping')
 
@@ -117,31 +173,144 @@ async def get_meet(meet: Meet):
         print('SAVING NEW VERSION')
         meet_file_data['events'] = current_meet_events
         meet_file_data['meet']['last_updated'] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-        # with open(os.path.join('/db/meets', fl), 'w') as jf:
-        #     jf.write(json.dumps(meet_file_data, indent=4))
+        with open(os.path.join('/db/meets', fl), 'w') as jf:
+            jf.write(json.dumps(meet_file_data, indent=4))
 
 
     meet_data = meet_file_data['meet']
     event_data = []  # meet_file_data['events']
     meet_data_update = remote_updates
+    
+    # Populating with default seed, pr, etc data
+    athlete_or_result_pulled = False
+    """
+    If athlete already pulled, dont find again. Assume its up to date
+    Only pull result data that occured before the meet
+    If there is an update to any row, pull all new records just in case
+    Dont overwrite time/place, assume its just a name change and the rest should act accordingly
+    """
+    meet_date = datetime.strptime(meet_file_data['meet']['date'], "%Y-%m-%d")
+    ah = AthleteHandler()
+    rh = ResultHandler()
     for event in current_meet_events:
         event_dict = {
             'time': event['Event Time'],
             'event': event['Event'],
         }
+        # print('')
+        # print('')
+        # print('')
+        # print('')
         # print(f"EVENT: {event}")
+        # print(event['Event'])
         athletes = []
         for athlete in event.get('athletes', []):
-            athlete['time/mark'] = None
-            athlete['place'] = None
-            athlete['pr'] = '-'
-            athlete['points'] = '-'
+            # print('')
+            # print(f"ATHLETE 1: {athlete}")
+            athlete['result'] = athlete.get('result', None)
+            athlete['place'] = athlete.get('place', None)
+            athlete['pr'] = athlete.get('pr', '-')
+            athlete['points'] = athlete.get('points', '-')
+            seed = athlete.get('seed', '-')
+
+            # Pull athlete data
+            if not athlete.get('athlete_uid'):
+                # print('    PULLING ATHLETE')
+                first_last = athlete['name'].split(' ')
+                first = first_last.pop(0)
+                last = ' '.join(first_last)
+                af = AthleteFilter(
+                    first_name=[first],
+                    last_name=[last],
+                    team=[TEAM],
+                )
+                athlete_obj = await ah.find_athlete(af, silence_missing=True, silence_dupe=True)
+                # print(f"FOUND ATHLETE: {athlete_obj}")
+                event_search_name = event['Event']
+                # re_match_1_s = r'(\d ?[mM])$'
+                # re_match_2_s = r'(\d ?[mM] ?)'
+
+                # re_match_1 = re.search(re_match_1_s, event_search_name)
+                # re_match_2 = re.search(re_match_2_s, event_search_name)
+                # if re_match_1:
+                #     event_search_name_l = [
+                #         event_search_name[:re_match_1.start()+1],
+                #         ' Meter',
+                #         event_search_name[re_match_1.end():]]
+                #     # print(f"OLD STRING: {event_search_name}")
+                #     event_search_name = re.sub(r"\s+", ' ', ''.join(event_search_name_l)).strip()
+                #     # print(f"NEW STRING: {event_search_name}")
+                # elif re_match_2:
+                #     event_search_name_l = [
+                #         event_search_name[:re_match_2.start()+1],
+                #         ' Meter',
+                #         event_search_name[re_match_2.end()-1:]]
+                #     # print(f"OLD STRING: {event_search_name}")
+                #     event_search_name = re.sub(r"\s+", ' ', ''.join(event_search_name_l)).strip()
+                #     # print(f"NEW STRING: {event_search_name}")
+                event_search_name = interpret_event(event_search_name)
+
+                if athlete_obj:
+                    athlete_or_result_pulled = True
+                    athlete['athlete_uid'] = athlete_obj.uid
+                    rf = ResultFilter(
+                        athlete_uid=[athlete_obj.uid],
+                        team=[TEAM],
+                        event=[event_search_name],
+                        meet_date=[f"Before{datetime.strftime(meet_date - timedelta(days=1), '%Y-%m-%d')}"]
+                    )
+                    results = await rh.filter_results(rf)
+                    # for result in results:
+                    #     # print(f"RESULT: {result.meet_date}")
+                    #     if result.meet_date > datetime(2025,3,11):
+                    #         print(f"ISSUE")
+                    # if not results:
+                    #     print('    NO RESULTS FOUND!!')
+                    # print(f"RESULTS: {results}")
+                    if results:
+                        pr = results[0]
+                        # print('')
+                        # print('')
+                        # print('')
+                        # print('')
+                        # print(f"EVENT: {event}")
+                        # print(f"ATHLETE: {athlete}")
+                        # print(f"RESULTS: {results}")
+                        for result in results:
+                            # print(f"    THING: {result.result}")
+                            if result.result > pr.result:
+                                pr = result
+                    else:
+                        pr = None
+                    # print(f"PR: {pr}")
+                    if pr:
+                        seed = pr.result.format
+                        athlete_or_result_pulled = True
+                        athlete['seed_uid'] = pr.uid
+                # else:
+                #     print(f"    NO ATHLETE FOUND")
+            # else:
+            #     print('    NOT PULLING ATHLETE')
+            athlete['seed'] = seed
+            # athlete['result'] = None
+            # athlete['place'] = None
+            # athlete['pr'] = '-'
+            # athlete['points'] = '-'
+            # print(f"ATHLETE 2: {athlete}")
             athletes.append(athlete)
         for team in event.get('teams', []):
             x=1
         event_dict['athletes'] = athletes
         # print(f"EVENT DICT: {event_dict}")
         event_data.append(event_dict)
+
+    if athlete_or_result_pulled:
+        # SAVE NEW VERSION
+        print('SAVING NEW VERSION')
+        meet_file_data['events'] = current_meet_events
+        meet_file_data['meet']['last_updated'] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        with open(os.path.join('/db/meets', fl), 'w') as jf:
+            jf.write(json.dumps(meet_file_data, indent=4))
 
     output = {
         'data_timestamp': meet_file_data['meet']['last_updated'],

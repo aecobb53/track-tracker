@@ -13,8 +13,10 @@ class EventParser:
     def parse_event(self, event_s: str):
         if re.search(r'(Dash|Run|Relay|Hurdles|Steeplechase|Javelin|Racewalk|Meter)', event_s):
             self.re_s = r'(?P<MINUTES>\d+:)?(?P<SECONDS>\d+)\.?(?P<SUBSECOND>\d*)'
+            self.event_type = 'run'
         elif re.search(r'(Shot[\s\t]*Put|Discus|Hammer[\s\t]+Throw|High[\s\t]+Jump|Long[\s\t]+Jump|Triple[\s\t]+Jump|Pole[\s\t]+Vault)', event_s):
             self.re_s = r'((?P<FEET>\d+)-)?(?P<INCHES>\d*)\.?(?P<FRACTIONS>\d*)'
+            self.event_type = 'field'
         else:
             raise ValueError(f"UNABLE TO DETERMINE EVENT TYPE FOR {event_s}")
 
@@ -81,7 +83,14 @@ class EventParser:
     def parse_event_result(cls, event_s: str, result_s: str):
         ep = cls(event_s)
         result = ep.parse_result(result_s)
-        assert result is not None, f"Result {result_s} is not valid for event {event_s}"
+        # print(f"EXAMPLE RESULT: {result}")
+        if result is None:
+            # print(f"EP: {ep}")
+            # print(f"EP: {ep.re_s}")
+            if ep.event_type == 'run':
+                result  = (0, 0, 0, None, None, None)
+            elif ep.event_type == 'field':
+                result  = (None, None, None, 0, 0, 0)
         return result
 
     @classmethod
