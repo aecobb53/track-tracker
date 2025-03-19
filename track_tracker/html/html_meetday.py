@@ -54,7 +54,8 @@ from models import Result
 
 
 async def find_meet_html_page(meet):
-    base_doc = await project_base_page(onload_function="runUpdate()")
+    base_doc = await project_base_page()
+    # base_doc = await project_base_page(onload_function="runUpdate()")
 
     # Body
     page_content = Div().add_class('page-content')
@@ -62,6 +63,10 @@ async def find_meet_html_page(meet):
     page_content.add_element(Header(level=1, internal=meet, id='page-identifier-meet-name'))
     page_content.add_element(Header(level=1, id='page-identifier-update-time', hidden=True))
     # page_content.add_element(Header(level=1, internal='EXAMPLE', id='page-identifier-update-time'))
+
+    page_content.add_element(
+        Button(internal='Edit Mode', type='button', onclick='runUpdate()').add_class('big-button').add_class('submit-button'))
+
 
     # Table
     table_div = Div(id='meet-table')
