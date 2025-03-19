@@ -11,7 +11,7 @@ etc_tmp = os.path.join(etc_dir, 'tmp')
 UPLOAD_DATA_PATH = os.path.join(etc_tmp, 'upload_file.json')
 COMPLETED_STEPS = os.path.join(etc_tmp, 'workfile_deleteme_2025.json')
 SERVER_URL = 'http://localhost:8205'
-SERVER_URL = 'https://fhs-track.nax.lol'
+# SERVER_URL = 'https://fhs-track.nax.lol'
 CURRENT_YEAR = 2025
 
 YEAR_MAP = {
@@ -106,8 +106,8 @@ def upload_athlete(athlete, result):
                 update = True
                 if key == 'tags':
                     athlete_content[key] = athlete_content[key] + value
-                else:
-                    athlete_content[key] = value
+                # else:
+                #     athlete_content[key] = value
         if update:
             # Need to update the record
             athlete_resp = requests.put(f"{SERVER_URL}/athlete/", json=athlete_content)

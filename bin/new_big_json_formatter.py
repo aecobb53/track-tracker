@@ -404,6 +404,11 @@ def parse_meet_file(path: str, meet_name: str, meet_dates: dict, calendar_year: 
     for index, line in enumerate(data):
         if 'All Results' in line or not line:
             continue
+
+        if 'Relay' in line:
+            x=1
+
+
         newline_re = re.search(r'^\d+$', line.strip())
         if newline_re:
             allow_points = True
@@ -531,6 +536,8 @@ meets_results = {}
 for meets in meets_dirs:
     for meet in os.listdir(meets):
         if not meet.endswith('.txt'):
+            continue
+        if meet.endswith(' Entries.txt'):
             continue
         meet_filepath = os.path.join(meets, meet)
         relay_filepath = meet_filepath.replace('.txt', ' Relays.yml')
