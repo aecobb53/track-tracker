@@ -75,11 +75,15 @@ async def find_meet_html_page(meet):
     # JS Files
     js_files = [
         os.path.join('csv', 'runUpdate.js'),
-        os.path.join('csv', 'GETMeetCSV.js'),
+        # os.path.join('csv', 'GETMeetCSV.js'),
         os.path.join('csv', 'updateMeetTable.js'),
         os.path.join('csv', 'populateCSV.js'),
         os.path.join('csv', 'createMeetUpdateBody.js'),
     ]
+    if os.environ.get('LOGICAL_ENV') == 'DEV':
+        js_files.append(os.path.join('csv', 'GETMeetCSVDEV.js'))
+    else:
+        js_files.append(os.path.join('csv', 'GETMeetCSVPROD.js'))
     for fl in js_files:
         with open(os.path.join('html', fl), 'r') as jf:
             # line = line.replace('SERVICE_URL', service_url)
