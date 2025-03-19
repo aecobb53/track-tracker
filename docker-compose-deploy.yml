@@ -34,9 +34,9 @@ services:
         labels:
             - "traefik.enable=true"
 
-            - "traefik.http.routers.track_tracking_lan.rule=Host(`fhs-track.bragi.lan`)"
-            - "traefik.http.routers.track_tracking_lan.entrypoints=web"
-            # - "traefik.http.routers.emergencyinfo_lan.entrypoints=websecure"
+            # - "traefik.http.routers.track_tracking_lan.rule=Host(`fhs-track.bragi.lan`)"
+            # - "traefik.http.routers.track_tracking_lan.entrypoints=web"
+            # # - "traefik.http.routers.emergencyinfo_lan.entrypoints=websecure"
 
             - "traefik.http.routers.track_tracking.rule=Host(`fhs-track.nax.lol`)"
             - "traefik.http.routers.track_tracking.entrypoints=websecure"

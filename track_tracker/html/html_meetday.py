@@ -54,8 +54,8 @@ from models import Result
 
 
 async def find_meet_html_page(meet):
-    base_doc = await project_base_page()
-    # base_doc = await project_base_page(onload_function="runUpdate()")
+    # base_doc = await project_base_page()
+    base_doc = await project_base_page(onload_function="runUpdate()")
 
     # Body
     page_content = Div().add_class('page-content')
