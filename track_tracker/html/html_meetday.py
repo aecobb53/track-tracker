@@ -15,6 +15,7 @@ from .base_page import (
     FILTER_STYLES,
     TABLE_STYLES,
     CSV_STYLES,
+    HOME_PAGE_STYLES,
     )
 # from .common import WORKOUT_FILTER_PARAMS, WORKOUT_ARRANGE_PARAMS, WORKOUT_DISPLAY_PARAMS
 from models import Result
@@ -64,8 +65,8 @@ async def find_meet_html_page(meet):
     page_content.add_element(Header(level=1, id='page-identifier-update-time', hidden=True))
     # page_content.add_element(Header(level=1, internal='EXAMPLE', id='page-identifier-update-time'))
 
-    page_content.add_element(
-        Button(internal='Edit Mode', type='button', onclick='runUpdate()').add_class('big-button').add_class('submit-button'))
+    # page_content.add_element(
+    #     Button(internal='Edit Mode', type='button', onclick='runUpdate()').add_class('big-button').add_class('submit-button'))
 
 
     # Table
@@ -111,8 +112,41 @@ async def find_meet_html_page(meet):
     base_doc.body_content = body_content
     return base_doc.return_document
 
-async def filter_meetdays_html_page():
-    pass
+async def filter_meetdays_html_page(meets_dict):
+    # base_doc = await project_base_page()
+    base_doc = await project_base_page(onload_function="runUpdate()")
+
+    # Body
+    page_content = Div().add_class('page-content')
+
+    meet_grouping_div = Div(Header(level=1, internal='THING')).add_class('page-group-div')
+    for meet_name, meet_details in meets_dict.items():
+        content = [
+            Div(internal=Header(level=2, internal=meet_name)).add_class('page-header'),
+            # Div(internal=Paragraph(internal=details['description'])).add_class('page-paragraph'),
+        ]
+        page_link = Link(internal=content, href=f"/html/{meet_details['endpoint']}").add_class('page-link').add_class('page-div')
+        meet_grouping_div.add_element(page_link)
+    page_content.add_element(meet_grouping_div)
+
+
+    body_content = BodyContent(body_content=[page_content])
+
+
+    # Styles
+    for style in PAGE_STYLES:
+        body_content.add_body_styles(style)
+    for style in FILTER_STYLES:
+        body_content.add_body_styles(style)
+    for style in TABLE_STYLES:
+        body_content.add_body_styles(style)
+    for style in CSV_STYLES:
+        body_content.add_body_styles(style)
+    for style in HOME_PAGE_STYLES:
+        body_content.add_body_styles(style)
+
+    base_doc.body_content = body_content
+    return base_doc.return_document
 
 
 # async def filter_meetdays_html_page():

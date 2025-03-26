@@ -310,6 +310,9 @@ async def points_html_page(athletes_dict, meet_name_list):
         description_dict = {k: [] for k in meet_name_list}
         for result in details['results']:
             # Meet points
+            if result.meet not in points_dict:
+                # This meet is being skipped for points
+                continue
             points_dict[result.meet] += result.points
             description_dict[result.meet].append((result.event, result.points))
 

@@ -281,6 +281,64 @@ CSV_STYLES = [
         """),
 ]
 
+HOME_PAGE_STYLES = [
+    StyleTag(name='.home-page-content', internal=f"""
+        color: {TEXT_COLOR_ONE};
+        margin: 10px;
+        padding: 0;
+    """),
+    StyleTag(name='.home-page-content h1', internal=f"""
+        margin: 0;
+        padding: 20px 40px;
+    """),
+    StyleTag(name='.page-group-div', internal=f"""
+        color: {TEXT_COLOR_ONE};
+        margin: 0;
+        padding: 0;
+        display: inline;
+    """),
+
+    StyleTag(name='.page-div', internal=f"""
+        background-color: {PRIMARY_SELECTION_COLOR};
+        margin: 20px;
+        padding: 0;
+        border: 3px solid black;
+        border-radius: 15px;
+        -moz-border-radius: 15px;
+        height: 100px;
+        width: 400px;
+        display: inline-block;
+        vertical-align: top;
+    """),
+
+    StyleTag(name='.page-link', internal=f"""
+        color: {TEXT_COLOR_ONE};
+        text-decoration: none;
+    """),
+
+
+    StyleTag(name='.page-header', internal=f"""
+        margin: 10px;
+        padding: 0;
+        text-align: center;
+    """),
+    StyleTag(name='.page-paragraph', internal=f"""
+        margin: 10px;
+        padding: 0;
+        text-align: center;
+    """),
+
+
+    StyleTag(name='.page-link h2', internal=f"""
+        margin: 15px;
+        padding: 0;
+    """),
+    StyleTag(name='.page-link p', internal=f"""
+        margin: 0;
+        padding: 0;
+    """),
+]
+
 """
 
 font-style: normal|italic|oblique|initial|inherit;
@@ -372,68 +430,68 @@ async def project_home_page():
             grouping_div.add_element(page_link)
         page_content.add_element(grouping_div)
 
-    body_styles = [
-        StyleTag(name='.home-page-content', internal=f"""
-            color: {TEXT_COLOR_ONE};
-            margin: 10px;
-            padding: 0;
-        """),
-        StyleTag(name='.home-page-content h1', internal=f"""
-            margin: 0;
-            padding: 20px 40px;
-        """),
-        StyleTag(name='.page-group-div', internal=f"""
-            color: {TEXT_COLOR_ONE};
-            margin: 0;
-            padding: 0;
-            display: inline;
-        """),
+    # body_styles = [
+    #     StyleTag(name='.home-page-content', internal=f"""
+    #         color: {TEXT_COLOR_ONE};
+    #         margin: 10px;
+    #         padding: 0;
+    #     """),
+    #     StyleTag(name='.home-page-content h1', internal=f"""
+    #         margin: 0;
+    #         padding: 20px 40px;
+    #     """),
+    #     StyleTag(name='.page-group-div', internal=f"""
+    #         color: {TEXT_COLOR_ONE};
+    #         margin: 0;
+    #         padding: 0;
+    #         display: inline;
+    #     """),
 
-        StyleTag(name='.page-div', internal=f"""
-            background-color: {PRIMARY_SELECTION_COLOR};
-            margin: 20px;
-            padding: 0;
-            border: 3px solid black;
-            border-radius: 15px;
-            -moz-border-radius: 15px;
-            height: 100px;
-            width: 400px;
-            display: inline-block;
-            vertical-align: top;
-        """),
+    #     StyleTag(name='.page-div', internal=f"""
+    #         background-color: {PRIMARY_SELECTION_COLOR};
+    #         margin: 20px;
+    #         padding: 0;
+    #         border: 3px solid black;
+    #         border-radius: 15px;
+    #         -moz-border-radius: 15px;
+    #         height: 100px;
+    #         width: 400px;
+    #         display: inline-block;
+    #         vertical-align: top;
+    #     """),
 
-        StyleTag(name='.page-link', internal=f"""
-            color: {TEXT_COLOR_ONE};
-            text-decoration: none;
-        """),
-
-
-        StyleTag(name='.page-header', internal=f"""
-            margin: 10px;
-            padding: 0;
-            text-align: center;
-        """),
-        StyleTag(name='.page-paragraph', internal=f"""
-            margin: 10px;
-            padding: 0;
-            text-align: center;
-        """),
+    #     StyleTag(name='.page-link', internal=f"""
+    #         color: {TEXT_COLOR_ONE};
+    #         text-decoration: none;
+    #     """),
 
 
-        StyleTag(name='.page-link h2', internal=f"""
-            margin: 15px;
-            padding: 0;
-        """),
-        StyleTag(name='.page-link p', internal=f"""
-            margin: 0;
-            padding: 0;
-        """),
-    ]
+    #     StyleTag(name='.page-header', internal=f"""
+    #         margin: 10px;
+    #         padding: 0;
+    #         text-align: center;
+    #     """),
+    #     StyleTag(name='.page-paragraph', internal=f"""
+    #         margin: 10px;
+    #         padding: 0;
+    #         text-align: center;
+    #     """),
+
+
+    #     StyleTag(name='.page-link h2', internal=f"""
+    #         margin: 15px;
+    #         padding: 0;
+    #     """),
+    #     StyleTag(name='.page-link p', internal=f"""
+    #         margin: 0;
+    #         padding: 0;
+    #     """),
+    # ]
 
     body_content = BodyContent(
         body_content=[page_content],
         body_styles=PAGE_STYLES,)
-    for style in body_styles:
+    for style in HOME_PAGE_STYLES:
         body_content.add_body_styles(style)
 
     base_doc.body_content = body_content

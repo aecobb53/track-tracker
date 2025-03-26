@@ -1,9 +1,9 @@
 {
     "meet": {
-        "meet_name": "Quad",
-        "date": null,
+        "meet_name": "BHS CHS FHS MHS",
+        "date": "2025-03-12",
         "small_meet": true,
-        "last_updated": null
+        "last_updated": "2025-03-19 19:08:41"
     },
     "events": [
         {
@@ -12,18 +12,15 @@
             "athletes": [
                 {
                     "name": "Ella Pluzynski",
-                    "Heat/Lane/Flight": "Flight 1 Vaulter 1",
-                    "seed": null
+                    "Heat/Lane/Flight": "Flight 1 Vaulter 1"
                 },
                 {
                     "name": "Amelia Harriman",
-                    "Heat/Lane/Flight": "Flight 1 Vaulter 2",
-                    "seed": null
+                    "Heat/Lane/Flight": "Flight 1 Vaulter 2"
                 },
                 {
                     "name": "Irene McCalmon",
-                    "Heat/Lane/Flight": "Flight 1 Vaulter 11",
-                    "seed": null
+                    "Heat/Lane/Flight": "Flight 1 Vaulter 11"
                 }
             ]
         },
@@ -33,18 +30,15 @@
             "athletes": [
                 {
                     "name": "Orion Davis",
-                    "Heat/Lane/Flight": "Flight 1 Jumper 11",
-                    "seed": null
+                    "Heat/Lane/Flight": "Flight 1 Jumper 11"
                 },
                 {
                     "name": "Anthony Giliberti",
-                    "Heat/Lane/Flight": "Flight 1 Jumper 12",
-                    "seed": null
+                    "Heat/Lane/Flight": "Flight 1 Jumper 12"
                 },
                 {
                     "name": "Max Webb",
-                    "Heat/Lane/Flight": "Flight 1 Jumper 16",
-                    "seed": null
+                    "Heat/Lane/Flight": "Flight 1 Jumper 16"
                 }
             ]
         },
@@ -54,8 +48,7 @@
             "athletes": [
                 {
                     "name": "Brigitte Schmid",
-                    "Heat/Lane/Flight": "Flight 2 Jumper 5",
-                    "seed": null
+                    "Heat/Lane/Flight": "Flight 2 Jumper 5"
                 }
             ]
         },
@@ -65,28 +58,23 @@
             "athletes": [
                 {
                     "name": "Zane Copeland",
-                    "Heat/Lane/Flight": "Flight 2 Jumper 2",
-                    "seed": null
+                    "Heat/Lane/Flight": "Flight 2 Jumper 2"
                 },
                 {
                     "name": "Henry Duckham",
-                    "Heat/Lane/Flight": "Flight 2 Jumper 6",
-                    "seed": null
+                    "Heat/Lane/Flight": "Flight 2 Jumper 6"
                 },
                 {
                     "name": "Jaxson Cooper",
-                    "Heat/Lane/Flight": "Flight 2 Jumper 8",
-                    "seed": null
+                    "Heat/Lane/Flight": "Flight 2 Jumper 8"
                 },
                 {
                     "name": "Santiago Caravia-Perry",
-                    "Heat/Lane/Flight": "Flight 3 Jumper 1",
-                    "seed": null
+                    "Heat/Lane/Flight": "Flight 3 Jumper 1"
                 },
                 {
                     "name": "Caleb Cooper",
-                    "Heat/Lane/Flight": "Flight 3 Jumper 2",
-                    "seed": null
+                    "Heat/Lane/Flight": "Flight 3 Jumper 2"
                 }
             ]
         },
@@ -96,33 +84,27 @@
             "athletes": [
                 {
                     "name": "Marek Dorris",
-                    "Heat/Lane/Flight": "Flight 1 Thrower 1",
-                    "seed": null
+                    "Heat/Lane/Flight": "Flight 1 Thrower 1"
                 },
                 {
                     "name": "Colin Overy",
-                    "Heat/Lane/Flight": "Flight 1 Thrower 4",
-                    "seed": null
+                    "Heat/Lane/Flight": "Flight 1 Thrower 4"
                 },
                 {
                     "name": "Zane Copeland",
-                    "Heat/Lane/Flight": "Flight 1 Thrower 8",
-                    "seed": null
+                    "Heat/Lane/Flight": "Flight 1 Thrower 8"
                 },
                 {
                     "name": "Jace Pollock",
-                    "Heat/Lane/Flight": "Flight 1 Thrower 9",
-                    "seed": null
+                    "Heat/Lane/Flight": "Flight 1 Thrower 9"
                 },
                 {
                     "name": "Kaylor Huang",
-                    "Heat/Lane/Flight": "Flight 1 Thrower 10",
-                    "seed": null
+                    "Heat/Lane/Flight": "Flight 1 Thrower 10"
                 },
                 {
                     "name": "Keeghan Field-Gordon",
-                    "Heat/Lane/Flight": "Flight 2 Thrower 8",
-                    "seed": null
+                    "Heat/Lane/Flight": "Flight 2 Thrower 8"
                 }
             ]
         },
@@ -132,8 +114,7 @@
             "athletes": [
                 {
                     "name": "Amelia Clasby",
-                    "Heat/Lane/Flight": "Flight 1 Thrower 4",
-                    "seed": null
+                    "Heat/Lane/Flight": "Flight 1 Thrower 4"
                 }
             ]
         },
@@ -143,13 +124,11 @@
             "athletes": [
                 {
                     "name": "Koji Dennis",
-                    "Heat/Lane/Flight": "Flight 1 Vaulter 7",
-                    "seed": null
+                    "Heat/Lane/Flight": "Flight 1 Vaulter 7"
                 },
                 {
                     "name": "Keiran Meier",
-                    "Heat/Lane/Flight": "Flight 1 Vaulter 9",
-                    "seed": null
+                    "Heat/Lane/Flight": "Flight 1 Vaulter 9"
                 }
             ]
         },
@@ -159,18 +138,15 @@
             "athletes": [
                 {
                     "name": "Evelyn Kear",
-                    "Heat/Lane/Flight": "Flight 1 Jumper 7",
-                    "seed": null
+                    "Heat/Lane/Flight": "Flight 1 Jumper 7"
                 },
                 {
                     "name": "Amelia Clasby",
-                    "Heat/Lane/Flight": "Flight 1 Jumper 8",
-                    "seed": null
+                    "Heat/Lane/Flight": "Flight 1 Jumper 8"
                 },
                 {
                     "name": "Julia Savage",
-                    "Heat/Lane/Flight": "Flight 1 Jumper 9",
-                    "seed": null
+                    "Heat/Lane/Flight": "Flight 1 Jumper 9"
                 }
             ]
         },
@@ -180,18 +156,15 @@
             "athletes": [
                 {
                     "name": "Jaxson Cooper",
-                    "Heat/Lane/Flight": "Flight 1 Jumper 5",
-                    "seed": null
+                    "Heat/Lane/Flight": "Flight 1 Jumper 5"
                 },
                 {
                     "name": "Zane Copeland",
-                    "Heat/Lane/Flight": "Flight 1 Jumper 7",
-                    "seed": null
+                    "Heat/Lane/Flight": "Flight 1 Jumper 7"
                 },
                 {
                     "name": "Caleb Cooper",
-                    "Heat/Lane/Flight": "Flight 1 Jumper 11",
-                    "seed": null
+                    "Heat/Lane/Flight": "Flight 1 Jumper 11"
                 }
             ]
         },
@@ -201,23 +174,19 @@
             "athletes": [
                 {
                     "name": "Colin Overy",
-                    "Heat/Lane/Flight": "Flight 1 Thrower 1",
-                    "seed": null
+                    "Heat/Lane/Flight": "Flight 1 Thrower 1"
                 },
                 {
                     "name": "Marek Dorris",
-                    "Heat/Lane/Flight": "Flight 1 Thrower 4",
-                    "seed": null
+                    "Heat/Lane/Flight": "Flight 1 Thrower 4"
                 },
                 {
                     "name": "Kaylor Huang",
-                    "Heat/Lane/Flight": "Flight 1 Thrower 6",
-                    "seed": null
+                    "Heat/Lane/Flight": "Flight 1 Thrower 6"
                 },
                 {
                     "name": "Jace Pollock",
-                    "Heat/Lane/Flight": "Flight 2 Thrower 2",
-                    "seed": null
+                    "Heat/Lane/Flight": "Flight 2 Thrower 2"
                 }
             ]
         },
@@ -271,23 +240,19 @@
             "athletes": [
                 {
                     "name": "Isabella Dibiase",
-                    "Heat/Lane/Flight": "Heat 1 Lane 1",
-                    "seed": null
+                    "Heat/Lane/Flight": "Heat 1 Lane 1"
                 },
                 {
                     "name": "Elise Roehrich",
-                    "Heat/Lane/Flight": "Heat 1 Lane 3",
-                    "seed": null
+                    "Heat/Lane/Flight": "Heat 1 Lane 3"
                 },
                 {
                     "name": "Kylie Duart",
-                    "Heat/Lane/Flight": "Heat 1 Lane 5",
-                    "seed": null
+                    "Heat/Lane/Flight": "Heat 1 Lane 5"
                 },
                 {
                     "name": "Kate Mccall",
-                    "Heat/Lane/Flight": "Heat 2 Lane 1",
-                    "seed": null
+                    "Heat/Lane/Flight": "Heat 2 Lane 1"
                 }
             ]
         },
@@ -297,13 +262,11 @@
             "athletes": [
                 {
                     "name": "Caden Rozic",
-                    "Heat/Lane/Flight": "Heat 1 Lane 3",
-                    "seed": null
+                    "Heat/Lane/Flight": "Heat 1 Lane 3"
                 },
                 {
                     "name": "Zephry Middleton",
-                    "Heat/Lane/Flight": "Heat 1 Lane 5",
-                    "seed": null
+                    "Heat/Lane/Flight": "Heat 1 Lane 5"
                 }
             ]
         },
@@ -313,53 +276,43 @@
             "athletes": [
                 {
                     "name": "Amelia Harriman",
-                    "Heat/Lane/Flight": "Heat 1 Lane 4",
-                    "seed": null
+                    "Heat/Lane/Flight": "Heat 1 Lane 4"
                 },
                 {
                     "name": "Bethany Kim",
-                    "Heat/Lane/Flight": "Heat 2 Lane 3",
-                    "seed": null
+                    "Heat/Lane/Flight": "Heat 2 Lane 3"
                 },
                 {
                     "name": "Kaia Rinaldo",
-                    "Heat/Lane/Flight": "Heat 2 Lane 6",
-                    "seed": null
+                    "Heat/Lane/Flight": "Heat 2 Lane 6"
                 },
                 {
                     "name": "Sammie Mollenkopf",
-                    "Heat/Lane/Flight": "Heat 2 Lane 8",
-                    "seed": null
+                    "Heat/Lane/Flight": "Heat 2 Lane 8"
                 },
                 {
                     "name": "Aubrie Miller",
-                    "Heat/Lane/Flight": "Heat 3 Lane 2",
-                    "seed": null
+                    "Heat/Lane/Flight": "Heat 3 Lane 2"
                 },
                 {
                     "name": "Elise Roehrich",
-                    "Heat/Lane/Flight": "Heat 3 Lane 4",
-                    "seed": null
+                    "Heat/Lane/Flight": "Heat 3 Lane 4"
                 },
                 {
                     "name": "Kate Mccall",
-                    "Heat/Lane/Flight": "Heat 3 Lane 5",
-                    "seed": null
+                    "Heat/Lane/Flight": "Heat 3 Lane 5"
                 },
                 {
                     "name": "Katie Harris",
-                    "Heat/Lane/Flight": "Heat 3 Lane 6",
-                    "seed": null
+                    "Heat/Lane/Flight": "Heat 3 Lane 6"
                 },
                 {
                     "name": "Saige Hageman",
-                    "Heat/Lane/Flight": "Heat 4 Lane 6",
-                    "seed": null
+                    "Heat/Lane/Flight": "Heat 4 Lane 6"
                 },
                 {
                     "name": "Evelyn Kear",
-                    "Heat/Lane/Flight": "Heat 5 Lane 7",
-                    "seed": null
+                    "Heat/Lane/Flight": "Heat 5 Lane 7"
                 }
             ]
         },
@@ -369,53 +322,43 @@
             "athletes": [
                 {
                     "name": "Miles Weber",
-                    "Heat/Lane/Flight": "Heat 1 Lane 1",
-                    "seed": null
+                    "Heat/Lane/Flight": "Heat 1 Lane 1"
                 },
                 {
                     "name": "Dash Ecklund",
-                    "Heat/Lane/Flight": "Heat 1 Lane 2",
-                    "seed": null
+                    "Heat/Lane/Flight": "Heat 1 Lane 2"
                 },
                 {
                     "name": "Mason McKenna",
-                    "Heat/Lane/Flight": "Heat 1 Lane 5",
-                    "seed": null
+                    "Heat/Lane/Flight": "Heat 1 Lane 5"
                 },
                 {
                     "name": "Wade Carlson",
-                    "Heat/Lane/Flight": "Heat 1 Lane 6",
-                    "seed": null
+                    "Heat/Lane/Flight": "Heat 1 Lane 6"
                 },
                 {
                     "name": "Henry Walker",
-                    "Heat/Lane/Flight": "Heat 1 Lane 8",
-                    "seed": null
+                    "Heat/Lane/Flight": "Heat 1 Lane 8"
                 },
                 {
                     "name": "Caden Rozic",
-                    "Heat/Lane/Flight": "Heat 3 Lane 1",
-                    "seed": null
+                    "Heat/Lane/Flight": "Heat 3 Lane 1"
                 },
                 {
                     "name": "Henry Poe",
-                    "Heat/Lane/Flight": "Heat 3 Lane 7",
-                    "seed": null
+                    "Heat/Lane/Flight": "Heat 3 Lane 7"
                 },
                 {
                     "name": "Miller Gumhaus",
-                    "Heat/Lane/Flight": "Heat 4 Lane 1",
-                    "seed": null
+                    "Heat/Lane/Flight": "Heat 4 Lane 1"
                 },
                 {
                     "name": "Jaxson Cooper",
-                    "Heat/Lane/Flight": "Heat 4 Lane 4",
-                    "seed": null
+                    "Heat/Lane/Flight": "Heat 4 Lane 4"
                 },
                 {
                     "name": "Santiago Caravia-Perry",
-                    "Heat/Lane/Flight": "Heat 4 Lane 8",
-                    "seed": null
+                    "Heat/Lane/Flight": "Heat 4 Lane 8"
                 }
             ]
         },
@@ -454,33 +397,27 @@
             "athletes": [
                 {
                     "name": "Charlotte Carlson",
-                    "Heat/Lane/Flight": "Heat 1 Runner 7",
-                    "seed": null
+                    "Heat/Lane/Flight": "Heat 1 Runner 7"
                 },
                 {
                     "name": "Annabelle Eisner",
-                    "Heat/Lane/Flight": "Heat 1 Runner 8",
-                    "seed": null
+                    "Heat/Lane/Flight": "Heat 1 Runner 8"
                 },
                 {
                     "name": "Carmen Lafrazza-Schwartz",
-                    "Heat/Lane/Flight": "Heat 1 Runner 10",
-                    "seed": null
+                    "Heat/Lane/Flight": "Heat 1 Runner 10"
                 },
                 {
                     "name": "Lola (Sly) Chagolla",
-                    "Heat/Lane/Flight": "Heat 1 Runner 12",
-                    "seed": null
+                    "Heat/Lane/Flight": "Heat 1 Runner 12"
                 },
                 {
                     "name": "Coco Glebe",
-                    "Heat/Lane/Flight": "Heat 2 Runner10",
-                    "seed": null
+                    "Heat/Lane/Flight": "Heat 2 Runner10"
                 },
                 {
                     "name": "Katja Brown",
-                    "Heat/Lane/Flight": "Heat 2 Runner 13",
-                    "seed": null
+                    "Heat/Lane/Flight": "Heat 2 Runner 13"
                 }
             ]
         },
@@ -490,43 +427,35 @@
             "athletes": [
                 {
                     "name": "Carter Ausmus",
-                    "Heat/Lane/Flight": "Heat 1 Runner 1",
-                    "seed": null
+                    "Heat/Lane/Flight": "Heat 1 Runner 1"
                 },
                 {
                     "name": "Osel Yeh",
-                    "Heat/Lane/Flight": "Heat 1 Runner 11",
-                    "seed": null
+                    "Heat/Lane/Flight": "Heat 1 Runner 11"
                 },
                 {
                     "name": "Jackson Wynett",
-                    "Heat/Lane/Flight": "Heat 1 Runner 12",
-                    "seed": null
+                    "Heat/Lane/Flight": "Heat 1 Runner 12"
                 },
                 {
                     "name": "Pietro Camporeale",
-                    "Heat/Lane/Flight": "Heat 1 Runner 15",
-                    "seed": null
+                    "Heat/Lane/Flight": "Heat 1 Runner 15"
                 },
                 {
                     "name": "Tim Nikel",
-                    "Heat/Lane/Flight": "Heat 1 Runner 17",
-                    "seed": null
+                    "Heat/Lane/Flight": "Heat 1 Runner 17"
                 },
                 {
                     "name": "Rory Treleaven",
-                    "Heat/Lane/Flight": "Heat 2 Runner 5",
-                    "seed": null
+                    "Heat/Lane/Flight": "Heat 2 Runner 5"
                 },
                 {
                     "name": "Theo Chastang",
-                    "Heat/Lane/Flight": "Heat 2 Runner 7",
-                    "seed": null
+                    "Heat/Lane/Flight": "Heat 2 Runner 7"
                 },
                 {
                     "name": "Dario Barnes",
-                    "Heat/Lane/Flight": "Heat 2 Runner 11",
-                    "seed": null
+                    "Heat/Lane/Flight": "Heat 2 Runner 11"
                 }
             ]
         },
@@ -570,33 +499,27 @@
             "athletes": [
                 {
                     "name": "Lola (Sly) Chagolla",
-                    "Heat/Lane/Flight": "Heat 1 Lane 2",
-                    "seed": null
+                    "Heat/Lane/Flight": "Heat 1 Lane 2"
                 },
                 {
                     "name": "Jade Kilpatrick",
-                    "Heat/Lane/Flight": "Heat 1 Lane 4",
-                    "seed": null
+                    "Heat/Lane/Flight": "Heat 1 Lane 4"
                 },
                 {
                     "name": "Hazel Straka",
-                    "Heat/Lane/Flight": "Heat 2 Lane 6",
-                    "seed": null
+                    "Heat/Lane/Flight": "Heat 2 Lane 6"
                 },
                 {
                     "name": "Isabella Dibiase",
-                    "Heat/Lane/Flight": "Heat 2 Lane 8",
-                    "seed": null
+                    "Heat/Lane/Flight": "Heat 2 Lane 8"
                 },
                 {
                     "name": "Anna Johnson",
-                    "Heat/Lane/Flight": "Heat 3 Lane 1",
-                    "seed": null
+                    "Heat/Lane/Flight": "Heat 3 Lane 1"
                 },
                 {
                     "name": "Ellie Grandsaert",
-                    "Heat/Lane/Flight": "Heat 3 Lane 6",
-                    "seed": null
+                    "Heat/Lane/Flight": "Heat 3 Lane 6"
                 }
             ]
         },
@@ -606,18 +529,15 @@
             "athletes": [
                 {
                     "name": "Andrew McCarty",
-                    "Heat/Lane/Flight": "Heat 1 Lane 4",
-                    "seed": null
+                    "Heat/Lane/Flight": "Heat 1 Lane 4"
                 },
                 {
                     "name": "James Young",
-                    "Heat/Lane/Flight": "Heat 2 Lane 3",
-                    "seed": null
+                    "Heat/Lane/Flight": "Heat 2 Lane 3"
                 },
                 {
                     "name": "Arran Machado McKelvie",
-                    "Heat/Lane/Flight": "Heat 4 Lane 2",
-                    "seed": null
+                    "Heat/Lane/Flight": "Heat 4 Lane 2"
                 }
             ]
         },
@@ -627,8 +547,7 @@
             "athletes": [
                 {
                     "name": "Portia Richards",
-                    "Heat/Lane/Flight": "Heat 1 Lane 4",
-                    "seed": null
+                    "Heat/Lane/Flight": "Heat 1 Lane 4"
                 }
             ]
         },
@@ -638,13 +557,11 @@
             "athletes": [
                 {
                     "name": "Rory Treleaven",
-                    "Heat/Lane/Flight": "Heat 2 Lane 7",
-                    "seed": null
+                    "Heat/Lane/Flight": "Heat 2 Lane 7"
                 },
                 {
                     "name": "Zephyr Middleton",
-                    "Heat/Lane/Flight": "Heat 2 Lane 8",
-                    "seed": null
+                    "Heat/Lane/Flight": "Heat 2 Lane 8"
                 }
             ]
         },
@@ -654,23 +571,19 @@
             "athletes": [
                 {
                     "name": "Hannah Kim",
-                    "Heat/Lane/Flight": "Heat 1 Runner 7",
-                    "seed": null
+                    "Heat/Lane/Flight": "Heat 1 Runner 7"
                 },
                 {
                     "name": "Cameron Lafrazza-Schwartz",
-                    "Heat/Lane/Flight": "Heat 1 Runner 9",
-                    "seed": null
+                    "Heat/Lane/Flight": "Heat 1 Runner 9"
                 },
                 {
                     "name": "Sierra Wall",
-                    "Heat/Lane/Flight": "Heat 2 Runner 1",
-                    "seed": null
+                    "Heat/Lane/Flight": "Heat 2 Runner 1"
                 },
                 {
                     "name": "Molly Weber",
-                    "Heat/Lane/Flight": "Heat 2 Runner 3",
-                    "seed": null
+                    "Heat/Lane/Flight": "Heat 2 Runner 3"
                 }
             ]
         },
@@ -680,43 +593,35 @@
             "athletes": [
                 {
                     "name": "Ewan Kenny",
-                    "Heat/Lane/Flight": "Heat 1 Runner 3",
-                    "seed": null
+                    "Heat/Lane/Flight": "Heat 1 Runner 3"
                 },
                 {
                     "name": "Tim Nikel",
-                    "Heat/Lane/Flight": "Heat 1 Runner 6",
-                    "seed": null
+                    "Heat/Lane/Flight": "Heat 1 Runner 6"
                 },
                 {
                     "name": "Colin Eisner",
-                    "Heat/Lane/Flight": "Heat 1 Runner 11",
-                    "seed": null
+                    "Heat/Lane/Flight": "Heat 1 Runner 11"
                 },
                 {
                     "name": "Jackson Wynett",
-                    "Heat/Lane/Flight": "Heat 1 Runner 12",
-                    "seed": null
+                    "Heat/Lane/Flight": "Heat 1 Runner 12"
                 },
                 {
                     "name": "Cam Miller",
-                    "Heat/Lane/Flight": "Heat 1 Runner 15",
-                    "seed": null
+                    "Heat/Lane/Flight": "Heat 1 Runner 15"
                 },
                 {
                     "name": "Luke Treleven",
-                    "Heat/Lane/Flight": "Heat 2 Runner 5",
-                    "seed": null
+                    "Heat/Lane/Flight": "Heat 2 Runner 5"
                 },
                 {
                     "name": "Zach Bean",
-                    "Heat/Lane/Flight": "Heat 2 Runner 9",
-                    "seed": null
+                    "Heat/Lane/Flight": "Heat 2 Runner 9"
                 },
                 {
                     "name": "Oliver Su",
-                    "Heat/Lane/Flight": "Heat 2 Runner 11",
-                    "seed": null
+                    "Heat/Lane/Flight": "Heat 2 Runner 11"
                 }
             ]
         },
@@ -726,33 +631,27 @@
             "athletes": [
                 {
                     "name": "Hazel Straka",
-                    "Heat/Lane/Flight": "Heat 1 Lane 7",
-                    "seed": null
+                    "Heat/Lane/Flight": "Heat 1 Lane 7"
                 },
                 {
                     "name": "Ella Pluzynski",
-                    "Heat/Lane/Flight": "Heat 3 Lane 3",
-                    "seed": null
+                    "Heat/Lane/Flight": "Heat 3 Lane 3"
                 },
                 {
                     "name": "Domenica Plaza Homiston",
-                    "Heat/Lane/Flight": "Heat 3 Lane 8",
-                    "seed": null
+                    "Heat/Lane/Flight": "Heat 3 Lane 8"
                 },
                 {
                     "name": "Saige Hageman",
-                    "Heat/Lane/Flight": "Heat 4 Lane 3",
-                    "seed": null
+                    "Heat/Lane/Flight": "Heat 4 Lane 3"
                 },
                 {
                     "name": "Ellie Grandsaert",
-                    "Heat/Lane/Flight": "Heat 4 Lane 5",
-                    "seed": null
+                    "Heat/Lane/Flight": "Heat 4 Lane 5"
                 },
                 {
                     "name": "Anna Johnson",
-                    "Heat/Lane/Flight": "Heat 5 Lane 7",
-                    "seed": null
+                    "Heat/Lane/Flight": "Heat 5 Lane 7"
                 }
             ]
         },
@@ -762,43 +661,35 @@
             "athletes": [
                 {
                     "name": "(Caleb Cooper \u2013 scratch)",
-                    "Heat/Lane/Flight": "Channing Cooper",
-                    "seed": null
+                    "Heat/Lane/Flight": "Channing Cooper"
                 },
                 {
                     "name": "Mason McKenna",
-                    "Heat/Lane/Flight": "Heat 1 Lane 1",
-                    "seed": null
+                    "Heat/Lane/Flight": "Heat 1 Lane 1"
                 },
                 {
                     "name": "Quinn Lewis",
-                    "Heat/Lane/Flight": "Heat 1 Lane 4",
-                    "seed": null
+                    "Heat/Lane/Flight": "Heat 1 Lane 4"
                 },
                 {
                     "name": "Daniel Bonvillian",
-                    "Heat/Lane/Flight": "Heat 1 Lane 5",
-                    "seed": null
+                    "Heat/Lane/Flight": "Heat 1 Lane 5"
                 },
                 {
                     "name": "Jett Jitboon",
-                    "Heat/Lane/Flight": "Heat 2 Lane 3",
-                    "seed": null
+                    "Heat/Lane/Flight": "Heat 2 Lane 3"
                 },
                 {
                     "name": "Dash Ecklund",
-                    "Heat/Lane/Flight": "Heat 3 Lane 3",
-                    "seed": null
+                    "Heat/Lane/Flight": "Heat 3 Lane 3"
                 },
                 {
                     "name": "Orion Davis",
-                    "Heat/Lane/Flight": "Heat 3 Lane 6",
-                    "seed": null
+                    "Heat/Lane/Flight": "Heat 3 Lane 6"
                 },
                 {
                     "name": "Charlie Bonvillian",
-                    "Heat/Lane/Flight": "Heat 4 Lane 5",
-                    "seed": null
+                    "Heat/Lane/Flight": "Heat 4 Lane 5"
                 }
             ]
         },
@@ -808,8 +699,7 @@
             "athletes": [
                 {
                     "name": "Koen Harriman",
-                    "Heat/Lane/Flight": "Heat 1 Runner 3",
-                    "seed": null
+                    "Heat/Lane/Flight": "Heat 1 Runner 3"
                 }
             ]
         },

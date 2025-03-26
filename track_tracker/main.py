@@ -1,6 +1,7 @@
 import os
 import json
 
+from datetime import datetime
 from fastapi import FastAPI, Query, Request, HTTPException, Body
 from fastapi.responses import HTMLResponse, ORJSONResponse, FileResponse
 from fastapi.middleware.cors import CORSMiddleware
@@ -150,9 +151,33 @@ async def favicon():
 
 # About
 @app.get('/about', status_code=200)
-async def root(request: Request):
+async def about(request: Request):
     about_page_content = await project_about()
     return HTMLResponse(content=about_page_content)
+
+# Service Info
+@app.get('/service-info', status_code=200)
+async def service_info():
+    context = ContextSingleton()
+    print(f"context.logger: {context.logger}")
+    print(f"context.database: {context.database}")
+    print(f"context.config: {context.config}")
+    print(f"context.init_time: {context.init_time}")
+    print(f"CONTEXT: {context}")
+    output = {
+        'Status': 'OK',
+        'Dependencies': {},
+    }
+    if context.database:
+        output['Dependencies']['Database'] = 'OK'
+    else:
+        output['Dependencies']['Database'] = 'Down'
+        output['status'] = 'Degraded'
+
+    uptime = datetime.now() - context.init_time
+    output['uptime'] = str(uptime)
+    return output
+
 
 
 # @app.get('/test', status_code=200)

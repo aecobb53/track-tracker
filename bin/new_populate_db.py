@@ -105,7 +105,8 @@ def upload_athlete(athlete, result):
             if athlete_content[key] != value:
                 update = True
                 if key == 'tags':
-                    athlete_content[key] = athlete_content[key] + value
+                    athlete_tags = list(set(athlete_content[key] + value))
+                    athlete_content[key] = athlete_tags
                 # else:
                 #     athlete_content[key] = value
         if update:
@@ -154,6 +155,17 @@ progress_count = sum([len(m) for y, m in data.items()])
 progress_pointer = 0
 x=1
 for year, meets in data.items():
+
+
+
+
+    # if year != '2025':
+    #     continue
+
+
+
+
+
     if year not in progress_tracking:
         progress_tracking[year] = {}
     for meet_name, events in meets.items():
@@ -181,8 +193,8 @@ for year, meets in data.items():
                 if 'Fairview' not in athlete['team']:
                     continue
 
-                if 'Girls High Jump' in result['event']:
-                    x=1
+                # if 'Girls High Jump' in result['event']:
+                #     x=1
 
 
                 event_query_params = {

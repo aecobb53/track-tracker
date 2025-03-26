@@ -211,6 +211,13 @@ def parse_data_row(
                 'meet': meet_name,
                 'gender': gender,
             }
+            if meet_metadata:
+                result_data['result_metadata'] = {}
+                if meet_metadata.get('small_meet'):
+                    result_data['result_metadata']['small_meet'] = meet_metadata['small_meet']
+                if meet_metadata.get('jv'):
+                    result_data['result_metadata']['jv'] = meet_metadata['jv']
+
 
             data_obj = {
                 'athlete': athlete_data,
@@ -236,11 +243,11 @@ def parse_data_row(
                 x=1
             team = data_row[-2]
 
-            x=1
-            # For faster data upload
-            if 'Fairview' not in team:
-                return
-            x=1
+            # x=1
+            # # For faster data upload
+            # if 'Fairview' not in team:
+            #     return
+            # x=1
 
 
 
@@ -286,6 +293,9 @@ def parse_data_row(
                 'team': team,
                 'gender': gender,
                 'graduation_year': calendar_year,
+                'athlete_metadata': {
+                    'relay_team': True
+                },
             }
 
             points = assess_points(event=event, place=place, tri_meet=tri_meet)
@@ -354,7 +364,12 @@ def parse_data_row(
                 'meet': meet_name,
                 'gender': gender,
             }
-
+            if meet_metadata:
+                result_data['result_metadata'] = {}
+                if meet_metadata.get('small_meet'):
+                    result_data['result_metadata']['small_meet'] = meet_metadata['small_meet']
+                if meet_metadata.get('jv'):
+                    result_data['result_metadata']['jv'] = meet_metadata['jv']
             data_obj = {
                 'athlete': athlete_data,
                 'result': result_data,
@@ -393,6 +408,7 @@ def parse_meet_file(path: str, meet_name: str, meet_dates: dict, calendar_year: 
                 'meet_name': deets['meet'],
                 'location': deets['location'],
                 'small_meet': deets.get('small_meet', False),
+                'jv': deets.get('jv_meet', False),
             }
             tri_meet = deets.get('small_meet', False)
             break

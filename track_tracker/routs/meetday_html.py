@@ -1,5 +1,7 @@
-from calendar import month
+import os
+import json
 from datetime import date, datetime, timedelta
+import re
 from fastapi import APIRouter, HTTPException, Request, Response, Depends
 from fastapi.responses import HTMLResponse, ORJSONResponse
 
@@ -9,8 +11,10 @@ from fastapi.responses import HTMLResponse, ORJSONResponse
 # from utils import parse_query_params, parse_header, MissingRecordException, DuplicateRecordsException
 from models import ContextSingleton
 # from .html.unimplemented_page import unimplemented_page
-from handlers import WorkoutHandler, AthleteHandler
-from models import WorkoutFilter, AthleteFilter
+from handlers import ResultHandler, AthleteHandler
+from models import ResultFilter, AthleteFilter
+from html import TEAM
+
 
 
 from html import (
@@ -44,6 +48,26 @@ router = APIRouter(
 #     # meetday_page = await filter_meetdays_html_page(meetdays=meetdays)
 #     meetday_page = await find_meet_html_page()
 #     return HTMLResponse(content=meetday_page, status_code=200)
+
+
+@router.get('/')
+async def html_meetday(request: Request):
+    print(f'MEETS PAGE')
+    meets_dict = {}
+    for fl in os.listdir('/db/meets'):
+        with open(os.path.join('/db/meets', fl), 'r') as jf:
+            meet_file_data = json.load(jf)
+            meet_metadata = meet_file_data['meet']
+            print(f'MEET: {meet_metadata}')
+            meets_dict[meet_metadata['meet_name']] = {
+                'meet_date': datetime.strptime(meet_metadata['date'], '%Y-%m-%d'),
+                'endpoint': f"meetday/{fl.replace('.json', '')}",
+                'jv': meet_metadata.get('jv'),
+            }
+
+    meets_dict = dict(sorted(meets_dict.items(), key=lambda item: item[1]['meet_date'], reverse=False))
+    meetday_page = await filter_meetdays_html_page(meets_dict=meets_dict)
+    return HTMLResponse(content=meetday_page, status_code=200)
 
 
 @router.get('/{meet_name}')

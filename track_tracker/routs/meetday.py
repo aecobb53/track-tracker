@@ -44,11 +44,11 @@ def compare_results(event_str, old, new):
     Return PR?, old_result, new_result
     """
     event_str = interpret_event(event_str)
-    print(f"    COMPARING OLD: {old}, NEW: {new} FOR EVENT: {event_str}")
+    # print(f"    COMPARING OLD: {old}, NEW: {new} FOR EVENT: {event_str}")
     result_old = Result.parse_event_result(event=event_str, result=old)
-    print(f"    RESULT old: {result_old}")
+    # print(f"    RESULT old: {result_old}")
     result_new = Result.parse_event_result(event=event_str, result=new)
-    print(f"    RESULT new: {result_new}")
+    # print(f"    RESULT new: {result_new}")
     if result_new.is_none and result_old.is_none:
         return False, '-', '-'
     elif result_new > result_old:
@@ -85,8 +85,8 @@ def interpret_event(event):
 
 def temp_function_compare_meet_data(local_meet_events, remote_meet_events, local_file_last_update_datetime, remote_file_last_update_datetime):
     x=1
-    print(f"LOCAL TIME: {local_file_last_update_datetime}")
-    print(f"REMOTE TIME: {remote_file_last_update_datetime}")
+    # print(f"LOCAL TIME: {local_file_last_update_datetime}")
+    # print(f"REMOTE TIME: {remote_file_last_update_datetime}")
     local_changed = False
     force_reload = False
     if remote_meet_events and remote_file_last_update_datetime:
@@ -106,7 +106,7 @@ def temp_function_compare_meet_data(local_meet_events, remote_meet_events, local
         local and remote are ahead of each other in different ways and both need to be updated
         local and remote have different athletes that conflict and remote needs to reset to local
         """
-        print('CHECKING FOR UPDATES')
+        # print('CHECKING FOR UPDATES')
 
         for index1, (local_event, remote_event) in enumerate(zip(local_meet_events, remote_meet_events)):
             if local_event['Event'] != remote_event['event'][0].strip():
@@ -159,6 +159,8 @@ async def get_meet(meet: Meet):
         if fl == f"{meet.name}.json":
             with open(os.path.join('/db/meets', fl), 'r') as jf:
                 meet_file_data = json.load(jf)
+    else:
+        print(f"COULD NOT FIND MEET")
 
     local_file_last_update_datetime = datetime.strptime(meet_file_data['meet']['last_updated'], "%Y-%m-%d %H:%M:%S")
     if meet.data_time_version:
@@ -168,19 +170,12 @@ async def get_meet(meet: Meet):
     current_meet_events, remote_updates, local_changed, force_reload = temp_function_compare_meet_data(
         local_meet_events=meet_file_data['events'], remote_meet_events=meet.events,
         local_file_last_update_datetime=local_file_last_update_datetime, remote_file_last_update_datetime=remote_file_last_update_datetime)
-    if local_changed:
-        # SAVE NEW VERSION
-        print('SAVING NEW VERSION')
-        meet_file_data['events'] = current_meet_events
-        meet_file_data['meet']['last_updated'] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-        with open(os.path.join('/db/meets', fl), 'w') as jf:
-            jf.write(json.dumps(meet_file_data, indent=4))
 
 
     meet_data = meet_file_data['meet']
     event_data = []  # meet_file_data['events']
     meet_data_update = remote_updates
-    
+
     # Populating with default seed, pr, etc data
     athlete_or_result_pulled = False
     """
@@ -197,16 +192,8 @@ async def get_meet(meet: Meet):
             'time': event['Event Time'],
             'event': event['Event'],
         }
-        # print('')
-        # print('')
-        # print('')
-        # print('')
-        # print(f"EVENT: {event}")
-        # print(event['Event'])
         athletes = []
         for athlete in event.get('athletes', []):
-            # print('')
-            # print(f"ATHLETE 1: {athlete}")
             athlete['result'] = athlete.get('result', None)
             athlete['place'] = athlete.get('place', None)
             athlete['pr'] = athlete.get('pr', '-')
@@ -214,8 +201,7 @@ async def get_meet(meet: Meet):
             seed = athlete.get('seed', '-')
 
             # Pull athlete data
-            if not athlete.get('athlete_uid'):
-                # print('    PULLING ATHLETE')
+            if not athlete.get('athlete_uid') or meet.run_full_update:
                 first_last = athlete['name'].split(' ')
                 first = first_last.pop(0)
                 last = ' '.join(first_last)
@@ -225,92 +211,114 @@ async def get_meet(meet: Meet):
                     team=[TEAM],
                 )
                 athlete_obj = await ah.find_athlete(af, silence_missing=True, silence_dupe=True)
-                # print(f"FOUND ATHLETE: {athlete_obj}")
-                event_search_name = event['Event']
-                # re_match_1_s = r'(\d ?[mM])$'
-                # re_match_2_s = r'(\d ?[mM] ?)'
-
-                # re_match_1 = re.search(re_match_1_s, event_search_name)
-                # re_match_2 = re.search(re_match_2_s, event_search_name)
-                # if re_match_1:
-                #     event_search_name_l = [
-                #         event_search_name[:re_match_1.start()+1],
-                #         ' Meter',
-                #         event_search_name[re_match_1.end():]]
-                #     # print(f"OLD STRING: {event_search_name}")
-                #     event_search_name = re.sub(r"\s+", ' ', ''.join(event_search_name_l)).strip()
-                #     # print(f"NEW STRING: {event_search_name}")
-                # elif re_match_2:
-                #     event_search_name_l = [
-                #         event_search_name[:re_match_2.start()+1],
-                #         ' Meter',
-                #         event_search_name[re_match_2.end()-1:]]
-                #     # print(f"OLD STRING: {event_search_name}")
-                #     event_search_name = re.sub(r"\s+", ' ', ''.join(event_search_name_l)).strip()
-                #     # print(f"NEW STRING: {event_search_name}")
-                event_search_name = interpret_event(event_search_name)
+                event_search_name = interpret_event(event['Event'])
 
                 if athlete_obj:
                     athlete_or_result_pulled = True
                     athlete['athlete_uid'] = athlete_obj.uid
-                    rf = ResultFilter(
+                    rf_pr = ResultFilter(
                         athlete_uid=[athlete_obj.uid],
                         team=[TEAM],
                         event=[event_search_name],
                         meet_date=[f"Before{datetime.strftime(meet_date - timedelta(days=1), '%Y-%m-%d')}"]
                     )
-                    results = await rh.filter_results(rf)
-                    # for result in results:
-                    #     # print(f"RESULT: {result.meet_date}")
-                    #     if result.meet_date > datetime(2025,3,11):
-                    #         print(f"ISSUE")
-                    # if not results:
-                    #     print('    NO RESULTS FOUND!!')
-                    # print(f"RESULTS: {results}")
-                    if results:
-                        pr = results[0]
-                        # print('')
-                        # print('')
-                        # print('')
-                        # print('')
-                        # print(f"EVENT: {event}")
-                        # print(f"ATHLETE: {athlete}")
-                        # print(f"RESULTS: {results}")
-                        for result in results:
-                            # print(f"    THING: {result.result}")
+                    results_pr = await rh.filter_results(rf_pr)
+                    if results_pr:
+                        pr = results_pr[0]
+                        for result in results_pr:
                             if result.result > pr.result:
                                 pr = result
                     else:
                         pr = None
-                    # print(f"PR: {pr}")
                     if pr:
                         seed = pr.result.format
                         athlete_or_result_pulled = True
                         athlete['seed_uid'] = pr.uid
-                # else:
-                #     print(f"    NO ATHLETE FOUND")
-            # else:
-            #     print('    NOT PULLING ATHLETE')
+
             athlete['seed'] = seed
-            # athlete['result'] = None
-            # athlete['place'] = None
-            # athlete['pr'] = '-'
-            # athlete['points'] = '-'
-            # print(f"ATHLETE 2: {athlete}")
             athletes.append(athlete)
-        for team in event.get('teams', []):
-            x=1
+        # for team in event.get('teams', []):
+        #     x=1
         event_dict['athletes'] = athletes
-        # print(f"EVENT DICT: {event_dict}")
         event_data.append(event_dict)
+
+    if local_changed or meet.run_full_update:
+        for event in current_meet_events:
+            event_search_name = interpret_event(event['Event'])
+            for athlete in event.get('athletes', []):
+                # print('')
+                # print('')
+                # print('')
+                # print(f"ATHLETE: {athlete}")
+                seed = athlete.get('seed', '')
+                if seed == '-':
+                    seed = None
+                result = athlete.get('result', '')
+                if result == '-':
+                    result = ''
+                if not result or meet.run_full_update:
+                    # LOOK FOR NEW RESULTS
+                    # print(f'result is none')
+                    # print(f"ATHLETE: {athlete}")
+                    if athlete.get('athlete_uid'):
+                        rf_pr = ResultFilter(
+                            athlete_uid=[athlete['athlete_uid']],
+                            # team=[TEAM],
+                            event=[event_search_name],
+                            meet=meet.name,
+                            # meet_date=[
+                            #     f"After{datetime.strftime(meet_date - timedelta(days=1), '%Y-%m-%d')}",
+                            #     f"Before{datetime.strftime(meet_date + timedelta(days=1), '%Y-%m-%d')}",
+                            #     ]
+                        )
+                        print('')
+                        # print(f"ATHLETE: {athlete}")
+                        print(f"FILTER PR: {rf_pr}")
+                        results_pr = await rh.filter_results(rf_pr)
+                        # print(f"RESULTS PR: {results_pr}")
+                        if results_pr:
+
+
+
+
+                            # # print(f"UIDS: {[r.athlete_uid for r in results_pr]}")
+                            # # print(f"{athlete['athlete_uid'] in [r.athlete_uid for r in results_pr]}")
+                            # ah = AthleteHandler()
+                            # print(f"EVENT: {event}")
+                            # print(results_pr[0].athlete_uid)
+                            # athlete_i = await ah.find_athlete(AthleteFilter(uid=[results_pr[0].athlete_uid]))
+                            # print(f"SINGLE ATHLETE: {athlete_i}")
+
+
+
+
+
+                            for result_i in results_pr:
+                                # print('')
+                                # print('')
+                                # print(f"RESULT: {result_i}")
+                                print(f"ATHLETE RECORD: {athlete}")
+                                athlete['result'] = result_i.result.format
+                                print(f"ATHLETE RECORD: {athlete}")
+                    else:
+                        continue
+                if not result:
+                    continue
+                else:
+                    if seed:
+                        new_pr, _, result_new = compare_results(event_str=event_search_name, old=seed, new=result)
+                        if new_pr:
+                            athlete['pr'] = result_new.format
+                    else:
+                        athlete['pr'] = result
 
     if athlete_or_result_pulled:
         # SAVE NEW VERSION
         print('SAVING NEW VERSION')
         meet_file_data['events'] = current_meet_events
         meet_file_data['meet']['last_updated'] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-        with open(os.path.join('/db/meets', fl), 'w') as jf:
-            jf.write(json.dumps(meet_file_data, indent=4))
+        # with open(os.path.join('/db/meets', fl), 'w') as jf:
+        #     jf.write(json.dumps(meet_file_data, indent=4))
 
     output = {
         'data_timestamp': meet_file_data['meet']['last_updated'],

@@ -49,6 +49,9 @@ async def html_sprint(request: Request):
         if 'Relay' in athlete.last_name:
             continue
         for result in results:
+            if result.result_metadata:
+                if result.result_metadata.get('split'):
+                    continue
             if ' 100' in result.event:
                 valid_athlete = True
                 break
@@ -131,6 +134,9 @@ async def html_points(request: Request):
         valid_athlete = False
 
         for result in results:
+            if result.result_metadata:
+                if result.result_metadata.get('jv'):
+                    continue
             if result.meet not in meet_name_list:
                 meet_name_list.append(result.meet)
             if result.points > 0:

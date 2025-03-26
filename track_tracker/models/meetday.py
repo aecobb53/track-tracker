@@ -15,6 +15,7 @@ class Meet(BaseModel):
     name: str
     events: list
     data_time_version: str | None = None
+    run_full_update: bool = True#False
 
     @model_validator(mode='before')
     def validate_fields(cls, fields):
