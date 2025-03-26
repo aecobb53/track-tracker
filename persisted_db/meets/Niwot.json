@@ -1,8 +1,9 @@
 {
     "meet": {
         "meet_name": "Niwot",
-        "date": "2025-03-29",
-        "last_updated": "2025-03-19 19:08:41"
+        "date": "2025-03-12",
+        "small_meet": true,
+        "last_updated": "2025-03-26 19:26:58"
     },
     "events": [
         {
@@ -11,15 +12,34 @@
             "athletes": [
                 {
                     "name": "Ella Pluzynski",
-                    "Heat/Lane/Flight": "Flight 1 Vaulter 1"
+                    "Heat/Lane/Flight": "Flight 1 Vaulter 1",
+                    "result": "7-01.0",
+                    "place": null,
+                    "pr": "7-01.0",
+                    "points": "-",
+                    "athlete_uid": "14adb04f-46cd-4480-8846-0d33fc543701",
+                    "seed": "-"
                 },
                 {
                     "name": "Amelia Harriman",
-                    "Heat/Lane/Flight": "Flight 1 Vaulter 2"
+                    "Heat/Lane/Flight": "Flight 1 Vaulter 2",
+                    "result": null,
+                    "place": null,
+                    "pr": "-",
+                    "points": "-",
+                    "athlete_uid": "fbbe4500-f459-444f-b70a-341cb54b0900",
+                    "seed": "-"
                 },
                 {
                     "name": "Irene McCalmon",
-                    "Heat/Lane/Flight": "Flight 1 Vaulter 11"
+                    "Heat/Lane/Flight": "Flight 1 Vaulter 11",
+                    "result": "9-01.0",
+                    "place": null,
+                    "pr": "9-01.0",
+                    "points": "-",
+                    "athlete_uid": "372cd22d-b29e-44ee-ae1c-f10b91389c38",
+                    "seed_uid": "16ae9076-f51f-4307-b2f5-09aedbac639c",
+                    "seed": "9-00.0"
                 }
             ]
         },
@@ -29,15 +49,36 @@
             "athletes": [
                 {
                     "name": "Orion Davis",
-                    "Heat/Lane/Flight": "Flight 1 Jumper 11"
+                    "Heat/Lane/Flight": "Flight 1 Jumper 11",
+                    "result": "5-02.0",
+                    "place": null,
+                    "pr": "5-02.0",
+                    "points": "-",
+                    "athlete_uid": "fece81f7-1845-4140-a2b5-a013a92aa735",
+                    "seed_uid": "34479c0a-49b3-415b-96bd-613aae454a37",
+                    "seed": "4-08.0"
                 },
                 {
                     "name": "Anthony Giliberti",
-                    "Heat/Lane/Flight": "Flight 1 Jumper 12"
+                    "Heat/Lane/Flight": "Flight 1 Jumper 12",
+                    "result": "5-00.0",
+                    "place": null,
+                    "pr": "-",
+                    "points": "-",
+                    "athlete_uid": "e0877623-43a1-4ae7-accb-df5da6d1343d",
+                    "seed_uid": "f2cbd14e-52c3-42a5-bdb4-32cebd783fea",
+                    "seed": "5-02.0"
                 },
                 {
                     "name": "Max Webb",
-                    "Heat/Lane/Flight": "Flight 1 Jumper 16"
+                    "Heat/Lane/Flight": "Flight 1 Jumper 16",
+                    "result": "5-06.0",
+                    "place": null,
+                    "pr": "-",
+                    "points": "-",
+                    "athlete_uid": "184532d4-8e4b-4937-af18-0e044c713e24",
+                    "seed_uid": "71d4f89b-601a-4cc3-a641-93f4259b6fd6",
+                    "seed": "5-06.0"
                 }
             ]
         },
@@ -47,7 +88,14 @@
             "athletes": [
                 {
                     "name": "Brigitte Schmid",
-                    "Heat/Lane/Flight": "Flight 2 Jumper 5"
+                    "Heat/Lane/Flight": "Flight 2 Jumper 5",
+                    "result": "11-02.0",
+                    "place": null,
+                    "pr": "-",
+                    "points": "-",
+                    "athlete_uid": "f74a0663-3975-4e3d-8807-d8d269d765db",
+                    "seed_uid": "cb5cd1ed-64c3-47ff-a4b2-c1955a1c1702",
+                    "seed": "13-02.0"
                 }
             ]
         },
@@ -57,23 +105,58 @@
             "athletes": [
                 {
                     "name": "Zane Copeland",
-                    "Heat/Lane/Flight": "Flight 2 Jumper 2"
+                    "Heat/Lane/Flight": "Flight 2 Jumper 2",
+                    "result": "17-00.0",
+                    "place": null,
+                    "pr": "17-00.0",
+                    "points": "-",
+                    "athlete_uid": "06940551-8448-4dc2-890c-c7ce3e22b616",
+                    "seed_uid": "c50eb0f3-6ffc-425c-bd1e-8c47eb088b8a",
+                    "seed": "15-03.5"
                 },
                 {
                     "name": "Henry Duckham",
-                    "Heat/Lane/Flight": "Flight 2 Jumper 6"
+                    "Heat/Lane/Flight": "Flight 2 Jumper 6",
+                    "result": "15-09.5",
+                    "place": null,
+                    "pr": "-",
+                    "points": "-",
+                    "athlete_uid": "a5ae8c53-63fb-467c-aae5-fbd76962014a",
+                    "seed_uid": "a98d2fd6-97de-46c6-91ce-0c8ef4d82017",
+                    "seed": "16-02.0"
                 },
                 {
                     "name": "Jaxson Cooper",
-                    "Heat/Lane/Flight": "Flight 2 Jumper 8"
+                    "Heat/Lane/Flight": "Flight 2 Jumper 8",
+                    "result": "16-09.0",
+                    "place": null,
+                    "pr": "16-09.0",
+                    "points": "-",
+                    "athlete_uid": "3da9d021-03a0-4068-94c7-b31c04479791",
+                    "seed_uid": "28f9b6d0-ef1c-4a84-93fa-840d48d74fa8",
+                    "seed": "16-05.0"
                 },
                 {
                     "name": "Santiago Caravia-Perry",
-                    "Heat/Lane/Flight": "Flight 3 Jumper 1"
+                    "Heat/Lane/Flight": "Flight 3 Jumper 1",
+                    "result": "16-06.0",
+                    "place": null,
+                    "pr": "-",
+                    "points": "-",
+                    "athlete_uid": "7f2531a6-cd77-43ea-bdce-e5a739cc85b3",
+                    "seed_uid": "0f9bae23-cc97-4c02-8fb7-cc00eb817de7",
+                    "seed": "17-01.5"
                 },
                 {
                     "name": "Caleb Cooper",
-                    "Heat/Lane/Flight": "Flight 3 Jumper 2"
+                    "Heat/Lane/Flight": "Flight 3 Jumper 2",
+                    "result": "19-02.0",
+                    "place": null,
+                    "pr": "19-02.0",
+                    "points": "-",
+                    "athlete_uid": "8401c48c-752e-44f7-9c14-47fbb4318608",
+                    "seed_uid": "a24ffca2-c158-4567-b8f3-0afea802dc36",
+                    "seed": "17-03.0"
                 }
             ]
         },
@@ -83,27 +166,67 @@
             "athletes": [
                 {
                     "name": "Marek Dorris",
-                    "Heat/Lane/Flight": "Flight 1 Thrower 1"
+                    "Heat/Lane/Flight": "Flight 1 Thrower 1",
+                    "result": "23-10.0",
+                    "place": null,
+                    "pr": "23-10.0",
+                    "points": "-",
+                    "athlete_uid": "f05a0622-1111-4383-8b25-3c16dc807df2",
+                    "seed": "-"
                 },
                 {
                     "name": "Colin Overy",
-                    "Heat/Lane/Flight": "Flight 1 Thrower 4"
+                    "Heat/Lane/Flight": "Flight 1 Thrower 4",
+                    "result": "33-11.5",
+                    "place": null,
+                    "pr": "33-11.5",
+                    "points": "-",
+                    "athlete_uid": "6e14d1b6-1f62-46a2-8bfd-eb6ec1f4bb8c",
+                    "seed": "-"
                 },
                 {
                     "name": "Zane Copeland",
-                    "Heat/Lane/Flight": "Flight 1 Thrower 8"
+                    "Heat/Lane/Flight": "Flight 1 Thrower 8",
+                    "result": "29-00.75",
+                    "place": null,
+                    "pr": "29-00.75",
+                    "points": "-",
+                    "athlete_uid": "06940551-8448-4dc2-890c-c7ce3e22b616",
+                    "seed_uid": "9dfeefdf-28c5-4319-b7c4-fb0c88f5f550",
+                    "seed": "25-03.0"
                 },
                 {
                     "name": "Jace Pollock",
-                    "Heat/Lane/Flight": "Flight 1 Thrower 9"
+                    "Heat/Lane/Flight": "Flight 1 Thrower 9",
+                    "result": "27-05.75",
+                    "place": null,
+                    "pr": "27-05.75",
+                    "points": "-",
+                    "athlete_uid": "cd196f28-9c40-47bf-b0ee-ed2d53a00783",
+                    "seed_uid": "4e6eafe9-5f6f-46c9-af30-4c9b3b273753",
+                    "seed": "26-04.5"
                 },
                 {
                     "name": "Kaylor Huang",
-                    "Heat/Lane/Flight": "Flight 1 Thrower 10"
+                    "Heat/Lane/Flight": "Flight 1 Thrower 10",
+                    "result": "29-02.5",
+                    "place": null,
+                    "pr": "29-02.5",
+                    "points": "-",
+                    "athlete_uid": "8eabf968-ec89-457b-9052-d00195596133",
+                    "seed_uid": "9d2b7ded-14c7-4d91-89fa-25b75dfcbc92",
+                    "seed": "27-11.5"
                 },
                 {
                     "name": "Keeghan Field-Gordon",
-                    "Heat/Lane/Flight": "Flight 2 Thrower 8"
+                    "Heat/Lane/Flight": "Flight 2 Thrower 8",
+                    "result": "36-08.25",
+                    "place": null,
+                    "pr": "-",
+                    "points": "-",
+                    "athlete_uid": "629eb267-d008-4e50-9e9f-3ddbcc9da4f5",
+                    "seed_uid": "92f04d0a-8d2c-4fff-b27a-048ebb4d851a",
+                    "seed": "38-02.0"
                 }
             ]
         },
@@ -113,7 +236,14 @@
             "athletes": [
                 {
                     "name": "Amelia Clasby",
-                    "Heat/Lane/Flight": "Flight 1 Thrower 4"
+                    "Heat/Lane/Flight": "Flight 1 Thrower 4",
+                    "result": "65-05.0",
+                    "place": null,
+                    "pr": "-",
+                    "points": "-",
+                    "athlete_uid": "5e65dd4f-8362-48fd-9152-78edde0061e5",
+                    "seed_uid": "81d721b8-3b20-4e32-bd9c-8caf1a2a7cc3",
+                    "seed": "69-10.0"
                 }
             ]
         },
@@ -123,11 +253,23 @@
             "athletes": [
                 {
                     "name": "Koji Dennis",
-                    "Heat/Lane/Flight": "Flight 1 Vaulter 7"
+                    "Heat/Lane/Flight": "Flight 1 Vaulter 7",
+                    "result": null,
+                    "place": null,
+                    "pr": "-",
+                    "points": "-",
+                    "athlete_uid": "cb07406f-89fa-4add-a828-eb4bf42f593e",
+                    "seed_uid": "10ed406d-1059-4689-bf05-7068f6234707",
+                    "seed": "9-00.0"
                 },
                 {
                     "name": "Keiran Meier",
-                    "Heat/Lane/Flight": "Flight 1 Vaulter 9"
+                    "Heat/Lane/Flight": "Flight 1 Vaulter 9",
+                    "result": null,
+                    "place": null,
+                    "pr": "-",
+                    "points": "-",
+                    "seed": "-"
                 }
             ]
         },
@@ -137,15 +279,36 @@
             "athletes": [
                 {
                     "name": "Evelyn Kear",
-                    "Heat/Lane/Flight": "Flight 1 Jumper 7"
+                    "Heat/Lane/Flight": "Flight 1 Jumper 7",
+                    "result": "4-10.0",
+                    "place": null,
+                    "pr": "-",
+                    "points": "-",
+                    "athlete_uid": "085f91e8-c212-47e2-baf9-bbdf7b3eb085",
+                    "seed_uid": "a6ad6e5d-26ee-4d8c-aaeb-fbd322e43268",
+                    "seed": "4-10.0"
                 },
                 {
                     "name": "Amelia Clasby",
-                    "Heat/Lane/Flight": "Flight 1 Jumper 8"
+                    "Heat/Lane/Flight": "Flight 1 Jumper 8",
+                    "result": null,
+                    "place": null,
+                    "pr": "-",
+                    "points": "-",
+                    "athlete_uid": "5e65dd4f-8362-48fd-9152-78edde0061e5",
+                    "seed_uid": "1936023c-382b-488f-b867-2f7b96991217",
+                    "seed": "4-10.5"
                 },
                 {
                     "name": "Julia Savage",
-                    "Heat/Lane/Flight": "Flight 1 Jumper 9"
+                    "Heat/Lane/Flight": "Flight 1 Jumper 9",
+                    "result": "4-10.0",
+                    "place": null,
+                    "pr": "-",
+                    "points": "-",
+                    "athlete_uid": "40030c69-bb7a-410c-9746-381e3f8551fe",
+                    "seed_uid": "86f96d41-00de-48fb-aad3-0d7622926db4",
+                    "seed": "5-00.0"
                 }
             ]
         },
@@ -155,15 +318,36 @@
             "athletes": [
                 {
                     "name": "Jaxson Cooper",
-                    "Heat/Lane/Flight": "Flight 1 Jumper 5"
+                    "Heat/Lane/Flight": "Flight 1 Jumper 5",
+                    "result": "34-08.0",
+                    "place": null,
+                    "pr": "34-08.0",
+                    "points": "-",
+                    "athlete_uid": "3da9d021-03a0-4068-94c7-b31c04479791",
+                    "seed_uid": "48caf00b-3e83-4497-8f24-3812e7088897",
+                    "seed": "33-05.5"
                 },
                 {
                     "name": "Zane Copeland",
-                    "Heat/Lane/Flight": "Flight 1 Jumper 7"
+                    "Heat/Lane/Flight": "Flight 1 Jumper 7",
+                    "result": null,
+                    "place": null,
+                    "pr": "-",
+                    "points": "-",
+                    "athlete_uid": "06940551-8448-4dc2-890c-c7ce3e22b616",
+                    "seed_uid": "6b38cb52-72f8-4158-b11d-dd23638886a2",
+                    "seed": "34-10.5"
                 },
                 {
                     "name": "Caleb Cooper",
-                    "Heat/Lane/Flight": "Flight 1 Jumper 11"
+                    "Heat/Lane/Flight": "Flight 1 Jumper 11",
+                    "result": "37-03.5",
+                    "place": null,
+                    "pr": "-",
+                    "points": "-",
+                    "athlete_uid": "8401c48c-752e-44f7-9c14-47fbb4318608",
+                    "seed_uid": "5b35047f-2436-472f-830a-4646bb4598b1",
+                    "seed": "37-04.0"
                 }
             ]
         },
@@ -173,19 +357,46 @@
             "athletes": [
                 {
                     "name": "Colin Overy",
-                    "Heat/Lane/Flight": "Flight 1 Thrower 1"
+                    "Heat/Lane/Flight": "Flight 1 Thrower 1",
+                    "result": "66-03.0",
+                    "place": null,
+                    "pr": "66-03.0",
+                    "points": "-",
+                    "athlete_uid": "6e14d1b6-1f62-46a2-8bfd-eb6ec1f4bb8c",
+                    "seed": "-"
                 },
                 {
                     "name": "Marek Dorris",
-                    "Heat/Lane/Flight": "Flight 1 Thrower 4"
+                    "Heat/Lane/Flight": "Flight 1 Thrower 4",
+                    "result": "64-01.0",
+                    "place": null,
+                    "pr": "64-01.0",
+                    "points": "-",
+                    "athlete_uid": "f05a0622-1111-4383-8b25-3c16dc807df2",
+                    "seed_uid": "48b9866d-8786-4934-bb74-eda4a4ee4f30",
+                    "seed": "48-09.0"
                 },
                 {
                     "name": "Kaylor Huang",
-                    "Heat/Lane/Flight": "Flight 1 Thrower 6"
+                    "Heat/Lane/Flight": "Flight 1 Thrower 6",
+                    "result": "82-01.0",
+                    "place": null,
+                    "pr": "82-01.0",
+                    "points": "-",
+                    "athlete_uid": "8eabf968-ec89-457b-9052-d00195596133",
+                    "seed_uid": "9c1e5561-be18-4f12-9b38-60b82eb89cee",
+                    "seed": "72-08.5"
                 },
                 {
                     "name": "Jace Pollock",
-                    "Heat/Lane/Flight": "Flight 2 Thrower 2"
+                    "Heat/Lane/Flight": "Flight 2 Thrower 2",
+                    "result": "101-08.0",
+                    "place": null,
+                    "pr": "101-08.0",
+                    "points": "-",
+                    "athlete_uid": "cd196f28-9c40-47bf-b0ee-ed2d53a00783",
+                    "seed_uid": "45cb2251-8e7e-4072-88b6-32778fedc37d",
+                    "seed": "89-04.0"
                 }
             ]
         },
@@ -239,19 +450,45 @@
             "athletes": [
                 {
                     "name": "Isabella Dibiase",
-                    "Heat/Lane/Flight": "Heat 1 Lane 1"
+                    "Heat/Lane/Flight": "Heat 1 Lane 1",
+                    "result": "23.07",
+                    "place": null,
+                    "pr": "23.07",
+                    "points": "-",
+                    "athlete_uid": "d40e84a3-e8d8-432a-a882-094fc90a452d",
+                    "seed": "-"
                 },
                 {
                     "name": "Elise Roehrich",
-                    "Heat/Lane/Flight": "Heat 1 Lane 3"
+                    "Heat/Lane/Flight": "Heat 1 Lane 3",
+                    "result": "20.56",
+                    "place": null,
+                    "pr": "20.56",
+                    "points": "-",
+                    "athlete_uid": "ba7b68d6-713a-4f24-a810-ef7f561946d5",
+                    "seed": "-"
                 },
                 {
                     "name": "Kylie Duart",
-                    "Heat/Lane/Flight": "Heat 1 Lane 5"
+                    "Heat/Lane/Flight": "Heat 1 Lane 5",
+                    "result": "22.25",
+                    "place": null,
+                    "pr": "22.25",
+                    "points": "-",
+                    "athlete_uid": "9a80bc90-26fa-4a57-b5b4-faaada40e4ad",
+                    "seed_uid": "cdc59064-bbe4-43f3-8ab9-f680c7380dc3",
+                    "seed": "23.13"
                 },
                 {
                     "name": "Kate Mccall",
-                    "Heat/Lane/Flight": "Heat 2 Lane 1"
+                    "Heat/Lane/Flight": "Heat 2 Lane 1",
+                    "result": "20.86",
+                    "place": null,
+                    "pr": "20.86",
+                    "points": "-",
+                    "athlete_uid": "a40f7b42-0293-406f-803f-bca8f9fefe73",
+                    "seed_uid": "e5d3b21b-7b06-42eb-96df-1f9641e5eda0",
+                    "seed": "20.97"
                 }
             ]
         },
@@ -261,11 +498,22 @@
             "athletes": [
                 {
                     "name": "Caden Rozic",
-                    "Heat/Lane/Flight": "Heat 1 Lane 3"
+                    "Heat/Lane/Flight": "Heat 1 Lane 3",
+                    "result": "21.73",
+                    "place": null,
+                    "pr": "21.73",
+                    "points": "-",
+                    "athlete_uid": "f2614037-c754-4d94-9c86-e07e63e71e25",
+                    "seed": "-"
                 },
                 {
                     "name": "Zephry Middleton",
-                    "Heat/Lane/Flight": "Heat 1 Lane 5"
+                    "Heat/Lane/Flight": "Heat 1 Lane 5",
+                    "result": null,
+                    "place": null,
+                    "pr": "-",
+                    "points": "-",
+                    "seed": "-"
                 }
             ]
         },
@@ -275,43 +523,108 @@
             "athletes": [
                 {
                     "name": "Amelia Harriman",
-                    "Heat/Lane/Flight": "Heat 1 Lane 4"
+                    "Heat/Lane/Flight": "Heat 1 Lane 4",
+                    "result": "22.55",
+                    "place": null,
+                    "pr": "22.55",
+                    "points": "-",
+                    "athlete_uid": "fbbe4500-f459-444f-b70a-341cb54b0900",
+                    "seed": "-"
                 },
                 {
                     "name": "Bethany Kim",
-                    "Heat/Lane/Flight": "Heat 2 Lane 3"
+                    "Heat/Lane/Flight": "Heat 2 Lane 3",
+                    "result": "15.44",
+                    "place": null,
+                    "pr": "15.44",
+                    "points": "-",
+                    "athlete_uid": "f5cf69ba-8290-43f7-a5e4-b45f9e4197e4",
+                    "seed": "-"
                 },
                 {
                     "name": "Kaia Rinaldo",
-                    "Heat/Lane/Flight": "Heat 2 Lane 6"
+                    "Heat/Lane/Flight": "Heat 2 Lane 6",
+                    "result": "15.91",
+                    "place": null,
+                    "pr": "15.91",
+                    "points": "-",
+                    "athlete_uid": "6e9084a3-633a-40ec-a031-14f4012b2aed",
+                    "seed": "-"
                 },
                 {
                     "name": "Sammie Mollenkopf",
-                    "Heat/Lane/Flight": "Heat 2 Lane 8"
+                    "Heat/Lane/Flight": "Heat 2 Lane 8",
+                    "result": null,
+                    "place": null,
+                    "pr": "-",
+                    "points": "-",
+                    "seed": "-"
                 },
                 {
                     "name": "Aubrie Miller",
-                    "Heat/Lane/Flight": "Heat 3 Lane 2"
+                    "Heat/Lane/Flight": "Heat 3 Lane 2",
+                    "result": "16.94",
+                    "place": null,
+                    "pr": "16.94",
+                    "points": "-",
+                    "athlete_uid": "ce23059d-d347-41e1-9e61-9754e831301d",
+                    "seed_uid": "4d6e23eb-7c65-4843-85f4-4ab5f1c89eac",
+                    "seed": "17.07"
                 },
                 {
                     "name": "Elise Roehrich",
-                    "Heat/Lane/Flight": "Heat 3 Lane 4"
+                    "Heat/Lane/Flight": "Heat 3 Lane 4",
+                    "result": "20.56",
+                    "place": null,
+                    "pr": "-",
+                    "points": "-",
+                    "athlete_uid": "ba7b68d6-713a-4f24-a810-ef7f561946d5",
+                    "seed_uid": "79d88994-3f9d-48a2-a9b8-ffd5a33090de",
+                    "seed": "15.04"
                 },
                 {
                     "name": "Kate Mccall",
-                    "Heat/Lane/Flight": "Heat 3 Lane 5"
+                    "Heat/Lane/Flight": "Heat 3 Lane 5",
+                    "result": "20.86",
+                    "place": null,
+                    "pr": "-",
+                    "points": "-",
+                    "athlete_uid": "a40f7b42-0293-406f-803f-bca8f9fefe73",
+                    "seed_uid": "589dc8c4-6472-4975-80d6-b044c48bba85",
+                    "seed": "15.13"
                 },
                 {
                     "name": "Katie Harris",
-                    "Heat/Lane/Flight": "Heat 3 Lane 6"
+                    "Heat/Lane/Flight": "Heat 3 Lane 6",
+                    "result": "16.74",
+                    "place": null,
+                    "pr": "16.74",
+                    "points": "-",
+                    "athlete_uid": "0fd4b40f-c8b9-460e-b3c3-a66ee2588537",
+                    "seed_uid": "73443526-6d93-458d-8905-685a255491f3",
+                    "seed": "16.91"
                 },
                 {
                     "name": "Saige Hageman",
-                    "Heat/Lane/Flight": "Heat 4 Lane 6"
+                    "Heat/Lane/Flight": "Heat 4 Lane 6",
+                    "result": "14.71",
+                    "place": null,
+                    "pr": "-",
+                    "points": "-",
+                    "athlete_uid": "6f853483-f6a0-494a-81f6-87a307b7faa7",
+                    "seed_uid": "02bc25ce-c09a-4902-979a-b8d465a0c0bb",
+                    "seed": "14.25"
                 },
                 {
                     "name": "Evelyn Kear",
-                    "Heat/Lane/Flight": "Heat 5 Lane 7"
+                    "Heat/Lane/Flight": "Heat 5 Lane 7",
+                    "result": "13.89",
+                    "place": null,
+                    "pr": "13.89",
+                    "points": "-",
+                    "athlete_uid": "085f91e8-c212-47e2-baf9-bbdf7b3eb085",
+                    "seed_uid": "a5e672ac-4d92-4d08-994c-2515381dc4af",
+                    "seed": "13.94"
                 }
             ]
         },
@@ -321,43 +634,105 @@
             "athletes": [
                 {
                     "name": "Miles Weber",
-                    "Heat/Lane/Flight": "Heat 1 Lane 1"
+                    "Heat/Lane/Flight": "Heat 1 Lane 1",
+                    "result": "12.76",
+                    "place": null,
+                    "pr": "12.76",
+                    "points": "-",
+                    "athlete_uid": "7ba3db64-d193-42a9-9e3a-656304fd1102",
+                    "seed": "-"
                 },
                 {
                     "name": "Dash Ecklund",
-                    "Heat/Lane/Flight": "Heat 1 Lane 2"
+                    "Heat/Lane/Flight": "Heat 1 Lane 2",
+                    "result": "13.0",
+                    "place": null,
+                    "pr": "13.0",
+                    "points": "-",
+                    "athlete_uid": "2f64820a-9425-4709-8bb4-78cf541fcb7f",
+                    "seed": "-"
                 },
                 {
                     "name": "Mason McKenna",
-                    "Heat/Lane/Flight": "Heat 1 Lane 5"
+                    "Heat/Lane/Flight": "Heat 1 Lane 5",
+                    "result": "12.73",
+                    "place": null,
+                    "pr": "12.73",
+                    "points": "-",
+                    "athlete_uid": "ce630329-8741-4fda-b877-abd2c4903264",
+                    "seed": "-"
                 },
                 {
                     "name": "Wade Carlson",
-                    "Heat/Lane/Flight": "Heat 1 Lane 6"
+                    "Heat/Lane/Flight": "Heat 1 Lane 6",
+                    "result": "12.1",
+                    "place": null,
+                    "pr": "12.1",
+                    "points": "-",
+                    "athlete_uid": "354a6812-b84a-46cc-b919-545194caba7d",
+                    "seed": "-"
                 },
                 {
                     "name": "Henry Walker",
-                    "Heat/Lane/Flight": "Heat 1 Lane 8"
+                    "Heat/Lane/Flight": "Heat 1 Lane 8",
+                    "result": "14.39",
+                    "place": null,
+                    "pr": "14.39",
+                    "points": "-",
+                    "athlete_uid": "c1cf5d04-c6a8-4368-924c-fecc3286ef35",
+                    "seed": "-"
                 },
                 {
                     "name": "Caden Rozic",
-                    "Heat/Lane/Flight": "Heat 3 Lane 1"
+                    "Heat/Lane/Flight": "Heat 3 Lane 1",
+                    "result": "13.58",
+                    "place": null,
+                    "pr": "13.58",
+                    "points": "-",
+                    "athlete_uid": "f2614037-c754-4d94-9c86-e07e63e71e25",
+                    "seed": "-"
                 },
                 {
                     "name": "Henry Poe",
-                    "Heat/Lane/Flight": "Heat 3 Lane 7"
+                    "Heat/Lane/Flight": "Heat 3 Lane 7",
+                    "result": "13.22",
+                    "place": null,
+                    "pr": "13.22",
+                    "points": "-",
+                    "athlete_uid": "c76454f6-8b63-415a-a0b0-7bef37596ea2",
+                    "seed_uid": "f70a9146-611c-496e-8fb3-e3ce988760b6",
+                    "seed": "13.61"
                 },
                 {
                     "name": "Miller Gumhaus",
-                    "Heat/Lane/Flight": "Heat 4 Lane 1"
+                    "Heat/Lane/Flight": "Heat 4 Lane 1",
+                    "result": null,
+                    "place": null,
+                    "pr": "-",
+                    "points": "-",
+                    "seed": "-"
                 },
                 {
                     "name": "Jaxson Cooper",
-                    "Heat/Lane/Flight": "Heat 4 Lane 4"
+                    "Heat/Lane/Flight": "Heat 4 Lane 4",
+                    "result": "12.39",
+                    "place": null,
+                    "pr": "12.39",
+                    "points": "-",
+                    "athlete_uid": "3da9d021-03a0-4068-94c7-b31c04479791",
+                    "seed_uid": "47130803-f17d-4243-bac0-dc63ebe79aa3",
+                    "seed": "12.5"
                 },
                 {
                     "name": "Santiago Caravia-Perry",
-                    "Heat/Lane/Flight": "Heat 4 Lane 8"
+                    "Heat/Lane/Flight": "Heat 4 Lane 8",
+                    "result": "12.63",
+                    "place": null,
+                    "pr": "12.63",
+                    "points": "-",
+                    "athlete_uid": "7f2531a6-cd77-43ea-bdce-e5a739cc85b3",
+                    "seed_uid": "362174dc-fc1a-4320-9863-8fd7b54de76e",
+                    "seed": "12.67"
                 }
             ]
         },
@@ -396,27 +771,63 @@
             "athletes": [
                 {
                     "name": "Charlotte Carlson",
-                    "Heat/Lane/Flight": "Heat 1 Runner 7"
+                    "Heat/Lane/Flight": "Heat 1 Runner 7",
+                    "result": "6:28.49",
+                    "place": null,
+                    "pr": "6:28.49",
+                    "points": "-",
+                    "athlete_uid": "d2a1f767-2bba-4771-96e1-299a0562662b",
+                    "seed": "-"
                 },
                 {
                     "name": "Annabelle Eisner",
-                    "Heat/Lane/Flight": "Heat 1 Runner 8"
+                    "Heat/Lane/Flight": "Heat 1 Runner 8",
+                    "result": "6:03.51",
+                    "place": null,
+                    "pr": "6:03.51",
+                    "points": "-",
+                    "athlete_uid": "733a098e-8050-46db-8b2f-d0ea73e452af",
+                    "seed_uid": "e38fd212-e46d-4a4f-a61c-2880c2e9807d",
+                    "seed": "6:16.1"
                 },
                 {
                     "name": "Carmen Lafrazza-Schwartz",
-                    "Heat/Lane/Flight": "Heat 1 Runner 10"
+                    "Heat/Lane/Flight": "Heat 1 Runner 10",
+                    "result": null,
+                    "place": null,
+                    "pr": "-",
+                    "points": "-",
+                    "seed": "-"
                 },
                 {
                     "name": "Lola (Sly) Chagolla",
-                    "Heat/Lane/Flight": "Heat 1 Runner 12"
+                    "Heat/Lane/Flight": "Heat 1 Runner 12",
+                    "result": null,
+                    "place": null,
+                    "pr": "-",
+                    "points": "-",
+                    "seed": "-"
                 },
                 {
                     "name": "Coco Glebe",
-                    "Heat/Lane/Flight": "Heat 2 Runner10"
+                    "Heat/Lane/Flight": "Heat 2 Runner10",
+                    "result": null,
+                    "place": null,
+                    "pr": "-",
+                    "points": "-",
+                    "athlete_uid": "b83a9edf-cb02-4333-bd5a-44d79e55cc49",
+                    "seed": "-"
                 },
                 {
                     "name": "Katja Brown",
-                    "Heat/Lane/Flight": "Heat 2 Runner 13"
+                    "Heat/Lane/Flight": "Heat 2 Runner 13",
+                    "result": "5:59.09",
+                    "place": null,
+                    "pr": "-",
+                    "points": "-",
+                    "athlete_uid": "d89d7274-f10c-4792-9ac4-c782f1bd74e3",
+                    "seed_uid": "076cf800-736f-4995-bcbf-b2dd07536ad6",
+                    "seed": "5:54.89"
                 }
             ]
         },
@@ -426,35 +837,87 @@
             "athletes": [
                 {
                     "name": "Carter Ausmus",
-                    "Heat/Lane/Flight": "Heat 1 Runner 1"
+                    "Heat/Lane/Flight": "Heat 1 Runner 1",
+                    "result": "5:19.36",
+                    "place": null,
+                    "pr": "5:19.36",
+                    "points": "-",
+                    "athlete_uid": "ac64823c-54bc-466b-a361-30f17d6c14c3",
+                    "seed": "-"
                 },
                 {
                     "name": "Osel Yeh",
-                    "Heat/Lane/Flight": "Heat 1 Runner 11"
+                    "Heat/Lane/Flight": "Heat 1 Runner 11",
+                    "result": "6:00.06",
+                    "place": null,
+                    "pr": "6:00.06",
+                    "points": "-",
+                    "athlete_uid": "09bf858c-9c59-4d8b-9be1-46e54eac2239",
+                    "seed": "-"
                 },
                 {
                     "name": "Jackson Wynett",
-                    "Heat/Lane/Flight": "Heat 1 Runner 12"
+                    "Heat/Lane/Flight": "Heat 1 Runner 12",
+                    "result": "5:43.95",
+                    "place": null,
+                    "pr": "5:43.95",
+                    "points": "-",
+                    "athlete_uid": "f6c2dcba-b626-4eb4-b4e9-7b5d38075b62",
+                    "seed_uid": "824e5446-2e9c-4cf5-80ed-1c8ff09945d6",
+                    "seed": "5:47.62"
                 },
                 {
                     "name": "Pietro Camporeale",
-                    "Heat/Lane/Flight": "Heat 1 Runner 15"
+                    "Heat/Lane/Flight": "Heat 1 Runner 15",
+                    "result": "5:43.86",
+                    "place": null,
+                    "pr": "5:43.86",
+                    "points": "-",
+                    "athlete_uid": "a893131d-ee27-4252-a1bc-b1187c76edc8",
+                    "seed_uid": "6613d290-649f-4127-982e-6693239368fc",
+                    "seed": "5:50.49"
                 },
                 {
                     "name": "Tim Nikel",
-                    "Heat/Lane/Flight": "Heat 1 Runner 17"
+                    "Heat/Lane/Flight": "Heat 1 Runner 17",
+                    "result": "5:11.6",
+                    "place": null,
+                    "pr": "5:11.6",
+                    "points": "-",
+                    "athlete_uid": "783b89be-5035-435f-98a6-7e50f20d9f90",
+                    "seed": "-"
                 },
                 {
                     "name": "Rory Treleaven",
-                    "Heat/Lane/Flight": "Heat 2 Runner 5"
+                    "Heat/Lane/Flight": "Heat 2 Runner 5",
+                    "result": "4:45.4",
+                    "place": null,
+                    "pr": "4:45.4",
+                    "points": "-",
+                    "athlete_uid": "e127b801-dd4f-4705-be56-e55d9134f898",
+                    "seed_uid": "5050c5c9-93ed-482f-ab67-c80ad459042f",
+                    "seed": "4:48.19"
                 },
                 {
                     "name": "Theo Chastang",
-                    "Heat/Lane/Flight": "Heat 2 Runner 7"
+                    "Heat/Lane/Flight": "Heat 2 Runner 7",
+                    "result": "4:53.23",
+                    "place": null,
+                    "pr": "4:53.23",
+                    "points": "-",
+                    "athlete_uid": "20f61b05-befd-4544-a004-d6604e97b6fa",
+                    "seed": "-"
                 },
                 {
                     "name": "Dario Barnes",
-                    "Heat/Lane/Flight": "Heat 2 Runner 11"
+                    "Heat/Lane/Flight": "Heat 2 Runner 11",
+                    "result": "4:59.74",
+                    "place": null,
+                    "pr": "-",
+                    "points": "-",
+                    "athlete_uid": "9bd78ad4-f989-4f05-a2d5-2e602111e7d6",
+                    "seed_uid": "9664091e-40a4-4c38-bba8-2db6db375fd4",
+                    "seed": "4:53.75"
                 }
             ]
         },
@@ -498,27 +961,65 @@
             "athletes": [
                 {
                     "name": "Lola (Sly) Chagolla",
-                    "Heat/Lane/Flight": "Heat 1 Lane 2"
+                    "Heat/Lane/Flight": "Heat 1 Lane 2",
+                    "result": null,
+                    "place": null,
+                    "pr": "-",
+                    "points": "-",
+                    "seed": "-"
                 },
                 {
                     "name": "Jade Kilpatrick",
-                    "Heat/Lane/Flight": "Heat 1 Lane 4"
+                    "Heat/Lane/Flight": "Heat 1 Lane 4",
+                    "result": "1:16.22",
+                    "place": null,
+                    "pr": "1:16.22",
+                    "points": "-",
+                    "athlete_uid": "9d4b3aac-2e47-494b-a523-34ce72b28c9a",
+                    "seed": "-"
                 },
                 {
                     "name": "Hazel Straka",
-                    "Heat/Lane/Flight": "Heat 2 Lane 6"
+                    "Heat/Lane/Flight": "Heat 2 Lane 6",
+                    "result": "1:16.75",
+                    "place": null,
+                    "pr": "1:16.75",
+                    "points": "-",
+                    "athlete_uid": "0b110f02-6f7d-4e40-9ae3-e29be4a3966a",
+                    "seed_uid": "8eb1920c-cbd4-4cc5-a528-49dca6ad4248",
+                    "seed": "1:17.83"
                 },
                 {
                     "name": "Isabella Dibiase",
-                    "Heat/Lane/Flight": "Heat 2 Lane 8"
+                    "Heat/Lane/Flight": "Heat 2 Lane 8",
+                    "result": "1:27.13",
+                    "place": null,
+                    "pr": "1:27.13",
+                    "points": "-",
+                    "athlete_uid": "d40e84a3-e8d8-432a-a882-094fc90a452d",
+                    "seed": "-"
                 },
                 {
                     "name": "Anna Johnson",
-                    "Heat/Lane/Flight": "Heat 3 Lane 1"
+                    "Heat/Lane/Flight": "Heat 3 Lane 1",
+                    "result": "1:06.1",
+                    "place": null,
+                    "pr": "-",
+                    "points": "-",
+                    "athlete_uid": "d14a13f4-cd32-4ae5-ab65-db29f7db69a7",
+                    "seed_uid": "a7a12617-26c7-4467-b2a5-259e8383dc2b",
+                    "seed": "1:04.04"
                 },
                 {
                     "name": "Ellie Grandsaert",
-                    "Heat/Lane/Flight": "Heat 3 Lane 6"
+                    "Heat/Lane/Flight": "Heat 3 Lane 6",
+                    "result": "1:03.83",
+                    "place": null,
+                    "pr": "-",
+                    "points": "-",
+                    "athlete_uid": "133b1284-9a57-4011-b288-6871d6577ba9",
+                    "seed_uid": "6e11a044-c448-4d06-9b86-e6e352521df8",
+                    "seed": "1:02.51"
                 }
             ]
         },
@@ -528,15 +1029,33 @@
             "athletes": [
                 {
                     "name": "Andrew McCarty",
-                    "Heat/Lane/Flight": "Heat 1 Lane 4"
+                    "Heat/Lane/Flight": "Heat 1 Lane 4",
+                    "result": "1:17.43",
+                    "place": null,
+                    "pr": "1:17.43",
+                    "points": "-",
+                    "athlete_uid": "3883641a-3a12-42f7-8183-a68f6b06acc4",
+                    "seed": "-"
                 },
                 {
                     "name": "James Young",
-                    "Heat/Lane/Flight": "Heat 2 Lane 3"
+                    "Heat/Lane/Flight": "Heat 2 Lane 3",
+                    "result": "1:02.58",
+                    "place": null,
+                    "pr": "1:02.58",
+                    "points": "-",
+                    "athlete_uid": "9ef6e635-188d-47b2-a847-43d1f23d0d62",
+                    "seed": "-"
                 },
                 {
                     "name": "Arran Machado McKelvie",
-                    "Heat/Lane/Flight": "Heat 4 Lane 2"
+                    "Heat/Lane/Flight": "Heat 4 Lane 2",
+                    "result": "57.92",
+                    "place": null,
+                    "pr": "57.92",
+                    "points": "-",
+                    "athlete_uid": "eb5debe3-c35e-48a3-923d-49ecb1d69016",
+                    "seed": "-"
                 }
             ]
         },
@@ -546,7 +1065,14 @@
             "athletes": [
                 {
                     "name": "Portia Richards",
-                    "Heat/Lane/Flight": "Heat 1 Lane 4"
+                    "Heat/Lane/Flight": "Heat 1 Lane 4",
+                    "result": "56.45",
+                    "place": null,
+                    "pr": "56.45",
+                    "points": "-",
+                    "athlete_uid": "3a000233-9d1e-475d-afb3-177f4abe3355",
+                    "seed_uid": "23e3cbaf-97d7-4d02-aca7-59d07b463631",
+                    "seed": "58.23"
                 }
             ]
         },
@@ -556,11 +1082,25 @@
             "athletes": [
                 {
                     "name": "Rory Treleaven",
-                    "Heat/Lane/Flight": "Heat 2 Lane 7"
+                    "Heat/Lane/Flight": "Heat 2 Lane 7",
+                    "result": "46.81",
+                    "place": null,
+                    "pr": "46.81",
+                    "points": "-",
+                    "athlete_uid": "e127b801-dd4f-4705-be56-e55d9134f898",
+                    "seed_uid": "9b9a60a0-30dd-49d0-bed9-54acd1a1bb10",
+                    "seed": "47.79"
                 },
                 {
                     "name": "Zephyr Middleton",
-                    "Heat/Lane/Flight": "Heat 2 Lane 8"
+                    "Heat/Lane/Flight": "Heat 2 Lane 8",
+                    "result": "49.64",
+                    "place": null,
+                    "pr": "-",
+                    "points": "-",
+                    "athlete_uid": "66153280-f001-4dac-8f4a-3f539b89eb09",
+                    "seed_uid": "e87d3232-bf0f-4fde-9650-72d58456f131",
+                    "seed": "49.23"
                 }
             ]
         },
@@ -570,19 +1110,46 @@
             "athletes": [
                 {
                     "name": "Hannah Kim",
-                    "Heat/Lane/Flight": "Heat 1 Runner 7"
+                    "Heat/Lane/Flight": "Heat 1 Runner 7",
+                    "result": null,
+                    "place": null,
+                    "pr": "-",
+                    "points": "-",
+                    "athlete_uid": "0ce9fa27-10b2-4df2-9a85-88caac423a92",
+                    "seed_uid": "a1a85c65-2d84-485c-a4eb-faaf10df7d3a",
+                    "seed": "2:53.68"
                 },
                 {
                     "name": "Cameron Lafrazza-Schwartz",
-                    "Heat/Lane/Flight": "Heat 1 Runner 9"
+                    "Heat/Lane/Flight": "Heat 1 Runner 9",
+                    "result": "2:59.46",
+                    "place": null,
+                    "pr": "-",
+                    "points": "-",
+                    "athlete_uid": "0f09f376-7146-45e3-a467-0502a54c30f1",
+                    "seed_uid": "a863bbf3-82ea-4a8e-b0f5-c57ba64995b7",
+                    "seed": "2:55.15"
                 },
                 {
                     "name": "Sierra Wall",
-                    "Heat/Lane/Flight": "Heat 2 Runner 1"
+                    "Heat/Lane/Flight": "Heat 2 Runner 1",
+                    "result": "2:22.24",
+                    "place": null,
+                    "pr": "2:22.24",
+                    "points": "-",
+                    "athlete_uid": "2f87d4f5-96b3-42c0-8593-44b07bf9667c",
+                    "seed_uid": "27d4c8ea-6dc3-42bf-b589-65f6b389f443",
+                    "seed": "2:22.31"
                 },
                 {
                     "name": "Molly Weber",
-                    "Heat/Lane/Flight": "Heat 2 Runner 3"
+                    "Heat/Lane/Flight": "Heat 2 Runner 3",
+                    "result": "2:33.11",
+                    "place": null,
+                    "pr": "2:33.11",
+                    "points": "-",
+                    "athlete_uid": "a8335588-f2d9-4944-8d42-bf59f72df4de",
+                    "seed": "-"
                 }
             ]
         },
@@ -592,35 +1159,86 @@
             "athletes": [
                 {
                     "name": "Ewan Kenny",
-                    "Heat/Lane/Flight": "Heat 1 Runner 3"
+                    "Heat/Lane/Flight": "Heat 1 Runner 3",
+                    "result": "2:04.08",
+                    "place": null,
+                    "pr": "2:04.08",
+                    "points": "-",
+                    "athlete_uid": "1e1f67ab-a1d3-4465-8edf-3a5d2da6bd8c",
+                    "seed_uid": "ad90d771-7a27-46e9-bbed-298fb34e0eb0",
+                    "seed": "2:18.5"
                 },
                 {
                     "name": "Tim Nikel",
-                    "Heat/Lane/Flight": "Heat 1 Runner 6"
+                    "Heat/Lane/Flight": "Heat 1 Runner 6",
+                    "result": null,
+                    "place": null,
+                    "pr": "-",
+                    "points": "-",
+                    "athlete_uid": "783b89be-5035-435f-98a6-7e50f20d9f90",
+                    "seed_uid": "63309bd1-a912-425d-b7dc-10c5b56781e3",
+                    "seed": "2:20.18"
                 },
                 {
                     "name": "Colin Eisner",
-                    "Heat/Lane/Flight": "Heat 1 Runner 11"
+                    "Heat/Lane/Flight": "Heat 1 Runner 11",
+                    "result": "2:38.3",
+                    "place": null,
+                    "pr": "2:38.3",
+                    "points": "-",
+                    "athlete_uid": "28fac796-e0a7-4db2-a959-f7ee851dd772",
+                    "seed": "-"
                 },
                 {
                     "name": "Jackson Wynett",
-                    "Heat/Lane/Flight": "Heat 1 Runner 12"
+                    "Heat/Lane/Flight": "Heat 1 Runner 12",
+                    "result": "2:38.31",
+                    "place": null,
+                    "pr": "-",
+                    "points": "-",
+                    "athlete_uid": "f6c2dcba-b626-4eb4-b4e9-7b5d38075b62",
+                    "seed_uid": "399486e9-fc32-4baa-800c-c318ebda4efa",
+                    "seed": "2:34.21"
                 },
                 {
                     "name": "Cam Miller",
-                    "Heat/Lane/Flight": "Heat 1 Runner 15"
+                    "Heat/Lane/Flight": "Heat 1 Runner 15",
+                    "result": "2:31.92",
+                    "place": null,
+                    "pr": "2:31.92",
+                    "points": "-",
+                    "athlete_uid": "ddea1958-ab61-477b-9863-6350d3f0b6f0",
+                    "seed": "-"
                 },
                 {
                     "name": "Luke Treleven",
-                    "Heat/Lane/Flight": "Heat 2 Runner 5"
+                    "Heat/Lane/Flight": "Heat 2 Runner 5",
+                    "result": null,
+                    "place": null,
+                    "pr": "-",
+                    "points": "-",
+                    "seed": "-"
                 },
                 {
                     "name": "Zach Bean",
-                    "Heat/Lane/Flight": "Heat 2 Runner 9"
+                    "Heat/Lane/Flight": "Heat 2 Runner 9",
+                    "result": "2:10.87",
+                    "place": null,
+                    "pr": "2:10.87",
+                    "points": "-",
+                    "athlete_uid": "f3e6fc7e-fdc1-4f97-8094-e31b0dc49150",
+                    "seed": "-"
                 },
                 {
                     "name": "Oliver Su",
-                    "Heat/Lane/Flight": "Heat 2 Runner 11"
+                    "Heat/Lane/Flight": "Heat 2 Runner 11",
+                    "result": "2:13.47",
+                    "place": null,
+                    "pr": "-",
+                    "points": "-",
+                    "athlete_uid": "6b2770d6-2a15-48e4-b85b-5ea7fc37f183",
+                    "seed_uid": "19206f9c-d526-4d5a-8add-1161eba97425",
+                    "seed": "2:10.44"
                 }
             ]
         },
@@ -630,27 +1248,67 @@
             "athletes": [
                 {
                     "name": "Hazel Straka",
-                    "Heat/Lane/Flight": "Heat 1 Lane 7"
+                    "Heat/Lane/Flight": "Heat 1 Lane 7",
+                    "result": "34.85",
+                    "place": null,
+                    "pr": "34.85",
+                    "points": "-",
+                    "athlete_uid": "0b110f02-6f7d-4e40-9ae3-e29be4a3966a",
+                    "seed": "-"
                 },
                 {
                     "name": "Ella Pluzynski",
-                    "Heat/Lane/Flight": "Heat 3 Lane 3"
+                    "Heat/Lane/Flight": "Heat 3 Lane 3",
+                    "result": "31.85",
+                    "place": null,
+                    "pr": "-",
+                    "points": "-",
+                    "athlete_uid": "14adb04f-46cd-4480-8846-0d33fc543701",
+                    "seed_uid": "ba5cb71f-2e16-40bc-b350-9c995addeb7f",
+                    "seed": "31.39"
                 },
                 {
                     "name": "Domenica Plaza Homiston",
-                    "Heat/Lane/Flight": "Heat 3 Lane 8"
+                    "Heat/Lane/Flight": "Heat 3 Lane 8",
+                    "result": "35.28",
+                    "place": null,
+                    "pr": "35.28",
+                    "points": "-",
+                    "athlete_uid": "fec3d4b1-38fc-4431-b883-bd13af10eb2a",
+                    "seed": "-"
                 },
                 {
                     "name": "Saige Hageman",
-                    "Heat/Lane/Flight": "Heat 4 Lane 3"
+                    "Heat/Lane/Flight": "Heat 4 Lane 3",
+                    "result": "30.42",
+                    "place": null,
+                    "pr": "-",
+                    "points": "-",
+                    "athlete_uid": "6f853483-f6a0-494a-81f6-87a307b7faa7",
+                    "seed_uid": "c562df29-a929-4fb8-b334-d4c66278fce7",
+                    "seed": "30.0"
                 },
                 {
                     "name": "Ellie Grandsaert",
-                    "Heat/Lane/Flight": "Heat 4 Lane 5"
+                    "Heat/Lane/Flight": "Heat 4 Lane 5",
+                    "result": "28.17",
+                    "place": null,
+                    "pr": "28.17",
+                    "points": "-",
+                    "athlete_uid": "133b1284-9a57-4011-b288-6871d6577ba9",
+                    "seed_uid": "6252f411-fb54-4da1-b03e-9d2f63a0fdda",
+                    "seed": "29.75"
                 },
                 {
                     "name": "Anna Johnson",
-                    "Heat/Lane/Flight": "Heat 5 Lane 7"
+                    "Heat/Lane/Flight": "Heat 5 Lane 7",
+                    "result": "29.15",
+                    "place": null,
+                    "pr": "-",
+                    "points": "-",
+                    "athlete_uid": "d14a13f4-cd32-4ae5-ab65-db29f7db69a7",
+                    "seed_uid": "1f5f3128-01eb-4b2c-af28-e0c322c603ac",
+                    "seed": "29.12"
                 }
             ]
         },
@@ -660,35 +1318,84 @@
             "athletes": [
                 {
                     "name": "(Caleb Cooper \u2013 scratch)",
-                    "Heat/Lane/Flight": "Channing Cooper"
+                    "Heat/Lane/Flight": "Channing Cooper",
+                    "result": null,
+                    "place": null,
+                    "pr": "-",
+                    "points": "-",
+                    "seed": "-"
                 },
                 {
                     "name": "Mason McKenna",
-                    "Heat/Lane/Flight": "Heat 1 Lane 1"
+                    "Heat/Lane/Flight": "Heat 1 Lane 1",
+                    "result": "25.93",
+                    "place": null,
+                    "pr": "25.93",
+                    "points": "-",
+                    "athlete_uid": "ce630329-8741-4fda-b877-abd2c4903264",
+                    "seed": "-"
                 },
                 {
                     "name": "Quinn Lewis",
-                    "Heat/Lane/Flight": "Heat 1 Lane 4"
+                    "Heat/Lane/Flight": "Heat 1 Lane 4",
+                    "result": "32.53",
+                    "place": null,
+                    "pr": "32.53",
+                    "points": "-",
+                    "athlete_uid": "58ca11a0-4fb8-490c-9031-283077724fd1",
+                    "seed": "-"
                 },
                 {
                     "name": "Daniel Bonvillian",
-                    "Heat/Lane/Flight": "Heat 1 Lane 5"
+                    "Heat/Lane/Flight": "Heat 1 Lane 5",
+                    "result": "32.74",
+                    "place": null,
+                    "pr": "32.74",
+                    "points": "-",
+                    "athlete_uid": "bd5536c0-15aa-4e67-b04d-c01d93252e1a",
+                    "seed": "-"
                 },
                 {
                     "name": "Jett Jitboon",
-                    "Heat/Lane/Flight": "Heat 2 Lane 3"
+                    "Heat/Lane/Flight": "Heat 2 Lane 3",
+                    "result": "26.93",
+                    "place": null,
+                    "pr": "26.93",
+                    "points": "-",
+                    "athlete_uid": "809eb6af-82af-4cce-99b8-96bb7e781cad",
+                    "seed": "-"
                 },
                 {
                     "name": "Dash Ecklund",
-                    "Heat/Lane/Flight": "Heat 3 Lane 3"
+                    "Heat/Lane/Flight": "Heat 3 Lane 3",
+                    "result": "26.22",
+                    "place": null,
+                    "pr": "26.22",
+                    "points": "-",
+                    "athlete_uid": "2f64820a-9425-4709-8bb4-78cf541fcb7f",
+                    "seed_uid": "01b3cb0f-4510-499b-aad9-a751b2aedc5b",
+                    "seed": "26.6"
                 },
                 {
                     "name": "Orion Davis",
-                    "Heat/Lane/Flight": "Heat 3 Lane 6"
+                    "Heat/Lane/Flight": "Heat 3 Lane 6",
+                    "result": "26.39",
+                    "place": null,
+                    "pr": "26.39",
+                    "points": "-",
+                    "athlete_uid": "fece81f7-1845-4140-a2b5-a013a92aa735",
+                    "seed_uid": "6bf62c27-462d-40e0-b97d-140102926615",
+                    "seed": "28.67"
                 },
                 {
                     "name": "Charlie Bonvillian",
-                    "Heat/Lane/Flight": "Heat 4 Lane 5"
+                    "Heat/Lane/Flight": "Heat 4 Lane 5",
+                    "result": null,
+                    "place": null,
+                    "pr": "-",
+                    "points": "-",
+                    "athlete_uid": "97644b84-36e6-440f-af98-06a0d975a738",
+                    "seed": "-"
                 }
             ]
         },
@@ -698,7 +1405,14 @@
             "athletes": [
                 {
                     "name": "Koen Harriman",
-                    "Heat/Lane/Flight": "Heat 1 Runner 3"
+                    "Heat/Lane/Flight": "Heat 1 Runner 3",
+                    "result": "11:01.05",
+                    "place": null,
+                    "pr": "11:01.05",
+                    "points": "-",
+                    "athlete_uid": "0bc280ac-94de-4297-b180-6763146f418e",
+                    "seed_uid": "1f84c5e6-cdc6-40ae-8e5f-3477f3fd4e7c",
+                    "seed": "11:27.36"
                 }
             ]
         },
