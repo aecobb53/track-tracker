@@ -500,6 +500,8 @@ async def points_html_page(athletes_dict, meet_name_list):
             girl_top_scorer = top_scorers[meet_name]['Girls'][0]
         points_table_row.add_element(
             TableData(internal=f"{girl_top_scorer[0]} ({girl_top_scorer[1]})").add_class('points-table-data'))
+        if girl_top_scorer[1] == 0:
+            girl_top_scorer = ('-', 0)
     points_table.add_element(points_table_row)
 
     # Boys
@@ -523,6 +525,8 @@ async def points_html_page(athletes_dict, meet_name_list):
             boy_top_scorer = (' / '.join([ts[0] for ts in top_scorers[meet_name]['Boys']]), top_scorers[meet_name]['Boys'][0][1])
         else:
             boy_top_scorer = top_scorers[meet_name]['Boys'][0]
+        if boy_top_scorer[1] == 0:
+            boy_top_scorer = ('-', 0)
         points_table_row.add_element(
             TableData(internal=f"{boy_top_scorer[0]} ({boy_top_scorer[1]})").add_class('points-table-data'))
     points_table.add_element(points_table_row)
