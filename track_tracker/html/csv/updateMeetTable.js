@@ -22,7 +22,7 @@ function createMeetDivItem(value, added_class) {
     return input_div;
 }
 
-function createMeetItem(value, input=true) {
+function createMeetItem(value, input = true) {
     var item = document.createElement('div');
     if (value.length === 1) {
         item.className = 'meet-item';
@@ -46,7 +46,35 @@ function createMeetItem(value, input=true) {
     return item;
 }
 
-function createMeetRow(event) {
+
+function createMeetButtonItem(value, added_class, functionText) {
+    var button_div = document.createElement('div');
+    var button = document.createElement('button');
+    button.innerHTML = value;
+    button.setAttribute('onclick', functionText);
+    button_div.className = added_class;
+    button_div.appendChild(button);
+    return button_div;
+}
+
+function createMeetRowManipulation(value, buttonText, functionName, rowIndex) {
+    var item = document.createElement('div');
+    if (value.length === 1) {
+        item.className = 'meet-item';
+        for (var i = 0; i < value.length; i++) {
+            item.appendChild(createMeetButtonItem(buttonText, 'meet-item', functionName + '(' + rowIndex + ')'));
+        }
+    } else {
+        item.className = 'meet-item';
+        for (var i = 0; i < value.length; i++) {
+            item.appendChild(createMeetButtonItem(buttonText, 'meet-multiline-item', functionName + '(' + rowIndex + ', ' + i + ')'));
+        }
+    }
+    return item;
+}
+
+
+function createMeetRow(event, index) {
     // console.log('');
     // console.log('Creating meet row');
     var table_row = document.createElement('div');
@@ -92,10 +120,36 @@ function createMeetRow(event) {
     athlete_item.classList.add('col-width-pr');
     table_row.appendChild(athlete_item);
 
-    // place
+    // Points
     var athlete_item = createMeetItem(event['athletes'].map(a => a['points']), false);
     athlete_item.classList.add('col-width-points');
     table_row.appendChild(athlete_item);
+
+
+
+
+
+    // Athlete Row Manipulation
+    // Add Athlete
+    var button_item = createMeetRowManipulation(event['athletes'].map(a => a['result']), 'Add Athlete', 'addAthlete', index + 1);
+    button_item.classList.add('col-width-button');
+    table_row.appendChild(button_item);
+
+    // Remove Athlete
+    var button_item = createMeetRowManipulation(event['athletes'].map(a => a['result']), 'Remove Athlete', 'removeAthlete', index + 1);
+    button_item.classList.add('col-width-button');
+    table_row.appendChild(button_item);
+
+    // Add Event
+    var button_item = createMeetRowManipulation([null], 'Add Event', 'addEvent', index + 1);
+    button_item.classList.add('col-width-button');
+    table_row.appendChild(button_item);
+
+    // Remove Event
+    var button_item = createMeetRowManipulation([null], 'Remove Event', 'removeEvent', index + 1);
+    button_item.classList.add('col-width-button');
+    table_row.appendChild(button_item);
+
 
     return table_row;
 }
@@ -139,7 +193,7 @@ async function updateMeetTable(meet_data) {
         // Data
         for (var i = 0; i < event_data.length; i++) {
             // console.log(event_data[i]);
-            row = createMeetRow(event_data[i]);
+            row = createMeetRow(event_data[i], i);
             table_div.appendChild(row);
         }
     }

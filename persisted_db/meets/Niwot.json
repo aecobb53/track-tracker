@@ -1,9 +1,9 @@
 {
     "meet": {
         "meet_name": "Niwot",
-        "date": "2025-03-12",
+        "date": "2025-03-29",
         "small_meet": true,
-        "last_updated": "2025-03-26 19:26:58"
+        "last_updated": "2025-03-26 21:49:47"
     },
     "events": [
         {
@@ -18,7 +18,8 @@
                     "pr": "7-01.0",
                     "points": "-",
                     "athlete_uid": "14adb04f-46cd-4480-8846-0d33fc543701",
-                    "seed": "-"
+                    "seed": "7-03.0",
+                    "seed_uid": "cebec904-2e2b-499c-870b-65e0008dfe5c"
                 },
                 {
                     "name": "Amelia Harriman",
@@ -28,7 +29,8 @@
                     "pr": "-",
                     "points": "-",
                     "athlete_uid": "fbbe4500-f459-444f-b70a-341cb54b0900",
-                    "seed": "-"
+                    "seed": "4-09.0",
+                    "seed_uid": "4c753595-4f5f-4a35-845c-b7cf5d145d98"
                 },
                 {
                     "name": "Irene McCalmon",
@@ -38,8 +40,8 @@
                     "pr": "9-01.0",
                     "points": "-",
                     "athlete_uid": "372cd22d-b29e-44ee-ae1c-f10b91389c38",
-                    "seed_uid": "16ae9076-f51f-4307-b2f5-09aedbac639c",
-                    "seed": "9-00.0"
+                    "seed_uid": "3b96e3a3-46dd-42d4-a5ae-44495e2948a5",
+                    "seed": "9-01.0"
                 }
             ]
         },
@@ -55,8 +57,8 @@
                     "pr": "5-02.0",
                     "points": "-",
                     "athlete_uid": "fece81f7-1845-4140-a2b5-a013a92aa735",
-                    "seed_uid": "34479c0a-49b3-415b-96bd-613aae454a37",
-                    "seed": "4-08.0"
+                    "seed_uid": "f3db7af0-831e-4c99-b980-15fd1a3981e0",
+                    "seed": "5-02.0"
                 },
                 {
                     "name": "Anthony Giliberti",
@@ -66,7 +68,7 @@
                     "pr": "-",
                     "points": "-",
                     "athlete_uid": "e0877623-43a1-4ae7-accb-df5da6d1343d",
-                    "seed_uid": "f2cbd14e-52c3-42a5-bdb4-32cebd783fea",
+                    "seed_uid": "ba4289e1-a27d-4332-9500-a109ac277de7",
                     "seed": "5-02.0"
                 },
                 {
@@ -111,8 +113,8 @@
                     "pr": "17-00.0",
                     "points": "-",
                     "athlete_uid": "06940551-8448-4dc2-890c-c7ce3e22b616",
-                    "seed_uid": "c50eb0f3-6ffc-425c-bd1e-8c47eb088b8a",
-                    "seed": "15-03.5"
+                    "seed_uid": "63334dfd-0fd2-446f-91dd-d578d4a788a5",
+                    "seed": "17-00.0"
                 },
                 {
                     "name": "Henry Duckham",
@@ -133,8 +135,8 @@
                     "pr": "16-09.0",
                     "points": "-",
                     "athlete_uid": "3da9d021-03a0-4068-94c7-b31c04479791",
-                    "seed_uid": "28f9b6d0-ef1c-4a84-93fa-840d48d74fa8",
-                    "seed": "16-05.0"
+                    "seed_uid": "35386efb-0755-4f18-816b-3fbc9179862c",
+                    "seed": "16-09.0"
                 },
                 {
                     "name": "Santiago Caravia-Perry",
@@ -155,8 +157,8 @@
                     "pr": "19-02.0",
                     "points": "-",
                     "athlete_uid": "8401c48c-752e-44f7-9c14-47fbb4318608",
-                    "seed_uid": "a24ffca2-c158-4567-b8f3-0afea802dc36",
-                    "seed": "17-03.0"
+                    "seed_uid": "66ec03bb-7fb6-4b6b-8dc6-a790e4092fe7",
+                    "seed": "19-02.0"
                 }
             ]
         },
@@ -172,7 +174,8 @@
                     "pr": "23-10.0",
                     "points": "-",
                     "athlete_uid": "f05a0622-1111-4383-8b25-3c16dc807df2",
-                    "seed": "-"
+                    "seed": "23-10.0",
+                    "seed_uid": "1e4dfec0-e4c7-49e9-bd21-5f9e6d3156c1"
                 },
                 {
                     "name": "Colin Overy",
@@ -182,7 +185,8 @@
                     "pr": "33-11.5",
                     "points": "-",
                     "athlete_uid": "6e14d1b6-1f62-46a2-8bfd-eb6ec1f4bb8c",
-                    "seed": "-"
+                    "seed": "33-11.5",
+                    "seed_uid": "1683e6e7-0d97-4c1a-8240-b99c12cdf719"
                 },
                 {
                     "name": "Zane Copeland",
@@ -192,8 +196,8 @@
                     "pr": "29-00.75",
                     "points": "-",
                     "athlete_uid": "06940551-8448-4dc2-890c-c7ce3e22b616",
-                    "seed_uid": "9dfeefdf-28c5-4319-b7c4-fb0c88f5f550",
-                    "seed": "25-03.0"
+                    "seed_uid": "9643a294-5aa0-4c4f-82df-18e4ae3708e4",
+                    "seed": "29-04.5"
                 },
                 {
                     "name": "Jace Pollock",
@@ -203,8 +207,8 @@
                     "pr": "27-05.75",
                     "points": "-",
                     "athlete_uid": "cd196f28-9c40-47bf-b0ee-ed2d53a00783",
-                    "seed_uid": "4e6eafe9-5f6f-46c9-af30-4c9b3b273753",
-                    "seed": "26-04.5"
+                    "seed_uid": "810777f2-3150-4306-98d6-2d3a4fc89982",
+                    "seed": "27-05.75"
                 },
                 {
                     "name": "Kaylor Huang",
@@ -214,8 +218,8 @@
                     "pr": "29-02.5",
                     "points": "-",
                     "athlete_uid": "8eabf968-ec89-457b-9052-d00195596133",
-                    "seed_uid": "9d2b7ded-14c7-4d91-89fa-25b75dfcbc92",
-                    "seed": "27-11.5"
+                    "seed_uid": "2039ae32-863f-463a-a779-05d0a9676a64",
+                    "seed": "33-03.5"
                 },
                 {
                     "name": "Keeghan Field-Gordon",
@@ -242,8 +246,8 @@
                     "pr": "-",
                     "points": "-",
                     "athlete_uid": "5e65dd4f-8362-48fd-9152-78edde0061e5",
-                    "seed_uid": "81d721b8-3b20-4e32-bd9c-8caf1a2a7cc3",
-                    "seed": "69-10.0"
+                    "seed_uid": "100521c0-9114-4daa-a7f8-e0c9efc73c66",
+                    "seed": "72-09.0"
                 }
             ]
         },
@@ -285,7 +289,7 @@
                     "pr": "-",
                     "points": "-",
                     "athlete_uid": "085f91e8-c212-47e2-baf9-bbdf7b3eb085",
-                    "seed_uid": "a6ad6e5d-26ee-4d8c-aaeb-fbd322e43268",
+                    "seed_uid": "84ca59b3-72f9-48fe-b5b0-fca7c905bc12",
                     "seed": "4-10.0"
                 },
                 {
@@ -324,8 +328,8 @@
                     "pr": "34-08.0",
                     "points": "-",
                     "athlete_uid": "3da9d021-03a0-4068-94c7-b31c04479791",
-                    "seed_uid": "48caf00b-3e83-4497-8f24-3812e7088897",
-                    "seed": "33-05.5"
+                    "seed_uid": "6a0ec7a4-c7d4-4815-b689-bacc28377739",
+                    "seed": "34-08.0"
                 },
                 {
                     "name": "Zane Copeland",
@@ -363,7 +367,8 @@
                     "pr": "66-03.0",
                     "points": "-",
                     "athlete_uid": "6e14d1b6-1f62-46a2-8bfd-eb6ec1f4bb8c",
-                    "seed": "-"
+                    "seed": "91-07.0",
+                    "seed_uid": "e8fc2713-edce-4fc7-a245-a33d23b4f210"
                 },
                 {
                     "name": "Marek Dorris",
@@ -373,8 +378,8 @@
                     "pr": "64-01.0",
                     "points": "-",
                     "athlete_uid": "f05a0622-1111-4383-8b25-3c16dc807df2",
-                    "seed_uid": "48b9866d-8786-4934-bb74-eda4a4ee4f30",
-                    "seed": "48-09.0"
+                    "seed_uid": "c5bd467d-1914-4260-830e-7e1ea1c5dc9c",
+                    "seed": "64-01.0"
                 },
                 {
                     "name": "Kaylor Huang",
@@ -384,8 +389,8 @@
                     "pr": "82-01.0",
                     "points": "-",
                     "athlete_uid": "8eabf968-ec89-457b-9052-d00195596133",
-                    "seed_uid": "9c1e5561-be18-4f12-9b38-60b82eb89cee",
-                    "seed": "72-08.5"
+                    "seed_uid": "ec0ce62b-d855-4c1a-922b-fd992c0eea76",
+                    "seed": "82-01.0"
                 },
                 {
                     "name": "Jace Pollock",
@@ -395,8 +400,8 @@
                     "pr": "101-08.0",
                     "points": "-",
                     "athlete_uid": "cd196f28-9c40-47bf-b0ee-ed2d53a00783",
-                    "seed_uid": "45cb2251-8e7e-4072-88b6-32778fedc37d",
-                    "seed": "89-04.0"
+                    "seed_uid": "59bd9152-a8df-4876-86bd-75233c5ec407",
+                    "seed": "101-08.0"
                 }
             ]
         },
@@ -456,7 +461,8 @@
                     "pr": "23.07",
                     "points": "-",
                     "athlete_uid": "d40e84a3-e8d8-432a-a882-094fc90a452d",
-                    "seed": "-"
+                    "seed": "22.59",
+                    "seed_uid": "7c40e164-fe51-4360-8431-fcae28379a57"
                 },
                 {
                     "name": "Elise Roehrich",
@@ -466,7 +472,8 @@
                     "pr": "20.56",
                     "points": "-",
                     "athlete_uid": "ba7b68d6-713a-4f24-a810-ef7f561946d5",
-                    "seed": "-"
+                    "seed": "20.14",
+                    "seed_uid": "dc115d74-8d94-4d7c-bdf2-853139d61715"
                 },
                 {
                     "name": "Kylie Duart",
@@ -476,8 +483,8 @@
                     "pr": "22.25",
                     "points": "-",
                     "athlete_uid": "9a80bc90-26fa-4a57-b5b4-faaada40e4ad",
-                    "seed_uid": "cdc59064-bbe4-43f3-8ab9-f680c7380dc3",
-                    "seed": "23.13"
+                    "seed_uid": "4795576c-80f1-4049-ba1b-6026aa1a04cd",
+                    "seed": "22.25"
                 },
                 {
                     "name": "Kate Mccall",
@@ -487,8 +494,8 @@
                     "pr": "20.86",
                     "points": "-",
                     "athlete_uid": "a40f7b42-0293-406f-803f-bca8f9fefe73",
-                    "seed_uid": "e5d3b21b-7b06-42eb-96df-1f9641e5eda0",
-                    "seed": "20.97"
+                    "seed_uid": "2563fbfa-0c3a-475b-88f8-2bffd442490e",
+                    "seed": "20.86"
                 }
             ]
         },
@@ -504,7 +511,8 @@
                     "pr": "21.73",
                     "points": "-",
                     "athlete_uid": "f2614037-c754-4d94-9c86-e07e63e71e25",
-                    "seed": "-"
+                    "seed": "21.73",
+                    "seed_uid": "d58bf6ae-5499-4a75-93bb-b64e0ccbd8d1"
                 },
                 {
                     "name": "Zephry Middleton",
@@ -529,7 +537,8 @@
                     "pr": "22.55",
                     "points": "-",
                     "athlete_uid": "fbbe4500-f459-444f-b70a-341cb54b0900",
-                    "seed": "-"
+                    "seed": "22.55",
+                    "seed_uid": "d05a84ef-89e4-4f6e-9e62-245df8c8201b"
                 },
                 {
                     "name": "Bethany Kim",
@@ -539,7 +548,8 @@
                     "pr": "15.44",
                     "points": "-",
                     "athlete_uid": "f5cf69ba-8290-43f7-a5e4-b45f9e4197e4",
-                    "seed": "-"
+                    "seed": "15.0",
+                    "seed_uid": "c27d5863-70d9-4df8-a0be-b52607d15c6a"
                 },
                 {
                     "name": "Kaia Rinaldo",
@@ -549,7 +559,8 @@
                     "pr": "15.91",
                     "points": "-",
                     "athlete_uid": "6e9084a3-633a-40ec-a031-14f4012b2aed",
-                    "seed": "-"
+                    "seed": "15.91",
+                    "seed_uid": "f96c8790-270b-466a-a925-265534f2e30e"
                 },
                 {
                     "name": "Sammie Mollenkopf",
@@ -568,8 +579,8 @@
                     "pr": "16.94",
                     "points": "-",
                     "athlete_uid": "ce23059d-d347-41e1-9e61-9754e831301d",
-                    "seed_uid": "4d6e23eb-7c65-4843-85f4-4ab5f1c89eac",
-                    "seed": "17.07"
+                    "seed_uid": "b009d86e-c967-4eaf-920c-3b61f9cb8968",
+                    "seed": "16.94"
                 },
                 {
                     "name": "Elise Roehrich",
@@ -601,8 +612,8 @@
                     "pr": "16.74",
                     "points": "-",
                     "athlete_uid": "0fd4b40f-c8b9-460e-b3c3-a66ee2588537",
-                    "seed_uid": "73443526-6d93-458d-8905-685a255491f3",
-                    "seed": "16.91"
+                    "seed_uid": "dbd0fa71-2c9d-406c-8caa-b37dcc4f16e0",
+                    "seed": "16.74"
                 },
                 {
                     "name": "Saige Hageman",
@@ -623,8 +634,8 @@
                     "pr": "13.89",
                     "points": "-",
                     "athlete_uid": "085f91e8-c212-47e2-baf9-bbdf7b3eb085",
-                    "seed_uid": "a5e672ac-4d92-4d08-994c-2515381dc4af",
-                    "seed": "13.94"
+                    "seed_uid": "bdc2e34f-a24a-4ef1-af58-8f325a16657b",
+                    "seed": "13.89"
                 }
             ]
         },
@@ -640,7 +651,8 @@
                     "pr": "12.76",
                     "points": "-",
                     "athlete_uid": "7ba3db64-d193-42a9-9e3a-656304fd1102",
-                    "seed": "-"
+                    "seed": "12.76",
+                    "seed_uid": "2d252bdf-dfaa-4b39-a49d-698a1c8984f1"
                 },
                 {
                     "name": "Dash Ecklund",
@@ -650,7 +662,8 @@
                     "pr": "13.0",
                     "points": "-",
                     "athlete_uid": "2f64820a-9425-4709-8bb4-78cf541fcb7f",
-                    "seed": "-"
+                    "seed": "12.95",
+                    "seed_uid": "a17eb14f-2809-4c07-ba01-f9d2a1dc9cd4"
                 },
                 {
                     "name": "Mason McKenna",
@@ -660,7 +673,8 @@
                     "pr": "12.73",
                     "points": "-",
                     "athlete_uid": "ce630329-8741-4fda-b877-abd2c4903264",
-                    "seed": "-"
+                    "seed": "12.73",
+                    "seed_uid": "7eebc39b-561f-48e4-850e-383938b5426c"
                 },
                 {
                     "name": "Wade Carlson",
@@ -670,7 +684,8 @@
                     "pr": "12.1",
                     "points": "-",
                     "athlete_uid": "354a6812-b84a-46cc-b919-545194caba7d",
-                    "seed": "-"
+                    "seed": "12.1",
+                    "seed_uid": "d3ae4b16-bb85-4ebc-9608-6802892274d9"
                 },
                 {
                     "name": "Henry Walker",
@@ -680,7 +695,8 @@
                     "pr": "14.39",
                     "points": "-",
                     "athlete_uid": "c1cf5d04-c6a8-4368-924c-fecc3286ef35",
-                    "seed": "-"
+                    "seed": "14.39",
+                    "seed_uid": "2b3df95d-7a36-4e60-b605-b9b2486b08e2"
                 },
                 {
                     "name": "Caden Rozic",
@@ -690,7 +706,8 @@
                     "pr": "13.58",
                     "points": "-",
                     "athlete_uid": "f2614037-c754-4d94-9c86-e07e63e71e25",
-                    "seed": "-"
+                    "seed": "13.38",
+                    "seed_uid": "d1294b2e-4107-4e17-8e13-d19ed1ed0fe4"
                 },
                 {
                     "name": "Henry Poe",
@@ -700,8 +717,8 @@
                     "pr": "13.22",
                     "points": "-",
                     "athlete_uid": "c76454f6-8b63-415a-a0b0-7bef37596ea2",
-                    "seed_uid": "f70a9146-611c-496e-8fb3-e3ce988760b6",
-                    "seed": "13.61"
+                    "seed_uid": "1830335c-33c0-43aa-89c6-3df0f4da3cc2",
+                    "seed": "13.22"
                 },
                 {
                     "name": "Miller Gumhaus",
@@ -720,8 +737,8 @@
                     "pr": "12.39",
                     "points": "-",
                     "athlete_uid": "3da9d021-03a0-4068-94c7-b31c04479791",
-                    "seed_uid": "47130803-f17d-4243-bac0-dc63ebe79aa3",
-                    "seed": "12.5"
+                    "seed_uid": "beebe766-c678-4f4d-a1ea-56f648dad34e",
+                    "seed": "12.39"
                 },
                 {
                     "name": "Santiago Caravia-Perry",
@@ -731,8 +748,8 @@
                     "pr": "12.63",
                     "points": "-",
                     "athlete_uid": "7f2531a6-cd77-43ea-bdce-e5a739cc85b3",
-                    "seed_uid": "362174dc-fc1a-4320-9863-8fd7b54de76e",
-                    "seed": "12.67"
+                    "seed_uid": "ae99c01e-0f5e-4265-baa7-137e0defad11",
+                    "seed": "12.63"
                 }
             ]
         },
@@ -777,7 +794,8 @@
                     "pr": "6:28.49",
                     "points": "-",
                     "athlete_uid": "d2a1f767-2bba-4771-96e1-299a0562662b",
-                    "seed": "-"
+                    "seed": "6:28.49",
+                    "seed_uid": "bcd8ca56-1d71-4479-a279-daed1220b39d"
                 },
                 {
                     "name": "Annabelle Eisner",
@@ -787,8 +805,8 @@
                     "pr": "6:03.51",
                     "points": "-",
                     "athlete_uid": "733a098e-8050-46db-8b2f-d0ea73e452af",
-                    "seed_uid": "e38fd212-e46d-4a4f-a61c-2880c2e9807d",
-                    "seed": "6:16.1"
+                    "seed_uid": "4398f283-9a36-4d66-ae9c-c03cb389ef68",
+                    "seed": "6:03.51"
                 },
                 {
                     "name": "Carmen Lafrazza-Schwartz",
@@ -843,7 +861,8 @@
                     "pr": "5:19.36",
                     "points": "-",
                     "athlete_uid": "ac64823c-54bc-466b-a361-30f17d6c14c3",
-                    "seed": "-"
+                    "seed": "5:12.07",
+                    "seed_uid": "96fd43b8-b3a2-432a-b18b-bbd46edc880a"
                 },
                 {
                     "name": "Osel Yeh",
@@ -853,7 +872,8 @@
                     "pr": "6:00.06",
                     "points": "-",
                     "athlete_uid": "09bf858c-9c59-4d8b-9be1-46e54eac2239",
-                    "seed": "-"
+                    "seed": "6:00.06",
+                    "seed_uid": "b7dfa3e4-b840-406a-9438-0810432fcf2a"
                 },
                 {
                     "name": "Jackson Wynett",
@@ -863,8 +883,8 @@
                     "pr": "5:43.95",
                     "points": "-",
                     "athlete_uid": "f6c2dcba-b626-4eb4-b4e9-7b5d38075b62",
-                    "seed_uid": "824e5446-2e9c-4cf5-80ed-1c8ff09945d6",
-                    "seed": "5:47.62"
+                    "seed_uid": "07d062a6-b7b8-43ad-83c5-11de0f3d1616",
+                    "seed": "5:43.95"
                 },
                 {
                     "name": "Pietro Camporeale",
@@ -874,8 +894,8 @@
                     "pr": "5:43.86",
                     "points": "-",
                     "athlete_uid": "a893131d-ee27-4252-a1bc-b1187c76edc8",
-                    "seed_uid": "6613d290-649f-4127-982e-6693239368fc",
-                    "seed": "5:50.49"
+                    "seed_uid": "44c24318-c417-4a8b-b181-47f58ccd9ee5",
+                    "seed": "5:39.82"
                 },
                 {
                     "name": "Tim Nikel",
@@ -885,7 +905,8 @@
                     "pr": "5:11.6",
                     "points": "-",
                     "athlete_uid": "783b89be-5035-435f-98a6-7e50f20d9f90",
-                    "seed": "-"
+                    "seed": "5:11.6",
+                    "seed_uid": "b37bcb1d-8546-4c84-bea3-1506b90c2d53"
                 },
                 {
                     "name": "Rory Treleaven",
@@ -895,8 +916,8 @@
                     "pr": "4:45.4",
                     "points": "-",
                     "athlete_uid": "e127b801-dd4f-4705-be56-e55d9134f898",
-                    "seed_uid": "5050c5c9-93ed-482f-ab67-c80ad459042f",
-                    "seed": "4:48.19"
+                    "seed_uid": "4f33cde1-37fe-494b-803a-ba43994a5e38",
+                    "seed": "4:45.4"
                 },
                 {
                     "name": "Theo Chastang",
@@ -906,7 +927,8 @@
                     "pr": "4:53.23",
                     "points": "-",
                     "athlete_uid": "20f61b05-befd-4544-a004-d6604e97b6fa",
-                    "seed": "-"
+                    "seed": "4:53.23",
+                    "seed_uid": "9682bd38-c6e2-4ac9-9ebe-8bd32fa4ffda"
                 },
                 {
                     "name": "Dario Barnes",
@@ -976,7 +998,8 @@
                     "pr": "1:16.22",
                     "points": "-",
                     "athlete_uid": "9d4b3aac-2e47-494b-a523-34ce72b28c9a",
-                    "seed": "-"
+                    "seed": "1:16.22",
+                    "seed_uid": "a599e265-bdbc-41bf-afad-2a5d14b9182c"
                 },
                 {
                     "name": "Hazel Straka",
@@ -986,8 +1009,8 @@
                     "pr": "1:16.75",
                     "points": "-",
                     "athlete_uid": "0b110f02-6f7d-4e40-9ae3-e29be4a3966a",
-                    "seed_uid": "8eb1920c-cbd4-4cc5-a528-49dca6ad4248",
-                    "seed": "1:17.83"
+                    "seed_uid": "d03cd630-ce77-4fbd-b3bd-8fee0ca43454",
+                    "seed": "1:16.75"
                 },
                 {
                     "name": "Isabella Dibiase",
@@ -997,7 +1020,8 @@
                     "pr": "1:27.13",
                     "points": "-",
                     "athlete_uid": "d40e84a3-e8d8-432a-a882-094fc90a452d",
-                    "seed": "-"
+                    "seed": "1:25.5",
+                    "seed_uid": "cb3244bb-90cb-4e65-bb7c-7cf0635554e5"
                 },
                 {
                     "name": "Anna Johnson",
@@ -1035,7 +1059,8 @@
                     "pr": "1:17.43",
                     "points": "-",
                     "athlete_uid": "3883641a-3a12-42f7-8183-a68f6b06acc4",
-                    "seed": "-"
+                    "seed": "1:09.4",
+                    "seed_uid": "cbee83fe-7185-4de6-a1e2-7d742aa8f463"
                 },
                 {
                     "name": "James Young",
@@ -1045,7 +1070,8 @@
                     "pr": "1:02.58",
                     "points": "-",
                     "athlete_uid": "9ef6e635-188d-47b2-a847-43d1f23d0d62",
-                    "seed": "-"
+                    "seed": "1:02.58",
+                    "seed_uid": "679f92aa-b892-47bb-b4d6-6a0d372a92ec"
                 },
                 {
                     "name": "Arran Machado McKelvie",
@@ -1055,7 +1081,8 @@
                     "pr": "57.92",
                     "points": "-",
                     "athlete_uid": "eb5debe3-c35e-48a3-923d-49ecb1d69016",
-                    "seed": "-"
+                    "seed": "57.92",
+                    "seed_uid": "4151b74c-56f3-4687-918c-de81be526ea4"
                 }
             ]
         },
@@ -1071,8 +1098,8 @@
                     "pr": "56.45",
                     "points": "-",
                     "athlete_uid": "3a000233-9d1e-475d-afb3-177f4abe3355",
-                    "seed_uid": "23e3cbaf-97d7-4d02-aca7-59d07b463631",
-                    "seed": "58.23"
+                    "seed_uid": "e4ae65ff-cae6-4b3b-88cf-4bdc7fb77d34",
+                    "seed": "56.45"
                 }
             ]
         },
@@ -1088,8 +1115,8 @@
                     "pr": "46.81",
                     "points": "-",
                     "athlete_uid": "e127b801-dd4f-4705-be56-e55d9134f898",
-                    "seed_uid": "9b9a60a0-30dd-49d0-bed9-54acd1a1bb10",
-                    "seed": "47.79"
+                    "seed_uid": "d19f3fb9-6843-468f-9a5f-158438abcb9e",
+                    "seed": "45.89"
                 },
                 {
                     "name": "Zephyr Middleton",
@@ -1138,8 +1165,8 @@
                     "pr": "2:22.24",
                     "points": "-",
                     "athlete_uid": "2f87d4f5-96b3-42c0-8593-44b07bf9667c",
-                    "seed_uid": "27d4c8ea-6dc3-42bf-b589-65f6b389f443",
-                    "seed": "2:22.31"
+                    "seed_uid": "b08448c3-ff59-4321-a349-ec4336a35ce8",
+                    "seed": "2:22.24"
                 },
                 {
                     "name": "Molly Weber",
@@ -1149,7 +1176,8 @@
                     "pr": "2:33.11",
                     "points": "-",
                     "athlete_uid": "a8335588-f2d9-4944-8d42-bf59f72df4de",
-                    "seed": "-"
+                    "seed": "2:33.11",
+                    "seed_uid": "f3de811c-0935-47e7-9dd4-053f23883d24"
                 }
             ]
         },
@@ -1165,8 +1193,8 @@
                     "pr": "2:04.08",
                     "points": "-",
                     "athlete_uid": "1e1f67ab-a1d3-4465-8edf-3a5d2da6bd8c",
-                    "seed_uid": "ad90d771-7a27-46e9-bbed-298fb34e0eb0",
-                    "seed": "2:18.5"
+                    "seed_uid": "72ce595f-6058-4824-8091-ca933def4836",
+                    "seed": "2:04.08"
                 },
                 {
                     "name": "Tim Nikel",
@@ -1187,7 +1215,8 @@
                     "pr": "2:38.3",
                     "points": "-",
                     "athlete_uid": "28fac796-e0a7-4db2-a959-f7ee851dd772",
-                    "seed": "-"
+                    "seed": "2:38.3",
+                    "seed_uid": "cb015a24-0386-4f10-9e60-4cd9c1f5590a"
                 },
                 {
                     "name": "Jackson Wynett",
@@ -1197,8 +1226,8 @@
                     "pr": "-",
                     "points": "-",
                     "athlete_uid": "f6c2dcba-b626-4eb4-b4e9-7b5d38075b62",
-                    "seed_uid": "399486e9-fc32-4baa-800c-c318ebda4efa",
-                    "seed": "2:34.21"
+                    "seed_uid": "757f3df8-dc81-4c0e-a824-9b198a83f886",
+                    "seed": "2:28.75"
                 },
                 {
                     "name": "Cam Miller",
@@ -1208,7 +1237,8 @@
                     "pr": "2:31.92",
                     "points": "-",
                     "athlete_uid": "ddea1958-ab61-477b-9863-6350d3f0b6f0",
-                    "seed": "-"
+                    "seed": "2:31.92",
+                    "seed_uid": "90e9b4e7-0949-4d28-8085-e3ecb64a6e26"
                 },
                 {
                     "name": "Luke Treleven",
@@ -1227,7 +1257,8 @@
                     "pr": "2:10.87",
                     "points": "-",
                     "athlete_uid": "f3e6fc7e-fdc1-4f97-8094-e31b0dc49150",
-                    "seed": "-"
+                    "seed": "2:10.87",
+                    "seed_uid": "2161e279-bfd1-49b2-8c42-282a9312b2cc"
                 },
                 {
                     "name": "Oliver Su",
@@ -1254,7 +1285,8 @@
                     "pr": "34.85",
                     "points": "-",
                     "athlete_uid": "0b110f02-6f7d-4e40-9ae3-e29be4a3966a",
-                    "seed": "-"
+                    "seed": "34.85",
+                    "seed_uid": "f41521cf-75cf-4a66-b52e-63cfca6c316e"
                 },
                 {
                     "name": "Ella Pluzynski",
@@ -1275,7 +1307,8 @@
                     "pr": "35.28",
                     "points": "-",
                     "athlete_uid": "fec3d4b1-38fc-4431-b883-bd13af10eb2a",
-                    "seed": "-"
+                    "seed": "35.28",
+                    "seed_uid": "6eb77245-d85b-4ff6-9f4a-0757df0cd75b"
                 },
                 {
                     "name": "Saige Hageman",
@@ -1296,8 +1329,8 @@
                     "pr": "28.17",
                     "points": "-",
                     "athlete_uid": "133b1284-9a57-4011-b288-6871d6577ba9",
-                    "seed_uid": "6252f411-fb54-4da1-b03e-9d2f63a0fdda",
-                    "seed": "29.75"
+                    "seed_uid": "c3f12428-f314-4987-a73f-b9cdc7fc1ddd",
+                    "seed": "28.17"
                 },
                 {
                     "name": "Anna Johnson",
@@ -1333,7 +1366,8 @@
                     "pr": "25.93",
                     "points": "-",
                     "athlete_uid": "ce630329-8741-4fda-b877-abd2c4903264",
-                    "seed": "-"
+                    "seed": "25.93",
+                    "seed_uid": "09c40870-f272-4729-b120-4ac4d6c7adac"
                 },
                 {
                     "name": "Quinn Lewis",
@@ -1343,7 +1377,8 @@
                     "pr": "32.53",
                     "points": "-",
                     "athlete_uid": "58ca11a0-4fb8-490c-9031-283077724fd1",
-                    "seed": "-"
+                    "seed": "32.53",
+                    "seed_uid": "dac9d76c-1730-4e12-b2a9-7d8858ef6716"
                 },
                 {
                     "name": "Daniel Bonvillian",
@@ -1353,7 +1388,8 @@
                     "pr": "32.74",
                     "points": "-",
                     "athlete_uid": "bd5536c0-15aa-4e67-b04d-c01d93252e1a",
-                    "seed": "-"
+                    "seed": "31.9",
+                    "seed_uid": "0aacb696-3d4d-4c4e-a586-5b174fcebb9a"
                 },
                 {
                     "name": "Jett Jitboon",
@@ -1363,7 +1399,8 @@
                     "pr": "26.93",
                     "points": "-",
                     "athlete_uid": "809eb6af-82af-4cce-99b8-96bb7e781cad",
-                    "seed": "-"
+                    "seed": "26.93",
+                    "seed_uid": "482dd3bc-1dd4-4f7e-a5e0-e0ee02ed792c"
                 },
                 {
                     "name": "Dash Ecklund",
@@ -1373,8 +1410,8 @@
                     "pr": "26.22",
                     "points": "-",
                     "athlete_uid": "2f64820a-9425-4709-8bb4-78cf541fcb7f",
-                    "seed_uid": "01b3cb0f-4510-499b-aad9-a751b2aedc5b",
-                    "seed": "26.6"
+                    "seed_uid": "afa0dd5c-0c2a-4eeb-ba34-a3380a91a430",
+                    "seed": "26.22"
                 },
                 {
                     "name": "Orion Davis",
@@ -1384,8 +1421,8 @@
                     "pr": "26.39",
                     "points": "-",
                     "athlete_uid": "fece81f7-1845-4140-a2b5-a013a92aa735",
-                    "seed_uid": "6bf62c27-462d-40e0-b97d-140102926615",
-                    "seed": "28.67"
+                    "seed_uid": "88b15135-edbc-49a8-b690-e61c692497e2",
+                    "seed": "26.39"
                 },
                 {
                     "name": "Charlie Bonvillian",
@@ -1411,8 +1448,8 @@
                     "pr": "11:01.05",
                     "points": "-",
                     "athlete_uid": "0bc280ac-94de-4297-b180-6763146f418e",
-                    "seed_uid": "1f84c5e6-cdc6-40ae-8e5f-3477f3fd4e7c",
-                    "seed": "11:27.36"
+                    "seed_uid": "cb90cd8a-0d04-46cc-b030-ac6191baabf5",
+                    "seed": "11:01.05"
                 }
             ]
         },

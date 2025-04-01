@@ -279,6 +279,10 @@ CSV_STYLES = [
             height: 22px;
             padding: 0px 10px;
         """),
+        StyleTag(name='.col-width-button button, .col-width-button div', internal=f"""
+            margin: 0px;
+            padding 0px;
+        """),
 ]
 
 HOME_PAGE_STYLES = [

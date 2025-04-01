@@ -80,6 +80,7 @@ async def find_meet_html_page(meet):
         os.path.join('csv', 'updateMeetTable.js'),
         os.path.join('csv', 'populateCSV.js'),
         os.path.join('csv', 'createMeetUpdateBody.js'),
+        os.path.join('csv', 'rowManipulation.js'),
     ]
     if os.environ.get('LOGICAL_ENV') == 'DEV':
         js_files.append(os.path.join('csv', 'GETMeetCSVDEV.js'))
