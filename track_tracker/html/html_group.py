@@ -376,9 +376,14 @@ async def points_html_page(athletes_dict, meet_name_list):
         points_table.add_element(points_table_row)
 
     # Top Scorers
+    print(f"DISPLAY DETAILS LIST: {display_details_list}")
     for details in display_details_list:
         athlete_name = f"{details['first_name']} {details['last_name']}"
+        print(f"    DETAILS: {details}")
         for meet, points in details['points_dict'].items():
+            print(f"        MEETS: {meet}")
+            if not top_scorers[meet].get(details['gender']):
+                top_scorers[meet][details['gender']] = []
             if not top_scorers[meet][details['gender']]:
                 top_scorers[meet][details['gender']] = [(athlete_name, points)]
             else:
@@ -409,7 +414,7 @@ async def points_html_page(athletes_dict, meet_name_list):
     for athlete in display_details_list:
         athlete_name = f"{athlete['first_name']} {athlete['last_name']}"
         total_points = athlete['total_points']
-        if not total_top_scorer[athlete['gender']]:
+        if not total_top_scorer.get(athlete['gender']):
             total_top_scorer[athlete['gender']] = [(athlete_name, total_points)]
         else:
             if total_points == total_top_scorer[athlete['gender']][0][1]:
