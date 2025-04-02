@@ -1,16 +1,20 @@
-function createMeetInputItem(value, added_class) {
+function createMeetInputItem(value, added_div_class, added_input_class) {
     var input_div = document.createElement('div');
     var input = document.createElement('input');
     input.type = 'text';
     input.value = value;
     input.setAttribute('onchange', "runUpdate()");
-    input_div.className = added_class;
+    if (added_input_class) {
+        input.className = added_input_class;
+    }
+    if (added_div_class) {
+        input_div.className = added_div_class;
+    }
     input_div.appendChild(input);
     return input_div;
 }
 
 function createMeetDivItem(value, added_class) {
-    // console.log('Creating meet input item: ' + value);
     var input_div = document.createElement('div');
     var input = document.createElement('div');
     // input.type = 'text';
@@ -22,26 +26,54 @@ function createMeetDivItem(value, added_class) {
     return input_div;
 }
 
-function createMeetItem(value, input = true) {
+function createMeetItem(value, validation = null, input = true) {
+    if (!validation) {
+        validation = [];
+        for (var i = 0; i < value.length; i++) {
+            validation.push('SKIP');
+        }
+    }
     var item = document.createElement('div');
-    if (value.length === 1) {
-        item.className = 'meet-item';
-        for (var i = 0; i < value.length; i++) {
+    item.className = 'meet-item';
+    for (var i = 0; i < value.length; i++) {
+        if (validation[i] != null && validation[i] != 'SKIP') {
+            // Validated value
             if (input) {
-                item.appendChild(createMeetInputItem(value[i]), 'meet-item');
+                var val = createMeetInputItem(value[i], null, 'validated');
             } else {
-                item.appendChild(createMeetDivItem(value[i]), 'meet-item');
+                var val = createMeetDivItem(value[i], 'validated');
             }
-        }
-    } else {
-        item.className = 'meet-item';
-        for (var i = 0; i < value.length; i++) {
+            // val = val + ' ☑';
+        } else if (validation[i] == 'SKIP') {
+            // Generic header
             if (input) {
-                item.appendChild(createMeetInputItem(value[i]), 'meet-multiline-item');
+                var val = createMeetInputItem(value[i]);
             } else {
-                item.appendChild(createMeetDivItem(value[i]), 'meet-multiline-item');
+                var val = createMeetDivItem(value[i]);
             }
+        } else {
+            // Value that is not validated by the database
+            if (value[i] == '' || value[i] == null || value[i] == '-') {
+                if (input) {
+                    var val = createMeetInputItem(value[i]);
+                } else {
+                    var val = createMeetDivItem(value[i]);
+                }
+            } else {
+                if (input) {
+                    var val = createMeetInputItem(value[i], null, 'partially-validated');
+                } else {
+                    var val = createMeetDivItem(value[i], 'partially-validated');
+                }
+            }
+            // val = val + ' ☒';
         }
+        item.appendChild(val, 'meet-item');
+        // if (input) {
+        //     item.appendChild(val, 'meet-item');
+        // } else {
+        //     item.appendChild(val, 'meet-item');
+        // }
     }
     return item;
 }
@@ -75,8 +107,6 @@ function createMeetRowManipulation(value, buttonText, functionName, rowIndex) {
 
 
 function createMeetRow(event, index) {
-    // console.log('');
-    // console.log('Creating meet row');
     var table_row = document.createElement('div');
     table_row.className = 'meet-row';
 
@@ -91,7 +121,10 @@ function createMeetRow(event, index) {
     table_row.appendChild(event_item);
 
     // Athletes
-    var athlete_item = createMeetItem(event['athletes'].map(a => a['name']));
+    var athlete_item = createMeetItem(
+        event['athletes'].map(a => a['name']),
+        event['athletes'].map(a => a['athlete_uid'])
+    );
     athlete_item.classList.add('col-width-athlete');
     table_row.appendChild(athlete_item);
 
@@ -101,12 +134,18 @@ function createMeetRow(event, index) {
     table_row.appendChild(athlete_item);
 
     // Seed
-    var athlete_item = createMeetItem(event['athletes'].map(a => a['seed']));
+    var athlete_item = createMeetItem(
+        event['athletes'].map(a => a['seed']),
+        event['athletes'].map(a => a['seed_uid'])
+    );
     athlete_item.classList.add('col-width-seed');
     table_row.appendChild(athlete_item);
 
     // Time/Mark
-    var athlete_item = createMeetItem(event['athletes'].map(a => a['result']));
+    var athlete_item = createMeetItem(
+        event['athletes'].map(a => a['result']),
+        event['athletes'].map(a => a['result_uid'])
+    );
     athlete_item.classList.add('col-width-result');
     table_row.appendChild(athlete_item);
 
@@ -116,12 +155,12 @@ function createMeetRow(event, index) {
     table_row.appendChild(athlete_item);
 
     // New PR
-    var athlete_item = createMeetItem(event['athletes'].map(a => a['pr']), false);
+    var athlete_item = createMeetItem(event['athletes'].map(a => a['pr']), null, false);
     athlete_item.classList.add('col-width-pr');
     table_row.appendChild(athlete_item);
 
     // Points
-    var athlete_item = createMeetItem(event['athletes'].map(a => a['points']), false);
+    var athlete_item = createMeetItem(event['athletes'].map(a => a['points']), null, false);
     athlete_item.classList.add('col-width-points');
     table_row.appendChild(athlete_item);
 
@@ -176,7 +215,6 @@ async function updateMeetTable(meet_data) {
         console.log('Populating CSV');
 
         // DIV
-        // console.log('Clearing table...');
         var table_div = document.getElementById('meet-table');
         table_div.innerHTML = '';
 
@@ -192,7 +230,6 @@ async function updateMeetTable(meet_data) {
 
         // Data
         for (var i = 0; i < event_data.length; i++) {
-            // console.log(event_data[i]);
             row = createMeetRow(event_data[i], i);
             table_div.appendChild(row);
         }

@@ -30,6 +30,8 @@ class EventParser:
         return self.gender
 
     def parse_result(self, result_s: str):
+        if not result_s:
+            return None, None, None, None, None, None
         re_s = re.search(self.re_s, result_s)
         if re_s:
             minutes = seconds = subsecond = feet = inches = fractions = None
@@ -77,7 +79,7 @@ class EventParser:
                 fractions = float(f"0.{fractions}")
             return minutes, seconds, subsecond, feet, inches, fractions
         else:
-            return None
+            return None, None, None, None, None, None
 
     @classmethod
     def parse_event_result(cls, event_s: str, result_s: str):

@@ -107,6 +107,7 @@ def temp_function_compare_meet_data(local_meet_events, remote_meet_events, local
         local and remote have different athletes that conflict and remote needs to reset to local
         """
         # print('CHECKING FOR UPDATES')
+        remote_meet_events.pop(0)
 
         for index1, (local_event, remote_event) in enumerate(zip(local_meet_events, remote_meet_events)):
             if local_event['Event'] != remote_event['event'][0].strip():
@@ -133,7 +134,10 @@ def temp_function_compare_meet_data(local_meet_events, remote_meet_events, local
                     old = local_athlete['seed']
                     local_changed = True
                     local_athlete['result'] = remote_athlete.strip()
-                    pr, result_old, result_new = compare_results(local_event['Event'], old, local_athlete['result'])
+                    new = local_athlete['result']
+                    print(f"LOCAL EVENT: {local_event}")
+                    print(f"    OLD: {old}, NEW: {new}")
+                    pr, result_old, result_new = compare_results(local_event['Event'], old, new)
                     print(f"    THING: {pr, result_old, result_new}")
                     if pr:
                         local_athlete['pr'] = result_new.format
@@ -168,8 +172,10 @@ async def get_meet(meet: Meet):
     else:
         remote_file_last_update_datetime = None
     current_meet_events, remote_updates, local_changed, force_reload = temp_function_compare_meet_data(
-        local_meet_events=meet_file_data['events'], remote_meet_events=meet.events,
-        local_file_last_update_datetime=local_file_last_update_datetime, remote_file_last_update_datetime=remote_file_last_update_datetime)
+        local_meet_events=meet_file_data['events'],
+        remote_meet_events=meet.events,
+        local_file_last_update_datetime=local_file_last_update_datetime,
+        remote_file_last_update_datetime=remote_file_last_update_datetime)
 
 
     meet_data = meet_file_data['meet']
@@ -198,6 +204,9 @@ async def get_meet(meet: Meet):
             athlete['place'] = athlete.get('place', None)
             athlete['pr'] = athlete.get('pr', '-')
             athlete['points'] = athlete.get('points', '-')
+            athlete['athlete_uid'] = athlete.get('athlete_uid', None)
+            athlete['seed_uid'] = athlete.get('seed_uid', None)
+            athlete['result_uid'] = athlete.get('result_uid', None)
             seed = athlete.get('seed', '-')
 
             # Pull athlete data
@@ -262,14 +271,18 @@ async def get_meet(meet: Meet):
                                 f"Before{datetime.strftime(meet_date + timedelta(days=1), '%Y-%m-%d')}"
                                 ]
                         )
-                        print('')
-                        print('')
-                        print(f"RF_PR: {rf_pr.dict()}")
+                        # print('')
+                        # print('')
+                        # print(f"RF_PR: {rf_pr.dict()}")
                         results_pr = await rh.filter_results(rf_pr)
-                        print(f"RESULTS_PR: {results_pr}")
+                        # print(f"RESULTS_PR: {results_pr}")
                         if results_pr:
+                            # print(f"RESULTS_PR: {results_pr}")
                             for result_i in results_pr:
+                                # print(f"RESULT: {result_i}")
                                 athlete['result'] = result_i.result.format
+                                athlete['result_uid'] = result_i.uid
+                                athlete_or_result_pulled = True
                                 result = result_i.result.format
                     else:
                         continue

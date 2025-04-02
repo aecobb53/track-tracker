@@ -283,6 +283,13 @@ CSV_STYLES = [
             margin: 0px;
             padding 0px;
         """),
+
+        StyleTag(name='.validated', internal=f"""
+            background-color: #a5ffa5;
+        """),
+        StyleTag(name='.partially-validated', internal=f"""
+            background-color: yellow;
+        """),
 ]
 
 HOME_PAGE_STYLES = [

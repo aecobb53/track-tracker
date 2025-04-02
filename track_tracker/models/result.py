@@ -1,5 +1,6 @@
 from datetime import datetime, timezone, timedelta
 import json
+from operator import is_
 import re
 from typing import List, Dict, Any
 from sqlmodel import Field, SQLModel, JSON, ARRAY, String, Column, UniqueConstraint, select
@@ -25,6 +26,8 @@ class Result(BaseModel):
 
     @classmethod
     def parse_event_result(cls, event: str, result: str):
+        if not result:
+            result = ''
         minutes, seconds, subsecond, feet, inches, fractions = EventParser.parse_event_result(event_s=event, result_s=result)
         obj = cls(
             event_str=event,
@@ -159,7 +162,12 @@ class Result(BaseModel):
         return cls.parse_event_result(event=event, result=result)
 
     def __gt__(self, other):
+        # print(f"SELF: {self}")
+        # print(f"SELF IS NONE: {self.is_none}")
+        # print(f"OTHER: {other}")
+        # print(f"OTHER IS NONE: {other.is_none}")
         if self.seconds is not None and self.subsecond is not None and other.seconds is not None and other.subsecond is not None:
+            # Its a time
             self_time = [
                 self.minutes or 0,
                 self.seconds or 0,
@@ -179,6 +187,7 @@ class Result(BaseModel):
             else:
                 return False
         elif self.inches is not None and self.fractions is not None and other.inches is not None and other.fractions is not None:
+            # Its a distance
             self_distance = [
                 self.feet or 0,
                 self.inches or 0,
@@ -195,7 +204,37 @@ class Result(BaseModel):
                 return True
             else:
                 return False
+        # elif self.is_none and other.is_none:
+        #     print(f"SELF: {self}")
+        #     print(f"SELF IS NONE: {self.is_none}")
+        #     print(f"OTHER: {other}")
+        #     print(f"OTHER IS NONE: {other.is_none}")
+        #     print('BOTH ARE NONE')
+        #     return False
+        elif self.is_none and not other.is_none:
+            # print(f"SELF: {self}")
+            # print(f"SELF IS NONE: {self.is_none}")
+            # print(f"OTHER: {other}")
+            # print(f"OTHER IS NONE: {other.is_none}")
+            # print('SELF IS NONE')
+            return True
+        elif not self.is_none and other.is_none:
+            # print(f"SELF: {self}")
+            # print(f"SELF IS NONE: {self.is_none}")
+            # print(f"OTHER: {other}")
+            # print(f"OTHER IS NONE: {other.is_none}")
+            # print('OTHER IS NONE')
+            return False
+        # elif self.is_none:
+        #     print('SELF IS NONE')
+        #     if other.is_none:
+        #         print('OTHER IS ALSO NONE')
+        #         return False
+        #     else:
+        #         print('OTHER IS NOT NONE')
+        #         return True
         else:
+            print('Invalid Result dumping comparison')
             print(f"event_str: {self.event_str}, {other.event_str}")
             print(f"result_str: {self.result_str}, {other.result_str}")
             print(f"minutes: {self.minutes}, {other.minutes}")
