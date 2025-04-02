@@ -379,7 +379,7 @@ async def points_html_page(athletes_dict, meet_name_list):
     for details in display_details_list:
         athlete_name = f"{details['first_name']} {details['last_name']}"
         for meet, points in details['points_dict'].items():
-            if not top_scorers[meet][details['gender']]:
+            if not top_scorers[meet].get(details['gender']):
                 top_scorers[meet][details['gender']] = [(athlete_name, points)]
             else:
                 # print(f"{athlete_name} {points} {top_scorers[meet][details['gender']]}")
@@ -409,7 +409,7 @@ async def points_html_page(athletes_dict, meet_name_list):
     for athlete in display_details_list:
         athlete_name = f"{athlete['first_name']} {athlete['last_name']}"
         total_points = athlete['total_points']
-        if not total_top_scorer[athlete['gender']]:
+        if not total_top_scorer.get(athlete['gender']):
             total_top_scorer[athlete['gender']] = [(athlete_name, total_points)]
         else:
             if total_points == total_top_scorer[athlete['gender']][0][1]:
