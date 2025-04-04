@@ -1,1609 +1,686 @@
 {
     "meet": {
-        "meet_name": "BHS CHS FHS MHS",
-        "date": "2025-03-12",
-        "small_meet": true,
-        "last_updated": "2025-04-02 18:34:53"
+        "meet_name": "Niwot",
+        "date": "2025-03-29",
+        "small_meet": false,
+        "last_updated": "2025-04-03 15:26:51"
     },
     "events": [
         {
-            "Event": "Girls Pole Vault",
-            "Event Time": "2:00pm",
-            "athletes": [
-                {
-                    "name": "Ella Pluzynski",
-                    "Heat/Lane/Flight": "Flight 1 Vaulter 1",
-                    "result": "7-01.0",
-                    "place": null,
-                    "pr": "7-01.0",
-                    "points": "-",
-                    "athlete_uid": "14adb04f-46cd-4480-8846-0d33fc543701",
-                    "seed": "-",
-                    "seed_uid": null,
-                    "result_uid": "a69319b4-ef46-4a55-8089-91f0e68fc30c"
-                },
-                {
-                    "name": "Amelia Harriman",
-                    "Heat/Lane/Flight": "Flight 1 Vaulter 2",
-                    "result": null,
-                    "place": null,
-                    "pr": "-",
-                    "points": "-",
-                    "athlete_uid": "fbbe4500-f459-444f-b70a-341cb54b0900",
-                    "seed": "-",
-                    "seed_uid": null,
-                    "result_uid": null
-                },
-                {
-                    "name": "Irene McCalmon",
-                    "Heat/Lane/Flight": "Flight 1 Vaulter 11",
-                    "result": "9-01.0",
-                    "place": null,
-                    "pr": "9-01.0",
-                    "points": "-",
-                    "athlete_uid": "372cd22d-b29e-44ee-ae1c-f10b91389c38",
-                    "seed_uid": "16ae9076-f51f-4307-b2f5-09aedbac639c",
-                    "seed": "9-00.0",
-                    "result_uid": "3b96e3a3-46dd-42d4-a5ae-44495e2948a5"
-                }
-            ]
-        },
-        {
-            "Event": "Boys High Jump",
-            "Event Time": "2:00pm",
-            "athletes": [
-                {
-                    "name": "Orion Davis",
-                    "Heat/Lane/Flight": "Flight 1 Jumper 11",
-                    "result": "5-02.0",
-                    "place": null,
-                    "pr": "5-02.0",
-                    "points": "-",
-                    "athlete_uid": "fece81f7-1845-4140-a2b5-a013a92aa735",
-                    "seed_uid": "34479c0a-49b3-415b-96bd-613aae454a37",
-                    "seed": "4-08.0",
-                    "result_uid": "f3db7af0-831e-4c99-b980-15fd1a3981e0"
-                },
-                {
-                    "name": "Anthony Giliberti",
-                    "Heat/Lane/Flight": "Flight 1 Jumper 12",
-                    "result": "5-00.0",
-                    "place": null,
-                    "pr": "-",
-                    "points": "-",
-                    "athlete_uid": "e0877623-43a1-4ae7-accb-df5da6d1343d",
-                    "seed_uid": "f2cbd14e-52c3-42a5-bdb4-32cebd783fea",
-                    "seed": "5-02.0",
-                    "result_uid": "8638857a-b9f9-4946-ba46-29f97ecd680b"
-                },
-                {
-                    "name": "Max Webb",
-                    "Heat/Lane/Flight": "Flight 1 Jumper 16",
-                    "result": "5-06.0",
-                    "place": null,
-                    "pr": "-",
-                    "points": "-",
-                    "athlete_uid": "184532d4-8e4b-4937-af18-0e044c713e24",
-                    "seed_uid": "71d4f89b-601a-4cc3-a641-93f4259b6fd6",
-                    "seed": "5-06.0",
-                    "result_uid": "9f88ac42-2e9c-4eb3-99ee-916888135c38"
-                }
-            ]
-        },
-        {
-            "Event": "Girls Long Jump",
-            "Event Time": "2:00pm",
-            "athletes": [
-                {
-                    "name": "Brigitte Schmid",
-                    "Heat/Lane/Flight": "Flight 2 Jumper 5",
-                    "result": "11-02.0",
-                    "place": null,
-                    "pr": "-",
-                    "points": "-",
-                    "athlete_uid": "f74a0663-3975-4e3d-8807-d8d269d765db",
-                    "seed_uid": "cb5cd1ed-64c3-47ff-a4b2-c1955a1c1702",
-                    "seed": "13-02.0",
-                    "result_uid": "3b422d42-3617-4f90-a657-7abf5f0c6504"
-                }
-            ]
-        },
-        {
-            "Event": "Boys Long Jump",
-            "Event Time": "2:00pm",
-            "athletes": [
-                {
-                    "name": "Zane Copeland",
-                    "Heat/Lane/Flight": "Flight 2 Jumper 2",
-                    "result": "17-00.0",
-                    "place": null,
-                    "pr": "17-00.0",
-                    "points": "-",
-                    "athlete_uid": "06940551-8448-4dc2-890c-c7ce3e22b616",
-                    "seed_uid": "c50eb0f3-6ffc-425c-bd1e-8c47eb088b8a",
-                    "seed": "15-03.5",
-                    "result_uid": "63334dfd-0fd2-446f-91dd-d578d4a788a5"
-                },
-                {
-                    "name": "Henry Duckham",
-                    "Heat/Lane/Flight": "Flight 2 Jumper 6",
-                    "result": "15-09.5",
-                    "place": null,
-                    "pr": "-",
-                    "points": "-",
-                    "athlete_uid": "a5ae8c53-63fb-467c-aae5-fbd76962014a",
-                    "seed_uid": "a98d2fd6-97de-46c6-91ce-0c8ef4d82017",
-                    "seed": "16-02.0",
-                    "result_uid": "86ca7eaf-d9c0-4e89-9f5e-8d6bb22a17ec"
-                },
-                {
-                    "name": "Jaxson Cooper",
-                    "Heat/Lane/Flight": "Flight 2 Jumper 8",
-                    "result": "16-09.0",
-                    "place": null,
-                    "pr": "16-09.0",
-                    "points": "-",
-                    "athlete_uid": "3da9d021-03a0-4068-94c7-b31c04479791",
-                    "seed_uid": "28f9b6d0-ef1c-4a84-93fa-840d48d74fa8",
-                    "seed": "16-05.0",
-                    "result_uid": "35386efb-0755-4f18-816b-3fbc9179862c"
-                },
-                {
-                    "name": "Santiago Caravia-Perry",
-                    "Heat/Lane/Flight": "Flight 3 Jumper 1",
-                    "result": "16-06.0",
-                    "place": null,
-                    "pr": "-",
-                    "points": "-",
-                    "athlete_uid": "7f2531a6-cd77-43ea-bdce-e5a739cc85b3",
-                    "seed_uid": "0f9bae23-cc97-4c02-8fb7-cc00eb817de7",
-                    "seed": "17-01.5",
-                    "result_uid": "09116342-96ae-4a96-bf18-c7a237bdf827"
-                },
-                {
-                    "name": "Caleb Cooper",
-                    "Heat/Lane/Flight": "Flight 3 Jumper 2",
-                    "result": "19-02.0",
-                    "place": null,
-                    "pr": "19-02.0",
-                    "points": "-",
-                    "athlete_uid": "8401c48c-752e-44f7-9c14-47fbb4318608",
-                    "seed_uid": "a24ffca2-c158-4567-b8f3-0afea802dc36",
-                    "seed": "17-03.0",
-                    "result_uid": "66ec03bb-7fb6-4b6b-8dc6-a790e4092fe7"
-                }
-            ]
-        },
-        {
-            "Event": "Boys Shot Put",
-            "Event Time": "2:00pm",
-            "athletes": [
-                {
-                    "name": "Marek Dorris",
-                    "Heat/Lane/Flight": "Flight 1 Thrower 1",
-                    "result": "23-10.0",
-                    "place": null,
-                    "pr": "23-10.0",
-                    "points": "-",
-                    "athlete_uid": "f05a0622-1111-4383-8b25-3c16dc807df2",
-                    "seed": "-",
-                    "seed_uid": null,
-                    "result_uid": "1e4dfec0-e4c7-49e9-bd21-5f9e6d3156c1"
-                },
-                {
-                    "name": "Colin Overy",
-                    "Heat/Lane/Flight": "Flight 1 Thrower 4",
-                    "result": "33-11.5",
-                    "place": null,
-                    "pr": "33-11.5",
-                    "points": "-",
-                    "athlete_uid": "6e14d1b6-1f62-46a2-8bfd-eb6ec1f4bb8c",
-                    "seed": "-",
-                    "seed_uid": null,
-                    "result_uid": "1683e6e7-0d97-4c1a-8240-b99c12cdf719"
-                },
-                {
-                    "name": "Zane Copeland",
-                    "Heat/Lane/Flight": "Flight 1 Thrower 8",
-                    "result": "29-00.75",
-                    "place": null,
-                    "pr": "29-00.75",
-                    "points": "-",
-                    "athlete_uid": "06940551-8448-4dc2-890c-c7ce3e22b616",
-                    "seed_uid": "9dfeefdf-28c5-4319-b7c4-fb0c88f5f550",
-                    "seed": "25-03.0",
-                    "result_uid": "665c5ab5-4174-4beb-b7c7-8bd627e38f3a"
-                },
-                {
-                    "name": "Jace Pollock",
-                    "Heat/Lane/Flight": "Flight 1 Thrower 9",
-                    "result": "27-05.75",
-                    "place": null,
-                    "pr": "27-05.75",
-                    "points": "-",
-                    "athlete_uid": "cd196f28-9c40-47bf-b0ee-ed2d53a00783",
-                    "seed_uid": "4e6eafe9-5f6f-46c9-af30-4c9b3b273753",
-                    "seed": "26-04.5",
-                    "result_uid": "810777f2-3150-4306-98d6-2d3a4fc89982"
-                },
-                {
-                    "name": "Kaylor Huang",
-                    "Heat/Lane/Flight": "Flight 1 Thrower 10",
-                    "result": "29-02.5",
-                    "place": null,
-                    "pr": "29-02.5",
-                    "points": "-",
-                    "athlete_uid": "8eabf968-ec89-457b-9052-d00195596133",
-                    "seed_uid": "9d2b7ded-14c7-4d91-89fa-25b75dfcbc92",
-                    "seed": "27-11.5",
-                    "result_uid": "74fd5ddd-8e21-400c-996d-c7690510bf66"
-                },
-                {
-                    "name": "Keeghan Field-Gordon",
-                    "Heat/Lane/Flight": "Flight 2 Thrower 8",
-                    "result": "36-08.25",
-                    "place": null,
-                    "pr": "-",
-                    "points": "-",
-                    "athlete_uid": "629eb267-d008-4e50-9e9f-3ddbcc9da4f5",
-                    "seed_uid": "92f04d0a-8d2c-4fff-b27a-048ebb4d851a",
-                    "seed": "38-02.0",
-                    "result_uid": "ef011c6f-9fb3-4514-bb26-734dcaef66fe"
-                }
-            ]
-        },
-        {
+            "Event Time": "9:00am",
             "Event": "Girls Discus",
-            "Event Time": "2:00pm",
             "athletes": [
                 {
                     "name": "Amelia Clasby",
-                    "Heat/Lane/Flight": "Flight 1 Thrower 4",
-                    "result": "65-05.0",
+                    "Heat/Lane/Flight": "Flight 1, Thrower 13",
+                    "result": "63-02.0",
                     "place": null,
                     "pr": "-",
                     "points": "-",
                     "athlete_uid": "5e65dd4f-8362-48fd-9152-78edde0061e5",
-                    "seed_uid": "81d721b8-3b20-4e32-bd9c-8caf1a2a7cc3",
-                    "seed": "69-10.0",
-                    "result_uid": "a860cf53-bf88-40ca-a7cf-9aaf37edbaff"
+                    "seed_uid": "100521c0-9114-4daa-a7f8-e0c9efc73c66",
+                    "result_uid": "8a060273-337e-46e3-96ef-1c3cc5a06e80",
+                    "seed": "72-09.0"
                 }
             ]
         },
         {
-            "Event": "Boys Pole Vault",
-            "Event Time": "4:00pm",
+            "Event Time": "9:00am",
+            "Event": "Girls Long Jump",
             "athletes": [
                 {
-                    "name": "Koji Dennis",
-                    "Heat/Lane/Flight": "Flight 1 Vaulter 7",
-                    "result": null,
+                    "name": "Saige Hageman",
+                    "Heat/Lane/Flight": "Flight 1, Jumper 11",
+                    "result": "12-02.25",
                     "place": null,
-                    "pr": "-",
+                    "pr": "12-02.25",
                     "points": "-",
-                    "athlete_uid": "cb07406f-89fa-4add-a828-eb4bf42f593e",
-                    "seed_uid": "10ed406d-1059-4689-bf05-7068f6234707",
-                    "seed": "9-00.0",
-                    "result_uid": null
-                },
-                {
-                    "name": "Keiran Meier",
-                    "Heat/Lane/Flight": "Flight 1 Vaulter 9",
-                    "result": null,
-                    "place": null,
-                    "pr": "-",
-                    "points": "-",
-                    "seed": "-",
-                    "athlete_uid": null,
-                    "seed_uid": null,
-                    "result_uid": null
+                    "athlete_uid": "6f853483-f6a0-494a-81f6-87a307b7faa7",
+                    "seed_uid": "6cd44e05-23f9-4393-8089-2dc910333cbd",
+                    "result_uid": "8b1f334d-d62f-49ec-83ac-1ebcf32a5d41",
+                    "seed": "12-02.0"
                 }
             ]
         },
         {
+            "Event Time": "9:00am",
+            "Event": "Boys Long Jump",
+            "athletes": [
+                {
+                    "name": "Caleb Cooper",
+                    "Heat/Lane/Flight": "Flight 4, Jumper 3",
+                    "result": "18-03.0",
+                    "place": null,
+                    "pr": "-",
+                    "points": "-",
+                    "athlete_uid": "8401c48c-752e-44f7-9c14-47fbb4318608",
+                    "seed_uid": "66ec03bb-7fb6-4b6b-8dc6-a790e4092fe7",
+                    "result_uid": "a2ede482-9a02-403f-b9f7-0e1585297798",
+                    "seed": "19-02.0"
+                },
+                {
+                    "name": "Jaxson Cooper",
+                    "Heat/Lane/Flight": "Flight 1, Jumper 15",
+                    "result": "17-00.5",
+                    "place": null,
+                    "pr": "17-00.5",
+                    "points": "-",
+                    "athlete_uid": "3da9d021-03a0-4068-94c7-b31c04479791",
+                    "seed_uid": "35386efb-0755-4f18-816b-3fbc9179862c",
+                    "result_uid": "6e1d2e52-a5b5-409b-bf16-6f0ed04af978",
+                    "seed": "16-09.0"
+                },
+                {
+                    "name": "Addis Redwine",
+                    "Heat/Lane/Flight": "Flight 1, Jumper 11",
+                    "result": "16-02.5",
+                    "place": null,
+                    "pr": "-",
+                    "points": "-",
+                    "athlete_uid": "3b220fc7-8281-4b6b-b264-aef3e0a7636d",
+                    "seed_uid": "cd79b77a-afa8-47d6-89ec-82588c11796e",
+                    "result_uid": "6085784d-8e78-419e-bce7-c78733f32445",
+                    "seed": "16-04.5"
+                }
+            ]
+        },
+        {
+            "Event Time": "9:00am",
             "Event": "Girls High Jump",
-            "Event Time": "4:00pm",
             "athletes": [
-                {
-                    "name": "Evelyn Kear",
-                    "Heat/Lane/Flight": "Flight 1 Jumper 7",
-                    "result": "4-10.0",
-                    "place": null,
-                    "pr": "-",
-                    "points": "-",
-                    "athlete_uid": "085f91e8-c212-47e2-baf9-bbdf7b3eb085",
-                    "seed_uid": "a6ad6e5d-26ee-4d8c-aaeb-fbd322e43268",
-                    "seed": "4-10.0",
-                    "result_uid": "84ca59b3-72f9-48fe-b5b0-fca7c905bc12"
-                },
                 {
                     "name": "Amelia Clasby",
-                    "Heat/Lane/Flight": "Flight 1 Jumper 8",
-                    "result": null,
+                    "Heat/Lane/Flight": "Flight 1, Jumper 28",
+                    "result": "4-08.0",
                     "place": null,
                     "pr": "-",
                     "points": "-",
                     "athlete_uid": "5e65dd4f-8362-48fd-9152-78edde0061e5",
                     "seed_uid": "1936023c-382b-488f-b867-2f7b96991217",
-                    "seed": "4-10.5",
-                    "result_uid": null
-                },
-                {
-                    "name": "Julia Savage",
-                    "Heat/Lane/Flight": "Flight 1 Jumper 9",
-                    "result": "4-10.0",
-                    "place": null,
-                    "pr": "-",
-                    "points": "-",
-                    "athlete_uid": "40030c69-bb7a-410c-9746-381e3f8551fe",
-                    "seed_uid": "86f96d41-00de-48fb-aad3-0d7622926db4",
-                    "seed": "5-00.0",
-                    "result_uid": "c6294283-7338-4b67-8020-48689f079193"
+                    "result_uid": "d4c60d45-4754-4bfc-b6c8-c03cadc4ecfb",
+                    "seed": "4-10.5"
                 }
             ]
         },
         {
-            "Event": "Boys Triple Jump",
-            "Event Time": "4:00pm",
+            "Event Time": "10:30am",
+            "Event": "Boys Discus",
             "athletes": [
                 {
-                    "name": "Jaxson Cooper",
-                    "Heat/Lane/Flight": "Flight 1 Jumper 5",
-                    "result": "34-08.0",
-                    "place": null,
-                    "pr": "34-08.0",
-                    "points": "-",
-                    "athlete_uid": "3da9d021-03a0-4068-94c7-b31c04479791",
-                    "seed_uid": "48caf00b-3e83-4497-8f24-3812e7088897",
-                    "seed": "33-05.5",
-                    "result_uid": "6a0ec7a4-c7d4-4815-b689-bacc28377739"
-                },
-                {
-                    "name": "Zane Copeland",
-                    "Heat/Lane/Flight": "Flight 1 Jumper 7",
+                    "name": "Kaylor Huang",
+                    "Heat/Lane/Flight": "Flight 1, Thrower 5",
                     "result": null,
                     "place": null,
                     "pr": "-",
                     "points": "-",
-                    "athlete_uid": "06940551-8448-4dc2-890c-c7ce3e22b616",
-                    "seed_uid": "6b38cb52-72f8-4158-b11d-dd23638886a2",
-                    "seed": "34-10.5",
-                    "result_uid": null
+                    "athlete_uid": "8eabf968-ec89-457b-9052-d00195596133",
+                    "seed_uid": "ec0ce62b-d855-4c1a-922b-fd992c0eea76",
+                    "result_uid": null,
+                    "seed": "82-01.0"
                 },
                 {
+                    "name": "Jace Pollock",
+                    "Heat/Lane/Flight": "Flight 2, Thrower 16",
+                    "result": "113-09.0",
+                    "place": null,
+                    "pr": "113-09.0",
+                    "points": "-",
+                    "athlete_uid": "cd196f28-9c40-47bf-b0ee-ed2d53a00783",
+                    "seed_uid": "59bd9152-a8df-4876-86bd-75233c5ec407",
+                    "result_uid": "b4cdcaa2-d076-4fd9-9377-80abd140861f",
+                    "seed": "101-08.0"
+                }
+            ]
+        },
+        {
+            "Event Time": "1:00pm",
+            "Event": "Boys Triple Jump",
+            "athletes": [
+                {
                     "name": "Caleb Cooper",
-                    "Heat/Lane/Flight": "Flight 1 Jumper 11",
-                    "result": "37-03.5",
+                    "Heat/Lane/Flight": "Flight 2, Jumper 6",
+                    "result": "36-07.5",
                     "place": null,
                     "pr": "-",
                     "points": "-",
                     "athlete_uid": "8401c48c-752e-44f7-9c14-47fbb4318608",
                     "seed_uid": "5b35047f-2436-472f-830a-4646bb4598b1",
-                    "seed": "37-04.0",
-                    "result_uid": "7757f6b2-d150-4433-abda-ce82efe13e79"
+                    "result_uid": "35a7a6f9-4deb-4282-a157-36161d114e50",
+                    "seed": "37-04.0"
+                },
+                {
+                    "name": "Jaxson Cooper",
+                    "Heat/Lane/Flight": "Flight 1, Jumper 7",
+                    "result": "34-01.0",
+                    "place": null,
+                    "pr": "-",
+                    "points": "-",
+                    "athlete_uid": "3da9d021-03a0-4068-94c7-b31c04479791",
+                    "seed_uid": "6a0ec7a4-c7d4-4815-b689-bacc28377739",
+                    "result_uid": "be194ce6-f786-46ac-9172-0349bf87bdd8",
+                    "seed": "34-08.0"
                 }
             ]
         },
         {
-            "Event": "Boys Discus",
-            "Event Time": "4:00pm",
+            "Event Time": "1:00pm",
+            "Event": "Girls Pole Vault",
             "athletes": [
                 {
-                    "name": "Colin Overy",
-                    "Heat/Lane/Flight": "Flight 1 Thrower 1",
-                    "result": "66-03.0",
+                    "name": "Irene McCalmon",
+                    "Heat/Lane/Flight": "Flight 1, Vaulter 14",
+                    "result": "9-06.0",
                     "place": null,
-                    "pr": "66-03.0",
+                    "pr": "9-06.0",
                     "points": "-",
-                    "athlete_uid": "6e14d1b6-1f62-46a2-8bfd-eb6ec1f4bb8c",
-                    "seed": "-",
-                    "seed_uid": null,
-                    "result_uid": "a1952b3f-2521-43d1-9cb1-5afe2dda5b2e"
-                },
+                    "athlete_uid": "372cd22d-b29e-44ee-ae1c-f10b91389c38",
+                    "seed_uid": "3b96e3a3-46dd-42d4-a5ae-44495e2948a5",
+                    "result_uid": "3aa5dde6-53ff-4492-8ad0-af0567bae3a3",
+                    "seed": "9-01.0"
+                }
+            ]
+        },
+        {
+            "Event Time": "2:30pm",
+            "Event": "Boys Shot Put",
+            "athletes": [
                 {
-                    "name": "Marek Dorris",
-                    "Heat/Lane/Flight": "Flight 1 Thrower 4",
-                    "result": "64-01.0",
+                    "name": "Zane Copeland",
+                    "Heat/Lane/Flight": "Flight 1, Thrower 2",
+                    "result": "33-06.5",
                     "place": null,
-                    "pr": "64-01.0",
+                    "pr": "33-06.5",
                     "points": "-",
-                    "athlete_uid": "f05a0622-1111-4383-8b25-3c16dc807df2",
-                    "seed_uid": "48b9866d-8786-4934-bb74-eda4a4ee4f30",
-                    "seed": "48-09.0",
-                    "result_uid": "c5bd467d-1914-4260-830e-7e1ea1c5dc9c"
+                    "athlete_uid": "06940551-8448-4dc2-890c-c7ce3e22b616",
+                    "seed_uid": "9643a294-5aa0-4c4f-82df-18e4ae3708e4",
+                    "result_uid": "bed8f506-eca7-42fd-9505-dcf57c27591e",
+                    "seed": "29-04.5"
                 },
                 {
                     "name": "Kaylor Huang",
-                    "Heat/Lane/Flight": "Flight 1 Thrower 6",
-                    "result": "82-01.0",
+                    "Heat/Lane/Flight": "Flight 1, Thrower 12",
+                    "result": null,
                     "place": null,
-                    "pr": "82-01.0",
+                    "pr": "-",
                     "points": "-",
                     "athlete_uid": "8eabf968-ec89-457b-9052-d00195596133",
-                    "seed_uid": "9c1e5561-be18-4f12-9b38-60b82eb89cee",
-                    "seed": "72-08.5",
-                    "result_uid": "ec0ce62b-d855-4c1a-922b-fd992c0eea76"
-                },
-                {
-                    "name": "Jace Pollock",
-                    "Heat/Lane/Flight": "Flight 2 Thrower 2",
-                    "result": "101-08.0",
-                    "place": null,
-                    "pr": "101-08.0",
-                    "points": "-",
-                    "athlete_uid": "cd196f28-9c40-47bf-b0ee-ed2d53a00783",
-                    "seed_uid": "45cb2251-8e7e-4072-88b6-32778fedc37d",
-                    "seed": "89-04.0",
-                    "result_uid": "59bd9152-a8df-4876-86bd-75233c5ec407"
+                    "seed_uid": "2039ae32-863f-463a-a779-05d0a9676a64",
+                    "result_uid": null,
+                    "seed": "33-03.5"
                 }
             ]
         },
         {
-            "Event": "Girls 4x800m relay",
-            "Event Time": "2:30pm",
-            "relay": true,
-            "teams": [
-                {
-                    "name": "Team A:",
-                    "Heat/Lane/Flight": "Heat 1 Lane 4",
-                    "athletes": [
-                        "Katja Brown",
-                        "Emma Weber",
-                        "Coco Glebe",
-                        "Cameron LaFrazza-Schwartz"
-                    ]
-                },
-                {
-                    "name": "Team B:",
-                    "Heat/Lane/Flight": "Heat 1 Lane 5",
-                    "athletes": [
-                        "Cam Miller",
-                        "Colin Eisner",
-                        "Arran Machado-Kelvie",
-                        "Lucas Jaramillo-Ortman"
-                    ]
-                }
-            ]
-        },
-        {
-            "Event": "Boys 4x800m relay",
-            "Event Time": "2:45pm",
-            "relay": true,
-            "teams": [
-                {
-                    "name": "Team A:",
-                    "Heat/Lane/Flight": "Heat 1 Lane 4",
-                    "athletes": []
-                },
-                {
-                    "name": "Team B:",
-                    "Heat/Lane/Flight": "Heat 1 Lane 5",
-                    "athletes": []
-                }
-            ]
-        },
-        {
-            "Event": "Girls 100m Hurdles",
-            "Event Time": "2:55pm",
+            "Event Time": "9:00am",
+            "Event": "Girls 3200m",
             "athletes": [
                 {
-                    "name": "Isabella Dibiase",
-                    "Heat/Lane/Flight": "Heat 1 Lane 1",
-                    "result": "23.07",
+                    "name": "Sierra Wall",
+                    "Heat/Lane/Flight": "Heat 2, Runner 14",
+                    "result": "11:11.21",
                     "place": null,
-                    "pr": "23.07",
+                    "pr": "11:11.21",
                     "points": "-",
-                    "athlete_uid": "d40e84a3-e8d8-432a-a882-094fc90a452d",
-                    "seed": "-",
-                    "seed_uid": null,
-                    "result_uid": "a20086c8-613c-485b-86f6-f702303eaeed"
+                    "athlete_uid": "2f87d4f5-96b3-42c0-8593-44b07bf9667c",
+                    "seed_uid": "e856cc77-9bfb-4168-8e51-3f3079774a36",
+                    "result_uid": "6baf33fc-d249-418d-b79d-59b696c3c3bc",
+                    "seed": "11:17.28"
                 },
                 {
-                    "name": "Elise Roehrich",
-                    "Heat/Lane/Flight": "Heat 1 Lane 3",
-                    "result": "20.56",
+                    "name": "Molly Weber",
+                    "Heat/Lane/Flight": "Heat 2, Runner 15",
+                    "result": "11:39.32",
                     "place": null,
-                    "pr": "20.56",
+                    "pr": "-",
                     "points": "-",
-                    "athlete_uid": "ba7b68d6-713a-4f24-a810-ef7f561946d5",
-                    "seed": "-",
-                    "seed_uid": null,
-                    "result_uid": "7293c8b4-7575-42cc-b215-56b24f23124f"
+                    "athlete_uid": "a8335588-f2d9-4944-8d42-bf59f72df4de",
+                    "seed_uid": "2578dd26-69be-467e-9952-4f98c854fad8",
+                    "result_uid": "c95f611f-2542-42d0-8b15-0f49c13ad1cf",
+                    "seed": "11:21.5"
                 },
                 {
-                    "name": "Kylie Duart",
-                    "Heat/Lane/Flight": "Heat 1 Lane 5",
-                    "result": "22.25",
-                    "place": null,
-                    "pr": "22.25",
-                    "points": "-",
-                    "athlete_uid": "9a80bc90-26fa-4a57-b5b4-faaada40e4ad",
-                    "seed_uid": "cdc59064-bbe4-43f3-8ab9-f680c7380dc3",
-                    "seed": "23.13",
-                    "result_uid": "4795576c-80f1-4049-ba1b-6026aa1a04cd"
-                },
-                {
-                    "name": "Kate Mccall",
-                    "Heat/Lane/Flight": "Heat 2 Lane 1",
-                    "result": "20.86",
-                    "place": null,
-                    "pr": "20.86",
-                    "points": "-",
-                    "athlete_uid": "a40f7b42-0293-406f-803f-bca8f9fefe73",
-                    "seed_uid": "e5d3b21b-7b06-42eb-96df-1f9641e5eda0",
-                    "seed": "20.97",
-                    "result_uid": "2563fbfa-0c3a-475b-88f8-2bffd442490e"
-                }
-            ]
-        },
-        {
-            "Event": "Boys 110m Hurdles",
-            "Event Time": "3:05pm",
-            "athletes": [
-                {
-                    "name": "Caden Rozic",
-                    "Heat/Lane/Flight": "Heat 1 Lane 3",
-                    "result": "21.73",
-                    "place": null,
-                    "pr": "21.73",
-                    "points": "-",
-                    "athlete_uid": "f2614037-c754-4d94-9c86-e07e63e71e25",
-                    "seed": "-",
-                    "seed_uid": null,
-                    "result_uid": "d58bf6ae-5499-4a75-93bb-b64e0ccbd8d1"
-                },
-                {
-                    "name": "Zephry Middleton",
-                    "Heat/Lane/Flight": "Heat 1 Lane 5",
+                    "name": "Laurel Brain",
+                    "Heat/Lane/Flight": "Heat 2, Runner 27",
                     "result": null,
                     "place": null,
                     "pr": "-",
                     "points": "-",
-                    "seed": "-",
-                    "athlete_uid": null,
-                    "seed_uid": null,
-                    "result_uid": null
+                    "athlete_uid": "a0167969-54e7-49db-8c32-bfd17b367049",
+                    "seed_uid": "3eae9792-faa5-4cb2-9acd-07727b8ba3c7",
+                    "result_uid": null,
+                    "seed": "13:25.57"
                 }
             ]
         },
         {
+            "Event Time": "9:30am",
+            "Event": "Boys 3200m",
+            "athletes": [
+                {
+                    "name": "Ewan Kenny",
+                    "Heat/Lane/Flight": "Heat 3, Runner 26",
+                    "result": "10:09.18",
+                    "place": null,
+                    "pr": "10:09.18",
+                    "points": "-",
+                    "athlete_uid": "1e1f67ab-a1d3-4465-8edf-3a5d2da6bd8c",
+                    "seed_uid": "a32b22c7-2049-4e99-896d-260c875e826c",
+                    "result_uid": "1f360b98-4568-4a23-ad98-bea243d3f005",
+                    "seed": "10:37.15"
+                },
+                {
+                    "name": "Oliver Su",
+                    "Heat/Lane/Flight": "Heat 2, Runner 5",
+                    "result": "10:21.68",
+                    "place": null,
+                    "pr": "10:21.68",
+                    "points": "-",
+                    "athlete_uid": "6b2770d6-2a15-48e4-b85b-5ea7fc37f183",
+                    "seed_uid": null,
+                    "result_uid": "9398eb2c-925b-4456-965d-8efddb9e5f4d",
+                    "seed": "-"
+                },
+                {
+                    "name": "Dario Barnes",
+                    "Heat/Lane/Flight": "Heat 2, Runner 9",
+                    "result": "10:52.09",
+                    "place": null,
+                    "pr": "10:52.09",
+                    "points": "-",
+                    "athlete_uid": "9bd78ad4-f989-4f05-a2d5-2e602111e7d6",
+                    "seed_uid": "364367c3-2c81-460b-bf56-2332b8319eb4",
+                    "result_uid": "66589994-4aa5-4a5d-960d-3b99a2585ced",
+                    "seed": "11:26.48"
+                }
+            ]
+        },
+        {
+            "Event Time": "10:55am",
+            "Event": "Boys 110 Hurdles",
+            "athletes": [
+                {
+                    "name": "Zephyr Middleton",
+                    "Heat/Lane/Flight": "Heat 2, Lane 1",
+                    "result": null,
+                    "place": null,
+                    "pr": "-",
+                    "points": "-",
+                    "athlete_uid": "66153280-f001-4dac-8f4a-3f539b89eb09",
+                    "seed_uid": null,
+                    "result_uid": null,
+                    "seed": "-"
+                }
+            ]
+        },
+        {
+            "Event Time": "11:15am",
             "Event": "Girls 100m",
-            "Event Time": "3:15pm",
             "athletes": [
-                {
-                    "name": "Amelia Harriman",
-                    "Heat/Lane/Flight": "Heat 1 Lane 4",
-                    "result": "22.55",
-                    "place": null,
-                    "pr": "22.55",
-                    "points": "-",
-                    "athlete_uid": "fbbe4500-f459-444f-b70a-341cb54b0900",
-                    "seed": "-",
-                    "seed_uid": null,
-                    "result_uid": "d05a84ef-89e4-4f6e-9e62-245df8c8201b"
-                },
-                {
-                    "name": "Bethany Kim",
-                    "Heat/Lane/Flight": "Heat 2 Lane 3",
-                    "result": "15.44",
-                    "place": null,
-                    "pr": "15.44",
-                    "points": "-",
-                    "athlete_uid": "f5cf69ba-8290-43f7-a5e4-b45f9e4197e4",
-                    "seed": "-",
-                    "seed_uid": null,
-                    "result_uid": "5ec1709c-ed7f-4ee1-a606-ab72c9c0c2fe"
-                },
-                {
-                    "name": "Kaia Rinaldo",
-                    "Heat/Lane/Flight": "Heat 2 Lane 6",
-                    "result": "15.91",
-                    "place": null,
-                    "pr": "15.91",
-                    "points": "-",
-                    "athlete_uid": "6e9084a3-633a-40ec-a031-14f4012b2aed",
-                    "seed": "-",
-                    "seed_uid": null,
-                    "result_uid": "f96c8790-270b-466a-a925-265534f2e30e"
-                },
-                {
-                    "name": "Sammie Mollenkopf",
-                    "Heat/Lane/Flight": "Heat 2 Lane 8",
-                    "result": null,
-                    "place": null,
-                    "pr": "-",
-                    "points": "-",
-                    "seed": "-",
-                    "athlete_uid": null,
-                    "seed_uid": null,
-                    "result_uid": null
-                },
-                {
-                    "name": "Aubrie Miller",
-                    "Heat/Lane/Flight": "Heat 3 Lane 2",
-                    "result": "16.94",
-                    "place": null,
-                    "pr": "16.94",
-                    "points": "-",
-                    "athlete_uid": "ce23059d-d347-41e1-9e61-9754e831301d",
-                    "seed_uid": "4d6e23eb-7c65-4843-85f4-4ab5f1c89eac",
-                    "seed": "17.07",
-                    "result_uid": "b009d86e-c967-4eaf-920c-3b61f9cb8968"
-                },
-                {
-                    "name": "Elise Roehrich",
-                    "Heat/Lane/Flight": "Heat 3 Lane 4",
-                    "result": "20.56",
-                    "place": null,
-                    "pr": "-",
-                    "points": "-",
-                    "athlete_uid": "ba7b68d6-713a-4f24-a810-ef7f561946d5",
-                    "seed_uid": "79d88994-3f9d-48a2-a9b8-ffd5a33090de",
-                    "seed": "15.04",
-                    "result_uid": "7293c8b4-7575-42cc-b215-56b24f23124f"
-                },
-                {
-                    "name": "Kate Mccall",
-                    "Heat/Lane/Flight": "Heat 3 Lane 5",
-                    "result": "20.86",
-                    "place": null,
-                    "pr": "-",
-                    "points": "-",
-                    "athlete_uid": "a40f7b42-0293-406f-803f-bca8f9fefe73",
-                    "seed_uid": "589dc8c4-6472-4975-80d6-b044c48bba85",
-                    "seed": "15.13",
-                    "result_uid": "2563fbfa-0c3a-475b-88f8-2bffd442490e"
-                },
-                {
-                    "name": "Katie Harris",
-                    "Heat/Lane/Flight": "Heat 3 Lane 6",
-                    "result": "16.74",
-                    "place": null,
-                    "pr": "16.74",
-                    "points": "-",
-                    "athlete_uid": "0fd4b40f-c8b9-460e-b3c3-a66ee2588537",
-                    "seed_uid": "73443526-6d93-458d-8905-685a255491f3",
-                    "seed": "16.91",
-                    "result_uid": "dbd0fa71-2c9d-406c-8caa-b37dcc4f16e0"
-                },
                 {
                     "name": "Saige Hageman",
-                    "Heat/Lane/Flight": "Heat 4 Lane 6",
-                    "result": "14.71",
+                    "Heat/Lane/Flight": "Heat 11, Lane 6",
+                    "result": "14.36",
                     "place": null,
                     "pr": "-",
                     "points": "-",
                     "athlete_uid": "6f853483-f6a0-494a-81f6-87a307b7faa7",
                     "seed_uid": "02bc25ce-c09a-4902-979a-b8d465a0c0bb",
-                    "seed": "14.25",
-                    "result_uid": "f458fe89-d56d-4df9-bf30-b45a55beb141"
+                    "result_uid": "14d631ec-f71a-45da-801e-79536b02fcd2",
+                    "seed": "14.25"
                 },
                 {
-                    "name": "Evelyn Kear",
-                    "Heat/Lane/Flight": "Heat 5 Lane 7",
-                    "result": "13.89",
+                    "name": "Petra Schmidt",
+                    "Heat/Lane/Flight": "Heat 13, Lane 3",
+                    "result": "14.04",
                     "place": null,
-                    "pr": "13.89",
+                    "pr": "-",
                     "points": "-",
-                    "athlete_uid": "085f91e8-c212-47e2-baf9-bbdf7b3eb085",
-                    "seed_uid": "a5e672ac-4d92-4d08-994c-2515381dc4af",
-                    "seed": "13.94",
-                    "result_uid": "bdc2e34f-a24a-4ef1-af58-8f325a16657b"
+                    "athlete_uid": "815312c9-5e5a-430e-a375-e8b918a801b2",
+                    "seed_uid": "d393062e-9c05-40c1-9216-986cb3b5313b",
+                    "result_uid": "06c5aac7-22f7-40cf-858e-550403288d51",
+                    "seed": "13.94"
                 }
             ]
         },
         {
+            "Event Time": "11:45am",
             "Event": "Boys 100m",
-            "Event Time": "3:25pm",
             "athletes": [
                 {
-                    "name": "Miles Weber",
-                    "Heat/Lane/Flight": "Heat 1 Lane 1",
-                    "result": "12.76",
+                    "name": "Wyatt Keegan",
+                    "Heat/Lane/Flight": "Heat 23, Lane 6",
+                    "result": "11.14",
                     "place": null,
-                    "pr": "12.76",
+                    "pr": "11.14",
                     "points": "-",
-                    "athlete_uid": "7ba3db64-d193-42a9-9e3a-656304fd1102",
-                    "seed": "-",
-                    "seed_uid": null,
-                    "result_uid": "2d252bdf-dfaa-4b39-a49d-698a1c8984f1"
+                    "athlete_uid": "faf08fd1-ed69-4002-af9f-9bcd76d40cc3",
+                    "seed_uid": "b26e038f-0f4b-48d7-b5e0-9cb021983b34",
+                    "result_uid": "0b7915ea-2b73-48fb-847f-cc16d28a64e3",
+                    "seed": "11.18"
                 },
                 {
-                    "name": "Dash Ecklund",
-                    "Heat/Lane/Flight": "Heat 1 Lane 2",
-                    "result": "13.0",
+                    "name": "Channing Cooper",
+                    "Heat/Lane/Flight": "Heat 13, Lane 1",
+                    "result": "11.6",
                     "place": null,
-                    "pr": "13.0",
+                    "pr": "11.6",
                     "points": "-",
-                    "athlete_uid": "2f64820a-9425-4709-8bb4-78cf541fcb7f",
-                    "seed": "-",
-                    "seed_uid": null,
-                    "result_uid": "81c4f895-da79-42ee-a21c-256a0883c096"
+                    "athlete_uid": "d1d62c0d-5d91-4afc-b035-e0c2b100e85f",
+                    "seed_uid": "c3d3b9dc-b8da-49af-8675-c48bf9a1370f",
+                    "result_uid": "9e79288b-e6b7-49f4-9660-3637407bba53",
+                    "seed": "12.03"
                 },
                 {
-                    "name": "Mason McKenna",
-                    "Heat/Lane/Flight": "Heat 1 Lane 5",
-                    "result": "12.73",
+                    "name": "Addis Redwine",
+                    "Heat/Lane/Flight": "Heat 12, Lane 3",
+                    "result": "12.69",
                     "place": null,
-                    "pr": "12.73",
+                    "pr": "12.69",
                     "points": "-",
-                    "athlete_uid": "ce630329-8741-4fda-b877-abd2c4903264",
-                    "seed": "-",
+                    "athlete_uid": "3b220fc7-8281-4b6b-b264-aef3e0a7636d",
                     "seed_uid": null,
-                    "result_uid": "7eebc39b-561f-48e4-850e-383938b5426c"
-                },
-                {
-                    "name": "Wade Carlson",
-                    "Heat/Lane/Flight": "Heat 1 Lane 6",
-                    "result": "12.1",
-                    "place": null,
-                    "pr": "12.1",
-                    "points": "-",
-                    "athlete_uid": "354a6812-b84a-46cc-b919-545194caba7d",
-                    "seed": "-",
-                    "seed_uid": null,
-                    "result_uid": "d3ae4b16-bb85-4ebc-9608-6802892274d9"
-                },
-                {
-                    "name": "Henry Walker",
-                    "Heat/Lane/Flight": "Heat 1 Lane 8",
-                    "result": "14.39",
-                    "place": null,
-                    "pr": "14.39",
-                    "points": "-",
-                    "athlete_uid": "c1cf5d04-c6a8-4368-924c-fecc3286ef35",
-                    "seed": "-",
-                    "seed_uid": null,
-                    "result_uid": "2b3df95d-7a36-4e60-b605-b9b2486b08e2"
-                },
-                {
-                    "name": "Caden Rozic",
-                    "Heat/Lane/Flight": "Heat 3 Lane 1",
-                    "result": "13.58",
-                    "place": null,
-                    "pr": "13.58",
-                    "points": "-",
-                    "athlete_uid": "f2614037-c754-4d94-9c86-e07e63e71e25",
-                    "seed": "-",
-                    "seed_uid": null,
-                    "result_uid": "544d85f2-0417-48ff-8e4c-8183d7d38839"
-                },
-                {
-                    "name": "Henry Poe",
-                    "Heat/Lane/Flight": "Heat 3 Lane 7",
-                    "result": "13.22",
-                    "place": null,
-                    "pr": "13.22",
-                    "points": "-",
-                    "athlete_uid": "c76454f6-8b63-415a-a0b0-7bef37596ea2",
-                    "seed_uid": "f70a9146-611c-496e-8fb3-e3ce988760b6",
-                    "seed": "13.61",
-                    "result_uid": "1830335c-33c0-43aa-89c6-3df0f4da3cc2"
-                },
-                {
-                    "name": "Miller Gumhaus",
-                    "Heat/Lane/Flight": "Heat 4 Lane 1",
-                    "result": null,
-                    "place": null,
-                    "pr": "-",
-                    "points": "-",
-                    "seed": "-",
-                    "athlete_uid": null,
-                    "seed_uid": null,
-                    "result_uid": null
+                    "result_uid": "30a5a07a-51ca-4b9d-a23e-dd0cbbbf6295",
+                    "seed": "-"
                 },
                 {
                     "name": "Jaxson Cooper",
-                    "Heat/Lane/Flight": "Heat 4 Lane 4",
-                    "result": "12.39",
+                    "Heat/Lane/Flight": "Heat 9, Lane 3",
+                    "result": "11.98",
                     "place": null,
-                    "pr": "12.39",
+                    "pr": "11.98",
                     "points": "-",
                     "athlete_uid": "3da9d021-03a0-4068-94c7-b31c04479791",
-                    "seed_uid": "47130803-f17d-4243-bac0-dc63ebe79aa3",
-                    "seed": "12.5",
-                    "result_uid": "beebe766-c678-4f4d-a1ea-56f648dad34e"
-                },
-                {
-                    "name": "Santiago Caravia-Perry",
-                    "Heat/Lane/Flight": "Heat 4 Lane 8",
-                    "result": "12.63",
-                    "place": null,
-                    "pr": "12.63",
-                    "points": "-",
-                    "athlete_uid": "7f2531a6-cd77-43ea-bdce-e5a739cc85b3",
-                    "seed_uid": "362174dc-fc1a-4320-9863-8fd7b54de76e",
-                    "seed": "12.67",
-                    "result_uid": "ae99c01e-0f5e-4265-baa7-137e0defad11"
+                    "seed_uid": "beebe766-c678-4f4d-a1ea-56f648dad34e",
+                    "result_uid": "b26a49fe-fa95-45cd-ab8f-01d62ae9c126",
+                    "seed": "12.39"
                 }
             ]
         },
         {
-            "Event": "Girls 4x200 relay",
-            "Event Time": "3:45pm",
-            "relay": true,
-            "teams": [
-                {
-                    "name": "Team A:",
-                    "Heat/Lane/Flight": "Heat 1 Lane 6",
-                    "athletes": []
-                }
-            ]
-        },
-        {
-            "Event": "Boys 4x200 relay",
-            "Event Time": "3:45pm",
-            "relay": true,
-            "teams": [
-                {
-                    "name": "Team A:",
-                    "Heat/Lane/Flight": "Heat 1 Lane 4",
-                    "athletes": []
-                },
-                {
-                    "name": "Team B:",
-                    "Heat/Lane/Flight": "Heat 2 Lane 3",
-                    "athletes": []
-                }
-            ]
-        },
-        {
+            "Event Time": "12:30pm",
             "Event": "Girls 1600m",
-            "Event Time": "3:55pm",
             "athletes": [
                 {
-                    "name": "Charlotte Carlson",
-                    "Heat/Lane/Flight": "Heat 1 Runner 7",
-                    "result": "6:28.49",
+                    "name": "Sierra Wall",
+                    "Heat/Lane/Flight": "Heat 6, Runner 12",
+                    "result": "5:13.31",
                     "place": null,
-                    "pr": "6:28.49",
+                    "pr": "-",
                     "points": "-",
-                    "athlete_uid": "d2a1f767-2bba-4771-96e1-299a0562662b",
-                    "seed": "-",
-                    "seed_uid": null,
-                    "result_uid": "bcd8ca56-1d71-4479-a279-daed1220b39d"
+                    "athlete_uid": "2f87d4f5-96b3-42c0-8593-44b07bf9667c",
+                    "seed_uid": "c3cb46e4-b61d-4539-9c7f-49c64fca7667",
+                    "result_uid": "04c72b36-7554-426c-8f4b-fd5b0bde67c0",
+                    "seed": "5:12.46"
+                },
+                {
+                    "name": "Elise Wobus",
+                    "Heat/Lane/Flight": "Heat 4, Runner 8",
+                    "result": "5:50.13",
+                    "place": null,
+                    "pr": "-",
+                    "points": "-",
+                    "athlete_uid": "7d2d7f1a-415b-48b4-968a-3bc70254c01f",
+                    "seed_uid": "0ec73185-f900-4e64-8c52-0e3b0a2021ac",
+                    "result_uid": "cd88c1ef-0c10-4f1a-8c94-467cc8fa5b7a",
+                    "seed": "5:49.04"
                 },
                 {
                     "name": "Annabelle Eisner",
-                    "Heat/Lane/Flight": "Heat 1 Runner 8",
-                    "result": "6:03.51",
+                    "Heat/Lane/Flight": "Heat 3, Runner 12",
+                    "result": "6:12.16",
                     "place": null,
-                    "pr": "6:03.51",
+                    "pr": "-",
                     "points": "-",
                     "athlete_uid": "733a098e-8050-46db-8b2f-d0ea73e452af",
-                    "seed_uid": "e38fd212-e46d-4a4f-a61c-2880c2e9807d",
-                    "seed": "6:16.1",
-                    "result_uid": "4398f283-9a36-4d66-ae9c-c03cb389ef68"
+                    "seed_uid": "4398f283-9a36-4d66-ae9c-c03cb389ef68",
+                    "result_uid": "501315c7-d25f-44db-b543-835e870cdd93",
+                    "seed": "6:03.51"
                 },
                 {
-                    "name": "Carmen Lafrazza-Schwartz",
-                    "Heat/Lane/Flight": "Heat 1 Runner 10",
-                    "result": null,
+                    "name": "Jade Kilpatrick Cramer",
+                    "Heat/Lane/Flight": "Heat 2, Runner 4",
+                    "result": "6:26.25",
                     "place": null,
                     "pr": "-",
-                    "points": "-",
-                    "seed": "-",
-                    "athlete_uid": null,
-                    "seed_uid": null,
-                    "result_uid": null
-                },
-                {
-                    "name": "Lola (Sly) Chagolla",
-                    "Heat/Lane/Flight": "Heat 1 Runner 12",
-                    "result": null,
-                    "place": null,
-                    "pr": "-",
-                    "points": "-",
-                    "seed": "-",
-                    "athlete_uid": null,
-                    "seed_uid": null,
-                    "result_uid": null
-                },
-                {
-                    "name": "Coco Glebe",
-                    "Heat/Lane/Flight": "Heat 2 Runner10",
-                    "result": null,
-                    "place": null,
-                    "pr": "-",
-                    "points": "-",
-                    "athlete_uid": "b83a9edf-cb02-4333-bd5a-44d79e55cc49",
-                    "seed": "-",
-                    "seed_uid": null,
-                    "result_uid": null
-                },
-                {
-                    "name": "Katja Brown",
-                    "Heat/Lane/Flight": "Heat 2 Runner 13",
-                    "result": "5:59.09",
-                    "place": null,
-                    "pr": "-",
-                    "points": "-",
-                    "athlete_uid": "d89d7274-f10c-4792-9ac4-c782f1bd74e3",
-                    "seed_uid": "076cf800-736f-4995-bcbf-b2dd07536ad6",
-                    "seed": "5:54.89",
-                    "result_uid": "377e483f-0f7e-4901-a446-b828a7df1c67"
-                }
-            ]
-        },
-        {
-            "Event": "Boys 1600m",
-            "Event Time": "4:10pm",
-            "athletes": [
-                {
-                    "name": "Carter Ausmus",
-                    "Heat/Lane/Flight": "Heat 1 Runner 1",
-                    "result": "5:19.36",
-                    "place": null,
-                    "pr": "5:19.36",
-                    "points": "-",
-                    "athlete_uid": "ac64823c-54bc-466b-a361-30f17d6c14c3",
-                    "seed": "-",
-                    "seed_uid": null,
-                    "result_uid": "0375d052-285e-492d-8e97-9c1f179ba088"
-                },
-                {
-                    "name": "Osel Yeh",
-                    "Heat/Lane/Flight": "Heat 1 Runner 11",
-                    "result": "6:00.06",
-                    "place": null,
-                    "pr": "6:00.06",
-                    "points": "-",
-                    "athlete_uid": "09bf858c-9c59-4d8b-9be1-46e54eac2239",
-                    "seed": "-",
-                    "seed_uid": null,
-                    "result_uid": "b7dfa3e4-b840-406a-9438-0810432fcf2a"
-                },
-                {
-                    "name": "Jackson Wynett",
-                    "Heat/Lane/Flight": "Heat 1 Runner 12",
-                    "result": "5:43.95",
-                    "place": null,
-                    "pr": "5:43.95",
-                    "points": "-",
-                    "athlete_uid": "f6c2dcba-b626-4eb4-b4e9-7b5d38075b62",
-                    "seed_uid": "824e5446-2e9c-4cf5-80ed-1c8ff09945d6",
-                    "seed": "5:47.62",
-                    "result_uid": "07d062a6-b7b8-43ad-83c5-11de0f3d1616"
-                },
-                {
-                    "name": "Pietro Camporeale",
-                    "Heat/Lane/Flight": "Heat 1 Runner 15",
-                    "result": "5:43.86",
-                    "place": null,
-                    "pr": "5:43.86",
-                    "points": "-",
-                    "athlete_uid": "a893131d-ee27-4252-a1bc-b1187c76edc8",
-                    "seed_uid": "6613d290-649f-4127-982e-6693239368fc",
-                    "seed": "5:50.49",
-                    "result_uid": "47bc6932-cc80-4130-9a98-afd633a1a433"
-                },
-                {
-                    "name": "Tim Nikel",
-                    "Heat/Lane/Flight": "Heat 1 Runner 17",
-                    "result": "5:11.6",
-                    "place": null,
-                    "pr": "5:11.6",
-                    "points": "-",
-                    "athlete_uid": "783b89be-5035-435f-98a6-7e50f20d9f90",
-                    "seed": "-",
-                    "seed_uid": null,
-                    "result_uid": "b37bcb1d-8546-4c84-bea3-1506b90c2d53"
-                },
-                {
-                    "name": "Rory Treleaven",
-                    "Heat/Lane/Flight": "Heat 2 Runner 5",
-                    "result": "4:45.4",
-                    "place": null,
-                    "pr": "4:45.4",
-                    "points": "-",
-                    "athlete_uid": "e127b801-dd4f-4705-be56-e55d9134f898",
-                    "seed_uid": "5050c5c9-93ed-482f-ab67-c80ad459042f",
-                    "seed": "4:48.19",
-                    "result_uid": "4f33cde1-37fe-494b-803a-ba43994a5e38"
-                },
-                {
-                    "name": "Theo Chastang",
-                    "Heat/Lane/Flight": "Heat 2 Runner 7",
-                    "result": "4:53.23",
-                    "place": null,
-                    "pr": "4:53.23",
-                    "points": "-",
-                    "athlete_uid": "20f61b05-befd-4544-a004-d6604e97b6fa",
-                    "seed": "-",
-                    "seed_uid": null,
-                    "result_uid": "9682bd38-c6e2-4ac9-9ebe-8bd32fa4ffda"
-                },
-                {
-                    "name": "Dario Barnes",
-                    "Heat/Lane/Flight": "Heat 2 Runner 11",
-                    "result": "4:59.74",
-                    "place": null,
-                    "pr": "-",
-                    "points": "-",
-                    "athlete_uid": "9bd78ad4-f989-4f05-a2d5-2e602111e7d6",
-                    "seed_uid": "9664091e-40a4-4c38-bba8-2db6db375fd4",
-                    "seed": "4:53.75",
-                    "result_uid": "ed677007-2952-4672-bc8e-a48a3eee18cc"
-                }
-            ]
-        },
-        {
-            "Event": "Girls 4x100 relay",
-            "Event Time": "4:25pm",
-            "relay": true,
-            "teams": [
-                {
-                    "name": "Team A:",
-                    "Heat/Lane/Flight": "Heat 1 Lane 3",
-                    "athletes": []
-                },
-                {
-                    "name": "Team B:",
-                    "Heat/Lane/Flight": "Heat 1 Lane 6",
-                    "athletes": []
-                }
-            ]
-        },
-        {
-            "Event": "Boys 4x100 relay",
-            "Event Time": "4:30pm",
-            "relay": true,
-            "teams": [
-                {
-                    "name": "Team A:",
-                    "Heat/Lane/Flight": "Heat 1 Lane 3",
-                    "athletes": []
-                },
-                {
-                    "name": "Team B:",
-                    "Heat/Lane/Flight": "Heat 1 Lane 6",
-                    "athletes": []
-                }
-            ]
-        },
-        {
-            "Event": "Girls 400m",
-            "Event Time": "4:35pm",
-            "athletes": [
-                {
-                    "name": "Lola (Sly) Chagolla",
-                    "Heat/Lane/Flight": "Heat 1 Lane 2",
-                    "result": null,
-                    "place": null,
-                    "pr": "-",
-                    "points": "-",
-                    "seed": "-",
-                    "athlete_uid": null,
-                    "seed_uid": null,
-                    "result_uid": null
-                },
-                {
-                    "name": "Jade Kilpatrick",
-                    "Heat/Lane/Flight": "Heat 1 Lane 4",
-                    "result": "1:16.22",
-                    "place": null,
-                    "pr": "1:16.22",
                     "points": "-",
                     "athlete_uid": "9d4b3aac-2e47-494b-a523-34ce72b28c9a",
-                    "seed": "-",
-                    "seed_uid": null,
-                    "result_uid": "a599e265-bdbc-41bf-afad-2a5d14b9182c"
-                },
-                {
-                    "name": "Hazel Straka",
-                    "Heat/Lane/Flight": "Heat 2 Lane 6",
-                    "result": "1:16.75",
-                    "place": null,
-                    "pr": "1:16.75",
-                    "points": "-",
-                    "athlete_uid": "0b110f02-6f7d-4e40-9ae3-e29be4a3966a",
-                    "seed_uid": "8eb1920c-cbd4-4cc5-a528-49dca6ad4248",
-                    "seed": "1:17.83",
-                    "result_uid": "d03cd630-ce77-4fbd-b3bd-8fee0ca43454"
-                },
-                {
-                    "name": "Isabella Dibiase",
-                    "Heat/Lane/Flight": "Heat 2 Lane 8",
-                    "result": "1:27.13",
-                    "place": null,
-                    "pr": "1:27.13",
-                    "points": "-",
-                    "athlete_uid": "d40e84a3-e8d8-432a-a882-094fc90a452d",
-                    "seed": "-",
-                    "seed_uid": null,
-                    "result_uid": "b604b215-be81-4d9a-a1c5-e97767cc57bd"
-                },
-                {
-                    "name": "Anna Johnson",
-                    "Heat/Lane/Flight": "Heat 3 Lane 1",
-                    "result": "1:06.1",
-                    "place": null,
-                    "pr": "-",
-                    "points": "-",
-                    "athlete_uid": "d14a13f4-cd32-4ae5-ab65-db29f7db69a7",
-                    "seed_uid": "a7a12617-26c7-4467-b2a5-259e8383dc2b",
-                    "seed": "1:04.04",
-                    "result_uid": "a57ce5bf-7663-4ee5-a186-39c542f15adb"
-                },
-                {
-                    "name": "Ellie Grandsaert",
-                    "Heat/Lane/Flight": "Heat 3 Lane 6",
-                    "result": "1:03.83",
-                    "place": null,
-                    "pr": "-",
-                    "points": "-",
-                    "athlete_uid": "133b1284-9a57-4011-b288-6871d6577ba9",
-                    "seed_uid": "6e11a044-c448-4d06-9b86-e6e352521df8",
-                    "seed": "1:02.51",
-                    "result_uid": "07861dc1-2284-4a44-9127-afac3b805db3"
+                    "seed_uid": "58a50ae0-3047-41b3-afb5-ce336ef40302",
+                    "result_uid": "b3391a88-8126-4256-b4d1-53928d18d214",
+                    "seed": "6:21.86"
                 }
             ]
         },
         {
+            "Event Time": "2:30pm",
+            "Event": "Girls 400m",
+            "athletes": [
+                {
+                    "name": "Lilly Graves",
+                    "Heat/Lane/Flight": "Heat 11, Lane 7",
+                    "result": null,
+                    "place": null,
+                    "pr": "-",
+                    "points": "-",
+                    "athlete_uid": null,
+                    "seed_uid": null,
+                    "result_uid": null,
+                    "seed": "-"
+                }
+            ]
+        },
+        {
+            "Event Time": "3:00pm",
             "Event": "Boys 400m",
-            "Event Time": "4:45pm",
             "athletes": [
                 {
-                    "name": "Andrew McCarty",
-                    "Heat/Lane/Flight": "Heat 1 Lane 4",
-                    "result": "1:17.43",
+                    "name": "Wyatt Keegan",
+                    "Heat/Lane/Flight": "Heat 14, Lane 8",
+                    "result": null,
                     "place": null,
-                    "pr": "1:17.43",
+                    "pr": "-",
                     "points": "-",
-                    "athlete_uid": "3883641a-3a12-42f7-8183-a68f6b06acc4",
-                    "seed": "-",
+                    "athlete_uid": "faf08fd1-ed69-4002-af9f-9bcd76d40cc3",
                     "seed_uid": null,
-                    "result_uid": "1a4a0dff-5727-44e4-a062-9bc3b8fcfb3d"
+                    "result_uid": null,
+                    "seed": "-"
                 },
                 {
-                    "name": "James Young",
-                    "Heat/Lane/Flight": "Heat 2 Lane 3",
-                    "result": "1:02.58",
+                    "name": "Wetera Schlachter",
+                    "Heat/Lane/Flight": "Heat 12, Lane 5",
+                    "result": "52.61",
                     "place": null,
-                    "pr": "1:02.58",
+                    "pr": "52.61",
                     "points": "-",
-                    "athlete_uid": "9ef6e635-188d-47b2-a847-43d1f23d0d62",
-                    "seed": "-",
+                    "athlete_uid": "6e6de1a2-d5f6-4e46-b6b8-b75218024b68",
                     "seed_uid": null,
-                    "result_uid": "679f92aa-b892-47bb-b4d6-6a0d372a92ec"
-                },
-                {
-                    "name": "Arran Machado McKelvie",
-                    "Heat/Lane/Flight": "Heat 4 Lane 2",
-                    "result": "57.92",
-                    "place": null,
-                    "pr": "57.92",
-                    "points": "-",
-                    "athlete_uid": "eb5debe3-c35e-48a3-923d-49ecb1d69016",
-                    "seed": "-",
-                    "seed_uid": null,
-                    "result_uid": "4151b74c-56f3-4687-918c-de81be526ea4"
+                    "result_uid": "24d3599b-125c-4311-a451-14a158b7b70c",
+                    "seed": "-"
                 }
             ]
         },
         {
-            "Event": "Girls 300m Hurdles",
-            "Event Time": "5:00pm",
-            "athletes": [
-                {
-                    "name": "Portia Richards",
-                    "Heat/Lane/Flight": "Heat 1 Lane 4",
-                    "result": "56.45",
-                    "place": null,
-                    "pr": "56.45",
-                    "points": "-",
-                    "athlete_uid": "3a000233-9d1e-475d-afb3-177f4abe3355",
-                    "seed_uid": "23e3cbaf-97d7-4d02-aca7-59d07b463631",
-                    "seed": "58.23",
-                    "result_uid": "e4ae65ff-cae6-4b3b-88cf-4bdc7fb77d34"
-                }
-            ]
-        },
-        {
+            "Event Time": "3:45pm",
             "Event": "Boys 300m Hurdles",
-            "Event Time": "5:10pm",
             "athletes": [
-                {
-                    "name": "Rory Treleaven",
-                    "Heat/Lane/Flight": "Heat 2 Lane 7",
-                    "result": "46.81",
-                    "place": null,
-                    "pr": "46.81",
-                    "points": "-",
-                    "athlete_uid": "e127b801-dd4f-4705-be56-e55d9134f898",
-                    "seed_uid": "9b9a60a0-30dd-49d0-bed9-54acd1a1bb10",
-                    "seed": "47.79",
-                    "result_uid": "de127242-6f48-48f1-8ded-314fa4113eed"
-                },
                 {
                     "name": "Zephyr Middleton",
-                    "Heat/Lane/Flight": "Heat 2 Lane 8",
-                    "result": "49.64",
+                    "Heat/Lane/Flight": "Heat 3, Lane 8",
+                    "result": null,
                     "place": null,
                     "pr": "-",
                     "points": "-",
                     "athlete_uid": "66153280-f001-4dac-8f4a-3f539b89eb09",
                     "seed_uid": "e87d3232-bf0f-4fde-9650-72d58456f131",
-                    "seed": "49.23",
-                    "result_uid": "616c91ba-5efb-4f69-a3ad-d61468337ed8"
+                    "result_uid": null,
+                    "seed": "49.23"
                 }
             ]
         },
         {
+            "Event Time": "4:00pm",
             "Event": "Girls 800m",
-            "Event Time": "5:25pm",
             "athletes": [
                 {
-                    "name": "Hannah Kim",
-                    "Heat/Lane/Flight": "Heat 1 Runner 7",
+                    "name": "Emma Weber",
+                    "Heat/Lane/Flight": "Heat 4, Runner 14",
                     "result": null,
                     "place": null,
                     "pr": "-",
                     "points": "-",
-                    "athlete_uid": "0ce9fa27-10b2-4df2-9a85-88caac423a92",
-                    "seed_uid": "a1a85c65-2d84-485c-a4eb-faaf10df7d3a",
-                    "seed": "2:53.68",
-                    "result_uid": null
+                    "athlete_uid": "4b4677d8-689f-45ed-910e-b127b6a42aa7",
+                    "seed_uid": null,
+                    "result_uid": null,
+                    "seed": "-"
                 },
                 {
-                    "name": "Cameron Lafrazza-Schwartz",
-                    "Heat/Lane/Flight": "Heat 1 Runner 9",
-                    "result": "2:59.46",
+                    "name": "Elise Wobus",
+                    "Heat/Lane/Flight": "Heat 4, Runner 19",
+                    "result": null,
                     "place": null,
                     "pr": "-",
                     "points": "-",
-                    "athlete_uid": "0f09f376-7146-45e3-a467-0502a54c30f1",
-                    "seed_uid": "a863bbf3-82ea-4a8e-b0f5-c57ba64995b7",
-                    "seed": "2:55.15",
-                    "result_uid": "37a8c055-901f-47a4-8251-9ec27d7cf921"
+                    "athlete_uid": "7d2d7f1a-415b-48b4-968a-3bc70254c01f",
+                    "seed_uid": "cf07d6d4-9dfc-441a-8f00-5db0d587e11c",
+                    "result_uid": null,
+                    "seed": "2:39.35"
                 },
                 {
-                    "name": "Sierra Wall",
-                    "Heat/Lane/Flight": "Heat 2 Runner 1",
-                    "result": "2:22.24",
+                    "name": "Laurel Brain",
+                    "Heat/Lane/Flight": "Heat 5, Runner 8",
+                    "result": null,
                     "place": null,
-                    "pr": "2:22.24",
+                    "pr": "-",
                     "points": "-",
-                    "athlete_uid": "2f87d4f5-96b3-42c0-8593-44b07bf9667c",
-                    "seed_uid": "27d4c8ea-6dc3-42bf-b589-65f6b389f443",
-                    "seed": "2:22.31",
-                    "result_uid": "b08448c3-ff59-4321-a349-ec4336a35ce8"
+                    "athlete_uid": "a0167969-54e7-49db-8c32-bfd17b367049",
+                    "seed_uid": "c8e0758e-2cf3-49e3-be25-8f12cec9c1f7",
+                    "result_uid": null,
+                    "seed": "2:27.66"
                 },
                 {
-                    "name": "Molly Weber",
-                    "Heat/Lane/Flight": "Heat 2 Runner 3",
-                    "result": "2:33.11",
+                    "name": "Jade Kilpatrick Cramer",
+                    "Heat/Lane/Flight": "Heat 2, Runner 11",
+                    "result": null,
                     "place": null,
-                    "pr": "2:33.11",
+                    "pr": "-",
                     "points": "-",
-                    "athlete_uid": "a8335588-f2d9-4944-8d42-bf59f72df4de",
-                    "seed": "-",
-                    "seed_uid": null,
-                    "result_uid": "f3de811c-0935-47e7-9dd4-053f23883d24"
+                    "athlete_uid": "9d4b3aac-2e47-494b-a523-34ce72b28c9a",
+                    "seed_uid": "6a40822a-1861-4db9-88ad-797371dc3708",
+                    "result_uid": null,
+                    "seed": "2:54.89"
                 }
             ]
         },
         {
+            "Event Time": "4:30pm",
             "Event": "Boys 800m",
-            "Event Time": "5:35pm",
             "athletes": [
                 {
-                    "name": "Ewan Kenny",
-                    "Heat/Lane/Flight": "Heat 1 Runner 3",
-                    "result": "2:04.08",
-                    "place": null,
-                    "pr": "2:04.08",
-                    "points": "-",
-                    "athlete_uid": "1e1f67ab-a1d3-4465-8edf-3a5d2da6bd8c",
-                    "seed_uid": "ad90d771-7a27-46e9-bbed-298fb34e0eb0",
-                    "seed": "2:18.5",
-                    "result_uid": "72ce595f-6058-4824-8091-ca933def4836"
-                },
-                {
-                    "name": "Tim Nikel",
-                    "Heat/Lane/Flight": "Heat 1 Runner 6",
+                    "name": "Rory Treleaven",
+                    "Heat/Lane/Flight": "Heat 7, Runner 20",
                     "result": null,
                     "place": null,
                     "pr": "-",
                     "points": "-",
-                    "athlete_uid": "783b89be-5035-435f-98a6-7e50f20d9f90",
-                    "seed_uid": "63309bd1-a912-425d-b7dc-10c5b56781e3",
-                    "seed": "2:20.18",
-                    "result_uid": null
-                },
-                {
-                    "name": "Colin Eisner",
-                    "Heat/Lane/Flight": "Heat 1 Runner 11",
-                    "result": "2:38.3",
-                    "place": null,
-                    "pr": "2:38.3",
-                    "points": "-",
-                    "athlete_uid": "28fac796-e0a7-4db2-a959-f7ee851dd772",
-                    "seed": "-",
+                    "athlete_uid": "e127b801-dd4f-4705-be56-e55d9134f898",
                     "seed_uid": null,
-                    "result_uid": "cb015a24-0386-4f10-9e60-4cd9c1f5590a"
+                    "result_uid": null,
+                    "seed": "-"
                 },
                 {
-                    "name": "Jackson Wynett",
-                    "Heat/Lane/Flight": "Heat 1 Runner 12",
-                    "result": "2:38.31",
-                    "place": null,
-                    "pr": "-",
-                    "points": "-",
-                    "athlete_uid": "f6c2dcba-b626-4eb4-b4e9-7b5d38075b62",
-                    "seed_uid": "399486e9-fc32-4baa-800c-c318ebda4efa",
-                    "seed": "2:34.21",
-                    "result_uid": "fcf31293-01fd-4073-9e0b-e4162907343f"
-                },
-                {
-                    "name": "Cam Miller",
-                    "Heat/Lane/Flight": "Heat 1 Runner 15",
-                    "result": "2:31.92",
-                    "place": null,
-                    "pr": "2:31.92",
-                    "points": "-",
-                    "athlete_uid": "ddea1958-ab61-477b-9863-6350d3f0b6f0",
-                    "seed": "-",
-                    "seed_uid": null,
-                    "result_uid": "90e9b4e7-0949-4d28-8085-e3ecb64a6e26"
-                },
-                {
-                    "name": "Luke Treleven",
-                    "Heat/Lane/Flight": "Heat 2 Runner 5",
+                    "name": "Luke Treleaven",
+                    "Heat/Lane/Flight": "Heat 6, Runner 6",
                     "result": null,
                     "place": null,
                     "pr": "-",
                     "points": "-",
-                    "seed": "-",
-                    "athlete_uid": null,
-                    "seed_uid": null,
-                    "result_uid": null
-                },
-                {
-                    "name": "Zach Bean",
-                    "Heat/Lane/Flight": "Heat 2 Runner 9",
-                    "result": "2:10.87",
-                    "place": null,
-                    "pr": "2:10.87",
-                    "points": "-",
-                    "athlete_uid": "f3e6fc7e-fdc1-4f97-8094-e31b0dc49150",
-                    "seed": "-",
-                    "seed_uid": null,
-                    "result_uid": "2161e279-bfd1-49b2-8c42-282a9312b2cc"
+                    "athlete_uid": "e912a331-8d6c-4908-b6a0-05c1975d235f",
+                    "seed_uid": "8c9693ea-e038-42d2-b505-f6125742e692",
+                    "result_uid": null,
+                    "seed": "2:06.96"
                 },
                 {
                     "name": "Oliver Su",
-                    "Heat/Lane/Flight": "Heat 2 Runner 11",
-                    "result": "2:13.47",
+                    "Heat/Lane/Flight": "Heat 5, Runner 6",
+                    "result": null,
                     "place": null,
                     "pr": "-",
                     "points": "-",
                     "athlete_uid": "6b2770d6-2a15-48e4-b85b-5ea7fc37f183",
                     "seed_uid": "19206f9c-d526-4d5a-8add-1161eba97425",
-                    "seed": "2:10.44",
-                    "result_uid": "61634e65-f180-48c7-9df8-6b491f147091"
+                    "result_uid": null,
+                    "seed": "2:10.44"
+                },
+                {
+                    "name": "Colin Eisner",
+                    "Heat/Lane/Flight": "Heat 2, Runner 9",
+                    "result": null,
+                    "place": null,
+                    "pr": "-",
+                    "points": "-",
+                    "athlete_uid": "28fac796-e0a7-4db2-a959-f7ee851dd772",
+                    "seed_uid": "cb015a24-0386-4f10-9e60-4cd9c1f5590a",
+                    "result_uid": null,
+                    "seed": "2:38.3"
                 }
             ]
         },
         {
+            "Event Time": "5:00pm",
             "Event": "Girls 200m",
-            "Event Time": "5:45pm",
             "athletes": [
                 {
-                    "name": "Hazel Straka",
-                    "Heat/Lane/Flight": "Heat 1 Lane 7",
-                    "result": "34.85",
-                    "place": null,
-                    "pr": "34.85",
-                    "points": "-",
-                    "athlete_uid": "0b110f02-6f7d-4e40-9ae3-e29be4a3966a",
-                    "seed": "-",
-                    "seed_uid": null,
-                    "result_uid": "f41521cf-75cf-4a66-b52e-63cfca6c316e"
-                },
-                {
-                    "name": "Ella Pluzynski",
-                    "Heat/Lane/Flight": "Heat 3 Lane 3",
-                    "result": "31.85",
+                    "name": "Lilly Graves",
+                    "Heat/Lane/Flight": "Heat 20, Lane 2",
+                    "result": null,
                     "place": null,
                     "pr": "-",
                     "points": "-",
-                    "athlete_uid": "14adb04f-46cd-4480-8846-0d33fc543701",
-                    "seed_uid": "ba5cb71f-2e16-40bc-b350-9c995addeb7f",
-                    "seed": "31.39",
-                    "result_uid": "2d5e22cb-0c0f-46a7-85f5-9228497c1cf5"
-                },
-                {
-                    "name": "Domenica Plaza Homiston",
-                    "Heat/Lane/Flight": "Heat 3 Lane 8",
-                    "result": "35.28",
-                    "place": null,
-                    "pr": "35.28",
-                    "points": "-",
-                    "athlete_uid": "fec3d4b1-38fc-4431-b883-bd13af10eb2a",
-                    "seed": "-",
+                    "athlete_uid": null,
                     "seed_uid": null,
-                    "result_uid": "6eb77245-d85b-4ff6-9f4a-0757df0cd75b"
+                    "result_uid": null,
+                    "seed": "-"
                 },
                 {
                     "name": "Saige Hageman",
-                    "Heat/Lane/Flight": "Heat 4 Lane 3",
-                    "result": "30.42",
+                    "Heat/Lane/Flight": "Heat 11, Lane 7",
+                    "result": null,
                     "place": null,
                     "pr": "-",
                     "points": "-",
                     "athlete_uid": "6f853483-f6a0-494a-81f6-87a307b7faa7",
                     "seed_uid": "c562df29-a929-4fb8-b334-d4c66278fce7",
-                    "seed": "30.0",
-                    "result_uid": "09adf81c-0821-4a1c-926d-35f031beba42"
+                    "result_uid": null,
+                    "seed": "30.0"
                 },
                 {
-                    "name": "Ellie Grandsaert",
-                    "Heat/Lane/Flight": "Heat 4 Lane 5",
-                    "result": "28.17",
-                    "place": null,
-                    "pr": "28.17",
-                    "points": "-",
-                    "athlete_uid": "133b1284-9a57-4011-b288-6871d6577ba9",
-                    "seed_uid": "6252f411-fb54-4da1-b03e-9d2f63a0fdda",
-                    "seed": "29.75",
-                    "result_uid": "c3f12428-f314-4987-a73f-b9cdc7fc1ddd"
-                },
-                {
-                    "name": "Anna Johnson",
-                    "Heat/Lane/Flight": "Heat 5 Lane 7",
-                    "result": "29.15",
+                    "name": "Petra Schmidt",
+                    "Heat/Lane/Flight": "Heat 15, Lane 8",
+                    "result": null,
                     "place": null,
                     "pr": "-",
                     "points": "-",
-                    "athlete_uid": "d14a13f4-cd32-4ae5-ab65-db29f7db69a7",
-                    "seed_uid": "1f5f3128-01eb-4b2c-af28-e0c322c603ac",
-                    "seed": "29.12",
-                    "result_uid": "1cc0ed7c-bf1b-4190-8fb7-9deb9f26975b"
+                    "athlete_uid": "815312c9-5e5a-430e-a375-e8b918a801b2",
+                    "seed_uid": null,
+                    "result_uid": null,
+                    "seed": "-"
                 }
             ]
         },
         {
+            "Event Time": "5:30pm",
             "Event": "Boys 200m",
-            "Event Time": "5:55pm",
             "athletes": [
                 {
-                    "name": "(Caleb Cooper \u2013 scratch)",
-                    "Heat/Lane/Flight": "Channing Cooper",
+                    "name": "Channing Cooper",
+                    "Heat/Lane/Flight": "Heat 20, Lane 8",
                     "result": null,
                     "place": null,
                     "pr": "-",
                     "points": "-",
-                    "seed": "-",
-                    "athlete_uid": null,
-                    "seed_uid": null,
-                    "result_uid": null
-                },
-                {
-                    "name": "Mason McKenna",
-                    "Heat/Lane/Flight": "Heat 1 Lane 1",
-                    "result": "25.93",
-                    "place": null,
-                    "pr": "25.93",
-                    "points": "-",
-                    "athlete_uid": "ce630329-8741-4fda-b877-abd2c4903264",
-                    "seed": "-",
-                    "seed_uid": null,
-                    "result_uid": "09c40870-f272-4729-b120-4ac4d6c7adac"
-                },
-                {
-                    "name": "Quinn Lewis",
-                    "Heat/Lane/Flight": "Heat 1 Lane 4",
-                    "result": "32.53",
-                    "place": null,
-                    "pr": "32.53",
-                    "points": "-",
-                    "athlete_uid": "58ca11a0-4fb8-490c-9031-283077724fd1",
-                    "seed": "-",
-                    "seed_uid": null,
-                    "result_uid": "dac9d76c-1730-4e12-b2a9-7d8858ef6716"
-                },
-                {
-                    "name": "Daniel Bonvillian",
-                    "Heat/Lane/Flight": "Heat 1 Lane 5",
-                    "result": "32.74",
-                    "place": null,
-                    "pr": "32.74",
-                    "points": "-",
-                    "athlete_uid": "bd5536c0-15aa-4e67-b04d-c01d93252e1a",
-                    "seed": "-",
-                    "seed_uid": null,
-                    "result_uid": "064b2c28-70f1-4663-8e6f-2b0c58ec0e26"
-                },
-                {
-                    "name": "Jett Jitboon",
-                    "Heat/Lane/Flight": "Heat 2 Lane 3",
-                    "result": "26.93",
-                    "place": null,
-                    "pr": "26.93",
-                    "points": "-",
-                    "athlete_uid": "809eb6af-82af-4cce-99b8-96bb7e781cad",
-                    "seed": "-",
-                    "seed_uid": null,
-                    "result_uid": "482dd3bc-1dd4-4f7e-a5e0-e0ee02ed792c"
-                },
-                {
-                    "name": "Dash Ecklund",
-                    "Heat/Lane/Flight": "Heat 3 Lane 3",
-                    "result": "26.22",
-                    "place": null,
-                    "pr": "26.22",
-                    "points": "-",
-                    "athlete_uid": "2f64820a-9425-4709-8bb4-78cf541fcb7f",
-                    "seed_uid": "01b3cb0f-4510-499b-aad9-a751b2aedc5b",
-                    "seed": "26.6",
-                    "result_uid": "afa0dd5c-0c2a-4eeb-ba34-a3380a91a430"
-                },
-                {
-                    "name": "Orion Davis",
-                    "Heat/Lane/Flight": "Heat 3 Lane 6",
-                    "result": "26.39",
-                    "place": null,
-                    "pr": "26.39",
-                    "points": "-",
-                    "athlete_uid": "fece81f7-1845-4140-a2b5-a013a92aa735",
-                    "seed_uid": "6bf62c27-462d-40e0-b97d-140102926615",
-                    "seed": "28.67",
-                    "result_uid": "88b15135-edbc-49a8-b690-e61c692497e2"
-                },
-                {
-                    "name": "Charlie Bonvillian",
-                    "Heat/Lane/Flight": "Heat 4 Lane 5",
-                    "result": null,
-                    "place": null,
-                    "pr": "-",
-                    "points": "-",
-                    "athlete_uid": "97644b84-36e6-440f-af98-06a0d975a738",
-                    "seed": "-",
-                    "seed_uid": null,
-                    "result_uid": null
-                }
-            ]
-        },
-        {
-            "Event": "Boys 3200m",
-            "Event Time": "6:25pm",
-            "athletes": [
-                {
-                    "name": "Koen Harriman",
-                    "Heat/Lane/Flight": "Heat 1 Runner 3",
-                    "result": "11:01.05",
-                    "place": null,
-                    "pr": "11:01.05",
-                    "points": "-",
-                    "athlete_uid": "0bc280ac-94de-4297-b180-6763146f418e",
-                    "seed_uid": "1f84c5e6-cdc6-40ae-8e5f-3477f3fd4e7c",
-                    "seed": "11:27.36",
-                    "result_uid": "cb90cd8a-0d04-46cc-b030-ac6191baabf5"
-                }
-            ]
-        },
-        {
-            "Event": "Girls 4x400 relay",
-            "Event Time": "6:40pm",
-            "relay": true,
-            "teams": [
-                {
-                    "name": "Team A:",
-                    "Heat/Lane/Flight": "Heat 1 Lane 4",
-                    "athletes": []
-                }
-            ]
-        },
-        {
-            "Event": "Boys 4x400 relay",
-            "Event Time": "6:50pm",
-            "relay": true,
-            "teams": [
-                {
-                    "name": "Team A:",
-                    "Heat/Lane/Flight": "Max Vieth",
-                    "athletes": []
+                    "athlete_uid": "d1d62c0d-5d91-4afc-b035-e0c2b100e85f",
+                    "seed_uid": "10f28aef-f468-4069-8cc7-749163f60114",
+                    "result_uid": null,
+                    "seed": "24.04"
                 }
             ]
         }

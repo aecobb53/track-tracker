@@ -1,0 +1,282 @@
+meet:
+  meet_name: David S. D'Evelyn
+  date: '2025-04-05'
+  small_meet: False
+  last_updated: '2025-04-02 21:02:27'
+events:
+  - Event: Girls 100 Meter
+    Event Time: TBD
+    athletes:
+      - name: Julia Savage
+        HEAT/LANE/FLIGHT: Unknown
+        seed: 13.65
+  - Event: Girls 200 Meter
+    Event Time: TBD
+    athletes:
+      - name: Lillian Graves
+        HEAT/LANE/FLIGHT: Unknown
+        seed: 25.00h
+      - name: Anna Johnson
+        HEAT/LANE/FLIGHT: Unknown
+        seed: 29.12
+      - name: Julia Savage
+        HEAT/LANE/FLIGHT: Unknown
+        seed: 28.22
+  - Event: Girls 400 Meter
+    Event Time: TBD
+    athletes:
+      - name: Ellie Grandsaert
+        HEAT/LANE/FLIGHT: Unknown
+        seed: 1:02.51
+      - name: Lillian Graves
+        HEAT/LANE/FLIGHT: Unknown
+        seed: 58.59
+      - name: Anna Johnson
+        HEAT/LANE/FLIGHT: Unknown
+        seed: 1:04.04
+  - Event: Girls 800 Meter
+    Event Time: TBD
+    athletes:
+      - name: Laurel Brain
+        HEAT/LANE/FLIGHT: Unknown
+        seed: 2:27.66
+      - name: Ella Seng
+        HEAT/LANE/FLIGHT: Unknown
+        seed: 2:26.61
+      - name: Sierra Wall
+        HEAT/LANE/FLIGHT: Unknown
+        seed: 2:22.24
+  - Event: Girls 1600 Meter
+    Event Time: TBD
+    athletes:
+      - name: Tilly Testa
+        HEAT/LANE/FLIGHT: Unknown
+        seed: 5:28.18
+      - name: Molly Weber
+        HEAT/LANE/FLIGHT: Unknown
+        seed: 5:16.94
+  - Event: Girls 3200 Meter
+    Event Time: TBD
+    athletes:
+      - name: Ellie Cartwright
+        HEAT/LANE/FLIGHT: Unknown
+        seed: 11:45.52
+      - name: Elise Wobus
+        HEAT/LANE/FLIGHT: Unknown
+        seed: 12:52.03
+  - Event: Girls 100 Meter Hurdles
+    Event Time: TBD
+    athletes: []
+  - Event: Girls 300 Meter Hurdles
+    Event Time: TBD
+    athletes:
+      - name: Avery Bugbee
+        HEAT/LANE/FLIGHT: Unknown
+        seed: 52.17
+  - Event: Girls 4X100 Meter Relay
+    Event Time: TBD
+    athletes: []
+  - Event: Girls 4X200 Meter Relay
+    Event Time: TBD
+    athletes:
+      - name: Julia Savage
+        HEAT/LANE/FLIGHT: Unknown
+      - name: Ellie Grandsaert
+        HEAT/LANE/FLIGHT: Unknown
+      - name: Avery Bugbee
+        HEAT/LANE/FLIGHT: Unknown
+      - name: Lillian Graves
+        HEAT/LANE/FLIGHT: Unknown
+  - Event: Girls 4X400 Meter Relay
+    Event Time: TBD
+    athletes: []
+  - Event: Girls 4X800 Meter Relay
+    Event Time: TBD
+    athletes:
+      - name: Emma Weber
+        HEAT/LANE/FLIGHT: Unknown
+      - name: Clara Connolly
+        HEAT/LANE/FLIGHT: Unknown
+      - name: Charlotte Carlson
+        HEAT/LANE/FLIGHT: Unknown
+      - name: Ellie Grandsaert
+        HEAT/LANE/FLIGHT: Unknown
+  - Event: Girls High Jump
+    Event Time: TBD
+    athletes:
+      - name: Amelia Clasby
+        HEAT/LANE/FLIGHT: Unknown
+        seed: 4-10.5
+      - name: Julia Savage
+        HEAT/LANE/FLIGHT: Unknown
+        seed: 5-0
+  - Event: Girls Long Jump
+    Event Time: TBD
+    athletes: []
+  - Event: Girls Triple Jump
+    Event Time: TBD
+    athletes: []
+  - Event: Girls Pole Vault
+    Event Time: TBD
+    athletes:
+      - name: Irene McCalmon
+        HEAT/LANE/FLIGHT: Unknown
+        seed: 9-6
+  - Event: Girls Discus
+    Event Time: TBD
+    athletes: []
+  - Event: Girls Shot Put
+    Event Time: TBD
+    athletes: []
+  - Event: Boys 100 Meter
+    Event Time: TBD
+    athletes:
+      - name: Wade Carlson
+        HEAT/LANE/FLIGHT: Unknown
+        seed: 12.10
+      - name: Channing Cooper
+        HEAT/LANE/FLIGHT: Unknown
+        seed: 11.60
+      - name: Jaxson Cooper
+        HEAT/LANE/FLIGHT: Unknown
+        seed: 11.98
+  - Event: Boys 200 Meter
+    Event Time: TBD
+    athletes:
+      - name: Charles Bonvillian
+        HEAT/LANE/FLIGHT: Unknown
+        seed: 25.36
+      - name: Channing Cooper
+        HEAT/LANE/FLIGHT: Unknown
+        seed: 23.75
+  - Event: Boys 400 Meter
+    Event Time: TBD
+    athletes:
+      - name: Arran Machado McKelvie
+        HEAT/LANE/FLIGHT: Unknown
+        seed: 57.92
+  - Event: Boys 800 Meter
+    Event Time: TBD
+    athletes:
+      - name: Dario Barnes
+        HEAT/LANE/FLIGHT: Unknown
+        seed: 2:14.41
+      - name: Theodore Chastang
+        HEAT/LANE/FLIGHT: Unknown
+        seed: 2:08.61
+      - name: Rory Treleaven
+        HEAT/LANE/FLIGHT: Unknown
+        seed: 2:06.00h
+  - Event: Boys 1600 Meter
+    Event Time: TBD
+    athletes:
+      - name: Zach Bean
+        HEAT/LANE/FLIGHT: Unknown
+        seed: 4:54.47
+      - name: Ewan Kenny
+        HEAT/LANE/FLIGHT: Unknown
+        seed: 4:41.53
+      - name: Oliver Su
+        HEAT/LANE/FLIGHT: Unknown
+        seed: 4:47.83
+  - Event: Boys 3200 Meter
+    Event Time: TBD
+    athletes:
+      - name: Koen Harriman
+        HEAT/LANE/FLIGHT: Unknown
+        seed: 11:01.05
+  - Event: Boys 110 Meter Hurdles
+    Event Time: TBD
+    athletes:
+      - name: Zephyr Middleton
+        HEAT/LANE/FLIGHT: Unknown
+        seed: 20.38
+  - Event: Boys 300 Meter Hurdles
+    Event Time: TBD
+    athletes:
+      - name: Zephyr Middleton
+        HEAT/LANE/FLIGHT: Unknown
+        seed: 49.23
+  - Event: Boys 4X100 Meter Relay
+    Event Time: TBD
+    athletes:
+      - name: Greene Smythe
+        HEAT/LANE/FLIGHT: Unknown
+      - name: Santiago Caravia-Perry
+        HEAT/LANE/FLIGHT: Unknown
+      - name: Jaxson Cooper
+        HEAT/LANE/FLIGHT: Unknown
+      - name: Channing Cooper
+        HEAT/LANE/FLIGHT: Unknown
+  - Event: Boys 4X200 Meter Relay
+    Event Time: TBD
+    athletes: []
+  - Event: Boys 4X400 Meter Relay
+    Event Time: TBD
+    athletes: []
+  - Event: Boys 4X800 Meter Relay
+    Event Time: TBD
+    athletes: []
+  - Event: Boys High Jump
+    Event Time: TBD
+    athletes:
+      - name: Anthony Giliberti
+        HEAT/LANE/FLIGHT: Unknown
+        seed: 5-2
+      - name: Max Webb
+        HEAT/LANE/FLIGHT: Unknown
+        seed: 5-6
+  - Event: Boys Long Jump
+    Event Time: TBD
+    athletes:
+      - name: Santiago Caravia-Perry
+        HEAT/LANE/FLIGHT: Unknown
+        seed: 17-1.5
+      - name: Caleb Cooper
+        HEAT/LANE/FLIGHT: Unknown
+        seed: 19-2
+      - name: Max Webb
+        HEAT/LANE/FLIGHT: Unknown
+        seed: 18-10
+  - Event: Boys Triple Jump
+    Event Time: TBD
+    athletes:
+      - name: Caleb Cooper
+        HEAT/LANE/FLIGHT: Unknown
+        seed: 37-4
+      - name: Jaxson Cooper
+        HEAT/LANE/FLIGHT: Unknown
+        seed: 34-8
+      - name: Zane Copeland
+        HEAT/LANE/FLIGHT: Unknown
+        seed: 34-10.5
+  - Event: Boys Pole Vault
+    Event Time: TBD
+    athletes:
+      - name: Kieran Meier
+        HEAT/LANE/FLIGHT: Unknown
+        seed: 11-7
+  - Event: Boys Discus
+    Event Time: TBD
+    athletes:
+      - name: Kaylor Huang
+        HEAT/LANE/FLIGHT: Unknown
+        seed: 82-1
+      - name: Colton Ott
+        HEAT/LANE/FLIGHT: Unknown
+        seed: 82-3
+      - name: Jace Pollock
+        HEAT/LANE/FLIGHT: Unknown
+        seed: 113-9
+  - Event: Boys Shot Put
+    Event Time: TBD
+    athletes:
+      - name: Keeghan Field-Gordon
+        HEAT/LANE/FLIGHT: Unknown
+        seed: 38-2
+      - name: Colton Ott
+        HEAT/LANE/FLIGHT: Unknown
+        seed: 34-5
+      - name: Colin Overy
+        HEAT/LANE/FLIGHT: Unknown
+        seed: 33-11.5

@@ -55,6 +55,8 @@ async def html_meetday(request: Request):
     print(f'MEETS PAGE')
     meets_dict = {}
     for fl in os.listdir('/db/meets'):
+        if not fl.endswith('.json'):
+            continue
         with open(os.path.join('/db/meets', fl), 'r') as jf:
             meet_file_data = json.load(jf)
             meet_metadata = meet_file_data['meet']

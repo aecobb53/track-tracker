@@ -42,9 +42,6 @@ async def sprint_html_page(athletes_dict):
     for _, details in athletes_dict.items():
         athlete = details['athlete']
         results = details['results']
-        # print('')
-        # print(f"ATHLETE: {athlete}")
-        # print(f"RESULTS: {results}")
         m100 = None
         m200 = None
         m400 = None
@@ -75,11 +72,9 @@ async def sprint_html_page(athletes_dict):
                     if result.result > m400.result:
                         m400 = result
             else:
-                # print('-not found-')
                 x=1
                 continue
 
-        # print('')
         if not m200:
             m200_assumed = True
             if m100:
@@ -125,7 +120,6 @@ async def sprint_html_page(athletes_dict):
             m100_assumed = False
             m200_assumed = False
             m400_assumed = False
-        # print(f"RESULTS: {m100}, {m200}, {m400}")
         if athlete.graduation_year:
             graduation_year = class_formatter(athlete.graduation_year)[0]
         else:

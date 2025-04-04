@@ -30,7 +30,7 @@ class EventParser:
         return self.gender
 
     def parse_result(self, result_s: str):
-        if not result_s:
+        if not result_s or result_s == '-':
             return None, None, None, None, None, None
         re_s = re.search(self.re_s, result_s)
         if re_s:
@@ -85,10 +85,7 @@ class EventParser:
     def parse_event_result(cls, event_s: str, result_s: str):
         ep = cls(event_s)
         result = ep.parse_result(result_s)
-        # print(f"EXAMPLE RESULT: {result}")
         if result is None:
-            # print(f"EP: {ep}")
-            # print(f"EP: {ep.re_s}")
             if ep.event_type == 'run':
                 result  = (0, 0, 0, None, None, None)
             elif ep.event_type == 'field':

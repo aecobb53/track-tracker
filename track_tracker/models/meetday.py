@@ -19,7 +19,6 @@ class Meet(BaseModel):
 
     @model_validator(mode='before')
     def validate_fields(cls, fields):
-        # print(f"FIELDS: {fields}")
         if not fields.get('events'):
             fields['events'] = []
         return fields
@@ -33,7 +32,6 @@ class MeetDay(BaseModel):
 
     @model_validator(mode='before')
     def validate_fields(cls, fields):
-        print(f"FIELDS: {fields}")
         if not fields.get('csv'):
             fields['csv'] = []
         return fields
