@@ -10,6 +10,7 @@ function createMeetInputItem(value, added_div_class, added_input_class) {
     if (added_div_class) {
         input_div.className = added_div_class;
     }
+    input_div.classList.add('event-data-row');
     input_div.appendChild(input);
     return input_div;
 }
@@ -22,6 +23,7 @@ function createMeetDivItem(value, added_class) {
     // input.value = value;
     // input.setAttribute('onchange', "runUpdate()");
     input_div.className = added_class;
+    input_div.classList.add('event-data-row');
     input_div.appendChild(input);
     return input_div;
 }
@@ -86,6 +88,7 @@ function createMeetButtonItem(value, added_class, functionText) {
     button.setAttribute('onclick', functionText);
     button_div.className = added_class;
     button_div.appendChild(button);
+    button_div.classList.add('event-data-row');
     return button_div;
 }
 

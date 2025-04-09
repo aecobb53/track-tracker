@@ -3,7 +3,7 @@
         "meet_name": "BHS CHS FHS MHS",
         "date": "2025-03-12",
         "small_meet": true,
-        "last_updated": "2025-04-03 15:56:35"
+        "last_updated": "2025-04-04 17:27:30"
     },
     "events": [
         {
@@ -448,16 +448,64 @@
                     "Heat/Lane/Flight": "Heat 1 Lane 4",
                     "athletes": [
                         {
-                            "name": "Katja Brown"
+                            "name": "Team A:",
+                            "Heat/Lane/Flight": "Heat 1 Lane 4",
+                            "result": null,
+                            "place": null,
+                            "pr": "-",
+                            "points": "-",
+                            "athlete_uid": null,
+                            "seed_uid": null,
+                            "result_uid": null,
+                            "seed": "-"
                         },
                         {
-                            "name": "Emma Weber"
+                            "name": "Katja Brown",
+                            "result": null,
+                            "place": null,
+                            "pr": "-",
+                            "points": "-",
+                            "athlete_uid": "d89d7274-f10c-4792-9ac4-c782f1bd74e3",
+                            "seed_uid": "cb9330bb-7e3e-4162-abf9-436b0e350c66",
+                            "result_uid": null,
+                            "Heat/Lane/Flight": "-",
+                            "seed": "176.05"
                         },
                         {
-                            "name": "Coco Glebe"
+                            "name": "Emma Weber",
+                            "result": null,
+                            "place": null,
+                            "pr": "-",
+                            "points": "-",
+                            "athlete_uid": "4b4677d8-689f-45ed-910e-b127b6a42aa7",
+                            "seed_uid": "6a2c4351-434a-4476-af03-49c614c5b449",
+                            "result_uid": null,
+                            "Heat/Lane/Flight": "-",
+                            "seed": "157.86"
                         },
                         {
-                            "name": "Cameron LaFrazza-Schwartz"
+                            "name": "Coco Glebe",
+                            "result": null,
+                            "place": null,
+                            "pr": "-",
+                            "points": "-",
+                            "athlete_uid": "b83a9edf-cb02-4333-bd5a-44d79e55cc49",
+                            "seed_uid": "251f4292-b7a3-4dda-b21f-566895b3dfe8",
+                            "result_uid": null,
+                            "Heat/Lane/Flight": "-",
+                            "seed": "165.37"
+                        },
+                        {
+                            "name": "Cameron LaFrazza-Schwartz",
+                            "result": null,
+                            "place": null,
+                            "pr": "-",
+                            "points": "-",
+                            "athlete_uid": "0f09f376-7146-45e3-a467-0502a54c30f1",
+                            "seed_uid": "8d563388-d8f4-4c6c-a820-93a8e7943ec5",
+                            "result_uid": null,
+                            "Heat/Lane/Flight": "-",
+                            "seed": "177.48"
                         }
                     ]
                 },
@@ -466,16 +514,64 @@
                     "Heat/Lane/Flight": "Heat 1 Lane 5",
                     "athletes": [
                         {
-                            "name": "Cam Miller"
+                            "name": "Team B:",
+                            "Heat/Lane/Flight": "Heat 1 Lane 5",
+                            "result": null,
+                            "place": null,
+                            "pr": "-",
+                            "points": "-",
+                            "athlete_uid": null,
+                            "seed_uid": null,
+                            "result_uid": null,
+                            "seed": "-"
                         },
                         {
-                            "name": "Colin Eisner"
+                            "name": "Cam Miller",
+                            "result": null,
+                            "place": null,
+                            "pr": "-",
+                            "points": "-",
+                            "athlete_uid": "ddea1958-ab61-477b-9863-6350d3f0b6f0",
+                            "seed_uid": null,
+                            "result_uid": null,
+                            "Heat/Lane/Flight": "-",
+                            "seed": "-"
                         },
                         {
-                            "name": "Arran Machado-Kelvie"
+                            "name": "Colin Eisner",
+                            "result": null,
+                            "place": null,
+                            "pr": "-",
+                            "points": "-",
+                            "athlete_uid": "28fac796-e0a7-4db2-a959-f7ee851dd772",
+                            "seed_uid": null,
+                            "result_uid": null,
+                            "Heat/Lane/Flight": "-",
+                            "seed": "-"
                         },
                         {
-                            "name": "Lucas Jaramillo-Ortman"
+                            "name": "Arran Machado-Kelvie",
+                            "result": null,
+                            "place": null,
+                            "pr": "-",
+                            "points": "-",
+                            "athlete_uid": "7ca99a25-41cc-49f8-b984-ecabe0d0a68d",
+                            "seed_uid": null,
+                            "result_uid": null,
+                            "Heat/Lane/Flight": "-",
+                            "seed": "-"
+                        },
+                        {
+                            "name": "Lucas Jaramillo-Ortman",
+                            "result": null,
+                            "place": null,
+                            "pr": "-",
+                            "points": "-",
+                            "athlete_uid": "4c5794f9-aa0f-48da-a102-fb0843291c0f",
+                            "seed_uid": null,
+                            "result_uid": null,
+                            "Heat/Lane/Flight": "-",
+                            "seed": "-"
                         }
                     ]
                 }
@@ -489,12 +585,38 @@
                 {
                     "name": "Team A:",
                     "Heat/Lane/Flight": "Heat 1 Lane 4",
-                    "athletes": []
+                    "athletes": [
+                        {
+                            "name": "Team A:",
+                            "Heat/Lane/Flight": "Heat 1 Lane 4",
+                            "result": null,
+                            "place": null,
+                            "pr": "-",
+                            "points": "-",
+                            "athlete_uid": null,
+                            "seed_uid": null,
+                            "result_uid": null,
+                            "seed": "-"
+                        }
+                    ]
                 },
                 {
                     "name": "Team B:",
                     "Heat/Lane/Flight": "Heat 1 Lane 5",
-                    "athletes": []
+                    "athletes": [
+                        {
+                            "name": "Team B:",
+                            "Heat/Lane/Flight": "Heat 1 Lane 5",
+                            "result": null,
+                            "place": null,
+                            "pr": "-",
+                            "points": "-",
+                            "athlete_uid": null,
+                            "seed_uid": null,
+                            "result_uid": null,
+                            "seed": "-"
+                        }
+                    ]
                 }
             ]
         },
@@ -842,7 +964,20 @@
                 {
                     "name": "Team A:",
                     "Heat/Lane/Flight": "Heat 1 Lane 6",
-                    "athletes": []
+                    "athletes": [
+                        {
+                            "name": "Team A:",
+                            "Heat/Lane/Flight": "Heat 1 Lane 6",
+                            "result": null,
+                            "place": null,
+                            "pr": "-",
+                            "points": "-",
+                            "athlete_uid": null,
+                            "seed_uid": null,
+                            "result_uid": null,
+                            "seed": "-"
+                        }
+                    ]
                 }
             ]
         },
@@ -854,12 +989,38 @@
                 {
                     "name": "Team A:",
                     "Heat/Lane/Flight": "Heat 1 Lane 4",
-                    "athletes": []
+                    "athletes": [
+                        {
+                            "name": "Team A:",
+                            "Heat/Lane/Flight": "Heat 1 Lane 4",
+                            "result": null,
+                            "place": null,
+                            "pr": "-",
+                            "points": "-",
+                            "athlete_uid": null,
+                            "seed_uid": null,
+                            "result_uid": null,
+                            "seed": "-"
+                        }
+                    ]
                 },
                 {
                     "name": "Team B:",
                     "Heat/Lane/Flight": "Heat 2 Lane 3",
-                    "athletes": []
+                    "athletes": [
+                        {
+                            "name": "Team B:",
+                            "Heat/Lane/Flight": "Heat 2 Lane 3",
+                            "result": null,
+                            "place": null,
+                            "pr": "-",
+                            "points": "-",
+                            "athlete_uid": null,
+                            "seed_uid": null,
+                            "result_uid": null,
+                            "seed": "-"
+                        }
+                    ]
                 }
             ]
         },
@@ -1051,12 +1212,38 @@
                 {
                     "name": "Team A:",
                     "Heat/Lane/Flight": "Heat 1 Lane 3",
-                    "athletes": []
+                    "athletes": [
+                        {
+                            "name": "Team A:",
+                            "Heat/Lane/Flight": "Heat 1 Lane 3",
+                            "result": null,
+                            "place": null,
+                            "pr": "-",
+                            "points": "-",
+                            "athlete_uid": null,
+                            "seed_uid": null,
+                            "result_uid": null,
+                            "seed": "-"
+                        }
+                    ]
                 },
                 {
                     "name": "Team B:",
                     "Heat/Lane/Flight": "Heat 1 Lane 6",
-                    "athletes": []
+                    "athletes": [
+                        {
+                            "name": "Team B:",
+                            "Heat/Lane/Flight": "Heat 1 Lane 6",
+                            "result": null,
+                            "place": null,
+                            "pr": "-",
+                            "points": "-",
+                            "athlete_uid": null,
+                            "seed_uid": null,
+                            "result_uid": null,
+                            "seed": "-"
+                        }
+                    ]
                 }
             ]
         },
@@ -1068,12 +1255,38 @@
                 {
                     "name": "Team A:",
                     "Heat/Lane/Flight": "Heat 1 Lane 3",
-                    "athletes": []
+                    "athletes": [
+                        {
+                            "name": "Team A:",
+                            "Heat/Lane/Flight": "Heat 1 Lane 3",
+                            "result": null,
+                            "place": null,
+                            "pr": "-",
+                            "points": "-",
+                            "athlete_uid": null,
+                            "seed_uid": null,
+                            "result_uid": null,
+                            "seed": "-"
+                        }
+                    ]
                 },
                 {
                     "name": "Team B:",
                     "Heat/Lane/Flight": "Heat 1 Lane 6",
-                    "athletes": []
+                    "athletes": [
+                        {
+                            "name": "Team B:",
+                            "Heat/Lane/Flight": "Heat 1 Lane 6",
+                            "result": null,
+                            "place": null,
+                            "pr": "-",
+                            "points": "-",
+                            "athlete_uid": null,
+                            "seed_uid": null,
+                            "result_uid": null,
+                            "seed": "-"
+                        }
+                    ]
                 }
             ]
         },
@@ -1607,7 +1820,20 @@
                 {
                     "name": "Team A:",
                     "Heat/Lane/Flight": "Heat 1 Lane 4",
-                    "athletes": []
+                    "athletes": [
+                        {
+                            "name": "Team A:",
+                            "Heat/Lane/Flight": "Heat 1 Lane 4",
+                            "result": null,
+                            "place": null,
+                            "pr": "-",
+                            "points": "-",
+                            "athlete_uid": null,
+                            "seed_uid": null,
+                            "result_uid": null,
+                            "seed": "-"
+                        }
+                    ]
                 }
             ]
         },
@@ -1619,7 +1845,20 @@
                 {
                     "name": "Team A:",
                     "Heat/Lane/Flight": "Max Vieth",
-                    "athletes": []
+                    "athletes": [
+                        {
+                            "name": "Team A:",
+                            "Heat/Lane/Flight": "Max Vieth",
+                            "result": null,
+                            "place": null,
+                            "pr": "-",
+                            "points": "-",
+                            "athlete_uid": null,
+                            "seed_uid": null,
+                            "result_uid": null,
+                            "seed": "-"
+                        }
+                    ]
                 }
             ]
         }

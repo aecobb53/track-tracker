@@ -120,7 +120,7 @@ async def filter_meetdays_html_page(meets_dict):
     # Body
     page_content = Div().add_class('page-content')
 
-    meet_grouping_div = Div(Header(level=1, internal='THING')).add_class('page-group-div')
+    meet_grouping_div = Div(Header(level=1, internal='Meets')).add_class('page-group-div')
     for meet_name, meet_details in meets_dict.items():
         content = [
             Div(internal=Header(level=2, internal=meet_name)).add_class('page-header'),

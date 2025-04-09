@@ -1,4 +1,5 @@
 from datetime import date, datetime, timedelta
+from tkinter import E
 from fastapi import APIRouter, HTTPException, Request, Response, Depends
 from fastapi.responses import HTMLResponse, ORJSONResponse
 
@@ -104,6 +105,38 @@ def temp_function_compare_meet_data(local_meet_events, remote_meet_events, local
         remote_meet_events.pop(0)
 
         for index1, (local_event, remote_event) in enumerate(zip(local_meet_events, remote_meet_events)):
+            if local_event.get('relay'):
+                pass
+            else:
+                tweaking = True
+                rescue = 100
+                while tweaking:
+                    tweaking = False
+                    if len(local_event['athletes']) != len(remote_event['athletes']):
+                        """
+                        Since I only add one empty athlete column, it should be pretty easy to see which one was added
+                        """
+                        tweaking = True
+                        for index in range(max(len(local_event['athletes']), len(remote_event['athletes']))):
+                            if len(local_event['athletes']) > len(remote_event['athletes']):
+                                # Need to remove
+                                local_event['athletes'].pop(index)
+                                break
+                            else:
+                                # Need to add
+                                if len(remote_event['athletes']) + 1 < index:
+                                    athlete_1 = None
+                                else:
+                                    athlete_1 = local_event['athletes'][index]['name']
+                                athlete_2 = remote_event['athletes'][index]
+                                if athlete_1 != athlete_2:
+                                    local_event['athletes'].insert(index, {'name': athlete_2})
+                                    break
+                    rescue -= 1
+                    if rescue <= 0:
+                        print(f"RESCUE TIMEOUT")
+                        break
+
             if local_event['Event'] != remote_event['event'][0].strip():
                 local_changed = True
                 local_event['Event'] = remote_event['event'][0].strip()
@@ -118,12 +151,74 @@ def temp_function_compare_meet_data(local_meet_events, remote_meet_events, local
                     local_athlete['seed_uid'] = None
                     local_athlete['result_uid'] = None
                     local_athlete['pr'] = None
+            if local_event.get('relay'):
+                local_teams = []
+                remote_teams = [{
+                    'name': None,
+                    'athletes': [],
+                }]
+                for team in local_event.get('teams', []):
+                    team_dict = {
+                        'name': team.get('name'),
+                        'athletes': [],
+                    }
+                    for athlete in team.get('athletes', []):
+                        if athlete['name'].lower().startswith('team'):
+                            continue
+                        team_dict['athletes'].append(athlete['name'])
+                    local_teams.append(team_dict)
+                # remote_athlete_index_pointer = 0
+                remote_team_pointer = 0
+                remote_team_dict = {}
+                for athlete in remote_event.get('athletes', []):
+                    if athlete.lower().startswith('team'):
+                        remote_team_pointer += 1
+                        remote_team_dict = {
+                            'name': athlete,
+                            'athletes': [],
+                        }
+                        remote_teams.append(remote_team_dict)
+                    else:
+                        if not remote_teams:
+                            remote_teams.append(remote_team_dict)
+                        remote_teams[remote_team_pointer]['athletes'].append(athlete)
+                for delete_index in reversed(range(len(remote_teams))):
+                    if not remote_teams[delete_index]['name'] and not remote_teams[delete_index]['athletes']:
+                        del remote_teams[delete_index]
+                # print('')
+                # print('HERE')
+                # print(remote_teams)
+                for local_team, remote_team in zip(local_teams, remote_teams):
+                    # print(f"THING1: {local_team}")
+                    # print(f"THING2: {remote_team}")
+                    if local_team['name'] != remote_team['name']:
+                        local_changed = True
+                        local_team['name'] = remote_team['name']
+                        # print(f'TEAM NAME CHANGED')
+                    # if len(local_team['athletes']) != len(remote_team['athletes']):
+                        # print(f"THE LENGTHS ARE DIFFERENT COME BACK TO BUILD THIS OUT")
+                    for local_athlete, remote_athlete in zip(local_team['athletes'], remote_team['athletes']):
+                        if local_athlete != remote_athlete:
+                            local_changed = True
+                            local_athlete = remote_athlete
+                            # print(f'ATHLETE NAME CHANGED')
+
+                # for index2, (local_athlete, remote_athlete) in enumerate(zip(local_event.get('athletes', []), remote_event.get('athletes', []))):
+                #     # print(f"    ATHLETES: {local_athlete}, {remote_athlete}")
+                #     if local_athlete['name'] != remote_athlete.strip():
+                #         # print(f"    ATHLETES ARE DIFFERENT: {local_athlete}, {remote_athlete}")
+                #         local_changed = True
+                #         local_athlete['name'] = remote_athlete.strip()
+                #         local_athlete['athlete_uid'] = None
+                #         local_athlete['seed_uid'] = None
+                #         local_athlete['result_uid'] = None
+                #         local_athlete['pr'] = None
             for index2, (local_athlete, remote_athlete) in enumerate(zip(local_event.get('athletes', []), remote_event.get('heats', []))):
-                if local_athlete['Heat/Lane/Flight'] != remote_athlete.strip():
+                if local_athlete.get('Heat/Lane/Flight') != remote_athlete.strip():
                     local_changed = True
                     local_athlete['Heat/Lane/Flight'] = remote_athlete.strip()
             for index2, (local_athlete, remote_athlete) in enumerate(zip(local_event.get('athletes', []), remote_event.get('seeds', []))):
-                if local_athlete['seed'] != remote_athlete.strip():
+                if local_athlete.get('seed') != remote_athlete.strip():
                     local_changed = True
                     local_athlete['seed'] = remote_athlete.strip()
                     local_athlete['seed_uid'] = None
@@ -258,6 +353,11 @@ async def post_meet(meet: Meet):
 
         for team in event.get('teams', []):
             # This is such a shitty hack. I am angry with myself. But just need it working for now
+            for index in reversed(range(len(team.get('athletes', [])))):
+                # This is a hack to remove the team name from the athletes list since I add them in a sec for display purposes
+                row = team['athletes'][index]
+                if row['name'].startswith('Team'):
+                    team['athletes'].pop(index)
             if team.get('name'):
                 team['athletes'].insert(0, {
                     'name': team['name'],
@@ -271,8 +371,6 @@ async def post_meet(meet: Meet):
                     rh,
                     athlete_or_result_pulled)
                 athletes.append(athlete)
-            # athletes = [team['name']]
-
 
         event_dict['athletes'] = athletes
         event_data.append(event_dict)
