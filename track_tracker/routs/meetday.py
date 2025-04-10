@@ -117,6 +117,12 @@ def temp_function_compare_meet_data(local_meet_events, remote_meet_events, local
                         Since I only add one empty athlete column, it should be pretty easy to see which one was added
                         """
                         tweaking = True
+                        print(local_event['athletes'])
+                        print(remote_event['athletes'])
+                        for a1 in local_event['athletes']:
+                            print(f"LOCAL: {a1['name']}")
+                        for a2 in remote_event['athletes']:
+                            print(f"REMOTE: {a2}")
                         for index in range(max(len(local_event['athletes']), len(remote_event['athletes']))):
                             if len(local_event['athletes']) > len(remote_event['athletes']):
                                 # Need to remove
@@ -124,7 +130,8 @@ def temp_function_compare_meet_data(local_meet_events, remote_meet_events, local
                                 break
                             else:
                                 # Need to add
-                                if len(remote_event['athletes']) + 1 < index:
+                                # if len(remote_event['athletes']) + 1 < index:
+                                if len(local_event['athletes']) < index:
                                     athlete_1 = None
                                 else:
                                     athlete_1 = local_event['athletes'][index]['name']
