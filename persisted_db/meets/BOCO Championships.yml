@@ -4,14 +4,14 @@ meet:
   small_meet: False
   last_updated: '2025-04-02 21:02:27'
 events:
-  - Event: Girls 100 Meter Dash
+  - Event: Girls 100m
     Event Time: '-'
     athletes:
       - name: Evelyn Kear
         seed: 13.89
       - name: Petra Schmidt
         seed: 13.89
-  - Event: Girls 200 Meter Dash
+  - Event: Girls 200m
     Event Time: '-'
     athletes:
       - name: Hilary Bojar
@@ -21,14 +21,14 @@ events:
       - name: Anna Johnson
         seed: 29.12
       - name: Petra Schmidt
-  - Event: Girls 400 Meter Dash
+  - Event: Girls 400m
     Event Time: '-'
     athletes:
       - name: Ellie Grandsaert
         seed: 1:02.51
       - name: Anna Johnson
         seed: 1:04.04
-  - Event: Girls 800 Meter Run
+  - Event: Girls 800m
     Event Time: '-'
     athletes:
       - name: Laurel Brain
@@ -38,7 +38,7 @@ events:
         seed: 2:37.37
       - name: Ella Seng
         seed: 2:26.61
-  - Event: Girls 1600 Meter Run
+  - Event: Girls 1600m
     Event Time: '-'
     athletes:
       - name: Laurel Brain
@@ -49,7 +49,7 @@ events:
         seed: 5:12.46
       - name: Elise Wobus
         seed: 5:49.04
-  - Event: Girls 3200 Meter Run
+  - Event: Girls 3200m
     Event Time: '-'
     athletes:
       - name: Katja Brown
@@ -59,48 +59,56 @@ events:
         seed: 12:18.39
       - name: Molly Weber
         seed: 11:21.50
-  - Event: Girls 100 Meter Hurdles
+  - Event: Girls 100 Hurdles
     Event Time: '-'
     athletes:
       - name: Hilary Bojar
         seed: 19.88
-  - Event: Girls 300 Meter Hurdles
+  - Event: Girls 300 Hurdles
     Event Time: '-'
     athletes:
       - name: Sierra Wall
         seed: 51.85
-  - Event: Girls 4x100 Meter Relay
+  - Event: Girls 4x100 Relay
     relay: true
     Event Time: '-'
-    athletes:
-      - name: Hilary Bojar
-      - name: Evelyn Kear
-      - name: Petra Schmidt
-      - name: Julia Savage
-  - Event: Girls 4x200 Meter Relay
+    teams:
+      - name: Team 1
+        athletes:
+          - name: Hilary Bojar
+          - name: Evelyn Kear
+          - name: Petra Schmidt
+          - name: Julia Savage
+  - Event: Girls 4x200 Relay
     relay: true
     Event Time: '-'
-    athletes:
-      - name: Petra Schmidt
-      - name: Hilary Bojar
-      - name: Julia Savage
-      - name: Ellie Grandsaert
-  - Event: Girls 4x400 Meter Relay
+    teams:
+      - name: Team 1
+        athletes:
+          - name: Petra Schmidt
+          - name: Hilary Bojar
+          - name: Julia Savage
+          - name: Ellie Grandsaert
+  - Event: Girls 4x400 Relay
     relay: true
     Event Time: '-'
-    athletes:
-      - name: Sierra Wall
-      - name: Ella Seng
-      - name: Anna Johnson
-      - name: Ellie Grandsaert
-  - Event: Girls 4x800 Meter Relay
+    teams:
+      - name: Team 1
+        athletes:
+          - name: Sierra Wall
+          - name: Ella Seng
+          - name: Anna Johnson
+          - name: Ellie Grandsaert
+  - Event: Girls 4x800 Relay
     relay: true
     Event Time: '-'
-    athletes:
-      - name: Laurel Brain
-      - name: Ella Seng
-      - name: Sierra Wall
-      - name: Molly Weber
+    teams:
+      - name: Team 1
+        athletes:
+          - name: Laurel Brain
+          - name: Ella Seng
+          - name: Sierra Wall
+          - name: Molly Weber
   - Event: Girls High Jump
     Event Time: '-'
     athletes:
@@ -112,10 +120,12 @@ events:
         seed: 5-0
   - Event: Girls Long Jump
     Event Time: '-'
-    athletes: []
+    athletes:
+      - name: "-"
   - Event: Girls Triple Jump
     Event Time: '-'
-    athletes: []
+    athletes:
+      - name: "-"
   - Event: Girls Pole Vault
     Event Time: '-'
     athletes:
@@ -133,7 +143,7 @@ events:
     athletes:
       - name: Isabella DiBiase
       - name: Kate Mccall
-  - Event: Boys 100 Meter Dash
+  - Event: Boys 100m
     Event Time: '-'
     athletes:
       - name: Channing Cooper
@@ -143,7 +153,7 @@ events:
       - name: Wyatt Keegan
         seed: 11.09
       - name: Max Vieth
-  - Event: Boys 200 Meter Dash
+  - Event: Boys 200m
     Event Time: '-'
     athletes:
       - name: Channing Cooper
@@ -153,7 +163,7 @@ events:
       - name: Luke Strickland
       - name: Max Vieth
         seed: 24.71
-  - Event: Boys 400 Meter Dash
+  - Event: Boys 400m
     Event Time: '-'
     athletes:
       - name: Wyatt Keegan
@@ -161,7 +171,7 @@ events:
         seed: 57.92
       - name: Max Vieth
         seed: 55.07
-  - Event: Boys 800 Meter Run
+  - Event: Boys 800m
     Event Time: '-'
     athletes:
       - name: Dario Barnes
@@ -172,7 +182,7 @@ events:
         seed: 2:08.61
       - name: Luke Treleaven
         seed: 2:06.96
-  - Event: Boys 1600 Meter Run
+  - Event: Boys 1600m
     Event Time: '-'
     athletes:
       - name: Dario Barnes
@@ -183,7 +193,7 @@ events:
         seed: 4:41.53
       - name: Oliver Su
         seed: 4:47.83
-  - Event: Boys 3200 Meter Run
+  - Event: Boys 3200m
     Event Time: '-'
     athletes:
       - name: Zach Bean
@@ -193,44 +203,56 @@ events:
         seed: 10:09.18
       - name: Oliver Su
         seed: 10:21.68
-  - Event: Boys 110 Meter Hurdles
+  - Event: Boys 110 Hurdles
     Event Time: '-'
     athletes:
       - name: Zephyr Middleton
         seed: 20.38
-  - Event: Boys 300 Meter Hurdles
+  - Event: Boys 300 Hurdles
     Event Time: '-'
     athletes:
       - name: Zephyr Middleton
         seed: 49.23
-  - Event: Boys 4x100 Meter Relay
+  - Event: Boys 4x100 Relay
     relay: true
     Event Time: '-'
-    athletes:
-      - name: Wade Carlson
-      - name: Jaxson Cooper
-      - name: Luke Strickland
-      - name: Channing Cooper
-  - Event: Boys 4x200 Meter Relay
+    teams:
+      - name: Team 1
+        athletes:
+          - name: Wade Carlson
+          - name: Jaxson Cooper
+          - name: Luke Strickland
+          - name: Channing Cooper
+  - Event: Boys 4x200 Relay
     relay: true
     Event Time: '-'
-    athletes:
-      - name: Channing Cooper
-      - name: Max Vieth
-      - name: Luke Strickland
-      - name: Wyatt Keegan
-  - Event: Boys 4x400 Meter Relay
+    teams:
+      - name: Team 1
+        athletes:
+          - name: Channing Cooper
+          - name: Max Vieth
+          - name: Luke Strickland
+          - name: Wyatt Keegan
+  - Event: Boys 4x400 Relay
     relay: true
     Event Time: '-'
-    athletes: []
-  - Event: Boys 4x800 Meter Relay
+    teams:
+      - name: Team 1
+        athletes:
+          - name: "-"
+          - name: "-"
+          - name: "-"
+          - name: "-"
+  - Event: Boys 4x800 Relay
     relay: true
     Event Time: '-'
-    athletes:
-      - name: Luke Treleaven
-      - name: Oliver Su
-      - name: Arran Machado McKelvie
-      - name: Zach Bean
+    teams:
+      - name: Team 1
+        athletes:
+          - name: Luke Treleaven
+          - name: Oliver Su
+          - name: Arran Machado McKelvie
+          - name: Zach Bean
   - Event: Boys High Jump
     Event Time: '-'
     athletes:
