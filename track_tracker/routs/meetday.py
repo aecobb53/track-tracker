@@ -1,4 +1,5 @@
 from datetime import date, datetime, timedelta
+from multiprocessing.sharedctypes import Value
 from tkinter import E
 from fastapi import APIRouter, HTTPException, Request, Response, Depends
 from fastapi.responses import HTMLResponse, ORJSONResponse
@@ -104,8 +105,47 @@ def temp_function_compare_meet_data(local_meet_events, remote_meet_events, local
         """
         remote_meet_events.pop(0)
 
+        # print(f"local_meet_events: {len(local_meet_events)}")
+        # print(f"remote_meet_events: {len(remote_meet_events)}")
+
+        if len(local_meet_events) > len(remote_meet_events):
+            # Local event needs to be removed
+            for index, (local_event, remote_event) in enumerate(zip(local_meet_events, remote_meet_events)):
+                if local_event['Event'] != remote_event['event'][0]:
+                    local_meet_events.pop(index)
+                    local_changed = True
+                    break
+        elif len(local_meet_events) < len(remote_meet_events):
+            # Local needs to add an event
+            for index, (local_event, remote_event) in enumerate(zip(local_meet_events, remote_meet_events)):
+                if local_event['Event'] != remote_event['event'][0]:
+                    new_event = {
+                        'Event': remote_event['event'][0],
+                        'Event Time': "-",
+                        'athletes': [],
+                    }
+                    local_meet_events.insert(index, new_event)
+                    break
+            else:
+                print('NO EVENT FOUND SO IT MUST BE THE LAST ONE')
+            pass
+        else:
+            pass
+
+        # print('FIXEDD')
+        # print(f"local_meet_events: {len(local_meet_events)}")
+        # print(f"remote_meet_events: {len(remote_meet_events)}")
+
         for index1, (local_event, remote_event) in enumerate(zip(local_meet_events, remote_meet_events)):
+            print(f"INDEX: {index1}, LE: {local_event['Event']}, RE: {remote_event['event'][0]}")
+            # print(f"LOCAL: {local_event}")
+            # print(f"REMOTE: {remote_event}")
+            # for a1 in local_event['athletes']:
+            #     print(f"    LOCAL: {a1['name']}")
+            # for a2 in remote_event['athletes']:
+            #     print(f"    REMOTE: {a2}")
             if local_event.get('relay'):
+                # print('NOT WORKING ON RELAYS YET!!!')
                 pass
             else:
                 tweaking = True
@@ -113,32 +153,83 @@ def temp_function_compare_meet_data(local_meet_events, remote_meet_events, local
                 while tweaking:
                     tweaking = False
                     if len(local_event['athletes']) != len(remote_event['athletes']):
+                        print('investigating')
                         """
                         Since I only add one empty athlete column, it should be pretty easy to see which one was added
                         """
                         tweaking = True
-                        print(local_event['athletes'])
-                        print(remote_event['athletes'])
-                        for a1 in local_event['athletes']:
-                            print(f"LOCAL: {a1['name']}")
-                        for a2 in remote_event['athletes']:
-                            print(f"REMOTE: {a2}")
+                        # print(local_event['athletes'])
+                        # print(remote_event['athletes'])
+                        # for a1 in local_event['athletes']:
+                        #     print(f"LOCAL: {a1['name']}")
+                        # for a2 in remote_event['athletes']:
+                        #     print(f"REMOTE: {a2}")
                         for index in range(max(len(local_event['athletes']), len(remote_event['athletes']))):
                             if len(local_event['athletes']) > len(remote_event['athletes']):
                                 # Need to remove
                                 local_event['athletes'].pop(index)
                                 break
                             else:
-                                # Need to add
-                                # if len(remote_event['athletes']) + 1 < index:
-                                if len(local_event['athletes']) < index:
-                                    athlete_1 = None
-                                else:
+                                if len(local_event['athletes']) and len(local_event['athletes']) > index:
+                                    # There are at least some local athletes
+                                    # if len(local_event['athletes']) < index:
+                                    #     athlete_1 = None
+                                    # else:
+                                    #     athlete_1 = local_event['athletes'][index]['name']
                                     athlete_1 = local_event['athletes'][index]['name']
-                                athlete_2 = remote_event['athletes'][index]
-                                if athlete_1 != athlete_2:
+                                else:
+                                    athlete_1 = None
+                                print(f"THING: LEN {len(remote_event['athletes'])}, INDEX: {index}")
+                                if len(remote_event['athletes']) and len(remote_event['athletes']) > index:
+                                    # There are at least some remote athletes
+                                    athlete_2 = remote_event['athletes'][index]
+                                else:
+                                    athlete_2 = None
+                                
+                                if not athlete_1 and not athlete_2:
+                                    print('PROBLEM WHERE BOTH ATHLETES ARE NOT VALID')
+                                    print(f"LOCAL: {local_event}")
+                                    print(f"REMOTE: {remote_event}")
+                                    print(f"LOCAL ATHLETE: {athlete_1}")
+                                    print(f"REMOTE ATHLETE: {athlete_2}")
+                                    raise ValueError('Both athletes are not valid')
+                                elif athlete_1 != athlete_2:
                                     local_event['athletes'].insert(index, {'name': athlete_2})
-                                    break
+                                    
+
+                                # # Need to add
+                                # # if len(remote_event['athletes']) + 1 < index:
+                                # # print(local_event)
+                                # # print(remote_event)
+                                # # for a1 in local_event['athletes']:
+                                # #     print(f"LOCAL: {a1['name']}")
+                                # # for a2 in remote_event['athletes']:
+                                # #     print(f"REMOTE: {a2}")
+                                # if len(local_event['athletes']):
+                                #     # There are at least some local athletes
+                                #     if len(local_event['athletes']) < index:
+                                #         athlete_1 = None
+                                #     else:
+                                #         athlete_1 = local_event['athletes'][index]['name']
+                                #     athlete_2 = remote_event['athletes'][index]
+                                #     if athlete_1 != athlete_2:
+                                #         local_event['athletes'].insert(index, {'name': athlete_2})
+                                #         break
+                                # else:
+                                #     # There are no local athletes
+                                #     # for athlete_2 in remote_event['athletes'][index]
+                                #     pass
+
+                                
+                                # print(f"INDEX AND LEN CHECK: len(local_event['athletes']): {len(local_event['athletes'])}, INDEX: {index}")
+                                # if len(local_event['athletes']) < index:
+                                #     athlete_1 = None
+                                # else:
+                                #     athlete_1 = local_event['athletes'][index]['name']
+                                # athlete_2 = remote_event['athletes'][index]
+                                # if athlete_1 != athlete_2:
+                                #     local_event['athletes'].insert(index, {'name': athlete_2})
+                                #     break
                     rescue -= 1
                     if rescue <= 0:
                         print(f"RESCUE TIMEOUT")

@@ -1,5 +1,8 @@
 function addAthlete(rowIndex, athleteIndex) {
     console.log('Adding Athlete Slot: ' + rowIndex + ', ' + athleteIndex);
+    if (athleteIndex === undefined) {
+        athleteIndex = 0;
+    }
     // DIV
     var table_div = document.getElementById('meet-table');
     var dataRows = table_div.getElementsByClassName('meet-row');
@@ -51,15 +54,16 @@ function addEvent(rowIndex) {
     // console.log(table_div);
     var dataRows = table_div.getElementsByClassName('meet-row');
     for (var i = 0; i < dataRows.length - 1; i++) {
-        console.log('');
-        console.log(i);
-        console.log(dataRows[i]);
+        // console.log('');
+        // console.log(i);
+        // console.log(dataRows[i]);
         if (i === rowIndex) {
-            console.log('MATCH: ' + i);
+            // console.log('MATCH: ' + i);
 
-            table_div.children[i+1].insertAdjacentElement('afterend', dataRows[i+1].cloneNode(true));
+            table_div.children[i].insertAdjacentElement('afterend', dataRows[i].cloneNode(true));
         }
     }
+    runUpdate();
 }
 
 function removeEvent(rowIndex) {
@@ -69,11 +73,11 @@ function removeEvent(rowIndex) {
     // console.log(table_div);
     var dataRows = table_div.getElementsByClassName('meet-row');
     for (var i = 0; i < dataRows.length; i++) {
-        console.log('');
-        console.log(i);
-        console.log(dataRows[i]);
+        // console.log('');
+        // console.log(i);
+        // console.log(dataRows[i]);
         if (i === rowIndex) {
-            console.log('MATCH: ' + i);
+            // console.log('MATCH: ' + i);
 
             table_div.removeChild(dataRows[i]);
             runUpdate();
@@ -81,7 +85,7 @@ function removeEvent(rowIndex) {
             // table_div.children[i+1].insertAdjacentElement('afterend', dataRows[i+1].cloneNode(true));
         }
     }
-    // runUpdate();
+    runUpdate();
 }
 
 

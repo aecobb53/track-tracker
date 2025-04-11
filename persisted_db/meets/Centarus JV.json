@@ -3,7 +3,7 @@
         "meet_name": "Centarus JV",
         "date": "2025-04-10",
         "small_meet": false,
-        "last_updated": "2025-04-10 21:00:41"
+        "last_updated": "2025-04-02 21:02:27"
     },
     "events": [
         {
@@ -11,40 +11,7 @@
             "Event Time": "-",
             "athletes": [
                 {
-                    "name": "A",
-                    "Heat/Lane/Flight": "-",
-                    "seed": "6-06.0",
-                    "seed_uid": "257e538c-2574-425e-a054-11c79c4d1c6b",
-                    "pr": null,
-                    "result": "",
-                    "result_uid": null,
-                    "place": null,
-                    "points": "-",
-                    "athlete_uid": "7d4f4354-2722-4f40-a0f3-811ef9e72ed1"
-                },
-                {
-                    "name": "B",
-                    "Heat/Lane/Flight": "-",
-                    "seed": "-",
-                    "seed_uid": null,
-                    "pr": "-",
-                    "result": "",
-                    "result_uid": null,
-                    "place": null,
-                    "points": "-",
-                    "athlete_uid": "a91d245c-d0b6-4b4c-94e5-1ac438bf5ef9"
-                },
-                {
-                    "name": "C",
-                    "result": null,
-                    "place": null,
-                    "pr": "-",
-                    "points": "-",
-                    "athlete_uid": "ac64823c-54bc-466b-a361-30f17d6c14c3",
-                    "seed_uid": null,
-                    "result_uid": null,
-                    "Heat/Lane/Flight": "-",
-                    "seed": "-"
+                    "name": "-"
                 }
             ]
         },
@@ -53,40 +20,7 @@
             "Event Time": "-",
             "athletes": [
                 {
-                    "name": "A",
-                    "result": null,
-                    "place": null,
-                    "pr": "-",
-                    "points": "-",
-                    "athlete_uid": "7d4f4354-2722-4f40-a0f3-811ef9e72ed1",
-                    "seed_uid": null,
-                    "result_uid": null,
-                    "Heat/Lane/Flight": "-",
-                    "seed": "-"
-                },
-                {
-                    "name": "B",
-                    "result": null,
-                    "place": null,
-                    "pr": "-",
-                    "points": "-",
-                    "athlete_uid": "a91d245c-d0b6-4b4c-94e5-1ac438bf5ef9",
-                    "seed_uid": null,
-                    "result_uid": null,
-                    "Heat/Lane/Flight": "-",
-                    "seed": "-"
-                },
-                {
-                    "name": "C",
-                    "result": null,
-                    "place": null,
-                    "pr": "-",
-                    "points": "-",
-                    "athlete_uid": "ac64823c-54bc-466b-a361-30f17d6c14c3",
-                    "seed_uid": null,
-                    "result_uid": null,
-                    "Heat/Lane/Flight": "-",
-                    "seed": "-"
+                    "name": "-"
                 }
             ]
         },
@@ -95,40 +29,7 @@
             "Event Time": "-",
             "athletes": [
                 {
-                    "name": "A",
-                    "result": null,
-                    "place": null,
-                    "pr": "-",
-                    "points": "-",
-                    "athlete_uid": "7d4f4354-2722-4f40-a0f3-811ef9e72ed1",
-                    "seed_uid": "78b77600-1543-4f94-b36d-96baf87f35ed",
-                    "result_uid": null,
-                    "Heat/Lane/Flight": "-",
-                    "seed": "12-09.5"
-                },
-                {
-                    "name": "B",
-                    "result": null,
-                    "place": null,
-                    "pr": "-",
-                    "points": "-",
-                    "athlete_uid": "a91d245c-d0b6-4b4c-94e5-1ac438bf5ef9",
-                    "seed_uid": null,
-                    "result_uid": null,
-                    "Heat/Lane/Flight": "-",
-                    "seed": "-"
-                },
-                {
-                    "name": "C",
-                    "result": null,
-                    "place": null,
-                    "pr": "-",
-                    "points": "-",
-                    "athlete_uid": "ac64823c-54bc-466b-a361-30f17d6c14c3",
-                    "seed_uid": null,
-                    "result_uid": null,
-                    "Heat/Lane/Flight": "-",
-                    "seed": "-"
+                    "name": "-"
                 }
             ]
         },
@@ -137,40 +38,7 @@
             "Event Time": "-",
             "athletes": [
                 {
-                    "name": "A",
-                    "result": null,
-                    "place": null,
-                    "pr": "-",
-                    "points": "-",
-                    "athlete_uid": "7d4f4354-2722-4f40-a0f3-811ef9e72ed1",
-                    "seed_uid": null,
-                    "result_uid": null,
-                    "Heat/Lane/Flight": "-",
-                    "seed": "-"
-                },
-                {
-                    "name": "B",
-                    "result": null,
-                    "place": null,
-                    "pr": "-",
-                    "points": "-",
-                    "athlete_uid": "a91d245c-d0b6-4b4c-94e5-1ac438bf5ef9",
-                    "seed_uid": null,
-                    "result_uid": null,
-                    "Heat/Lane/Flight": "-",
-                    "seed": "-"
-                },
-                {
-                    "name": "C",
-                    "result": null,
-                    "place": null,
-                    "pr": "-",
-                    "points": "-",
-                    "athlete_uid": "ac64823c-54bc-466b-a361-30f17d6c14c3",
-                    "seed_uid": null,
-                    "result_uid": null,
-                    "Heat/Lane/Flight": "-",
-                    "seed": "-"
+                    "name": "-"
                 }
             ]
         },
@@ -179,40 +47,7 @@
             "Event Time": "-",
             "athletes": [
                 {
-                    "name": "A",
-                    "result": null,
-                    "place": null,
-                    "pr": "-",
-                    "points": "-",
-                    "athlete_uid": "7d4f4354-2722-4f40-a0f3-811ef9e72ed1",
-                    "seed_uid": null,
-                    "result_uid": null,
-                    "Heat/Lane/Flight": "-",
-                    "seed": "-"
-                },
-                {
-                    "name": "B",
-                    "result": null,
-                    "place": null,
-                    "pr": "-",
-                    "points": "-",
-                    "athlete_uid": "a91d245c-d0b6-4b4c-94e5-1ac438bf5ef9",
-                    "seed_uid": null,
-                    "result_uid": null,
-                    "Heat/Lane/Flight": "-",
-                    "seed": "-"
-                },
-                {
-                    "name": "C",
-                    "result": null,
-                    "place": null,
-                    "pr": "-",
-                    "points": "-",
-                    "athlete_uid": "ac64823c-54bc-466b-a361-30f17d6c14c3",
-                    "seed_uid": null,
-                    "result_uid": null,
-                    "Heat/Lane/Flight": "-",
-                    "seed": "-"
+                    "name": "-"
                 }
             ]
         },
@@ -221,40 +56,7 @@
             "Event Time": "-",
             "athletes": [
                 {
-                    "name": "A",
-                    "result": null,
-                    "place": null,
-                    "pr": "-",
-                    "points": "-",
-                    "athlete_uid": "7d4f4354-2722-4f40-a0f3-811ef9e72ed1",
-                    "seed_uid": null,
-                    "result_uid": null,
-                    "Heat/Lane/Flight": "-",
-                    "seed": "-"
-                },
-                {
-                    "name": "B",
-                    "result": null,
-                    "place": null,
-                    "pr": "-",
-                    "points": "-",
-                    "athlete_uid": "a91d245c-d0b6-4b4c-94e5-1ac438bf5ef9",
-                    "seed_uid": null,
-                    "result_uid": null,
-                    "Heat/Lane/Flight": "-",
-                    "seed": "-"
-                },
-                {
-                    "name": "C",
-                    "result": null,
-                    "place": null,
-                    "pr": "-",
-                    "points": "-",
-                    "athlete_uid": "ac64823c-54bc-466b-a361-30f17d6c14c3",
-                    "seed_uid": null,
-                    "result_uid": null,
-                    "Heat/Lane/Flight": "-",
-                    "seed": "-"
+                    "name": "-"
                 }
             ]
         },
@@ -263,40 +65,7 @@
             "Event Time": "-",
             "athletes": [
                 {
-                    "name": "A",
-                    "result": null,
-                    "place": null,
-                    "pr": "-",
-                    "points": "-",
-                    "athlete_uid": "7d4f4354-2722-4f40-a0f3-811ef9e72ed1",
-                    "seed_uid": null,
-                    "result_uid": null,
-                    "Heat/Lane/Flight": "-",
-                    "seed": "-"
-                },
-                {
-                    "name": "B",
-                    "result": null,
-                    "place": null,
-                    "pr": "-",
-                    "points": "-",
-                    "athlete_uid": "a91d245c-d0b6-4b4c-94e5-1ac438bf5ef9",
-                    "seed_uid": null,
-                    "result_uid": null,
-                    "Heat/Lane/Flight": "-",
-                    "seed": "-"
-                },
-                {
-                    "name": "C",
-                    "result": null,
-                    "place": null,
-                    "pr": "-",
-                    "points": "-",
-                    "athlete_uid": "ac64823c-54bc-466b-a361-30f17d6c14c3",
-                    "seed_uid": null,
-                    "result_uid": null,
-                    "Heat/Lane/Flight": "-",
-                    "seed": "-"
+                    "name": "-"
                 }
             ]
         },
@@ -305,40 +74,7 @@
             "Event Time": "-",
             "athletes": [
                 {
-                    "name": "A",
-                    "result": null,
-                    "place": null,
-                    "pr": "-",
-                    "points": "-",
-                    "athlete_uid": "7d4f4354-2722-4f40-a0f3-811ef9e72ed1",
-                    "seed_uid": "68fddb89-ae94-4f39-84f3-34ce0beed155",
-                    "result_uid": null,
-                    "Heat/Lane/Flight": "-",
-                    "seed": "4-02.0"
-                },
-                {
-                    "name": "B",
-                    "result": null,
-                    "place": null,
-                    "pr": "-",
-                    "points": "-",
-                    "athlete_uid": "a91d245c-d0b6-4b4c-94e5-1ac438bf5ef9",
-                    "seed_uid": null,
-                    "result_uid": null,
-                    "Heat/Lane/Flight": "-",
-                    "seed": "-"
-                },
-                {
-                    "name": "C",
-                    "result": null,
-                    "place": null,
-                    "pr": "-",
-                    "points": "-",
-                    "athlete_uid": "ac64823c-54bc-466b-a361-30f17d6c14c3",
-                    "seed_uid": null,
-                    "result_uid": null,
-                    "Heat/Lane/Flight": "-",
-                    "seed": "-"
+                    "name": "-"
                 }
             ]
         },
@@ -347,40 +83,7 @@
             "Event Time": "-",
             "athletes": [
                 {
-                    "name": "A",
-                    "result": null,
-                    "place": null,
-                    "pr": "-",
-                    "points": "-",
-                    "athlete_uid": "7d4f4354-2722-4f40-a0f3-811ef9e72ed1",
-                    "seed_uid": null,
-                    "result_uid": null,
-                    "Heat/Lane/Flight": "-",
-                    "seed": "-"
-                },
-                {
-                    "name": "B",
-                    "result": null,
-                    "place": null,
-                    "pr": "-",
-                    "points": "-",
-                    "athlete_uid": "a91d245c-d0b6-4b4c-94e5-1ac438bf5ef9",
-                    "seed_uid": null,
-                    "result_uid": null,
-                    "Heat/Lane/Flight": "-",
-                    "seed": "-"
-                },
-                {
-                    "name": "C",
-                    "result": null,
-                    "place": null,
-                    "pr": "-",
-                    "points": "-",
-                    "athlete_uid": "ac64823c-54bc-466b-a361-30f17d6c14c3",
-                    "seed_uid": null,
-                    "result_uid": null,
-                    "Heat/Lane/Flight": "-",
-                    "seed": "-"
+                    "name": "-"
                 }
             ]
         },
@@ -389,40 +92,7 @@
             "Event Time": "-",
             "athletes": [
                 {
-                    "name": "A",
-                    "result": null,
-                    "place": null,
-                    "pr": "-",
-                    "points": "-",
-                    "athlete_uid": "7d4f4354-2722-4f40-a0f3-811ef9e72ed1",
-                    "seed_uid": null,
-                    "result_uid": null,
-                    "Heat/Lane/Flight": "-",
-                    "seed": "-"
-                },
-                {
-                    "name": "B",
-                    "result": null,
-                    "place": null,
-                    "pr": "-",
-                    "points": "-",
-                    "athlete_uid": "a91d245c-d0b6-4b4c-94e5-1ac438bf5ef9",
-                    "seed_uid": null,
-                    "result_uid": null,
-                    "Heat/Lane/Flight": "-",
-                    "seed": "-"
-                },
-                {
-                    "name": "C",
-                    "result": null,
-                    "place": null,
-                    "pr": "-",
-                    "points": "-",
-                    "athlete_uid": "ac64823c-54bc-466b-a361-30f17d6c14c3",
-                    "seed_uid": null,
-                    "result_uid": null,
-                    "Heat/Lane/Flight": "-",
-                    "seed": "-"
+                    "name": "-"
                 }
             ]
         },
@@ -459,40 +129,7 @@
             "Event Time": "-",
             "athletes": [
                 {
-                    "name": "A",
-                    "result": null,
-                    "place": null,
-                    "pr": "-",
-                    "points": "-",
-                    "athlete_uid": "7d4f4354-2722-4f40-a0f3-811ef9e72ed1",
-                    "seed_uid": null,
-                    "result_uid": null,
-                    "Heat/Lane/Flight": "-",
-                    "seed": "-"
-                },
-                {
-                    "name": "B",
-                    "result": null,
-                    "place": null,
-                    "pr": "-",
-                    "points": "-",
-                    "athlete_uid": "a91d245c-d0b6-4b4c-94e5-1ac438bf5ef9",
-                    "seed_uid": null,
-                    "result_uid": null,
-                    "Heat/Lane/Flight": "-",
-                    "seed": "-"
-                },
-                {
-                    "name": "C",
-                    "result": null,
-                    "place": null,
-                    "pr": "-",
-                    "points": "-",
-                    "athlete_uid": "ac64823c-54bc-466b-a361-30f17d6c14c3",
-                    "seed_uid": null,
-                    "result_uid": null,
-                    "Heat/Lane/Flight": "-",
-                    "seed": "-"
+                    "name": "-"
                 }
             ]
         },
@@ -501,40 +138,7 @@
             "Event Time": "-",
             "athletes": [
                 {
-                    "name": "A",
-                    "result": null,
-                    "place": null,
-                    "pr": "-",
-                    "points": "-",
-                    "athlete_uid": "7d4f4354-2722-4f40-a0f3-811ef9e72ed1",
-                    "seed_uid": null,
-                    "result_uid": null,
-                    "Heat/Lane/Flight": "-",
-                    "seed": "-"
-                },
-                {
-                    "name": "B",
-                    "result": null,
-                    "place": null,
-                    "pr": "-",
-                    "points": "-",
-                    "athlete_uid": "a91d245c-d0b6-4b4c-94e5-1ac438bf5ef9",
-                    "seed_uid": null,
-                    "result_uid": null,
-                    "Heat/Lane/Flight": "-",
-                    "seed": "-"
-                },
-                {
-                    "name": "C",
-                    "result": null,
-                    "place": null,
-                    "pr": "-",
-                    "points": "-",
-                    "athlete_uid": "ac64823c-54bc-466b-a361-30f17d6c14c3",
-                    "seed_uid": null,
-                    "result_uid": null,
-                    "Heat/Lane/Flight": "-",
-                    "seed": "-"
+                    "name": "-"
                 }
             ]
         },
@@ -543,40 +147,7 @@
             "Event Time": "-",
             "athletes": [
                 {
-                    "name": "A",
-                    "result": null,
-                    "place": null,
-                    "pr": "-",
-                    "points": "-",
-                    "athlete_uid": "7d4f4354-2722-4f40-a0f3-811ef9e72ed1",
-                    "seed_uid": null,
-                    "result_uid": null,
-                    "Heat/Lane/Flight": "-",
-                    "seed": "-"
-                },
-                {
-                    "name": "B",
-                    "result": null,
-                    "place": null,
-                    "pr": "-",
-                    "points": "-",
-                    "athlete_uid": "a91d245c-d0b6-4b4c-94e5-1ac438bf5ef9",
-                    "seed_uid": "a4f3cb82-9bac-417b-8f6f-9bbc5457170b",
-                    "result_uid": null,
-                    "Heat/Lane/Flight": "-",
-                    "seed": "18.49"
-                },
-                {
-                    "name": "C",
-                    "result": null,
-                    "place": null,
-                    "pr": "-",
-                    "points": "-",
-                    "athlete_uid": "ac64823c-54bc-466b-a361-30f17d6c14c3",
-                    "seed_uid": null,
-                    "result_uid": null,
-                    "Heat/Lane/Flight": "-",
-                    "seed": "-"
+                    "name": "-"
                 }
             ]
         },
@@ -585,40 +156,7 @@
             "Event Time": "-",
             "athletes": [
                 {
-                    "name": "A",
-                    "result": null,
-                    "place": null,
-                    "pr": "-",
-                    "points": "-",
-                    "athlete_uid": "7d4f4354-2722-4f40-a0f3-811ef9e72ed1",
-                    "seed_uid": null,
-                    "result_uid": null,
-                    "Heat/Lane/Flight": "-",
-                    "seed": "-"
-                },
-                {
-                    "name": "B",
-                    "result": null,
-                    "place": null,
-                    "pr": "-",
-                    "points": "-",
-                    "athlete_uid": "a91d245c-d0b6-4b4c-94e5-1ac438bf5ef9",
-                    "seed_uid": null,
-                    "result_uid": null,
-                    "Heat/Lane/Flight": "-",
-                    "seed": "-"
-                },
-                {
-                    "name": "C",
-                    "result": null,
-                    "place": null,
-                    "pr": "-",
-                    "points": "-",
-                    "athlete_uid": "ac64823c-54bc-466b-a361-30f17d6c14c3",
-                    "seed_uid": null,
-                    "result_uid": null,
-                    "Heat/Lane/Flight": "-",
-                    "seed": "-"
+                    "name": "-"
                 }
             ]
         },
@@ -655,40 +193,7 @@
             "Event Time": "-",
             "athletes": [
                 {
-                    "name": "A",
-                    "result": null,
-                    "place": null,
-                    "pr": "-",
-                    "points": "-",
-                    "athlete_uid": "7d4f4354-2722-4f40-a0f3-811ef9e72ed1",
-                    "seed_uid": null,
-                    "result_uid": null,
-                    "Heat/Lane/Flight": "-",
-                    "seed": "-"
-                },
-                {
-                    "name": "B",
-                    "result": null,
-                    "place": null,
-                    "pr": "-",
-                    "points": "-",
-                    "athlete_uid": "a91d245c-d0b6-4b4c-94e5-1ac438bf5ef9",
-                    "seed_uid": null,
-                    "result_uid": null,
-                    "Heat/Lane/Flight": "-",
-                    "seed": "-"
-                },
-                {
-                    "name": "C",
-                    "result": null,
-                    "place": null,
-                    "pr": "-",
-                    "points": "-",
-                    "athlete_uid": "ac64823c-54bc-466b-a361-30f17d6c14c3",
-                    "seed_uid": null,
-                    "result_uid": null,
-                    "Heat/Lane/Flight": "-",
-                    "seed": "-"
+                    "name": "-"
                 }
             ]
         },
@@ -697,40 +202,7 @@
             "Event Time": "-",
             "athletes": [
                 {
-                    "name": "A",
-                    "result": null,
-                    "place": null,
-                    "pr": "-",
-                    "points": "-",
-                    "athlete_uid": "7d4f4354-2722-4f40-a0f3-811ef9e72ed1",
-                    "seed_uid": null,
-                    "result_uid": null,
-                    "Heat/Lane/Flight": "-",
-                    "seed": "-"
-                },
-                {
-                    "name": "B",
-                    "result": null,
-                    "place": null,
-                    "pr": "-",
-                    "points": "-",
-                    "athlete_uid": "a91d245c-d0b6-4b4c-94e5-1ac438bf5ef9",
-                    "seed_uid": null,
-                    "result_uid": null,
-                    "Heat/Lane/Flight": "-",
-                    "seed": "-"
-                },
-                {
-                    "name": "C",
-                    "result": null,
-                    "place": null,
-                    "pr": "-",
-                    "points": "-",
-                    "athlete_uid": "ac64823c-54bc-466b-a361-30f17d6c14c3",
-                    "seed_uid": "96fd43b8-b3a2-432a-b18b-bbd46edc880a",
-                    "result_uid": null,
-                    "Heat/Lane/Flight": "-",
-                    "seed": "5:12.07"
+                    "name": "-"
                 }
             ]
         },
@@ -767,40 +239,7 @@
             "Event Time": "-",
             "athletes": [
                 {
-                    "name": "A",
-                    "result": null,
-                    "place": null,
-                    "pr": "-",
-                    "points": "-",
-                    "athlete_uid": "7d4f4354-2722-4f40-a0f3-811ef9e72ed1",
-                    "seed_uid": null,
-                    "result_uid": null,
-                    "Heat/Lane/Flight": "-",
-                    "seed": "-"
-                },
-                {
-                    "name": "B",
-                    "result": null,
-                    "place": null,
-                    "pr": "-",
-                    "points": "-",
-                    "athlete_uid": "a91d245c-d0b6-4b4c-94e5-1ac438bf5ef9",
-                    "seed_uid": null,
-                    "result_uid": null,
-                    "Heat/Lane/Flight": "-",
-                    "seed": "-"
-                },
-                {
-                    "name": "C",
-                    "result": null,
-                    "place": null,
-                    "pr": "-",
-                    "points": "-",
-                    "athlete_uid": "ac64823c-54bc-466b-a361-30f17d6c14c3",
-                    "seed_uid": null,
-                    "result_uid": null,
-                    "Heat/Lane/Flight": "-",
-                    "seed": "-"
+                    "name": "-"
                 }
             ]
         },
@@ -809,40 +248,7 @@
             "Event Time": "-",
             "athletes": [
                 {
-                    "name": "A",
-                    "result": null,
-                    "place": null,
-                    "pr": "-",
-                    "points": "-",
-                    "athlete_uid": "7d4f4354-2722-4f40-a0f3-811ef9e72ed1",
-                    "seed_uid": null,
-                    "result_uid": null,
-                    "Heat/Lane/Flight": "-",
-                    "seed": "-"
-                },
-                {
-                    "name": "B",
-                    "result": null,
-                    "place": null,
-                    "pr": "-",
-                    "points": "-",
-                    "athlete_uid": "a91d245c-d0b6-4b4c-94e5-1ac438bf5ef9",
-                    "seed_uid": null,
-                    "result_uid": null,
-                    "Heat/Lane/Flight": "-",
-                    "seed": "-"
-                },
-                {
-                    "name": "C",
-                    "result": null,
-                    "place": null,
-                    "pr": "-",
-                    "points": "-",
-                    "athlete_uid": "ac64823c-54bc-466b-a361-30f17d6c14c3",
-                    "seed_uid": null,
-                    "result_uid": null,
-                    "Heat/Lane/Flight": "-",
-                    "seed": "-"
+                    "name": "-"
                 }
             ]
         },
@@ -851,40 +257,7 @@
             "Event Time": "-",
             "athletes": [
                 {
-                    "name": "A",
-                    "result": null,
-                    "place": null,
-                    "pr": "-",
-                    "points": "-",
-                    "athlete_uid": "7d4f4354-2722-4f40-a0f3-811ef9e72ed1",
-                    "seed_uid": null,
-                    "result_uid": null,
-                    "Heat/Lane/Flight": "-",
-                    "seed": "-"
-                },
-                {
-                    "name": "B",
-                    "result": null,
-                    "place": null,
-                    "pr": "-",
-                    "points": "-",
-                    "athlete_uid": "a91d245c-d0b6-4b4c-94e5-1ac438bf5ef9",
-                    "seed_uid": null,
-                    "result_uid": null,
-                    "Heat/Lane/Flight": "-",
-                    "seed": "-"
-                },
-                {
-                    "name": "C",
-                    "result": null,
-                    "place": null,
-                    "pr": "-",
-                    "points": "-",
-                    "athlete_uid": "ac64823c-54bc-466b-a361-30f17d6c14c3",
-                    "seed_uid": null,
-                    "result_uid": null,
-                    "Heat/Lane/Flight": "-",
-                    "seed": "-"
+                    "name": "-"
                 }
             ]
         },
@@ -893,40 +266,7 @@
             "Event Time": "-",
             "athletes": [
                 {
-                    "name": "A",
-                    "result": null,
-                    "place": null,
-                    "pr": "-",
-                    "points": "-",
-                    "athlete_uid": "7d4f4354-2722-4f40-a0f3-811ef9e72ed1",
-                    "seed_uid": null,
-                    "result_uid": null,
-                    "Heat/Lane/Flight": "-",
-                    "seed": "-"
-                },
-                {
-                    "name": "B",
-                    "result": null,
-                    "place": null,
-                    "pr": "-",
-                    "points": "-",
-                    "athlete_uid": "a91d245c-d0b6-4b4c-94e5-1ac438bf5ef9",
-                    "seed_uid": null,
-                    "result_uid": null,
-                    "Heat/Lane/Flight": "-",
-                    "seed": "-"
-                },
-                {
-                    "name": "C",
-                    "result": null,
-                    "place": null,
-                    "pr": "-",
-                    "points": "-",
-                    "athlete_uid": "ac64823c-54bc-466b-a361-30f17d6c14c3",
-                    "seed_uid": null,
-                    "result_uid": null,
-                    "Heat/Lane/Flight": "-",
-                    "seed": "-"
+                    "name": "-"
                 }
             ]
         },
@@ -935,40 +275,7 @@
             "Event Time": "-",
             "athletes": [
                 {
-                    "name": "A",
-                    "result": null,
-                    "place": null,
-                    "pr": "-",
-                    "points": "-",
-                    "athlete_uid": "7d4f4354-2722-4f40-a0f3-811ef9e72ed1",
-                    "seed_uid": null,
-                    "result_uid": null,
-                    "Heat/Lane/Flight": "-",
-                    "seed": "-"
-                },
-                {
-                    "name": "B",
-                    "result": null,
-                    "place": null,
-                    "pr": "-",
-                    "points": "-",
-                    "athlete_uid": "a91d245c-d0b6-4b4c-94e5-1ac438bf5ef9",
-                    "seed_uid": null,
-                    "result_uid": null,
-                    "Heat/Lane/Flight": "-",
-                    "seed": "-"
-                },
-                {
-                    "name": "C",
-                    "result": null,
-                    "place": null,
-                    "pr": "-",
-                    "points": "-",
-                    "athlete_uid": "ac64823c-54bc-466b-a361-30f17d6c14c3",
-                    "seed_uid": null,
-                    "result_uid": null,
-                    "Heat/Lane/Flight": "-",
-                    "seed": "-"
+                    "name": "-"
                 }
             ]
         },
@@ -977,40 +284,7 @@
             "Event Time": "-",
             "athletes": [
                 {
-                    "name": "A",
-                    "result": null,
-                    "place": null,
-                    "pr": "-",
-                    "points": "-",
-                    "athlete_uid": "7d4f4354-2722-4f40-a0f3-811ef9e72ed1",
-                    "seed_uid": null,
-                    "result_uid": null,
-                    "Heat/Lane/Flight": "-",
-                    "seed": "-"
-                },
-                {
-                    "name": "B",
-                    "result": null,
-                    "place": null,
-                    "pr": "-",
-                    "points": "-",
-                    "athlete_uid": "a91d245c-d0b6-4b4c-94e5-1ac438bf5ef9",
-                    "seed_uid": null,
-                    "result_uid": null,
-                    "Heat/Lane/Flight": "-",
-                    "seed": "-"
-                },
-                {
-                    "name": "C",
-                    "result": null,
-                    "place": null,
-                    "pr": "-",
-                    "points": "-",
-                    "athlete_uid": "ac64823c-54bc-466b-a361-30f17d6c14c3",
-                    "seed_uid": null,
-                    "result_uid": null,
-                    "Heat/Lane/Flight": "-",
-                    "seed": "-"
+                    "name": "-"
                 }
             ]
         },
@@ -1019,40 +293,7 @@
             "Event Time": "-",
             "athletes": [
                 {
-                    "name": "A",
-                    "result": null,
-                    "place": null,
-                    "pr": "-",
-                    "points": "-",
-                    "athlete_uid": "7d4f4354-2722-4f40-a0f3-811ef9e72ed1",
-                    "seed_uid": null,
-                    "result_uid": null,
-                    "Heat/Lane/Flight": "-",
-                    "seed": "-"
-                },
-                {
-                    "name": "B",
-                    "result": null,
-                    "place": null,
-                    "pr": "-",
-                    "points": "-",
-                    "athlete_uid": "a91d245c-d0b6-4b4c-94e5-1ac438bf5ef9",
-                    "seed_uid": null,
-                    "result_uid": null,
-                    "Heat/Lane/Flight": "-",
-                    "seed": "-"
-                },
-                {
-                    "name": "C",
-                    "result": null,
-                    "place": null,
-                    "pr": "-",
-                    "points": "-",
-                    "athlete_uid": "ac64823c-54bc-466b-a361-30f17d6c14c3",
-                    "seed_uid": null,
-                    "result_uid": null,
-                    "Heat/Lane/Flight": "-",
-                    "seed": "-"
+                    "name": "-"
                 }
             ]
         },
@@ -1061,40 +302,7 @@
             "Event Time": "-",
             "athletes": [
                 {
-                    "name": "A",
-                    "result": null,
-                    "place": null,
-                    "pr": "-",
-                    "points": "-",
-                    "athlete_uid": "7d4f4354-2722-4f40-a0f3-811ef9e72ed1",
-                    "seed_uid": null,
-                    "result_uid": null,
-                    "Heat/Lane/Flight": "-",
-                    "seed": "-"
-                },
-                {
-                    "name": "B",
-                    "result": null,
-                    "place": null,
-                    "pr": "-",
-                    "points": "-",
-                    "athlete_uid": "a91d245c-d0b6-4b4c-94e5-1ac438bf5ef9",
-                    "seed_uid": null,
-                    "result_uid": null,
-                    "Heat/Lane/Flight": "-",
-                    "seed": "-"
-                },
-                {
-                    "name": "C",
-                    "result": null,
-                    "place": null,
-                    "pr": "-",
-                    "points": "-",
-                    "athlete_uid": "ac64823c-54bc-466b-a361-30f17d6c14c3",
-                    "seed_uid": null,
-                    "result_uid": null,
-                    "Heat/Lane/Flight": "-",
-                    "seed": "-"
+                    "name": "-"
                 }
             ]
         },
@@ -1103,40 +311,7 @@
             "Event Time": "-",
             "athletes": [
                 {
-                    "name": "A",
-                    "result": null,
-                    "place": null,
-                    "pr": "-",
-                    "points": "-",
-                    "athlete_uid": "7d4f4354-2722-4f40-a0f3-811ef9e72ed1",
-                    "seed_uid": null,
-                    "result_uid": null,
-                    "Heat/Lane/Flight": "-",
-                    "seed": "-"
-                },
-                {
-                    "name": "B",
-                    "result": null,
-                    "place": null,
-                    "pr": "-",
-                    "points": "-",
-                    "athlete_uid": "a91d245c-d0b6-4b4c-94e5-1ac438bf5ef9",
-                    "seed_uid": null,
-                    "result_uid": null,
-                    "Heat/Lane/Flight": "-",
-                    "seed": "-"
-                },
-                {
-                    "name": "C",
-                    "result": null,
-                    "place": null,
-                    "pr": "-",
-                    "points": "-",
-                    "athlete_uid": "ac64823c-54bc-466b-a361-30f17d6c14c3",
-                    "seed_uid": null,
-                    "result_uid": null,
-                    "Heat/Lane/Flight": "-",
-                    "seed": "-"
+                    "name": "-"
                 }
             ]
         },

@@ -1,0 +1,281 @@
+meet:
+  meet_name: BOCO Championships
+  date: '2025-04-12'
+  small_meet: False
+  last_updated: '2025-04-02 21:02:27'
+events:
+  - Event: Girls 100 Meter Dash
+    Event Time: '-'
+    athletes:
+      - name: Evelyn Kear
+        seed: 13.89
+      - name: Petra Schmidt
+        seed: 13.89
+  - Event: Girls 200 Meter Dash
+    Event Time: '-'
+    athletes:
+      - name: Hilary Bojar
+        seed: 28.61
+      - name: Ellie Grandsaert
+        seed: 28.17
+      - name: Anna Johnson
+        seed: 29.12
+      - name: Petra Schmidt
+  - Event: Girls 400 Meter Dash
+    Event Time: '-'
+    athletes:
+      - name: Ellie Grandsaert
+        seed: 1:02.51
+      - name: Anna Johnson
+        seed: 1:04.04
+  - Event: Girls 800 Meter Run
+    Event Time: '-'
+    athletes:
+      - name: Laurel Brain
+        seed: 2:27.66
+      - name: Charlotte Carlson
+      - name: Clara Connolly
+        seed: 2:37.37
+      - name: Ella Seng
+        seed: 2:26.61
+  - Event: Girls 1600 Meter Run
+    Event Time: '-'
+    athletes:
+      - name: Laurel Brain
+        seed: 5:24.94
+      - name: Tilly Testa
+        seed: 5:28.18
+      - name: Sierra Wall
+        seed: 5:12.46
+      - name: Elise Wobus
+        seed: 5:49.04
+  - Event: Girls 3200 Meter Run
+    Event Time: '-'
+    athletes:
+      - name: Katja Brown
+      - name: Ellie Cartwright
+        seed: 11:45.52
+      - name: Martina Riley
+        seed: 12:18.39
+      - name: Molly Weber
+        seed: 11:21.50
+  - Event: Girls 100 Meter Hurdles
+    Event Time: '-'
+    athletes:
+      - name: Hilary Bojar
+        seed: 19.88
+  - Event: Girls 300 Meter Hurdles
+    Event Time: '-'
+    athletes:
+      - name: Sierra Wall
+        seed: 51.85
+  - Event: Girls 4x100 Meter Relay
+    relay: true
+    Event Time: '-'
+    athletes:
+      - name: Hilary Bojar
+      - name: Evelyn Kear
+      - name: Petra Schmidt
+      - name: Julia Savage
+  - Event: Girls 4x200 Meter Relay
+    relay: true
+    Event Time: '-'
+    athletes:
+      - name: Petra Schmidt
+      - name: Hilary Bojar
+      - name: Julia Savage
+      - name: Ellie Grandsaert
+  - Event: Girls 4x400 Meter Relay
+    relay: true
+    Event Time: '-'
+    athletes:
+      - name: Sierra Wall
+      - name: Ella Seng
+      - name: Anna Johnson
+      - name: Ellie Grandsaert
+  - Event: Girls 4x800 Meter Relay
+    relay: true
+    Event Time: '-'
+    athletes:
+      - name: Laurel Brain
+      - name: Ella Seng
+      - name: Sierra Wall
+      - name: Molly Weber
+  - Event: Girls High Jump
+    Event Time: '-'
+    athletes:
+      - name: Amelia Clasby
+        seed: 4-10.5
+      - name: Evelyn Kear
+        seed: 4-10
+      - name: Julia Savage
+        seed: 5-0
+  - Event: Girls Long Jump
+    Event Time: '-'
+    athletes: []
+  - Event: Girls Triple Jump
+    Event Time: '-'
+    athletes: []
+  - Event: Girls Pole Vault
+    Event Time: '-'
+    athletes:
+      - name: Irene McCalmon
+        seed: 9-6
+      - name: Ella Pluzynski
+        seed: 7-3
+  - Event: Girls Discus
+    Event Time: '-'
+    athletes:
+      - name: Amelia Clasby
+        seed: 72-9
+  - Event: Girls Shot Put
+    Event Time: '-'
+    athletes:
+      - name: Isabella DiBiase
+      - name: Kate Mccall
+  - Event: Boys 100 Meter Dash
+    Event Time: '-'
+    athletes:
+      - name: Channing Cooper
+        seed: 11.60
+      - name: Jaxson Cooper
+        seed: 11.98
+      - name: Wyatt Keegan
+        seed: 11.09
+      - name: Max Vieth
+  - Event: Boys 200 Meter Dash
+    Event Time: '-'
+    athletes:
+      - name: Channing Cooper
+        seed: 23.75
+      - name: Wyatt Keegan
+        seed: 23.04
+      - name: Luke Strickland
+      - name: Max Vieth
+        seed: 24.71
+  - Event: Boys 400 Meter Dash
+    Event Time: '-'
+    athletes:
+      - name: Wyatt Keegan
+      - name: Arran Machado McKelvie
+        seed: 57.92
+      - name: Max Vieth
+        seed: 55.07
+  - Event: Boys 800 Meter Run
+    Event Time: '-'
+    athletes:
+      - name: Dario Barnes
+        seed: 2:14.41
+      - name: Zach Bean
+        seed: 2:10.00
+      - name: Theodore Chastang
+        seed: 2:08.61
+      - name: Luke Treleaven
+        seed: 2:06.96
+  - Event: Boys 1600 Meter Run
+    Event Time: '-'
+    athletes:
+      - name: Dario Barnes
+        seed: 4:53.75
+      - name: Theodore Chastang
+        seed: 4:50.00
+      - name: Ewan Kenny
+        seed: 4:41.53
+      - name: Oliver Su
+        seed: 4:47.83
+  - Event: Boys 3200 Meter Run
+    Event Time: '-'
+    athletes:
+      - name: Zach Bean
+      - name: Koen Harriman
+        seed: 11:01.05
+      - name: Ewan Kenny
+        seed: 10:09.18
+      - name: Oliver Su
+        seed: 10:21.68
+  - Event: Boys 110 Meter Hurdles
+    Event Time: '-'
+    athletes:
+      - name: Zephyr Middleton
+        seed: 20.38
+  - Event: Boys 300 Meter Hurdles
+    Event Time: '-'
+    athletes:
+      - name: Zephyr Middleton
+        seed: 49.23
+  - Event: Boys 4x100 Meter Relay
+    relay: true
+    Event Time: '-'
+    athletes:
+      - name: Wade Carlson
+      - name: Jaxson Cooper
+      - name: Luke Strickland
+      - name: Channing Cooper
+  - Event: Boys 4x200 Meter Relay
+    relay: true
+    Event Time: '-'
+    athletes:
+      - name: Channing Cooper
+      - name: Max Vieth
+      - name: Luke Strickland
+      - name: Wyatt Keegan
+  - Event: Boys 4x400 Meter Relay
+    relay: true
+    Event Time: '-'
+    athletes: []
+  - Event: Boys 4x800 Meter Relay
+    relay: true
+    Event Time: '-'
+    athletes:
+      - name: Luke Treleaven
+      - name: Oliver Su
+      - name: Arran Machado McKelvie
+      - name: Zach Bean
+  - Event: Boys High Jump
+    Event Time: '-'
+    athletes:
+      - name: Anthony Giliberti
+        seed: 5-2
+      - name: Max Webb
+        seed: 5-6
+  - Event: Boys Long Jump
+    Event Time: '-'
+    athletes:
+      - name: Caleb Cooper
+        seed: 19-2
+      - name: Jaxson Cooper
+        seed: 17-0.5
+      - name: Max Webb
+        seed: 18-10
+  - Event: Boys Triple Jump
+    Event Time: '-'
+    athletes:
+      - name: Caleb Cooper
+        seed: 37-4
+      - name: Jaxson Cooper
+        seed: 34-8
+      - name: Anthony Giliberti
+        seed: 35-9
+  - Event: Boys Pole Vault
+    Event Time: '-'
+    athletes:
+      - name: Kieran Meier
+        seed: 11-7
+  - Event: Boys Discus
+    Event Time: '-'
+    athletes:
+      - name: Kaylor Huang
+        seed: 82-1
+      - name: Colin Overy
+        seed: 91-7
+      - name: Jace Pollock
+        seed: 113-9
+  - Event: Boys Shot Put
+    Event Time: '-'
+    athletes:
+      - name: Keeghan Field-Gordon
+        seed: 38-2
+      - name: Colton Ott
+        seed: 34-5
+      - name: Colin Overy
+        seed: 33-11.5
