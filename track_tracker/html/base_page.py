@@ -249,7 +249,7 @@ CSV_STYLES = [
         #     width : 100px
         # """),
         StyleTag(name='.col-width-time input, .col-width-time div', internal=f"""
-            width: 60px;
+            width: 55px;
         """),
         StyleTag(name='.col-width-event input, .col-width-event div', internal=f"""
             width: 135px;
@@ -261,21 +261,21 @@ CSV_STYLES = [
             width: 130px;
         """),
         StyleTag(name='.col-width-seed input, .col-width-seed div', internal=f"""
-            width: 150px;
+            width: 65px;
         """),
         StyleTag(name='.col-width-result input, .col-width-result div', internal=f"""
-            width: 150px;
+            width: 65px;
         """),
         StyleTag(name='.col-width-place input, .col-width-place div', internal=f"""
-            width: 60px;
+            width: 35px;
         """),
         StyleTag(name='.col-width-pr div', internal=f"""
-            width: 70px;
+            width: 65px;
             height: 22px;
             padding: 0px 10px;
         """),
         StyleTag(name='.col-width-points div', internal=f"""
-            width: 70px;
+            width: 35px;
             height: 22px;
             padding: 0px 10px;
         """),
