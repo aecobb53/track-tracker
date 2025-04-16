@@ -364,6 +364,8 @@ async def points_html_page(athletes_dict, meet_name_list):
         for meet_name, points in details['points_dict'].items():
             description = details['point_description_dict'][meet_name]
             description = ', '.join([f"{k}: {v}" for k, v in details['point_description_dict'][meet_name]])
+            if not points:
+                points = ''
             points_table_row.add_element(
                 TableData(internal=points, title=description).add_class('points-table-data'))
 

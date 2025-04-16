@@ -298,6 +298,13 @@ def parse_data_row(
                 },
             }
 
+
+
+            if meet_name == 'BOCO Championships' and 'Fairview' in team:
+                x=1
+
+
+
             points = assess_points(event=event, place=place, tri_meet=tri_meet)
             if not allow_points:
                 points = 0
