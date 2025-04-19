@@ -1,9 +1,12 @@
 
 import json
+import os
 
 from datetime import datetime, date, time, timedelta
 from enum import Enum
 
+
+x=1
 
 """
 WARNING: Things get messed up if you try to modify in the same update as a delete.
@@ -55,11 +58,14 @@ class Athlete:
     """
     This is a mock for right now
     """
-    def __init__(self, name: str):
+    def __init__(self, name: str, team: str):
         self.name = name
+        self.team = team
 
     def __eq__(self, other_object: object) -> bool:
         if self.name != other_object.name:
+            return False
+        if self.team != other_object.team:
             return False
         return True
 
@@ -211,7 +217,13 @@ class ResultDataObject(BespokeDataObjectBase):
         elif isinstance(json_data, dict):
             data = json_data
         x=1
-        athlete = Athlete(data.get('name', 'Unknown'))
+        """
+        THIS WILL NEED TO BE UPDAT4ED BEFORE ADDING TO SERVICE
+        """
+        athlete = Athlete(
+            data.get('name', 'Unknown'),
+            data.get('team', 'School'),
+        )
         seed = Result(data.get('seed', None))
         result = Result(data.get('seed', None))
         heat_lane_flight = data.get('Heat/Lane/Flight', 'Unknown')
@@ -249,6 +261,7 @@ class EventDataObject(BespokeDataObjectBase):
         self.is_relay = is_relay
 
         self.results = []
+        self.team_team_results = {}
 
     def __iter__(self):
         return iter(self.results)
@@ -285,7 +298,7 @@ class EventDataObject(BespokeDataObjectBase):
     def find_result(self, identifier: str | int) -> ResultDataObject | None:
         if isinstance(identifier, str):
             for result in self.results:
-                if result.athlete_name == identifier:
+                if result.athlete.name == identifier:
                     return result
             else:
                 raise IndexError(f"ResultDataObject with name {identifier} not found.")
@@ -299,7 +312,7 @@ class EventDataObject(BespokeDataObjectBase):
     def remove_result(self, identifier: str | int):
         if isinstance(identifier, str):
             for result in self.results:
-                if result.athlete_name == identifier:
+                if result.athlete.name == identifier:
                     self.results.remove(result)
                     return
             else:
@@ -308,11 +321,52 @@ class EventDataObject(BespokeDataObjectBase):
             self.results.pop(identifier)
             return
 
+    def add_team_result(self, team: str, result, index: int | None = None):
+        if result.athlete.team not in self.team_team_results:
+            self.team_team_results[result.athlete.team] = {}
+        if team not in self.team_team_results[result.athlete.team]:
+            self.team_team_results[result.athlete.team][team] = []
+        if index is not None:
+            self.team_team_results[result.athlete.team][team].insert(index, result)
+        else:
+            self.team_team_results[result.athlete.team][team].append(result)
+
     def convert_to_relay(self):
-        pass
+        """
+        Grabs existing teams and tries to add any results/athletes that slipped through the cracks
+        """
+        self.is_relay = True
+        teams = {k: v for k, v in self.team_team_results.items()}
+        for result in self.results:
+            if result.athlete.team not in teams:
+                teams[result.athlete.team] = {'Team 1': []}
+            team_pointer_int = 1
+            while True:
+                team_name = f"Team {team_pointer_int}"
+                if team_name not in teams[result.athlete.team]:
+                    teams[result.athlete.team][team_name] = []
+                if len(teams[result.athlete.team][team_name]) < 4:
+                    results_check = []
+                    [results_check.extend(v) for k, v in teams[result.athlete.team].items()]
+                    if result in results_check:
+                        break
+                    teams[result.athlete.team][team_name].append(result)
+                    break
+                else:
+                    team_pointer_int += 1
+        self.team_team_results = teams
+        self.results = []
 
     def convert_to_open(self):
-        pass
+        self.is_relay = False
+        results = [r for r in self.results]
+        for team_results in self.team_team_results.values():
+            for team_results_list in team_results.values():
+                for result in team_results_list:
+                    if result not in results:
+                        results.append(result)
+        self.results = results
+        self.team_team_results = {}
 
     def update(self, other_event):
         event_update_object = EventUpdateObject()
@@ -328,10 +382,6 @@ class EventDataObject(BespokeDataObjectBase):
         if self.is_relay != other_event.is_relay:
             event_update_object.add_update('is_relay', other_event.is_relay)
             self.is_relay = other_event.is_relay
-
-        """
-        IF IS RELAY CHANGES NEED TO SWITCH BETWEEN ATHLETE AND TEAM
-        """
 
         # Deletion detection
         if len(self.results) > len(other_event.results):
@@ -566,6 +616,11 @@ class MeetDataObject(BespokeDataObjectBase):
         x=1
         return obj
 
+    @classmethod
+    def from_file(cls, fl_obj):
+        obj = cls.import_json(fl_obj.read())
+        return obj
+
 
 class ResultUpdateObject(BespokeUpdateObjectBase):
     def __init__(self, *args, **kwargs):
@@ -691,9 +746,9 @@ def gen_base_meet():
     e3 = EventDataObject("Shot Put", time(13, 0), EventType(False, True, False, False, True, False, False))
     x=1
 
-    a1 = Athlete("John Doe")
-    a2 = Athlete("Jane Smith")
-    a3 = Athlete("Bob Johnson")
+    a1 = Athlete("John Doe", 'School')
+    a2 = Athlete("Jane Smith", 'School')
+    a3 = Athlete("Bob Johnson", 'School')
 
 
     e1.add_result(ResultDataObject(a1, result=Result(12.5), place=1))
@@ -860,5 +915,293 @@ for event in meet:
 
 x=1
 
+
+"""
+TEST BLOCK
+"""
+
+def generate_base_meet():
+    meet = MeetDataObject("Test MeetDataObject", date(2025,1,1), False, False, "Test Location")
+
+    event_1 = EventDataObject("100m", time(12, 0), EventType(True, False, True, False, False, False, False))
+    event_2 = EventDataObject("200m", time(12, 30), EventType(True, False, True, False, False, False, False))
+    event_3 = EventDataObject("Shot Put", time(13, 0), EventType(False, True, False, False, True, False, False))
+    event_4 = EventDataObject("400m", time(13, 0), EventType(False, True, False, False, True, False, False))
+    event_5 = EventDataObject("Long Jump", time(13, 0), EventType(False, True, False, False, True, False, False))
+
+    athlete_1 = Athlete("John Doe", "School")
+    athlete_2 = Athlete("Jane Smith", "School")
+    athlete_3 = Athlete("Bob Johnson", "School")
+    athlete_4 = Athlete("Alice Brown", "School")
+    athlete_5 = Athlete("Charlie Davis", "School")
+
+    # Event 1 has results and places
+    event_1.add_result(ResultDataObject(athlete_1, result=Result(12.5), place=1))
+    event_1.add_result(ResultDataObject(athlete_2, result=Result(12.5), place=1))
+    event_1.add_result(ResultDataObject(athlete_3, result=Result(12.6), place=3))
+
+    # Event 2 has athletes but no results
+    event_2.add_result(ResultDataObject(athlete_1))
+    event_2.add_result(ResultDataObject(athlete_2))
+    event_2.add_result(ResultDataObject(athlete_3))
+
+    # Event 3 has nothing
+
+    # Event 4 has results
+    event_4.add_result(ResultDataObject(athlete_3, result=Result(50.0), place=1))
+    event_4.add_result(ResultDataObject(athlete_4, result=Result(50.5), place=2))
+    event_4.add_result(ResultDataObject(athlete_5, result=Result(51.0), place=3))
+
+    # Event 5 has results
+    event_5.add_result(ResultDataObject(athlete_1, result=Result(5.0), place=1))
+    event_5.add_result(ResultDataObject(athlete_3, result=Result(4.8), place=2))
+    event_5.add_result(ResultDataObject(athlete_5, result=Result(4.9), place=3))
+
+    meet.add_event(event_1)
+    meet.add_event(event_2)
+    meet.add_event(event_3)
+    meet.add_event(event_4)
+    meet.add_event(event_5)
+    return meet
+
+def load_meet_from_file(file_path):
+    """
+    Load a meet from a JSON file.
+    """
+    with open(file_path, 'r') as jf:
+        meet = MeetDataObject.import_json(jf.read())
+    return meet
+
+def test_simple_create():
+    """
+    Creating a meet with some diversity but injecting an event between other events.
+    """
+    meet = MeetDataObject("Test MeetDataObject", date(2025,1,1), False, False, "Test Location")
+
+    event_1 = EventDataObject("100m", time(12, 0), EventType(True, False, True, False, False, False, False))
+    event_2 = EventDataObject("200m", time(12, 30), EventType(True, False, True, False, False, False, False))
+    event3 = EventDataObject("Shot Put", time(13, 0), EventType(False, True, False, False, True, False, False))
+
+    athlete_1 = Athlete("John Doe", "School")
+    athlete_2 = Athlete("Jane Smith", "School")
+    athlete_3 = Athlete("Bob Johnson", "School")
+
+    event_1.add_result(ResultDataObject(athlete_1, result=Result(12.5), place=1))
+    event_1.add_result(ResultDataObject(athlete_2, result=Result(12.5), place=1))
+    event_1.add_result(ResultDataObject(athlete_3, result=Result(12.6), place=3))
+
+    event_2.add_result(ResultDataObject(athlete_1))
+    event_2.add_result(ResultDataObject(athlete_2))
+    event_2.add_result(ResultDataObject(athlete_3))
+
+    meet.add_event(event_1)
+    meet.add_event(event_2)
+    meet.add_event(event3, 1)
+    assert meet.events[0].event_name == "100m"
+    assert meet.events[1].event_name == "Shot Put"
+    assert meet.events[2].event_name == "200m"
+
+def test_modify_meet():
+    """
+    Test modifying a meet by changing values here and there.
+    """
+    meet1 = generate_base_meet()
+    meet2 = generate_base_meet()
+
+    meet2.events[0].results[0].athlete = Athlete("New Athlete", "School")
+    meet2.events[0].results[0].seed = Result(12.5)
+
+    meet2.events[0].event_time = time(13, 15)
+
+    meet2.meet_name = "Updated meet object"
+
+    meet2.events[2].event_name = "Updated Event Name"
+
+    meet2.events[4].event_name = "Updated Event Name 2"
+    meet2.events[4].results[1].seed = Result(10.0)
+    meet2.events[4].results[2].athlete = Athlete("Updated Athlete", "School")
+
+
+    update_object = meet1.update(meet2)
+    assert update_object.updates['meet_name'] == "Updated meet object"
+    assert update_object.updates['events'][0].updates['event_time'] == time(13, 15)
+    assert update_object.updates['events'][0].updates['results'][0].updates['athlete'].name == 'New Athlete'
+    assert update_object.updates['events'][0].updates['results'][0].updates['seed'].result == 12.5
+
+    assert update_object.updates['events'][2].updates['event_name'] == "Updated Event Name"
+    assert update_object.updates['events'][4].updates['event_name'] == "Updated Event Name 2"
+    assert update_object.updates['events'][4].updates['results'][1].updates['seed'].result == 10.0
+    assert update_object.updates['events'][4].updates['results'][2].updates['athlete'].name == "Updated Athlete"
+
+def test_add_to_meet():
+    """
+    Test adding events and results.
+    """
+    meet1 = generate_base_meet()
+    meet2 = generate_base_meet()
+
+    meet2.events[0].add_result(ResultDataObject(Athlete("New Athlete", "School"), result=Result(12.5), place=1))
+
+    meet2.add_event(EventDataObject("New Event", time(14, 0), EventType(True, False, True, False, False, False, False)))
+
+    update_object = meet1.update(meet2)
+    assert isinstance(update_object.updates['new_events'][0], EventDataObject)
+    assert isinstance(update_object.updates['events'][0].updates['new_results'][0], ResultDataObject)
+
+def test_delete_from_meet():
+    """
+    Test deleting events and results.
+    """
+    meet1 = generate_base_meet()
+    meet2 = generate_base_meet()
+
+    del meet2.events[0].results[0]
+    del meet2.events[3].results[1]
+    del meet2.events[4].results[2]
+
+    update_object_1 = meet1.update(meet2)
+
+    assert update_object_1.updates['events'][0].updates['deleted_results'][0].athlete.name == "John Doe"
+    assert update_object_1.updates['events'][3].updates['deleted_results'][1].athlete.name == "Alice Brown"
+    assert update_object_1.updates['events'][4].updates['deleted_results'][2].athlete.name == "Charlie Davis"
+
+    meet3 = generate_base_meet()
+    meet4 = generate_base_meet()
+
+    del meet4.events[4]
+    del meet4.events[2]
+    del meet4.events[0]
+
+    update_object_2 = meet3.update(meet4)
+
+    assert update_object_2.updates['deleted_results'][4].event_name == "Long Jump"
+    assert update_object_2.updates['deleted_results'][2].event_name == "Shot Put"
+    assert update_object_2.updates['deleted_results'][0].event_name == "100m"
+
+def test_different_add_update_delete_functions():
+    result_1 = ResultDataObject(Athlete("John Doe", "School"), result=Result(12.5), place=1)
+    result_2 = ResultDataObject(Athlete("Jane Smith", "School"), result=Result(12.5), place=1)
+    result_3 = ResultDataObject(Athlete("Bob Johnson", "School"), result=Result(12.6), place=3)
+
+    event_1 = EventDataObject("100m", time(12, 0), EventType(True, False, True, False, False, False, False))
+    event_2 = EventDataObject("100m", time(12, 0), EventType(True, False, True, False, False, False, False))
+    assert event_1 == event_2
+
+    event_1.add_result(result_1)
+    event_1.add_result(result_2)
+    event_1.add_result(result_3)
+    event_2.add_result(result_1)
+    event_2.add_result(result_2)
+    event_2.add_result(result_3)
+
+    assert event_1 == event_2
+    event_1.remove_result(result_2.athlete.name)
+    assert event_1 != event_2
+    event_1.add_result(result_2, 1)
+    assert event_1 == event_2
+
+    result = event_1.find_result(result_2.athlete.name)
+    assert result == result_2
+
+    for thing in event_1:
+        pass
+
+def test_event_relay_handling():
+    result_1 = ResultDataObject(Athlete("John Doe", "School"), result=Result(12.5), place=1)
+    result_2 = ResultDataObject(Athlete("Jane Smith", "School"), result=Result(12.5), place=1)
+    result_3 = ResultDataObject(Athlete("Bob Johnson", "School"), result=Result(12.6), place=3)
+    result_4 = ResultDataObject(Athlete("Jack Doe", "School"), result=Result(12.5), place=1)
+
+    result_5 = ResultDataObject(Athlete("John Doe 2", "School 2"), result=Result(12.5), place=1)
+    result_6 = ResultDataObject(Athlete("Jane Smith 2", "School 2"), result=Result(12.5), place=1)
+    result_7 = ResultDataObject(Athlete("Bob Johnson 2", "School 2"), result=Result(12.6), place=3)
+    result_8 = ResultDataObject(Athlete("Jack Doe 2", "School 2"), result=Result(12.5), place=1)
+    # result_9 = ResultDataObject(Athlete("Blake Doe 2", "School 2"), result=Result(12.5), place=1)
+
+    result_11 = ResultDataObject(Athlete("John Doe 3", "School"), result=Result(12.5), place=1)
+    result_12 = ResultDataObject(Athlete("Jane Smith 3", "School"), result=Result(12.5), place=1)
+    result_13 = ResultDataObject(Athlete("Bob Johnson 3", "School"), result=Result(12.6), place=3)
+    result_14 = ResultDataObject(Athlete("Jack Doe 3", "School"), result=Result(12.5), place=1)
+
+    result_21 = ResultDataObject(Athlete("John Doe 4", "School 3"), result=Result(12.5), place=1)
+    result_22 = ResultDataObject(Athlete("Jane Smith 4", "School 3"), result=Result(12.5), place=1)
+    result_23 = ResultDataObject(Athlete("Bob Johnson 4", "School 3"), result=Result(12.6), place=3)
+    result_24 = ResultDataObject(Athlete("Jack Doe 4", "School 3"), result=Result(12.5), place=1)
+    result_25 = ResultDataObject(Athlete("Jack Doe 4", "School 3"), result=Result(12.5), place=1)
+
+    event_1 = EventDataObject("100m", time(12, 0), EventType(True, False, True, False, False, False, False))
+
+    event_1.add_result(result_1)
+    event_1.add_result(result_2)
+    event_1.add_result(result_3)
+    event_1.add_result(result_4)
+
+    event_1.add_result(result_5)
+    event_1.add_result(result_6)
+    event_1.add_result(result_7)
+    event_1.add_result(result_8)
+
+    event_1.add_result(result_11)
+    event_1.add_result(result_12)
+    event_1.add_result(result_13)
+    event_1.add_result(result_14)
+
+    event_1.add_team_result('Team 1', result_1)
+    event_1.add_team_result('Team 1', result_2)
+    event_1.add_team_result('Team 1', result_3)
+    # event_1.add_team_result('Team 1', result_4)
+
+    event_1.add_team_result('Team 1', result_21)
+    event_1.add_team_result('Team 1', result_22)
+    event_1.add_team_result('Team 1', result_23)
+    event_1.add_team_result('Team 1', result_24)
+    event_1.add_team_result('Team 1', result_25)
+
+    event_1.convert_to_relay()
+    assert event_1.is_relay == True
+    assert event_1.results == []
+    assert 'School 2' in event_1.team_team_results
+    assert 'School' in event_1.team_team_results
+    assert 'Team 1' in event_1.team_team_results['School']
+    assert 'Team 2' in event_1.team_team_results['School']
+
+    assert event_1.team_team_results['School']['Team 1'] == [result_1, result_2, result_3, result_4]
+    assert event_1.team_team_results['School']['Team 2'] == [result_11, result_12, result_13, result_14]
+    assert event_1.team_team_results['School 2']['Team 1'] == [result_5, result_6, result_7, result_8]
+    assert event_1.team_team_results['School 3']['Team 1'] == [result_21, result_22, result_23, result_24, result_25]
+
+    event_1.add_result(result_1)
+    event_1.add_result(result_2)
+    event_1.add_result(result_3)
+    event_1.add_result(result_4)
+
+    event_1.convert_to_open()
+
+    assert event_1.is_relay == False
+    assert event_1.team_team_results == {}
+    assert len(event_1.results) == 16
+
+def test_real_world():
+    path = '/home/acobb/git/track-tracker/persisted_db/meets'
+    meets = []
+    for fl in os.listdir(path):
+        if fl.endswith('.json'):
+            with open(os.path.join(path, fl), 'r') as f:
+                meet = MeetDataObject.from_file(f)
+                meets.append(meet)
+                x=1
+    x=1
+
+
+test_simple_create()
+test_modify_meet()
+test_add_to_meet()
+test_delete_from_meet()
+test_different_add_update_delete_functions()
+test_event_relay_handling()
+
+test_real_world()
+
+x=1
 
 # Workout
