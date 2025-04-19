@@ -1,3 +1,4 @@
+from multiprocessing.sharedctypes import Value
 import re
 
 
@@ -16,6 +17,9 @@ class EventParser:
         elif re.search(r'(Shot[\s\t]*Put|Discus|Hammer[\s\t]+Throw|High[\s\t]+Jump|Long[\s\t]+Jump|Triple[\s\t]+Jump|Pole[\s\t]+Vault)', event_s):
             self.re_s = r'((?P<FEET>\d+)-)?(?P<INCHES>\d*)\.?(?P<FRACTIONS>\d*)'
             self.event_type = 'field'
+        elif re.search(r'\d+ ?(m)', event_s):
+            self.re_s = r'(?P<MINUTES>\d+:)?(?P<SECONDS>\d+)\.?(?P<SUBSECOND>\d*)'
+            self.event_type = 'run'
         else:
             raise ValueError(f"UNABLE TO DETERMINE EVENT TYPE FOR {event_s}")
 

@@ -94,37 +94,6 @@ class Result(BaseModel):
         else:
             raise ValueError('Unable to give a Sort Value')
 
-    # @property
-    # def format_padded_value(self):
-    #     """
-    #     Pad results with minutes and feet even if there are none
-    #     """
-    #     """
-    #     tmp = timedelta(
-    #         minutes=minutes or 0,
-    #         seconds=seconds or 0,
-    #         milliseconds=subsecond or 0,
-    #     )
-    #     tmp_min = tmp.seconds // 60
-    #     tmp_sec = tmp.seconds % 60
-    #     tmp_microseconds = tmp.microseconds
-    #     tmp_format = f"{tmp_min}:{tmp_sec}.{tmp_microseconds}"
-    #     print(f"tmp: {tmp}, tmp_min: {tmp_min}, tmp_sec: {tmp_sec}, tmp_microseconds: {tmp_microseconds}, tmp_format: {tmp_format}")
-
-    #     """
-    #     if self.minutes or self.seconds or self.subsecond:
-    #         minutes = self.minutes or 0
-    #         seconds = self.seconds or 0
-    #         subsecond = self.subsecond or 0
-    #         return minutes * 60 + seconds + subsecond
-    #     elif self.feet or self.inches or self.fractions:
-    #         feet = self.feet or 0
-    #         inches = self.inches or 0
-    #         fractions = self.fractions or 0
-    #         return feet * 12 + inches + fractions
-    #     else:
-    #         raise ValueError('Unable to give a Sort Value')
-
     @property
     def put(self):
         output = f"{self.event_str}::{self.result_str}"
@@ -216,6 +185,25 @@ class Result(BaseModel):
             print(f"fractions: {self.fractions}, {other.fractions}")
             raise ValueError('Invalid Result')
 
+    def __eq__(self, other_object):
+        if self.event_str != other_object.event_str:
+            return False
+        if self.result_str != other_object.result_str:
+            return False
+        if self.minutes != other_object.minutes:
+            return False
+        if self.seconds != other_object.seconds:
+            return False
+        if self.subsecond != other_object.subsecond:
+            return False
+        if self.feet != other_object.feet:
+            return False
+        if self.inches != other_object.inches:
+            return False
+        if self.fractions != other_object.fractions:
+            return False
+        return True
+
 
 class ResultData(BaseModel):
     uid: str
@@ -250,6 +238,39 @@ class ResultData(BaseModel):
     def rest_output(self):
         output = self.model_dump_json()
         return output
+
+    def __eq__(self, other_object):
+        if self.uid != other_object.uid:
+            return False
+        if self.update_datetime != other_object.update_datetime:
+            return False
+        if self.event != other_object.event:
+            return False
+        if self.heat != other_object.heat:
+            return False
+        if self.place != other_object.place:
+            return False
+        if self.wind != other_object.wind:
+            return False
+        if self.athlete != other_object.athlete:
+            return False
+        if self.athlete_uid != other_object.athlete_uid:
+            return False
+        if self.team != other_object.team:
+            return False
+        if self.meet_date != other_object.meet_date:
+            return False
+        if self.result != other_object.result:
+            return False
+        if self.meet != other_object.meet:
+            return False
+        if self.gender != other_object.gender:
+            return False
+        if self.points != other_object.points:
+            return False
+        if self.result_metadata != other_object.result_metadata:
+            return False
+        return True
 
 
 class ResultApiCreate(BaseModel):

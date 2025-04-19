@@ -53,7 +53,33 @@ class AthleteData(BaseModel):
 
     @property
     def name(self):
-        return f"{self.first_name} {self.last_name}"
+        return f"{self.first_name} {self.last_name}".strip()
+
+    def __eq__(self, other_object):
+        if self.uid != other_object.uid:
+            return False
+        if self.update_datetime != other_object.update_datetime:
+            return False
+        if self.first_name != other_object.first_name:
+            return False
+        if self.last_name != other_object.last_name:
+            return False
+        if self.team != other_object.team:
+            return False
+        if self.gender != other_object.gender:
+            return False
+        if self.graduation_year != other_object.graduation_year:
+            return False
+        if self.aliases != other_object.aliases:
+            return False
+        if self.tags != other_object.tags:
+            return False
+        if self.active != other_object.active:
+            return False
+        if self.athlete_metadata != other_object.athlete_metadata:
+            return False
+        return True
+
 
 
 class AthleteApiCreate(BaseModel):

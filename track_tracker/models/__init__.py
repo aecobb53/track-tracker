@@ -29,3 +29,17 @@ from .workout import (
     WorkoutFilter,
 )
 from .meetday import MeetDay, Meet
+
+from .bespoke_data_objects import(
+    BespokeDataObjectBase,
+    UpdateType,
+    BespokeUpdateObjectBase,
+    EventType,
+    ResultDataObject,
+    EventDataObject,
+    MeetDataObject,
+    ResultUpdateObject,
+    EventUpdateObject,
+    MeetUpdateObject,
+    UpdateResultObject,
+)
