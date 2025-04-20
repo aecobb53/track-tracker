@@ -1,5 +1,7 @@
 
+import enum
 import json
+from operator import is_
 import os
 
 from datetime import datetime, date, time, timedelta
@@ -312,10 +314,13 @@ class EventDataObject(BespokeDataObjectBase):
                 teams[result.athlete.team] = {'Team 1': []}
             team_pointer_int = 1
             while True:
+                if result.athlete.name.startswith('Team'):
+                    break
                 team_name = f"Team {team_pointer_int}"
                 if team_name not in teams[result.athlete.team]:
                     teams[result.athlete.team][team_name] = []
                 if len(teams[result.athlete.team][team_name]) < 4:
+                    print(f"RESULT: {result}")
                     results_check = []
                     [results_check.extend(v) for k, v in teams[result.athlete.team].items()]
                     if result in results_check:
@@ -409,8 +414,10 @@ class EventDataObject(BespokeDataObjectBase):
         event_type = EventType.from_event_type_name(event_name)
         is_relay = data.get('relay', False)
 
-        parsed_event = EventParser.parse_event_gender(event_name)
         event_dict = {k: data.get(k) for k in ['Event', 'relay']}
+        print('')
+        print('')
+        print(data['Event'])
 
         obj = cls(
             event_name=event_name,
@@ -418,20 +425,20 @@ class EventDataObject(BespokeDataObjectBase):
             event_type=event_type,
             is_relay=is_relay,
         )
-        if is_relay:
-            # print('ITS A RELAY')
-            # print(data, event_dict)
-            team_key = 'Team 1'
-            for team in data.get('teams', []):
-                for athlete in team.get('athletes', []):
-                    if athlete['name'].startswith('Team'):
-                        team_key = athlete['name']
-                    athlete = ResultDataObject.import_json(athlete, event_dict)
-                    obj.add_team_result(team_key, athlete)
-        else:
-            for athlete in data.get('athletes', []):
+        team_key = 'Team 1'
+        for team in data.get('teams', []):
+            print('')
+            print(f"TEAM: {team.get('name')}, {team.get('Heat/Lane/Flight')}")
+            for athlete in team.get('athletes', []):
+                if athlete['name'].startswith('Team'):
+                    team_key = athlete['name']
                 athlete = ResultDataObject.import_json(athlete, event_dict)
-                obj.add_result(athlete)
+                obj.add_team_result(team_key, athlete)
+            print(f"TEAM: {team}")
+            # print(f"TEAM: {team.get('name')}, {team.get('Heat/Lane/Flight')}")
+        for athlete in data.get('athletes', []):
+            athlete = ResultDataObject.import_json(athlete, event_dict)
+            obj.add_result(athlete)
         return obj
 
     def export_json(self):
@@ -470,6 +477,20 @@ class EventDataObject(BespokeDataObjectBase):
                     tmp_team['athletes'].append(result_json)
                 output['teams'].append(tmp_team)
         return output
+
+    def clean(self):
+        if self.is_relay:
+            if self.results:
+                self.convert_to_relay()
+            for school, teams in self.team_team_results.items():
+                for team_name, results in teams.items():
+                    for result_index in reversed(range(len(results))):
+                        result = results[result_index]
+                        if result.athlete.name == team_name:
+                            self.team_team_results[school][team_name].pop(result_index)
+        else:
+            if self.team_team_results:
+                self.convert_to_open()
 
 
 class MeetDataObject(BespokeDataObjectBase):
@@ -630,6 +651,7 @@ class MeetDataObject(BespokeDataObjectBase):
         )
         for event in events:
             event_obj = EventDataObject.import_json(event)
+            event_obj.clean()
             obj.add_event(event_obj)
         return obj
 
@@ -653,7 +675,7 @@ class MeetDataObject(BespokeDataObjectBase):
     def from_file(cls, fl_obj):
         obj = cls.import_json(fl_obj.read())
         return obj
-    
+
     def to_file(self, fl_obj):
         content = self.export_json()
         fl_obj.write(json.dumps(content, indent=4))
@@ -773,11 +795,21 @@ for fl in os.listdir(path):
     if fl.endswith('.json'):
         if 'Jack and Jill' in fl:
             continue
+        if 'DELETEME' in fl:
+            continue
+
+
+        if 'copy'not in     fl:
+            continue
+
+
+
         print(f"Loading {fl}...")
         with open(os.path.join(path, fl), 'r') as jf:
             meet = MeetDataObject.from_file(jf)
             # print(json.dumps(meet.export_json(), indent=4))
         new_fl = f"DELETEME_{fl}"
+        meet.meet_name = meet.meet_name + ' -- TESTING'
         print(new_fl)
         with open(os.path.join(path, new_fl), 'w') as jf:
             meet.to_file(jf)
