@@ -315,7 +315,7 @@ def parse_data_row(
                     relay = relay_data[gender][relay_i]
                     if relay['relay'] in event:
                         relay = relay_data[gender].pop(relay_i)
-                        if any([True for athlete in [relay[i] for i in [1, 2, 3, 4]] if athlete['split'] is None]):
+                        if any([True for athlete in [relay[i] for i in [1, 2, 3, 4]] if athlete.get('split', '-') is None]):
                             # There are some None splits
                             remaining_time = str(relay['time'])
                             seconds = parse_event_time(remaining_time)
@@ -349,7 +349,7 @@ def parse_data_row(
                                     'team': team,
                                     'points': points / 4,
                                     'meet_date': meet_date,
-                                    'result': str(athlete['split']),
+                                    'result': str(athlete.get('split', None)),
                                     'meet': meet_name,
                                     'gender': gender,
                                     'result_metadata': {
