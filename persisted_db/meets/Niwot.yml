@@ -108,7 +108,7 @@ events:
   - Event Time: 2:30pm
     Event: Girls 400m
     athletes:
-      - name: Lilly Graves
+      - name: Lillian Graves
         Heat/Lane/Flight: Heat 11, Lane 7
   - Event Time: 3:00pm
     Event: Boys 400m
@@ -147,7 +147,7 @@ events:
   - Event Time: 5:00pm
     Event: Girls 200m
     athletes:
-      - name: Lilly Graves
+      - name: Lillian Graves
         Heat/Lane/Flight: Heat 20, Lane 2
       - name: Saige Hageman
         Heat/Lane/Flight: Heat 11, Lane 7

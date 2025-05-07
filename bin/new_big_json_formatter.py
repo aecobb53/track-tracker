@@ -41,7 +41,9 @@ def assess_points(event: str, place: int, tri_meet: bool = False):
             return NORMAL_POINTS[place - 1]
     return 0
 
-def parse_event_time(time):
+def parse_event_time(time, none_to_zero=False):
+    if none_to_zero and str(time) == 'None':
+        return 0
     a = time.split(':')
     if len(a) == 2:
         minutes = int(a.pop(0))
@@ -311,24 +313,25 @@ def parse_data_row(
             # Add data for relay legs
             relay_athletes_dict = []
             if team == TEAM and relay_data:
-                for relay_i in range(len(relay_data[gender])):
+                for relay_i in range(len(relay_data.get(gender, []))):
                     relay = relay_data[gender][relay_i]
                     if relay['relay'] in event:
                         relay = relay_data[gender].pop(relay_i)
-                        if any([True for athlete in [relay[i] for i in [1, 2, 3, 4]] if athlete['split'] is None]):
+                        if any([True for athlete in [relay[i] for i in [1, 2, 3, 4]] if athlete.get('split') is None]):
                             # There are some None splits
-                            remaining_time = str(relay['time'])
-                            seconds = parse_event_time(remaining_time)
+                            remaining_time = str(relay.get('time'))
+                            seconds = parse_event_time(remaining_time, none_to_zero=True)
                             for timed_athlete in [
-                                athlete for athlete in [relay[i] for i in [1, 2, 3, 4]] if athlete['split'] is not None
+                                athlete for athlete in [relay[i] for i in [1, 2, 3, 4]] if athlete.get('split') is not None
                                 ]:
-                                thing = parse_event_time(str(timed_athlete['split']))
+                                thing = parse_event_time(str(timed_athlete.get('split')), none_to_zero=True)
                                 seconds -= thing
                             for timed_athlete in [
-                                athlete for athlete in [relay[i] for i in [1, 2, 3, 4]] if athlete['split'] is None
+                                athlete for athlete in [relay[i] for i in [1, 2, 3, 4]] if athlete.get('split') is None
                                 ]:
+                                thing = parse_event_time(str(timed_athlete.get('split')), none_to_zero=True)
                                 timed_athlete['split'] = thing / len([
-                                athlete for athlete in [relay[i] for i in [1, 2, 3, 4]] if athlete['split'] is None
+                                athlete for athlete in [relay[i] for i in [1, 2, 3, 4]] if athlete.get('split') is None
                                 ])
                         for athlete in [relay[i] for i in [1, 2, 3, 4]]:
                             first_last = athlete['name'].split(' ')
@@ -506,7 +509,7 @@ def parse_meet_file(path: str, meet_name: str, meet_dates: dict, calendar_year: 
         output_data[record['result']['event']].append(record)
 
     if relay_data:
-        if relay_data['Boys'] or relay_data['Girls']:
+        if relay_data.get('Boys') or relay_data['Girls']:
             x=1  # Did i get all the relay data?
 
     for event, results in output_data.items():

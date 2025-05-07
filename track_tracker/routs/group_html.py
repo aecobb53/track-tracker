@@ -155,7 +155,17 @@ async def html_points(request: Request):
             relay = athletes_dict.pop(athlete_uid)
             athletes_dict[athlete_uid] = relay
 
-    meet_name_list = ['Coyote Invite', 'BHS CHS FHS MHS', 'Niwot', 'BOCO Championships']
+    meet_name_list = [
+        'Coyote Invite',
+        'BHS CHS FHS MHS',
+        'Niwot',
+        'BOCO Championships',
+        'Centaurus Twilight',
+        'Longmont Invitational',
+        # 'League Championship',
+        # 'St. Vrain Last Chance',
+        # 'Colorado State Track and Field Championships',
+    ]
     # FIX    this eventually
 
     workout_page = await points_html_page(athletes_dict, meet_name_list)
