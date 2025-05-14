@@ -9,7 +9,7 @@ from enum import Enum
 from re import L
 
 from .result import Result, ResultData, ResultApiCreate
-from .athlete import AthleteData, AthleteApiCreate
+from .ms_athlete import AthleteData, AthleteApiCreate
 from .event import EventParser
 
 

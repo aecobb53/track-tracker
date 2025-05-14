@@ -162,8 +162,9 @@ async def html_points(request: Request):
         'BOCO Championships',
         'Centaurus Twilight',
         'Longmont Invitational',
-        # 'League Championship',
-        # 'St. Vrain Last Chance',
+        'League Championship',
+        'St Vrain Last Chance',
+        'Teddys Last Chance',
         # 'Colorado State Track and Field Championships',
     ]
     # FIX    this eventually

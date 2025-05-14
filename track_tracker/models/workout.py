@@ -8,7 +8,7 @@ from pydantic import BaseModel, model_validator
 from enum import Enum
 from uuid import uuid4
 
-from .athlete import AthleteData
+from .ms_athlete import AthleteData
 from .event import EventParser
 from .common import apply_modifier
 from .result import Result

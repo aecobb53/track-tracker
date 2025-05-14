@@ -1,16 +1,16 @@
 from .request_models import ResponseTypes, RestHeaders
 from .context_singleton import ContextSingleton
-from .athlete import (
-    AthleteData,
-    AthleteApiCreate,
-    AthleteDBBase,
-    AthleteDBCreate,
-    AthleteDBRead,
-    AthleteDB,
-    AthleteFilter,
+from .result import Result
+from .ms_athlete import (
+    MSAthleteData,
+    MSAthleteApiCreate,
+    MSAthleteDBBase,
+    MSAthleteDBCreate,
+    MSAthleteDBRead,
+    MSAthleteDB,
+    MSAthleteFilter,
 )
-from .result import (
-    Result,
+from .ms_result import (
     ResultData,
     ResultApiCreate,
     ResultDBBase,

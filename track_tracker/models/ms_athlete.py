@@ -7,28 +7,25 @@ from pydantic import BaseModel, model_validator
 from enum import Enum
 from uuid import uuid4
 
-from .event import EventParser
 from .common import apply_modifier
 
 
-class AthleteData(BaseModel):
+class MSAthleteData(BaseModel):
     uid: str
     update_datetime: datetime
 
     first_name: str | None = None
     last_name: str | None = None
+    first_nickname: str | None = None
+    last_nickname: str | None = None
     team: str | None = None
     gender: str | None = None
     graduation_year: int | None = None
 
-    aliases: List[str] = []
     tags: List[str] = []
     active: bool = True
 
     athlete_metadata: Dict[str, Any] = {}
-
-    # @model_validator(mode='before')
-    # def validate_fields(cls, fields):
 
     @property
     def put(self):
@@ -47,13 +44,17 @@ class AthleteData(BaseModel):
                 output['current_year'] = f'Freshman'
             elif year > 3:
                 output['current_year'] = f'Not in HS yet'
-        # output['aliases'] = self.aliases
-        # output['tags'] = self.tags
         return output
 
     @property
     def name(self):
         return f"{self.first_name} {self.last_name}".strip()
+
+    @property
+    def nick_name(self):
+        first = self.first_nickname if self.first_nickname else self.first_name
+        last = self.last_nickname if self.last_nickname else self.last_name
+        return f"{first} {last}".strip()
 
     def __eq__(self, other_object):
         if self.uid != other_object.uid:
@@ -70,8 +71,6 @@ class AthleteData(BaseModel):
             return False
         if self.graduation_year != other_object.graduation_year:
             return False
-        if self.aliases != other_object.aliases:
-            return False
         if self.tags != other_object.tags:
             return False
         if self.active != other_object.active:
@@ -82,86 +81,116 @@ class AthleteData(BaseModel):
 
 
 
-class AthleteApiCreate(BaseModel):
+class MSAthleteApiCreate(BaseModel):
     first_name: str
     last_name: str
+    first_nickname: str | None = None
+    last_nickname: str | None = None
     graduation_year: int | None = None
     team: str
     gender: str | None = None
 
-    aliases: List[str] = []
     tags: List[str] = []
 
     athlete_metadata: Dict[str, Any] = {}
 
-    def cast_data_object(self) -> AthleteData:
-        """Return a data object based on the AthleteData class"""
+    @model_validator(mode='before')
+    def validate_fields(cls, fields):
+        if fields.get('first_name'):
+            fields['first_name'] = fields['first_name'].strip()
+        if fields.get('last_name'):
+            fields['last_name'] = fields['last_name'].strip()
+        if fields.get('first_nickname'):
+            fields['first_nickname'] = fields['first_nickname'].strip()
+        if fields.get('last_nickname'):
+            fields['last_nickname'] = fields['last_nickname'].strip()
+        if fields.get('team'):
+            fields['team'] = fields['team'].strip()
+        return fields
+
+    def cast_data_object(self) -> MSAthleteData:
+        """Return a data object based on the MSAthleteData class"""
         content = self.model_dump()
         content['uid'] = str(uuid4())
         content['update_datetime'] = datetime.now(timezone.utc)
         content['active'] = True
-        data_obj = AthleteData(**content)
+        data_obj = MSAthleteData(**content)
         return data_obj
 
 
-class AthleteDBBase(SQLModel):
+class MSAthleteDBBase(SQLModel):
     id: int | None = Field(primary_key=True, default=None)
     uid: str = Field(unique=True)
     update_datetime: datetime | None = None
 
     first_name: str | None = None
     last_name: str | None = None
+    first_nickname: str | None = None
+    last_nickname: str | None = None
     team: str | None = None
     gender: str | None = None
     graduation_year: int | None = None
 
     search_first_name: str | None = None
     search_last_name: str | None = None
+    search_first_name_only: str | None = None
+    search_last_name_only: str | None = None
+    search_first_nickname_only: str | None = None
+    search_last_nickname_only: str | None = None
+
     search_team: str | None = None
 
-    aliases: str | None = None
     tags: str | None = None
     active: bool | None = True
 
     athlete_metadata: str | None = None
 
-    def cast_data_object(self) -> AthleteData:
-        """Return a data object based on the AthleteData class"""
+    def cast_data_object(self) -> MSAthleteData:
+        """Return a data object based on the MSAthleteData class"""
         content = self.model_dump()
-        content['aliases'] = json.loads(self.aliases)
         content['tags'] = json.loads(self.tags)
         content['athlete_metadata'] = json.loads(self.athlete_metadata)
-        data_obj = AthleteData(**content)
+        data_obj = MSAthleteData(**content)
         return data_obj
 
 
-class AthleteDBCreate(AthleteDBBase):
+class MSAthleteDBCreate(MSAthleteDBBase):
     @model_validator(mode='before')
     def validate_fields(cls, fields):
         fields = fields.model_dump()
         fields['search_first_name'] = fields['first_name'].lower()
         fields['search_last_name'] = fields['last_name'].lower()
+
+        fields['search_first_name_only'] = fields['first_name'].lower()
+        fields['search_last_name_only'] = fields['last_name'].lower()
+        fields['search_first_nickname_only'] = fields['first_name'].lower()
+        fields['search_last_nickname_only'] = fields['last_name'].lower()
+
         fields['search_team'] = fields['team'].lower()
-        fields['aliases'] = json.dumps(fields['aliases'])
         fields['tags'] = json.dumps(list(set(fields['tags'])))
         fields['athlete_metadata'] = json.dumps(fields['athlete_metadata'])
         return fields
 
 
-class AthleteDBRead(AthleteDBBase):
+class MSAthleteDBRead(MSAthleteDBBase):
     pass
 
 
-class AthleteDB(AthleteDBBase, table=True):
-    __tablename__ = "athlete"
+class MSAthleteDB(MSAthleteDBBase, table=True):
+    __tablename__ = "mile-split-athlete"
 
 
-class AthleteFilter(BaseModel):
+class MSAthleteFilter(BaseModel):
     uid: List[str] | None = None
 
     first_name: List[str] | None = None
     last_name: List[str] | None = None
-    # aliases: List[str] | None = None
+
+    first_name_only: List[str] | None = None
+    last_name_only: List[str] | None = None
+    first_nickname_only: List[str] | None = None
+    last_nickname_only: List[str] | None = None
+
     team: List[str] | None = None
     gender: List[str] | None = None
     graduation_year: List[str] | None = None
@@ -170,7 +199,7 @@ class AthleteFilter(BaseModel):
     event_class: str | None = None
     tags: List[str] | None = None
 
-    # active: bool
+    # active: bool = True
 
     limit: int = 1000
     order_by: List[str] = ['last_name', 'first_name']
@@ -187,6 +216,26 @@ class AthleteFilter(BaseModel):
             last_name = []
             [last_name.extend(i.lower().split(',')) for i in fields['last_name']]
             fields['last_name'] = [e.strip() for e in last_name]
+
+        if fields.get('first_name_only'):
+            first_name_only = []
+            [first_name_only.extend(i.lower().split(',')) for i in fields['first_name_only']]
+            fields['first_name_only'] = [e.strip() for e in first_name_only]
+
+        if fields.get('last_name_only'):
+            last_name_only = []
+            [last_name_only.extend(i.lower().split(',')) for i in fields['last_name_only']]
+            fields['last_name_only'] = [e.strip() for e in last_name_only]
+
+        if fields.get('first_nickname_only'):
+            first_nickname_only = []
+            [first_nickname_only.extend(i.lower().split(',')) for i in fields['first_nickname_only']]
+            fields['first_nickname_only'] = [e.strip() for e in first_nickname_only]
+
+        if fields.get('last_nickname_only'):
+            last_nickname_only = []
+            [last_nickname_only.extend(i.lower().split(',')) for i in fields['last_nickname_only']]
+            fields['last_nickname_only'] = [e.strip() for e in last_nickname_only]
 
         if fields.get('team'):
             team = []
@@ -244,17 +293,35 @@ class AthleteFilter(BaseModel):
             fields['offset'] = fields['offset'][0]
         return fields
 
-    def apply_filters(self, database_object_class: AthleteDBBase, query: select, count: bool = False) -> select:
+    def apply_filters(self, database_object_class: MSAthleteDBBase, query: select, count: bool = False) -> select:
         """Apply the filters to the query"""
         if self.uid:
             query = query.filter(database_object_class.uid.in_(self.uid))
 
         if self.first_name:
             filter_list = [database_object_class.search_first_name.contains(e) for e in self.first_name]
+            filter_list + [database_object_class.search_first_nickname.contains(e) for e in self.first_name]
             query = query.filter(or_(*filter_list))
 
         if self.last_name:
             filter_list = [database_object_class.search_last_name.contains(e) for e in self.last_name]
+            filter_list + [database_object_class.search_last_nickname.contains(e) for e in self.last_name]
+            query = query.filter(or_(*filter_list))
+
+        if self.first_name_only:
+            filter_list = [database_object_class.search_first_name.contains(e) for e in self.first_name_only]
+            query = query.filter(or_(*filter_list))
+
+        if self.last_name_only:
+            filter_list = [database_object_class.search_last_name.contains(e) for e in self.last_name_only]
+            query = query.filter(or_(*filter_list))
+
+        if self.first_nickname_only:
+            filter_list = [database_object_class.search_first_nickname.contains(e) for e in self.first_nickname_only]
+            query = query.filter(or_(*filter_list))
+
+        if self.last_nickname_only:
+            filter_list = [database_object_class.search_last_nickname.contains(e) for e in self.last_nickname_only]
             query = query.filter(or_(*filter_list))
 
         if self.team:

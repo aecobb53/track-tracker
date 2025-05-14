@@ -1,3 +1,4 @@
+from re import L
 from fastapi import APIRouter, HTTPException, Request, Response, Depends
 
 # from models import Athlete, AthleteFilter
@@ -6,7 +7,7 @@ from handlers import AthleteHandler, ResultHandler, parse_query_params, Duplicat
 # # from utils import parse_query_params, parse_header, MissingRecordException, DuplicateRecordsException
 from models import AthleteData, AthleteApiCreate, AthleteFilter, ResultFilter, ContextSingleton, RestHeaders
 
-from typing import Annotated
+
 
 context = ContextSingleton()
 
@@ -108,6 +109,44 @@ async def filter_athlete(request: Request):
     except Exception as err:
         context.logger.warning(f'ERROR: {err}')
         raise HTTPException(status_code=500, detail='Internal Service Error')
+
+@router.get('/pr-graph', status_code=201)
+async def generate_athlete_pr_graph(request: Request):
+    athlete_filter = parse_query_params(request=request, query_class=AthleteFilter)
+    ah = AthleteHandler()
+    rh = ResultHandler()
+    athletes = await ah.filter_athletes(athlete_filter=athlete_filter)
+    athlete_graph = [{'athlete': a} for a in athletes]
+    # athlete_graph = [{'athlete': a} for a in athletes if 'Lil' in a.first_name]
+    for graph_item in athlete_graph:
+        athlete = graph_item['athlete']
+        result_filter = ResultFilter(athlete_uid=[athlete.uid], order_by=['meet_date'])
+        results = await rh.filter_results(result_filter=result_filter)
+        pr_data = {}
+        for result in results:
+            if result.event not in pr_data:
+                result.result_metadata['PR'] = True
+                pr_data[result.event] = result
+            else:
+                if result.result > pr_data[result.event].result:
+                    result.result_metadata['PR'] = True
+                    pr_data[result.event] = result
+        graph_item['results'] = results
+        graph_item['pr_data'] = pr_data
+
+
+    return {'athletes_graph': athlete_graph}
+
+
+    # try:
+    #     athlete_filter = parse_query_params(request=request, query_class=AthleteFilter)
+    #     ah = AthleteHandler()
+    #     athletes = await ah.filter_athletes(athlete_filter=athlete_filter)
+    #     return {'athletes': athletes}
+    # except Exception as err:
+    #     context.logger.warning(f'ERROR: {err}')
+    #     raise HTTPException(status_code=500, detail='Internal Service Error')
+
 
 # @router.put('/{athlete_id}', status_code=200)
 # async def update_athlete(athlete_id: str, athlete: Athlete):

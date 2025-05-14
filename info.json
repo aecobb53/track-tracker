@@ -1,5 +1,5 @@
 {
     "service_name": "Track Data Server",
     "description": "Keep track and trend our athletes data.",
-    "version": "1.3.0"
+    "version": "2.0.0"
 }
