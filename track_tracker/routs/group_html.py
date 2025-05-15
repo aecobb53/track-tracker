@@ -9,8 +9,8 @@ from fastapi.responses import HTMLResponse, ORJSONResponse
 # from utils import parse_query_params, parse_header, MissingRecordException, DuplicateRecordsException
 from models import ContextSingleton
 # from .html.unimplemented_page import unimplemented_page
-from handlers import ResultHandler, AthleteHandler
-from models import ResultFilter, AthleteFilter
+from handlers import MSResultHandler, MSAthleteHandler
+from models import MSResultFilter, MSAthleteFilter
 from html import TEAM
 
 
@@ -37,13 +37,13 @@ router = APIRouter(
 
 @router.get('/sprint')
 async def html_sprint(request: Request):
-    rh = ResultHandler()
-    ah = AthleteHandler()
-    athlete_filter = AthleteFilter(tags=['Sprint'], team=[TEAM])
+    rh = MSResultHandler()
+    ah = MSAthleteHandler()
+    athlete_filter = MSAthleteFilter(tags=['Sprint'], team=[TEAM])
     athletes = await ah.filter_athletes(athlete_filter=athlete_filter)
     athletes_dict = {}
     for athlete in athletes:
-        result_filter = ResultFilter(athlete_uid=[athlete.uid], current=['Current'])
+        result_filter = MSResultFilter(athlete_uid=[athlete.uid], current=['Current'])
         results = await rh.filter_results(result_filter=result_filter)
         valid_athlete = False
         if 'Relay' in athlete.last_name:
@@ -72,15 +72,15 @@ async def html_sprint(request: Request):
 
 @router.get('/hurdle')
 async def html_sprint(request: Request):
-    rh = ResultHandler()
-    ah = AthleteHandler()
-    athlete_filter = AthleteFilter(tags=['Sprint'], team=[TEAM])
+    rh = MSResultHandler()
+    ah = MSAthleteHandler()
+    athlete_filter = MSAthleteFilter(tags=['Sprint'], team=[TEAM])
     athletes = await ah.filter_athletes(athlete_filter=athlete_filter)
     athletes_dict = {}
     for athlete in athletes:
         if not athlete.athlete_metadata:
             continue
-        result_filter = ResultFilter(athlete_uid=[athlete.uid], current=['Current'])
+        result_filter = MSResultFilter(athlete_uid=[athlete.uid], current=['Current'])
         results = await rh.filter_results(result_filter=result_filter)
         # valid_athlete = False
         # for result in results:
@@ -100,9 +100,9 @@ async def html_sprint(request: Request):
 async def html_sprint(request: Request):
     # mh = WorkoutHandler()
     # workouts = await mh.filter_workouts(workout_filter=WorkoutFilter())
-    # ah = AthleteHandler()
+    # ah = MSAthleteHandler()
     # for workout in workouts:
-    #     athlete = await ah.find_athlete(AthleteFilter(uid=[workout.athlete_uid]))
+    #     athlete = await ah.find_athlete(MSAthleteFilter(uid=[workout.athlete_uid]))
     #     workout.athlete = athlete
     # workout_page = await filter_workouts_html_page(workouts=workouts)
     workout_page = await unimplemented_page()
@@ -112,9 +112,9 @@ async def html_sprint(request: Request):
 async def html_sprint(request: Request):
     # mh = WorkoutHandler()
     # workouts = await mh.filter_workouts(workout_filter=WorkoutFilter())
-    # ah = AthleteHandler()
+    # ah = MSAthleteHandler()
     # for workout in workouts:
-    #     athlete = await ah.find_athlete(AthleteFilter(uid=[workout.athlete_uid]))
+    #     athlete = await ah.find_athlete(MSAthleteFilter(uid=[workout.athlete_uid]))
     #     workout.athlete = athlete
     # workout_page = await filter_workouts_html_page(workouts=workouts)
     workout_page = await unimplemented_page()
@@ -122,14 +122,14 @@ async def html_sprint(request: Request):
 
 @router.get('/points')
 async def html_points(request: Request):
-    rh = ResultHandler()
-    ah = AthleteHandler()
-    athlete_filter = AthleteFilter(team=[TEAM], order_by=['last_name', 'first_name'])
+    rh = MSResultHandler()
+    ah = MSAthleteHandler()
+    athlete_filter = MSAthleteFilter(team=[TEAM], order_by=['last_name', 'first_name'])
     athletes = await ah.filter_athletes(athlete_filter=athlete_filter)
     athletes_dict = {}
     meet_name_list = []
     for athlete in athletes:
-        result_filter = ResultFilter(athlete_uid=[athlete.uid], current=['Current'])
+        result_filter = MSResultFilter(athlete_uid=[athlete.uid], current=['Current'])
         results = await rh.filter_results(result_filter=result_filter)
         valid_athlete = False
 

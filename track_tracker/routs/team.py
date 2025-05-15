@@ -1,7 +1,7 @@
 from fastapi import APIRouter, HTTPException, Request, Response, Depends
 
-from handlers import AthleteHandler, ResultHandler, parse_query_params, DuplicateRecordsException, MissingRecordException
-from models import AthleteData, AthleteApiCreate, AthleteFilter, ResultFilter, ContextSingleton, RestHeaders
+from handlers import MSAthleteHandler, MSResultHandler, parse_query_params, DuplicateRecordsException, MissingRecordException
+from models import MSAthleteData, MSAthleteApiCreate, MSAthleteFilter, MSResultFilter, ContextSingleton, RestHeaders
 
 from typing import Annotated
 
@@ -16,8 +16,8 @@ router = APIRouter(
 @router.get('/', status_code=200)
 async def filter_team(request: Request):
     try:
-        athlete_filter = parse_query_params(request=request, query_class=AthleteFilter)
-        ah = AthleteHandler()
+        athlete_filter = parse_query_params(request=request, query_class=MSAthleteFilter)
+        ah = MSAthleteHandler()
         athletes = await ah.filter_athletes(athlete_filter=athlete_filter)
 
         # APPLY A FILTER TO ONLY GET ACTIVE TEAM MEMEBRS
@@ -42,10 +42,10 @@ async def filter_team(request: Request):
 @router.get('/display', status_code=200)
 async def filter_athlete(request: Request):
     try:
-        athlete_filter = parse_query_params(request=request, query_class=AthleteFilter)
+        athlete_filter = parse_query_params(request=request, query_class=MSAthleteFilter)
         params = parse_query_params(request=request)
-        ah = AthleteHandler()
-        athletes = await ah.filter_athletes(athlete_filter=AthleteFilter(team=athlete_filter.team))
+        ah = MSAthleteHandler()
+        athletes = await ah.filter_athletes(athlete_filter=MSAthleteFilter(team=athlete_filter.team))
         offset = athlete_filter.offset
         limit = athlete_filter.limit
         start_index = offset
@@ -64,16 +64,16 @@ async def filter_athlete(request: Request):
             if team not in team_details:
                 team_details[team] = {
                     'Team': team,
-                    'Athlete Count': 0
+                    'MSAthlete Count': 0
                 }
-            team_details[team]['Athlete Count'] += 1
+            team_details[team]['MSAthlete Count'] += 1
         team_keys = list(team_details.keys())
         team_keys.sort()
         teams = [team_details[key] for key in team_keys]
 
 
         # if params.get('min_athlete_count'):
-        #     teams = [t for t in teams if t['Athlete Count'] >= int(params['min_athlete_count'][0])]
+        #     teams = [t for t in teams if t['MSAthlete Count'] >= int(params['min_athlete_count'][0])]
 
 
 

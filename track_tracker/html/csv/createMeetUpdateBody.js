@@ -38,7 +38,7 @@ async function createMeetUpdateBody() {
             // Event
             event_row_dict['event'] = returnRowInputValue(event_items[1]);
 
-            // Athletes
+            // MSAthletes
             event_row_dict['athletes'] = returnRowInputValue(event_items[2]);
 
             // Heat Late Flight

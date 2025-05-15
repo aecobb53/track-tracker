@@ -243,7 +243,7 @@ async def find_team_html_page(athletes, results, team_name, season_year=SEASON_Y
     seniors = [a for a in athletes if a.graduation_year == current_year]
 
 
-    page_content.add_element(Header(level=2, internal=f"Athlete count: {len(athletes)}").add_class('team-info-tag'))
+    page_content.add_element(Header(level=2, internal=f"MSAthlete count: {len(athletes)}").add_class('team-info-tag'))
     page_content.add_element(Header(level=2, internal=f"Boys: {len(boys)}").add_class('team-info-tag').add_class('mens-format'))
     page_content.add_element(Header(level=2, internal=f"Girls: {len(girls)}").add_class('team-info-tag').add_class('womens-format'))
     page_content.add_element(Header(level=2, internal=f"Freshmen: {len(freshmen)}").add_class('team-info-tag'))
@@ -308,7 +308,7 @@ async def find_team_html_page(athletes, results, team_name, season_year=SEASON_Y
                 break
         event_dict[result.event].append(result)
     events_div = Div()
-    column_names = ['Place', 'Meet', 'Athlete', 'Result', 'Wind (m/s)', 'Heat', 'Class', 'Date']
+    column_names = ['Place', 'Meet', 'MSAthlete', 'Result', 'Wind (m/s)', 'Heat', 'Class', 'Date']
     for event, event_results in event_dict.items():
         event_results.sort(key=lambda x: x.meet_date)
         record_result = event_results[0]
@@ -401,7 +401,7 @@ async def find_team_html_page(athletes, results, team_name, season_year=SEASON_Y
                 break
         event_dict[result.event].append(result)
     events_div = Div()
-    column_names = ['Place', 'Meet', 'Athlete', 'Result', 'Wind (m/s)', 'Heat', 'Class', 'Date']
+    column_names = ['Place', 'Meet', 'MSAthlete', 'Result', 'Wind (m/s)', 'Heat', 'Class', 'Date']
     for event, event_results in event_dict.items():
         event_results.sort(key=lambda x: x.result.sort_value)
         record_result = event_results[0]
@@ -495,7 +495,7 @@ async def find_team_html_page(athletes, results, team_name, season_year=SEASON_Y
                 break
         meet_dict[result.meet][result.event].append(result)
     meets_div = Div()
-    column_names = ['Place', 'Athlete', 'Result', 'Wind (m/s)', 'Heat', 'Class', 'Date']
+    column_names = ['Place', 'MSAthlete', 'Result', 'Wind (m/s)', 'Heat', 'Class', 'Date']
     for index, (meet, events_results) in enumerate(meet_dict.items()):
         if index % 2:
             meet_div = Div().add_class('odd-content-format')
@@ -584,12 +584,12 @@ async def find_team_html_page(athletes, results, team_name, season_year=SEASON_Y
     display_different_content.add_element(page_content_meet)
 
 
-    # Athletes - Events
+    # MSAthletes - Events
     display_form.add_element(
-        Button(internal='Athlete Events', type='button', onclick="teamDisplay('Athlete-events')"
+        Button(internal='MSAthlete Events', type='button', onclick="teamDisplay('MSAthlete-events')"
         ).add_class('button-item-athlete-events').add_class('team-display-button').add_class('button-deactivated'))
     page_content_athlete = Div().add_class('display-item-deactivated').add_class('page-content-athlete-events')
-    page_content_athlete.add_element(Header(level=1, internal=f"Athletes"))
+    page_content_athlete.add_element(Header(level=1, internal=f"MSAthletes"))
     athlete_dict = {}
     for result in results:
         for athlete in athletes:
@@ -603,7 +603,7 @@ async def find_team_html_page(athletes, results, team_name, season_year=SEASON_Y
             athlete_dict[athlete_key][result.event] = []
         athlete_dict[athlete_key][result.event].append(result)
     athletes_div = Div()
-    column_names = ['Place', 'Meet', 'Athlete', 'Result', 'Wind (m/s)', 'Heat', 'Class', 'Date']
+    column_names = ['Place', 'Meet', 'MSAthlete', 'Result', 'Wind (m/s)', 'Heat', 'Class', 'Date']
     athlete_keys = list(athlete_dict.keys())
     athlete_keys.sort()
     athlete_dict = {k: athlete_dict[k] for k in athlete_keys}
@@ -696,12 +696,12 @@ async def find_team_html_page(athletes, results, team_name, season_year=SEASON_Y
     display_different_content.add_element(page_content_athlete)
 
 
-    # Athletes - Meets
+    # MSAthletes - Meets
     display_form.add_element(
-        Button(internal='Athlete Meets', type='button', onclick="teamDisplay('Athlete-meets')"
+        Button(internal='MSAthlete Meets', type='button', onclick="teamDisplay('MSAthlete-meets')"
         ).add_class('button-item-athlete-meets').add_class('team-display-button').add_class('button-deactivated'))
     page_content_athlete = Div().add_class('display-item-deactivated').add_class('page-content-athlete-meets')
-    page_content_athlete.add_element(Header(level=1, internal=f"Athletes"))
+    page_content_athlete.add_element(Header(level=1, internal=f"MSAthletes"))
     athlete_dict = {}
     for result in results:
         for athlete in athletes:

@@ -5,13 +5,13 @@ from sqlmodel import Session, select, func
 
 from .base_handler import BaseHandler
 from models import (
-    ResultData,
-    ResultApiCreate,
-    ResultDBBase,
-    ResultDBCreate,
-    ResultDBRead,
-    ResultDB,
-    ResultFilter,
+    MSResultData,
+    MSResultApiCreate,
+    MSResultDBBase,
+    MSResultDBCreate,
+    MSResultDBRead,
+    MSResultDB,
+    MSResultFilter,
 )
 from html import display_date
 from html.common import class_formatter
@@ -20,49 +20,49 @@ from html.env import SEASON_YEAR
 from .exceptions import MissingRecordException, DuplicateRecordsException, DataIntegrityException
 
 
-class ResultHandler(BaseHandler):
+class MSResultHandler(BaseHandler):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
-    async def create_result(self, result: ResultData) -> ResultData:
+    async def create_result(self, result: MSResultData) -> MSResultData:
         self.context.logger.info(f"Creating result: {result.model_dump_json()}")
         with Session(self.context.database.engine) as session:
-            create_obj = ResultDBCreate.model_validate(result)
-            create_obj = ResultDB.model_validate(create_obj)
+            create_obj = MSResultDBCreate.model_validate(result)
+            create_obj = MSResultDB.model_validate(create_obj)
             session.add(create_obj)
             session.commit()
             session.refresh(create_obj)
-            read_obj = ResultDBRead.model_validate(create_obj)
+            read_obj = MSResultDBRead.model_validate(create_obj)
             result = read_obj.cast_data_object()
         self.context.logger.info(f"Result Created: {result.model_dump_json()}")
         return result
 
-    async def filter_results(self, result_filter: ResultFilter) -> list[ResultData]:
+    async def filter_results(self, result_filter: MSResultFilter) -> list[MSResultData]:
         # self.context.logger.info(f"Filtering results: {result_filter.model_dump_json()}")
         with Session(self.context.database.engine) as session:
-            query = select(ResultDB)
-            query = result_filter.apply_filters(ResultDB, query)
+            query = select(MSResultDB)
+            query = result_filter.apply_filters(MSResultDB, query)
             rows = session.exec(query).all()
             results = []
             for row in rows:
-                read_obj = ResultDBRead.model_validate(row)
+                read_obj = MSResultDBRead.model_validate(row)
                 result = read_obj.cast_data_object()
                 results.append(result)
         # self.context.logger.info(f"Results Filtered: {len(results)}")
         return results
 
-    async def find_results(self, result_filter: ResultFilter, silence_missing=False) -> ResultData:
+    async def find_results(self, result_filter: MSResultFilter, silence_missing=False) -> MSResultData:
         """
         Find single matching result or error
         """
         # self.context.logger.info(f"Filtering results: {result_filter.model_dump_json()}")
         with Session(self.context.database.engine) as session:
-            query = select(ResultDB)
-            query = result_filter.apply_filters(ResultDB, query)
+            query = select(MSResultDB)
+            query = result_filter.apply_filters(MSResultDB, query)
             rows = session.exec(query).all()
             results = []
             for row in rows:
-                read_obj = ResultDBRead.model_validate(row)
+                read_obj = MSResultDBRead.model_validate(row)
                 result = read_obj.cast_data_object()
                 results.append(result)
             if len(results) == 0:
@@ -76,26 +76,46 @@ class ResultHandler(BaseHandler):
         self.context.logger.info(f"Result found")
         return result
 
-    async def filter_results_display(self, result_filter: ResultFilter) -> list[dict]:
+    async def delete_result(self, result_uid: str) -> MSResultData:
+        """
+        Find single matching result or error
+        """
+        # self.context.logger.info(f"Filtering results: {result_filter.model_dump_json()}")
+        with Session(self.context.database.engine) as session:
+            query = select(MSResultDB)
+            query = query.where(MSResultDB.uid == result_uid)
+            row = session.exec(query).first()
+
+            if row is None:
+                raise MissingRecordException(f"No records found for uid: [{result_uid}]")
+
+            session.delete(row)
+            session.commit()
+            read_obj = MSResultDBRead.model_validate(row)
+            result = read_obj.cast_data_object()
+        self.context.logger.info(f"Result found")
+        return result
+
+    async def filter_results_display(self, result_filter: MSResultFilter) -> list[dict]:
         # self.context.logger.info(f"Filtering results for display: {result_filter.model_dump_json()}")
         with Session(self.context.database.engine) as session:
-            query = select(ResultDB)
-            query = result_filter.apply_filters(ResultDB, query)
+            query = select(MSResultDB)
+            query = result_filter.apply_filters(MSResultDB, query)
             rows = session.exec(query).all()
             results = []
             for row in rows:
-                read_obj = ResultDBRead.model_validate(row)
+                read_obj = MSResultDBRead.model_validate(row)
                 result = read_obj.cast_data_object()
                 results.append(result)
 
             # COUNT DOESNT WORK IF THERE ARE FILTERS APPLIED. IT ONLY GETS MAX SIZE FOR ALL RECORDS
-            query_max_count = select(func.count(ResultDB.uid))
-            query_max_count = result_filter.apply_filters(ResultDB, query_max_count, count=True)
+            query_max_count = select(func.count(MSResultDB.uid))
+            query_max_count = result_filter.apply_filters(MSResultDB, query_max_count, count=True)
             query_max_count = session.exec(
                 query_max_count).one()
 
             # query_max_count = rows = session.exec(
-            #     select(func.count(ResultDB.uid))).one()
+            #     select(func.count(MSResultDB.uid))).one()
 
         self.context.logger.info(f"Results Filtered: {len(results)}")
         display_results = []
@@ -105,7 +125,7 @@ class ResultHandler(BaseHandler):
             display_results.append({
                 'Event': result.event,
                 'Place': result.place,
-                'Athlete': athlete,
+                'MSAthlete': athlete,
                 'Team': result.team,
                 'Result': result.result.format,
                 'Wind': result.wind,
@@ -120,12 +140,12 @@ class ResultHandler(BaseHandler):
     # async def find_result(self, result_uid: str) -> Result:
     #     self.context.logger.info(f"Finding result: {result_uid}")
     #     with Session(self.context.database.engine) as session:
-    #         query = select(ResultDB)
-    #         query = query.where(ResultDB.uid == result_uid)
+    #         query = select(MSResultDB)
+    #         query = query.where(MSResultDB.uid == result_uid)
     #         row = session.exec(query).first()
     #         if row is None:
     #             raise MissingRecordException(f"No records found for uid: [{result_uid}]")
-    #         read_obj = ResultDBRead.model_validate(row)
+    #         read_obj = MSResultDBRead.model_validate(row)
     #         result = read_obj.cast_data_object(Result)
     #     self.context.logger.info(f"Result found: [{result_uid}]")
     #     return result
@@ -133,8 +153,8 @@ class ResultHandler(BaseHandler):
     # async def update_result(self, result_uid: str, result: Result) -> Result:
     #     self.context.logger.info(f"Updating result: {result_uid}")
     #     with Session(self.context.database.engine) as session:
-    #         query = select(ResultDB)
-    #         query = query.where(ResultDB.uid == result_uid)
+    #         query = select(MSResultDB)
+    #         query = query.where(MSResultDB.uid == result_uid)
     #         row = session.exec(query).first()
     #         if row is None:
     #             raise MissingRecordException(f"No records found for uid: [{result_uid}]")
@@ -166,7 +186,7 @@ class ResultHandler(BaseHandler):
     #         session.add(row)
     #         session.commit()
     #         session.refresh(row)
-    #         read_obj = ResultDBRead.model_validate(row)
+    #         read_obj = MSResultDBRead.model_validate(row)
     #         result = read_obj.cast_data_object(Result)
     #     self.context.logger.info(f"Result updated: [{result_uid}]")
     #     return result
@@ -184,8 +204,8 @@ class ResultHandler(BaseHandler):
     # async def delete_result(self, result_uid: str) -> None:
     #     self.context.logger.info(f"Deleting result: {result_uid}")
     #     with Session(self.context.database.engine) as session:
-    #         query = select(ResultDB)
-    #         query = query.where(ResultDB.uid == result_uid)
+    #         query = select(MSResultDB)
+    #         query = query.where(MSResultDB.uid == result_uid)
     #         row = session.exec(query).first()
     #         session.delete(row)
     #         session.commit()

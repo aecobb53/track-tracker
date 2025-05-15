@@ -61,8 +61,8 @@ async function populateTeamTable(filterResults, page, page_size, page_count) {
     //     console.log('HERE 2');
     //     console.log(filterResults[i]);
     //     for (const [key, value] of Object.entries(filterResults[i])) {
-    //         if (key == 'Athlete Count') {
-    //             console.log('Athlete Count');
+    //         if (key == 'MSAthlete Count') {
+    //             console.log('MSAthlete Count');
     //             console.log(value);
     //             if (value <= 10) {
     //                 continue;
@@ -78,8 +78,8 @@ async function populateTeamTable(filterResults, page, page_size, page_count) {
     for(var i = 0; i < filterResults.length; i++) {
         console.log('HERE 2');
         console.log(filterResults[i]);
-        console.log(filterResults[i]['Athlete Count']);
-        if (filterResults[i]['Athlete Count'] >= 2) {
+        console.log(filterResults[i]['MSAthlete Count']);
+        if (filterResults[i]['MSAthlete Count'] >= 2) {
             condensed_list.push(filterResults[i]);
         }
     }

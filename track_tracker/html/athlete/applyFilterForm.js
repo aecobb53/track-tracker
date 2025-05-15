@@ -58,7 +58,7 @@ async function applyFilterForm(page=1, page_size=null, record_size=null) {
     var offset = page - 1;
     offset = offset * page_size;
     params['offset'] = offset
-    const queryResults = await GETFilterAthlete(params);
+    const queryResults = await GETFilterMSAthlete(params);
 
     filterResults = queryResults['athletes'];
     query_max_count = queryResults['query_max_count'];
@@ -67,6 +67,6 @@ async function applyFilterForm(page=1, page_size=null, record_size=null) {
     page_count = Math.round(query_max_count / page_size);
     console.log('Page count: ' + page_count);
 
-    populateAthleteTable(filterResults, page, page_size, page_count);
+    populateMSAthleteTable(filterResults, page, page_size, page_count);
     applyDisplayFilters();
 }

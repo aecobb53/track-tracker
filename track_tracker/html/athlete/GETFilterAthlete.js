@@ -1,4 +1,4 @@
-async function GETFilterAthlete(params) {
+async function GETFilterMSAthlete(params) {
     console.log('GETing to /athlete/display');
     // var url = '/result/display';
     var url = '/athlete/display?' + new URLSearchParams(params).toString();

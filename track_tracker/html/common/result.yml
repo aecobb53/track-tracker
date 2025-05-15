@@ -178,7 +178,7 @@ arrange:
             options:
                 - Event
                 - Place
-                - Athlete
+                - MSAthlete
                 - Team
                 - Result
                 - Wind
@@ -197,7 +197,7 @@ arrange:
                 - Meet
                 - Place
                 - Event
-                - Athlete
+                - MSAthlete
                 - Team
                 - Result
                 - Wind
@@ -215,7 +215,7 @@ arrange:
             options:
                 - Place
                 - Event
-                - Athlete
+                - MSAthlete
                 - Team
                 - Result
                 - Wind
@@ -235,7 +235,7 @@ arrange:
                 - '-'
                 - Place
                 - Event
-                - Athlete
+                - MSAthlete
                 - Team
                 - Result
                 - Wind
@@ -254,7 +254,7 @@ arrange:
                 - '-'
                 - Place
                 - Event
-                - Athlete
+                - MSAthlete
                 - Team
                 - Result
                 - Wind
@@ -286,7 +286,7 @@ display:
                     - Example
         athlete:
             variable: athlete
-            display: Athlete
+            display: MSAthlete
             formatted_function: null
             html_display_filtering:
                 display_column: Common

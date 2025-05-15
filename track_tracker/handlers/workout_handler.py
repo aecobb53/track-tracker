@@ -105,7 +105,7 @@ class WorkoutHandler(BaseHandler):
     #         display_workouts.append({
     #             'Event': workout.event,
     #             'Place': workout.place,
-    #             'Athlete': athlete,
+    #             'MSAthlete': athlete,
     #             'Team': workout.team,
     #             'Workout': workout.workout.format,
     #             'Wind': workout.wind,

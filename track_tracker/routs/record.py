@@ -1,7 +1,7 @@
 from fastapi import APIRouter, HTTPException, Request, Response, Depends
 
-from handlers import AthleteHandler, ResultHandler, parse_query_params, DuplicateRecordsException, MissingRecordException
-from models import AthleteData, AthleteApiCreate, AthleteFilter, ResultFilter, ContextSingleton, RestHeaders
+from handlers import MSAthleteHandler, MSResultHandler, parse_query_params, DuplicateRecordsException, MissingRecordException
+from models import MSAthleteData, MSAthleteApiCreate, MSAthleteFilter, MSResultFilter, ContextSingleton, RestHeaders
 
 context = ContextSingleton()
 
@@ -14,16 +14,16 @@ router = APIRouter(
 @router.get('/', status_code=200)
 async def filter_team(request: Request):
     try:
-        # athlete_filter = parse_query_params(request=request, query_class=AthleteFilter)
-        # ah = AthleteHandler()
-        # athletes = await ah.filter_athletes(AthleteFilter())
-        mh = ResultHandler()
+        # athlete_filter = parse_query_params(request=request, query_class=MSAthleteFilter)
+        # ah = MSAthleteHandler()
+        # athletes = await ah.filter_athletes(MSAthleteFilter())
+        mh = MSResultHandler()
         offset = 0
         checking = True
-        size = ResultFilter().limit
+        size = MSResultFilter().limit
         results = []
         while checking:
-            results_l = await mh.filter_results(ResultFilter(offset=offset))
+            results_l = await mh.filter_results(MSResultFilter(offset=offset))
             results.extend(results_l)
             if len(results_l) < 1000:
                 checking = False
@@ -50,9 +50,9 @@ async def filter_team(request: Request):
 @router.get('/display', status_code=200)
 async def filter_athlete(request: Request):
     try:
-        athlete_filter = parse_query_params(request=request, query_class=AthleteFilter)
-        ah = AthleteHandler()
-        athletes = await ah.filter_athletes(athlete_filter=AthleteFilter(team=athlete_filter.team))
+        athlete_filter = parse_query_params(request=request, query_class=MSAthleteFilter)
+        ah = MSAthleteHandler()
+        athletes = await ah.filter_athletes(athlete_filter=MSAthleteFilter(team=athlete_filter.team))
         offset = athlete_filter.offset
         limit = athlete_filter.limit
         start_index = offset
@@ -67,9 +67,9 @@ async def filter_athlete(request: Request):
             if team not in team_details:
                 team_details[team] = {
                     'Team': team,
-                    'Athlete Count': 0
+                    'MSAthlete Count': 0
                 }
-            team_details[team]['Athlete Count'] += 1
+            team_details[team]['MSAthlete Count'] += 1
         team_keys = list(team_details.keys())
         team_keys.sort()
         teams = [team_details[key] for key in team_keys]

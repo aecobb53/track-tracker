@@ -17,7 +17,7 @@ from .base_page import (
     TABLE_STYLES,
     )
 from .common import class_formatter
-from models import Result, ResultData
+from models import Result, MSResultData
 
 def _sort_function(item):
     if item is None or item == '-':
@@ -84,7 +84,7 @@ async def sprint_html_page(athletes_dict):
             # else:
         if not m100 and m200:
             m100_assumed = True
-            if isinstance(m200, ResultData):
+            if isinstance(m200, MSResultData):
                 m200_val = m200.result.format_smaller_value
             else:
                 m200_val = m200
@@ -92,24 +92,24 @@ async def sprint_html_page(athletes_dict):
 
         if not m400 and m200:
             m400_assumed = True
-            if isinstance(m200, ResultData):
+            if isinstance(m200, MSResultData):
                 m200_val = m200.result.format_smaller_value
             else:
                 m200_val = m200
             m400 = ( m200_val * 2) + 4
-        if isinstance(m100, ResultData):
+        if isinstance(m100, MSResultData):
             m100 = m100.result.format_smaller_value
         elif m100 is None:
             m100 = None
         else:
             m100 = round(m100, 2)
-        if isinstance(m200, ResultData):
+        if isinstance(m200, MSResultData):
             m200 = m200.result.format_smaller_value
         elif m200 is None:
             m200 = None
         else:
             m200 = round(m200, 2)
-        if isinstance(m400, ResultData):
+        if isinstance(m400, MSResultData):
             m400 = m400.result.format_smaller_value
         elif m400 is None:
             m400 = None
@@ -340,7 +340,7 @@ async def points_html_page(athletes_dict, meet_name_list):
             'Meet Name': [
                 points,  # This is the max points
                 [
-                    'Athlete Name'  # list of athletes that meet this value
+                    'MSAthlete Name'  # list of athletes that meet this value
                 ]
             ]
         }

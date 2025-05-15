@@ -9,7 +9,7 @@ from pydantic import BaseModel, model_validator
 from enum import Enum
 from uuid import uuid4
 
-from .ms_athlete import MSAthleteData
+from .athlete import MSAthleteData
 from .event import EventParser
 from .common import apply_modifier
 from .result import Result
@@ -133,7 +133,7 @@ class MSResultDBBase(SQLModel):
     heat: int
     place: int
     wind: float
-    athlete_uid: str = Field(foreign_key="milesplit_athlete.uid")
+    athlete_uid: str = Field(foreign_key="athlete.uid")
     team: str | None = None
     meet_date: datetime
     result: Dict | None = Field(default_factory=dict, sa_column=Column(JSON))
@@ -173,7 +173,7 @@ class MSResultDBRead(MSResultDBBase):
 
 
 class MSResultDB(MSResultDBBase, table=True):
-    __tablename__ = "milesplit_result"
+    __tablename__ = "result"
 
 
 class MSResultFilter(BaseModel):

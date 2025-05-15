@@ -19,7 +19,7 @@ RESULT_ARRANGE_PARAMS = result_file['arrange']
 RESULT_DISPLAY_PARAMS = result_file['display']
 
 
-# Athlete Filter Params
+# MSAthlete Filter Params
 with open(os.path.join(path, 'athlete.yml')) as yf:
     athlete_file = yaml.safe_load(yf)
 ATHLETE_FILTER_PARAMS = athlete_file['filter']

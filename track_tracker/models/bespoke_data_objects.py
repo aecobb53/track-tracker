@@ -8,8 +8,8 @@ from datetime import datetime, date, time, timedelta
 from enum import Enum
 from re import L
 
-from .result import Result, ResultData, ResultApiCreate
-from .ms_athlete import AthleteData, AthleteApiCreate
+from .ms_result import Result, MSResultData, MSResultApiCreate
+from .ms_athlete import MSAthleteData, MSAthleteApiCreate
 from .event import EventParser
 
 
@@ -81,11 +81,11 @@ class EventType:
         return obj
 
 
-class ResultDataObject(BespokeDataObjectBase):
+class MSResultDataObject(BespokeDataObjectBase):
     def __init__(self,
-        athlete: AthleteData,
-        seed: ResultData | None = None,
-        result: ResultData | None = None,
+        athlete: MSAthleteData,
+        seed: MSResultData | None = None,
+        result: MSResultData | None = None,
         # team: str,
         heat_lane_flight: str = 'Unknown',
         place: int | None = None,
@@ -102,10 +102,10 @@ class ResultDataObject(BespokeDataObjectBase):
         self.points = points
 
     def __repr__(self):
-        return f"ResultDataObject(athlete='{self.athlete.name}', result='{self.result.format if self.result else None}', place={self.place})"
+        return f"MSResultDataObject(athlete='{self.athlete.name}', result='{self.result.format if self.result else None}', place={self.place})"
 
     def __str__(self):
-        return f"ResultDataObject(athlete='{self.athlete.name}', result='{self.result.format if self.result else None}', place={self.place})"
+        return f"MSResultDataObject(athlete='{self.athlete.name}', result='{self.result.format if self.result else None}', place={self.place})"
 
     def __eq__(self, other_object: object) -> bool:
         if self.athlete != other_object.athlete:
@@ -171,7 +171,7 @@ class ResultDataObject(BespokeDataObjectBase):
         first_name = first_last.pop(0)
         last_name = ' '.join(first_last)
         team = json_data.get('team', 'Fairview High School')
-        athlete = AthleteApiCreate(
+        athlete = MSAthleteApiCreate(
             first_name=first_name,
             last_name=last_name,
             team=team,
@@ -267,13 +267,13 @@ class EventDataObject(BespokeDataObjectBase):
         else:
             self.results.append(result)
 
-    def find_result(self, identifier: str | int) -> ResultDataObject | None:
+    def find_result(self, identifier: str | int) -> MSResultDataObject | None:
         if isinstance(identifier, str):
             for result in self.results:
                 if result.athlete.name == identifier:
                     return result
             else:
-                raise IndexError(f"ResultDataObject with name {identifier} not found.")
+                raise IndexError(f"MSResultDataObject with name {identifier} not found.")
         elif isinstance(identifier, int):
             try:
                 return self.results[identifier]
@@ -288,7 +288,7 @@ class EventDataObject(BespokeDataObjectBase):
                     self.results.remove(result)
                     return
             else:
-                raise IndexError(f"ResultDataObject with name {identifier} not found.")
+                raise IndexError(f"MSResultDataObject with name {identifier} not found.")
         elif isinstance(identifier, int):
             self.results.pop(identifier)
             return
@@ -432,12 +432,12 @@ class EventDataObject(BespokeDataObjectBase):
             for athlete in team.get('athletes', []):
                 if athlete['name'].startswith('Team'):
                     team_key = athlete['name']
-                athlete = ResultDataObject.import_json(athlete, event_dict)
+                athlete = MSResultDataObject.import_json(athlete, event_dict)
                 obj.add_team_result(team_key, athlete)
             print(f"TEAM: {team}")
             # print(f"TEAM: {team.get('name')}, {team.get('Heat/Lane/Flight')}")
         for athlete in data.get('athletes', []):
-            athlete = ResultDataObject.import_json(athlete, event_dict)
+            athlete = MSResultDataObject.import_json(athlete, event_dict)
             obj.add_result(athlete)
         return obj
 
@@ -713,12 +713,12 @@ class EventUpdateObject(BespokeUpdateObjectBase):
             self.updates['results'] = {}
         self.updates['results'][index] = result_update
 
-    def add_result_create(self, result_data_object: ResultDataObject):
+    def add_result_create(self, result_data_object: MSResultDataObject):
         if 'new_results' not in self.updates:
             self.updates['new_results'] = []
         self.updates['new_results'].append(result_data_object)
 
-    def add_result_delete(self, index: int, result_data_object: ResultDataObject):
+    def add_result_delete(self, index: int, result_data_object: MSResultDataObject):
         if 'deleted_results' not in self.updates:
             self.updates['deleted_results'] = {}
         self.updates['deleted_results'][index] = result_data_object
@@ -748,7 +748,7 @@ class MeetUpdateObject(BespokeUpdateObjectBase):
             self.updates['new_events'] = []
         self.updates['new_events'].append(event_data_object)
 
-    def add_result_delete(self, index: int, result_data_object: ResultDataObject):
+    def add_result_delete(self, index: int, result_data_object: MSResultDataObject):
         if 'deleted_results' not in self.updates:
             self.updates['deleted_results'] = {}
         self.updates['deleted_results'][index] = result_data_object
@@ -772,7 +772,7 @@ class UpdateResultObject:
             for key, value in {k: v for k, v in event_update_object.updates.items() if k not in ['results', 'new_results', 'deleted_results']}.items():
                 print(f"    {key}: {value}")
             for result_index, result_update_object in event_update_object.updates.get('results', {}).items():
-                print(f"    ResultData Index: {result_index}")
+                print(f"    MSResultData Index: {result_index}")
                 for key, value in result_update_object.updates.items():
                     print(f"      {key}: {value}")
         for event_data_object in self.update_object.updates.get('new_events', []):

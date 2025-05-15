@@ -3,10 +3,10 @@ from fastapi import APIRouter, HTTPException, Request, Response, Depends
 
 # from models import Workout, WorkoutFilter
 # # from handlers import WorkoutHandler
-from handlers import ResultHandler, AthleteHandler, WorkoutHandler, parse_query_params, DuplicateRecordsException, MissingRecordException
+from handlers import MSResultHandler, MSAthleteHandler, WorkoutHandler, parse_query_params, DuplicateRecordsException, MissingRecordException
 # # from utils import parse_query_params, parse_header, MissingRecordException, DuplicateRecordsException
 # from models import WorkoutData, WorkoutApiCreate, WorkoutFilter
-from models import WorkoutData, WorkoutApiCreate, WorkoutFilter, AthleteFilter
+from models import WorkoutData, WorkoutApiCreate, WorkoutFilter, MSAthleteFilter
 from models import ContextSingleton
 
 
@@ -21,8 +21,8 @@ router = APIRouter(
 @router.post('/', status_code=201)
 async def create_workout(workout: WorkoutApiCreate):
     try:
-        ah = AthleteHandler()
-        athlete = await ah.find_athlete(AthleteFilter(
+        ah = MSAthleteHandler()
+        athlete = await ah.find_athlete(MSAthleteFilter(
                 first_name=[workout.athlete_first_name],
                 last_name=[workout.athlete_last_name],
                 team=["Fairview High School"],
@@ -63,9 +63,9 @@ async def filter_workout(request: Request):
         workout_filter = parse_query_params(request=request, query_class=WorkoutFilter)
         mh = WorkoutHandler()
         workouts = await mh.filter_workouts(workout_filter=workout_filter)
-        ah = AthleteHandler()
+        ah = MSAthleteHandler()
         for workout in workouts:
-            athlete = await ah.find_athlete(AthleteFilter(uid=[workout.athlete_uid]))
+            athlete = await ah.find_athlete(MSAthleteFilter(uid=[workout.athlete_uid]))
             workout.athlete = athlete
         return {'workouts': workouts}
     except Exception as err:
@@ -76,7 +76,7 @@ async def filter_workout(request: Request):
 # @router.put('/', status_code=200)
 # async def update_workout(workout: WorkoutData):
 #     try:
-#         mh = AthleteHandler()
+#         mh = MSAthleteHandler()
 #         created_workout = await mh.update_workout(workout=workout)
 #         return created_workout.put
 #     except DuplicateRecordsException as err:
@@ -94,10 +94,10 @@ async def filter_workout(request: Request):
 #         workout_filter = parse_query_params(request=request, query_class=WorkoutFilter)
 #         mh = WorkoutHandler()
 #         workouts, query_max_count = await mh.filter_workouts_display(workout_filter=workout_filter)
-#         ah = AthleteHandler()
+#         ah = MSAthleteHandler()
 #         for workout in workouts:
-#             athlete = await ah.find_athlete(AthleteFilter(uid=[workout['Athlete']]))
-#             workout['Athlete'] = f"{athlete.first_name} {athlete.last_name}"
+#             athlete = await ah.find_athlete(MSAthleteFilter(uid=[workout['MSAthlete']]))
+#             workout['MSAthlete'] = f"{athlete.first_name} {athlete.last_name}"
 #             workout['Class'] = class_formatter(athlete.graduation_year)[1]
 #         response = {
 #             'workouts': workouts,

@@ -26,7 +26,7 @@ from html import (
     filter_results_html_page,
     filter_athletes_html_page, find_athletes_html_page,
     filter_teams_html_page, find_team_html_page,
-    filter_records_html_page,
+    # filter_records_html_page,
 )
 
 
@@ -40,18 +40,18 @@ from routs import (
     result_router,
     athlete_router,
     team_router,
-    record_router,
+    # record_router,
     # result_html_router,
     # athlete_html_router,
     # team_html_router,
     # record_html_router,
     unimplemented_html_router,
     # dev_html_router,
-    workout_router,
+    # workout_router,
     # workout_html_router,
     # group_html_router,
     html_routs_main_router,
-    meetday_router,
+    # meetday_router,
 )
 
 # Can delete after done testing rest calls from different sources
@@ -85,9 +85,9 @@ app.add_middleware(
 app.include_router(result_router)
 app.include_router(athlete_router)
 app.include_router(team_router)
-app.include_router(record_router)
-app.include_router(workout_router)
-app.include_router(meetday_router)
+# app.include_router(record_router)
+# app.include_router(workout_router)
+# app.include_router(meetday_router)
 # app.include_router(result_html_router)
 # app.include_router(athlete_html_router)
 # app.include_router(team_html_router)
@@ -130,6 +130,7 @@ async def root(request: Request):
 @app.get('/html/home', status_code=200)
 @app.get('/html/home', status_code=200)
 async def root(request: Request):
+    # TODO: If html is in the path, always return HTML even if its a json request
     header_details = RestHeaders(request=request)
     if header_details.response_type == ResponseTypes.HTML:
         project_page = await project_home_page()

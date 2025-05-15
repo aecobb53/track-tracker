@@ -67,8 +67,8 @@
     - [ ] Light/Dark mode?
     - [ ] Teams Find page add counts for each grade, gender?
     - [ ] Teams find page add district
-    - [ ] "Athlete Count" not a toggle on Team page
-    - [ ] For teams allow a user to order by Athlete Name, Graduation Year, Event, Meet, Gender, Varsity/JV?
+    - [ ] "MSAthlete Count" not a toggle on Team page
+    - [ ] For teams allow a user to order by MSAthlete Name, Graduation Year, Event, Meet, Gender, Varsity/JV?
         - [ ] Add to Season Selector Gender
         - [ ] Add to Season Selector and Class?
         - [ ] Is there a way to select JV/Varsity just Varsity or just JV?

@@ -15,8 +15,8 @@ import re
 from models import ContextSingleton
 from models import MeetDay, Meet, Result
 # from .html.unimplemented_page import unimplemented_page
-from handlers import AthleteHandler, ResultHandler
-from models import AthleteFilter, ResultFilter
+from handlers import MSAthleteHandler, MSResultHandler
+from models import MSAthleteFilter, MSResultFilter
 from html import TEAM
 
 
@@ -403,7 +403,7 @@ async def post_meet(meet: Meet):
             first_last = athlete['name'].split(' ')
             first = first_last.pop(0)
             last = ' '.join(first_last)
-            af = AthleteFilter(
+            af = MSAthleteFilter(
                 first_name=[first],
                 last_name=[last],
                 team=[TEAM],
@@ -414,7 +414,7 @@ async def post_meet(meet: Meet):
             if athlete_obj:
                 athlete_or_result_pulled = True
                 athlete['athlete_uid'] = athlete_obj.uid
-                rf_pr = ResultFilter(
+                rf_pr = MSResultFilter(
                     athlete_uid=[athlete_obj.uid],
                     team=[TEAM],
                     event=[event_search_name],
@@ -437,8 +437,8 @@ async def post_meet(meet: Meet):
         return athlete_or_result_pulled
 
     meet_date = datetime.strptime(meet_file_data['meet']['date'], "%Y-%m-%d")
-    ah = AthleteHandler()
-    rh = ResultHandler()
+    ah = MSAthleteHandler()
+    rh = MSResultHandler()
     for event in current_meet_events:
         event_dict = {
             'time': event['Event Time'],
@@ -488,7 +488,7 @@ async def post_meet(meet: Meet):
                     first_last = athlete['name'].split(' ')
                     first = first_last.pop(0)
                     last = ' '.join(first_last)
-                    af = AthleteFilter(
+                    af = MSAthleteFilter(
                         first_name=[first],
                         last_name=[last],
                         team=[TEAM],
@@ -500,7 +500,7 @@ async def post_meet(meet: Meet):
                 if ( not result or meet.run_full_update ) and athlete['athlete_uid']:
                     # LOOK FOR NEW RESULTS
 
-                    rf_pr = ResultFilter(
+                    rf_pr = MSResultFilter(
                         athlete_uid=[athlete['athlete_uid']],
                         event=[event_search_name],
                         meet_date=[
@@ -537,7 +537,7 @@ async def post_meet(meet: Meet):
         'event_header': [
             {'name': 'Time', 'class': 'col-width-time'},
             {'name': 'Event', 'class': 'col-width-event'},
-            {'name': 'Athlete', 'class': 'col-width-athlete'},
+            {'name': 'MSAthlete', 'class': 'col-width-athlete'},
             {'name': 'Heat/Lane/Flight', 'class': 'col-width-heat'},
             {'name': 'Seed', 'class': 'col-width-seed'},
             {'name': 'Result', 'class': 'col-width-result'},
@@ -610,9 +610,9 @@ async def post_meet(meet: Meet):
 # async def update_meetday(meetday: MeetDay):
 #     # mh = WorkoutHandler()
 #     # meetdays = await mh.filter_meetdays(meetday_filter=WorkoutFilter())
-#     # ah = AthleteHandler()
+#     # ah = MSAthleteHandler()
 #     # for meetday in meetdays:
-#     #     athlete = await ah.find_athlete(AthleteFilter(uid=[meetday.athlete_uid]))
+#     #     athlete = await ah.find_athlete(MSAthleteFilter(uid=[meetday.athlete_uid]))
 #     #     meetday.athlete = athlete
 #     # meetday_page = await filter_meetdays_html_page(meetdays=meetdays)
 #     meetday_page = await filter_meetdays_html_page()

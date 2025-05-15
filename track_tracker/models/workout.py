@@ -8,7 +8,7 @@ from pydantic import BaseModel, model_validator
 from enum import Enum
 from uuid import uuid4
 
-from .ms_athlete import AthleteData
+from .ms_athlete import MSAthleteData
 from .event import EventParser
 from .common import apply_modifier
 from .result import Result
@@ -18,8 +18,8 @@ class WorkoutData(BaseModel):
     uid: str
     update_datetime: datetime
 
-    # Athlete
-    athlete: AthleteData | None = None
+    # MSAthlete
+    athlete: MSAthleteData | None = None
     athlete_uid: str | None = None
 
     # Result
@@ -60,7 +60,7 @@ class WorkoutApiCreate(BaseModel):
     athlete_uid: str | None = None
     athlete_first_name: str | None = None
     athlete_last_name: str | None = None
-    athlete: AthleteData | None = None
+    athlete: MSAthleteData | None = None
 
     @model_validator(mode='before')
     def validate_fields(cls, fields):

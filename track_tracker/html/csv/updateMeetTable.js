@@ -123,7 +123,7 @@ function createMeetRow(event, index) {
     event_item.classList.add('col-width-event');
     table_row.appendChild(event_item);
 
-    // Athletes
+    // MSAthletes
     var athlete_item = createMeetItem(
         event['athletes'].map(a => a['name']),
         event['athletes'].map(a => a['athlete_uid'])
@@ -171,14 +171,14 @@ function createMeetRow(event, index) {
 
 
 
-    // Athlete Row Manipulation
-    // Add Athlete
-    var button_item = createMeetRowManipulation(event['athletes'].map(a => a['result']), 'Add Athlete', 'addAthlete', index + 1);
+    // MSAthlete Row Manipulation
+    // Add MSAthlete
+    var button_item = createMeetRowManipulation(event['athletes'].map(a => a['result']), 'Add MSAthlete', 'addMSAthlete', index + 1);
     button_item.classList.add('col-width-button');
     table_row.appendChild(button_item);
 
-    // Remove Athlete
-    var button_item = createMeetRowManipulation(event['athletes'].map(a => a['result']), 'Remove Athlete', 'removeAthlete', index + 1);
+    // Remove MSAthlete
+    var button_item = createMeetRowManipulation(event['athletes'].map(a => a['result']), 'Remove MSAthlete', 'removeMSAthlete', index + 1);
     button_item.classList.add('col-width-button');
     table_row.appendChild(button_item);
 

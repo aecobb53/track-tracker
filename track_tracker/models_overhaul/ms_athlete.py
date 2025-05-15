@@ -133,8 +133,10 @@ class MSAthleteDBBase(SQLModel):
 
     search_first_name: str | None = None
     search_last_name: str | None = None
-    search_first_nickname: str | None = None
-    search_last_nickname: str | None = None
+    search_first_name_only: str | None = None
+    search_last_name_only: str | None = None
+    search_first_nickname_only: str | None = None
+    search_last_nickname_only: str | None = None
 
     search_team: str | None = None
 
@@ -158,8 +160,11 @@ class MSAthleteDBCreate(MSAthleteDBBase):
         fields = fields.model_dump()
         fields['search_first_name'] = fields['first_name'].lower()
         fields['search_last_name'] = fields['last_name'].lower()
-        fields['search_first_nickname'] = fields['first_name'].lower()
-        fields['search_last_nickname'] = fields['last_name'].lower()
+
+        fields['search_first_name_only'] = fields['first_name'].lower()
+        fields['search_last_name_only'] = fields['last_name'].lower()
+        fields['search_first_nickname_only'] = fields['first_name'].lower()
+        fields['search_last_nickname_only'] = fields['last_name'].lower()
 
         fields['search_team'] = fields['team'].lower()
         fields['tags'] = json.dumps(list(set(fields['tags'])))
@@ -172,7 +177,7 @@ class MSAthleteDBRead(MSAthleteDBBase):
 
 
 class MSAthleteDB(MSAthleteDBBase, table=True):
-    __tablename__ = "milesplit_athlete"
+    __tablename__ = "athlete"
 
 
 class MSAthleteFilter(BaseModel):

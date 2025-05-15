@@ -34,7 +34,7 @@ display:
                     - Example
         # count:
         #     variable: athlete-count
-        #     display: Athlete Count
+        #     display: MSAthlete Count
         #     formatted_function: null
         #     html_display_filtering:
         #         display_column: Common

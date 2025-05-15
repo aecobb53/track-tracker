@@ -6,8 +6,8 @@ from fastapi.responses import HTMLResponse, ORJSONResponse
 # from handlers import EventHandler, parse_query_params
 # from utils import parse_query_params, parse_header, MissingRecordException, DuplicateRecordsException
 from models import ContextSingleton
-from handlers import AthleteHandler, ResultHandler
-from models import AthleteFilter, ResultFilter
+from handlers import MSAthleteHandler, MSResultHandler
+from models import MSAthleteFilter, MSResultFilter
 # from .html.unimplemented_page import unimplemented_page
 
 

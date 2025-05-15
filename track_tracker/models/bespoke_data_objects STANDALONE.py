@@ -26,7 +26,7 @@ class Result:
         return True
 
 
-class Athlete:
+class MSAthlete:
     def __init__(self, name: str):
         self.name = name
 
@@ -54,7 +54,7 @@ class Result:
         return True
 
 
-class Athlete:
+class MSAthlete:
     """
     This is a mock for right now
     """
@@ -138,9 +138,9 @@ class EventType:
         return obj
 
 
-class ResultDataObject(BespokeDataObjectBase):
+class MSResultDataObject(BespokeDataObjectBase):
     def __init__(self,
-        athlete: Athlete,
+        athlete: MSAthlete,
         seed: Result | None = None,
         result: Result | None = None,
         # team: str,
@@ -159,10 +159,10 @@ class ResultDataObject(BespokeDataObjectBase):
         self.points = points
 
     def __repr__(self):
-        return f"ResultDataObject(athlete='{self.athlete.name}', result='{self.result.result if self.result else None}', place={self.place})"
+        return f"MSResultDataObject(athlete='{self.athlete.name}', result='{self.result.result if self.result else None}', place={self.place})"
 
     def __str__(self):
-        return f"ResultDataObject(athlete='{self.athlete.name}', result='{self.result.result if self.result else None}', place={self.place})"
+        return f"MSResultDataObject(athlete='{self.athlete.name}', result='{self.result.result if self.result else None}', place={self.place})"
 
     def __eq__(self, other_object: object) -> bool:
         if self.athlete != other_object.athlete:
@@ -220,7 +220,7 @@ class ResultDataObject(BespokeDataObjectBase):
         """
         THIS WILL NEED TO BE UPDAT4ED BEFORE ADDING TO SERVICE
         """
-        athlete = Athlete(
+        athlete = MSAthlete(
             data.get('name', 'Unknown'),
             data.get('team', 'School'),
         )
@@ -295,13 +295,13 @@ class EventDataObject(BespokeDataObjectBase):
         else:
             self.results.append(result)
 
-    def find_result(self, identifier: str | int) -> ResultDataObject | None:
+    def find_result(self, identifier: str | int) -> MSResultDataObject | None:
         if isinstance(identifier, str):
             for result in self.results:
                 if result.athlete.name == identifier:
                     return result
             else:
-                raise IndexError(f"ResultDataObject with name {identifier} not found.")
+                raise IndexError(f"MSResultDataObject with name {identifier} not found.")
         elif isinstance(identifier, int):
             try:
                 return self.results[identifier]
@@ -316,7 +316,7 @@ class EventDataObject(BespokeDataObjectBase):
                     self.results.remove(result)
                     return
             else:
-                raise IndexError(f"ResultDataObject with name {identifier} not found.")
+                raise IndexError(f"MSResultDataObject with name {identifier} not found.")
         elif isinstance(identifier, int):
             self.results.pop(identifier)
             return
@@ -448,7 +448,7 @@ class EventDataObject(BespokeDataObjectBase):
         )
         if not is_relay:
             for athlete in data.get('athletes', []):
-                obj.add_result(ResultDataObject.import_json(athlete))
+                obj.add_result(MSResultDataObject.import_json(athlete))
         return obj
 
 
@@ -654,12 +654,12 @@ class EventUpdateObject(BespokeUpdateObjectBase):
             self.updates['results'] = {}
         self.updates['results'][index] = result_update
 
-    def add_result_create(self, result_data_object: ResultDataObject):
+    def add_result_create(self, result_data_object: MSResultDataObject):
         if 'new_results' not in self.updates:
             self.updates['new_results'] = []
         self.updates['new_results'].append(result_data_object)
 
-    def add_result_delete(self, index: int, result_data_object: ResultDataObject):
+    def add_result_delete(self, index: int, result_data_object: MSResultDataObject):
         if 'deleted_results' not in self.updates:
             self.updates['deleted_results'] = {}
         self.updates['deleted_results'][index] = result_data_object
@@ -690,7 +690,7 @@ class MeetUpdateObject(BespokeUpdateObjectBase):
             self.updates['new_events'] = []
         self.updates['new_events'].append(event_data_object)
 
-    def add_result_delete(self, index: int, result_data_object: ResultDataObject):
+    def add_result_delete(self, index: int, result_data_object: MSResultDataObject):
         if 'deleted_results' not in self.updates:
             self.updates['deleted_results'] = {}
         self.updates['deleted_results'][index] = result_data_object
@@ -746,18 +746,18 @@ def gen_base_meet():
     e3 = EventDataObject("Shot Put", time(13, 0), EventType(False, True, False, False, True, False, False))
     x=1
 
-    a1 = Athlete("John Doe", 'School')
-    a2 = Athlete("Jane Smith", 'School')
-    a3 = Athlete("Bob Johnson", 'School')
+    a1 = MSAthlete("John Doe", 'School')
+    a2 = MSAthlete("Jane Smith", 'School')
+    a3 = MSAthlete("Bob Johnson", 'School')
 
 
-    e1.add_result(ResultDataObject(a1, result=Result(12.5), place=1))
-    e1.add_result(ResultDataObject(a2, result=Result(12.5), place=1))
-    e1.add_result(ResultDataObject(a3, result=Result(12.6), place=3))
+    e1.add_result(MSResultDataObject(a1, result=Result(12.5), place=1))
+    e1.add_result(MSResultDataObject(a2, result=Result(12.5), place=1))
+    e1.add_result(MSResultDataObject(a3, result=Result(12.6), place=3))
 
-    e2.add_result(ResultDataObject(a1))
-    e2.add_result(ResultDataObject(a2))
-    e2.add_result(ResultDataObject(a3))
+    e2.add_result(MSResultDataObject(a1))
+    e2.add_result(MSResultDataObject(a2))
+    e2.add_result(MSResultDataObject(a3))
 
 
     meet.add_event(e1)
@@ -803,18 +803,18 @@ def gen_real_meet():
 # e3 = EventDataObject("Shot Put", time(13, 0), EventType(False, True, False, False, True, False, False))
 # x=1
 
-# a1 = Athlete("John Doe")
-# a2 = Athlete("Jane Smith")
-# a3 = Athlete("Bob Johnson")
+# a1 = MSAthlete("John Doe")
+# a2 = MSAthlete("Jane Smith")
+# a3 = MSAthlete("Bob Johnson")
 
 
-# e1.add_result(ResultDataObject(a1, result=Result(12.5), place=1))
-# e1.add_result(ResultDataObject(a2, result=Result(12.5), place=1))
-# e1.add_result(ResultDataObject(a3, result=Result(12.6), place=3))
+# e1.add_result(MSResultDataObject(a1, result=Result(12.5), place=1))
+# e1.add_result(MSResultDataObject(a2, result=Result(12.5), place=1))
+# e1.add_result(MSResultDataObject(a3, result=Result(12.6), place=3))
 
-# e2.add_result(ResultDataObject(a1))
-# e2.add_result(ResultDataObject(a2))
-# e2.add_result(ResultDataObject(a3))
+# e2.add_result(MSResultDataObject(a1))
+# e2.add_result(MSResultDataObject(a2))
+# e2.add_result(MSResultDataObject(a3))
 
 
 # meet.add_event(e1)
@@ -860,12 +860,12 @@ print('-----')
 meet2 = gen_base_meet()
 # meet2.meet_name = "Updated meet object"
 # meet2.events[0].results[0].seed = Result(12.5)
-# meet2.events[0].results[0].athlete = Athlete("Jain Doe")
+# meet2.events[0].results[0].athlete = MSAthlete("Jain Doe")
 # meet2.events[1].event_time = "13:15"
 # meet2.jv_meet = True
 
 # e4 = EventDataObject("400m", time(13, 0), EventType(False, True, False, False, True, False, False))
-# meet2.events[0].add_result(ResultDataObject(Athlete("New Athlete"), result=Result(12.5), place=1))
+# meet2.events[0].add_result(MSResultDataObject(MSAthlete("New MSAthlete"), result=Result(12.5), place=1))
 # meet2.add_event(e4)
 meet2.events.pop(1)
 # meet2.events[0].results.pop(1)
@@ -929,33 +929,33 @@ def generate_base_meet():
     event_4 = EventDataObject("400m", time(13, 0), EventType(False, True, False, False, True, False, False))
     event_5 = EventDataObject("Long Jump", time(13, 0), EventType(False, True, False, False, True, False, False))
 
-    athlete_1 = Athlete("John Doe", "School")
-    athlete_2 = Athlete("Jane Smith", "School")
-    athlete_3 = Athlete("Bob Johnson", "School")
-    athlete_4 = Athlete("Alice Brown", "School")
-    athlete_5 = Athlete("Charlie Davis", "School")
+    athlete_1 = MSAthlete("John Doe", "School")
+    athlete_2 = MSAthlete("Jane Smith", "School")
+    athlete_3 = MSAthlete("Bob Johnson", "School")
+    athlete_4 = MSAthlete("Alice Brown", "School")
+    athlete_5 = MSAthlete("Charlie Davis", "School")
 
     # Event 1 has results and places
-    event_1.add_result(ResultDataObject(athlete_1, result=Result(12.5), place=1))
-    event_1.add_result(ResultDataObject(athlete_2, result=Result(12.5), place=1))
-    event_1.add_result(ResultDataObject(athlete_3, result=Result(12.6), place=3))
+    event_1.add_result(MSResultDataObject(athlete_1, result=Result(12.5), place=1))
+    event_1.add_result(MSResultDataObject(athlete_2, result=Result(12.5), place=1))
+    event_1.add_result(MSResultDataObject(athlete_3, result=Result(12.6), place=3))
 
     # Event 2 has athletes but no results
-    event_2.add_result(ResultDataObject(athlete_1))
-    event_2.add_result(ResultDataObject(athlete_2))
-    event_2.add_result(ResultDataObject(athlete_3))
+    event_2.add_result(MSResultDataObject(athlete_1))
+    event_2.add_result(MSResultDataObject(athlete_2))
+    event_2.add_result(MSResultDataObject(athlete_3))
 
     # Event 3 has nothing
 
     # Event 4 has results
-    event_4.add_result(ResultDataObject(athlete_3, result=Result(50.0), place=1))
-    event_4.add_result(ResultDataObject(athlete_4, result=Result(50.5), place=2))
-    event_4.add_result(ResultDataObject(athlete_5, result=Result(51.0), place=3))
+    event_4.add_result(MSResultDataObject(athlete_3, result=Result(50.0), place=1))
+    event_4.add_result(MSResultDataObject(athlete_4, result=Result(50.5), place=2))
+    event_4.add_result(MSResultDataObject(athlete_5, result=Result(51.0), place=3))
 
     # Event 5 has results
-    event_5.add_result(ResultDataObject(athlete_1, result=Result(5.0), place=1))
-    event_5.add_result(ResultDataObject(athlete_3, result=Result(4.8), place=2))
-    event_5.add_result(ResultDataObject(athlete_5, result=Result(4.9), place=3))
+    event_5.add_result(MSResultDataObject(athlete_1, result=Result(5.0), place=1))
+    event_5.add_result(MSResultDataObject(athlete_3, result=Result(4.8), place=2))
+    event_5.add_result(MSResultDataObject(athlete_5, result=Result(4.9), place=3))
 
     meet.add_event(event_1)
     meet.add_event(event_2)
@@ -982,17 +982,17 @@ def test_simple_create():
     event_2 = EventDataObject("200m", time(12, 30), EventType(True, False, True, False, False, False, False))
     event3 = EventDataObject("Shot Put", time(13, 0), EventType(False, True, False, False, True, False, False))
 
-    athlete_1 = Athlete("John Doe", "School")
-    athlete_2 = Athlete("Jane Smith", "School")
-    athlete_3 = Athlete("Bob Johnson", "School")
+    athlete_1 = MSAthlete("John Doe", "School")
+    athlete_2 = MSAthlete("Jane Smith", "School")
+    athlete_3 = MSAthlete("Bob Johnson", "School")
 
-    event_1.add_result(ResultDataObject(athlete_1, result=Result(12.5), place=1))
-    event_1.add_result(ResultDataObject(athlete_2, result=Result(12.5), place=1))
-    event_1.add_result(ResultDataObject(athlete_3, result=Result(12.6), place=3))
+    event_1.add_result(MSResultDataObject(athlete_1, result=Result(12.5), place=1))
+    event_1.add_result(MSResultDataObject(athlete_2, result=Result(12.5), place=1))
+    event_1.add_result(MSResultDataObject(athlete_3, result=Result(12.6), place=3))
 
-    event_2.add_result(ResultDataObject(athlete_1))
-    event_2.add_result(ResultDataObject(athlete_2))
-    event_2.add_result(ResultDataObject(athlete_3))
+    event_2.add_result(MSResultDataObject(athlete_1))
+    event_2.add_result(MSResultDataObject(athlete_2))
+    event_2.add_result(MSResultDataObject(athlete_3))
 
     meet.add_event(event_1)
     meet.add_event(event_2)
@@ -1008,7 +1008,7 @@ def test_modify_meet():
     meet1 = generate_base_meet()
     meet2 = generate_base_meet()
 
-    meet2.events[0].results[0].athlete = Athlete("New Athlete", "School")
+    meet2.events[0].results[0].athlete = MSAthlete("New MSAthlete", "School")
     meet2.events[0].results[0].seed = Result(12.5)
 
     meet2.events[0].event_time = time(13, 15)
@@ -1019,19 +1019,19 @@ def test_modify_meet():
 
     meet2.events[4].event_name = "Updated Event Name 2"
     meet2.events[4].results[1].seed = Result(10.0)
-    meet2.events[4].results[2].athlete = Athlete("Updated Athlete", "School")
+    meet2.events[4].results[2].athlete = MSAthlete("Updated MSAthlete", "School")
 
 
     update_object = meet1.update(meet2)
     assert update_object.updates['meet_name'] == "Updated meet object"
     assert update_object.updates['events'][0].updates['event_time'] == time(13, 15)
-    assert update_object.updates['events'][0].updates['results'][0].updates['athlete'].name == 'New Athlete'
+    assert update_object.updates['events'][0].updates['results'][0].updates['athlete'].name == 'New MSAthlete'
     assert update_object.updates['events'][0].updates['results'][0].updates['seed'].result == 12.5
 
     assert update_object.updates['events'][2].updates['event_name'] == "Updated Event Name"
     assert update_object.updates['events'][4].updates['event_name'] == "Updated Event Name 2"
     assert update_object.updates['events'][4].updates['results'][1].updates['seed'].result == 10.0
-    assert update_object.updates['events'][4].updates['results'][2].updates['athlete'].name == "Updated Athlete"
+    assert update_object.updates['events'][4].updates['results'][2].updates['athlete'].name == "Updated MSAthlete"
 
 def test_add_to_meet():
     """
@@ -1040,13 +1040,13 @@ def test_add_to_meet():
     meet1 = generate_base_meet()
     meet2 = generate_base_meet()
 
-    meet2.events[0].add_result(ResultDataObject(Athlete("New Athlete", "School"), result=Result(12.5), place=1))
+    meet2.events[0].add_result(MSResultDataObject(MSAthlete("New MSAthlete", "School"), result=Result(12.5), place=1))
 
     meet2.add_event(EventDataObject("New Event", time(14, 0), EventType(True, False, True, False, False, False, False)))
 
     update_object = meet1.update(meet2)
     assert isinstance(update_object.updates['new_events'][0], EventDataObject)
-    assert isinstance(update_object.updates['events'][0].updates['new_results'][0], ResultDataObject)
+    assert isinstance(update_object.updates['events'][0].updates['new_results'][0], MSResultDataObject)
 
 def test_delete_from_meet():
     """
@@ -1079,9 +1079,9 @@ def test_delete_from_meet():
     assert update_object_2.updates['deleted_results'][0].event_name == "100m"
 
 def test_different_add_update_delete_functions():
-    result_1 = ResultDataObject(Athlete("John Doe", "School"), result=Result(12.5), place=1)
-    result_2 = ResultDataObject(Athlete("Jane Smith", "School"), result=Result(12.5), place=1)
-    result_3 = ResultDataObject(Athlete("Bob Johnson", "School"), result=Result(12.6), place=3)
+    result_1 = MSResultDataObject(MSAthlete("John Doe", "School"), result=Result(12.5), place=1)
+    result_2 = MSResultDataObject(MSAthlete("Jane Smith", "School"), result=Result(12.5), place=1)
+    result_3 = MSResultDataObject(MSAthlete("Bob Johnson", "School"), result=Result(12.6), place=3)
 
     event_1 = EventDataObject("100m", time(12, 0), EventType(True, False, True, False, False, False, False))
     event_2 = EventDataObject("100m", time(12, 0), EventType(True, False, True, False, False, False, False))
@@ -1107,27 +1107,27 @@ def test_different_add_update_delete_functions():
         pass
 
 def test_event_relay_handling():
-    result_1 = ResultDataObject(Athlete("John Doe", "School"), result=Result(12.5), place=1)
-    result_2 = ResultDataObject(Athlete("Jane Smith", "School"), result=Result(12.5), place=1)
-    result_3 = ResultDataObject(Athlete("Bob Johnson", "School"), result=Result(12.6), place=3)
-    result_4 = ResultDataObject(Athlete("Jack Doe", "School"), result=Result(12.5), place=1)
+    result_1 = MSResultDataObject(MSAthlete("John Doe", "School"), result=Result(12.5), place=1)
+    result_2 = MSResultDataObject(MSAthlete("Jane Smith", "School"), result=Result(12.5), place=1)
+    result_3 = MSResultDataObject(MSAthlete("Bob Johnson", "School"), result=Result(12.6), place=3)
+    result_4 = MSResultDataObject(MSAthlete("Jack Doe", "School"), result=Result(12.5), place=1)
 
-    result_5 = ResultDataObject(Athlete("John Doe 2", "School 2"), result=Result(12.5), place=1)
-    result_6 = ResultDataObject(Athlete("Jane Smith 2", "School 2"), result=Result(12.5), place=1)
-    result_7 = ResultDataObject(Athlete("Bob Johnson 2", "School 2"), result=Result(12.6), place=3)
-    result_8 = ResultDataObject(Athlete("Jack Doe 2", "School 2"), result=Result(12.5), place=1)
-    # result_9 = ResultDataObject(Athlete("Blake Doe 2", "School 2"), result=Result(12.5), place=1)
+    result_5 = MSResultDataObject(MSAthlete("John Doe 2", "School 2"), result=Result(12.5), place=1)
+    result_6 = MSResultDataObject(MSAthlete("Jane Smith 2", "School 2"), result=Result(12.5), place=1)
+    result_7 = MSResultDataObject(MSAthlete("Bob Johnson 2", "School 2"), result=Result(12.6), place=3)
+    result_8 = MSResultDataObject(MSAthlete("Jack Doe 2", "School 2"), result=Result(12.5), place=1)
+    # result_9 = MSResultDataObject(MSAthlete("Blake Doe 2", "School 2"), result=Result(12.5), place=1)
 
-    result_11 = ResultDataObject(Athlete("John Doe 3", "School"), result=Result(12.5), place=1)
-    result_12 = ResultDataObject(Athlete("Jane Smith 3", "School"), result=Result(12.5), place=1)
-    result_13 = ResultDataObject(Athlete("Bob Johnson 3", "School"), result=Result(12.6), place=3)
-    result_14 = ResultDataObject(Athlete("Jack Doe 3", "School"), result=Result(12.5), place=1)
+    result_11 = MSResultDataObject(MSAthlete("John Doe 3", "School"), result=Result(12.5), place=1)
+    result_12 = MSResultDataObject(MSAthlete("Jane Smith 3", "School"), result=Result(12.5), place=1)
+    result_13 = MSResultDataObject(MSAthlete("Bob Johnson 3", "School"), result=Result(12.6), place=3)
+    result_14 = MSResultDataObject(MSAthlete("Jack Doe 3", "School"), result=Result(12.5), place=1)
 
-    result_21 = ResultDataObject(Athlete("John Doe 4", "School 3"), result=Result(12.5), place=1)
-    result_22 = ResultDataObject(Athlete("Jane Smith 4", "School 3"), result=Result(12.5), place=1)
-    result_23 = ResultDataObject(Athlete("Bob Johnson 4", "School 3"), result=Result(12.6), place=3)
-    result_24 = ResultDataObject(Athlete("Jack Doe 4", "School 3"), result=Result(12.5), place=1)
-    result_25 = ResultDataObject(Athlete("Jack Doe 4", "School 3"), result=Result(12.5), place=1)
+    result_21 = MSResultDataObject(MSAthlete("John Doe 4", "School 3"), result=Result(12.5), place=1)
+    result_22 = MSResultDataObject(MSAthlete("Jane Smith 4", "School 3"), result=Result(12.5), place=1)
+    result_23 = MSResultDataObject(MSAthlete("Bob Johnson 4", "School 3"), result=Result(12.6), place=3)
+    result_24 = MSResultDataObject(MSAthlete("Jack Doe 4", "School 3"), result=Result(12.5), place=1)
+    result_25 = MSResultDataObject(MSAthlete("Jack Doe 4", "School 3"), result=Result(12.5), place=1)
 
     event_1 = EventDataObject("100m", time(12, 0), EventType(True, False, True, False, False, False, False))
 

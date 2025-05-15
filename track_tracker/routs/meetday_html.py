@@ -11,8 +11,8 @@ from fastapi.responses import HTMLResponse, ORJSONResponse
 # from utils import parse_query_params, parse_header, MissingRecordException, DuplicateRecordsException
 from models import ContextSingleton
 # from .html.unimplemented_page import unimplemented_page
-from handlers import ResultHandler, AthleteHandler
-from models import ResultFilter, AthleteFilter
+from handlers import MSResultHandler, MSAthleteHandler
+from models import MSResultFilter, MSAthleteFilter
 from html import TEAM
 
 
@@ -41,9 +41,9 @@ router = APIRouter(
 # async def html_meetday(request: Request):
 #     # mh = WorkoutHandler()
 #     # meetdays = await mh.filter_meetdays(meetday_filter=WorkoutFilter())
-#     # ah = AthleteHandler()
+#     # ah = MSAthleteHandler()
 #     # for meetday in meetdays:
-#     #     athlete = await ah.find_athlete(AthleteFilter(uid=[meetday.athlete_uid]))
+#     #     athlete = await ah.find_athlete(MSAthleteFilter(uid=[meetday.athlete_uid]))
 #     #     meetday.athlete = athlete
 #     # meetday_page = await filter_meetdays_html_page(meetdays=meetdays)
 #     meetday_page = await find_meet_html_page()
@@ -77,9 +77,9 @@ async def html_meetday(meet_name: str, request: Request):
     print(f'PAGE MEET: {meet_name}')
     # mh = WorkoutHandler()
     # meetdays = await mh.filter_meetdays(meetday_filter=WorkoutFilter())
-    # ah = AthleteHandler()
+    # ah = MSAthleteHandler()
     # for meetday in meetdays:
-    #     athlete = await ah.find_athlete(AthleteFilter(uid=[meetday.athlete_uid]))
+    #     athlete = await ah.find_athlete(MSAthleteFilter(uid=[meetday.athlete_uid]))
     #     meetday.athlete = athlete
     # meetday_page = await filter_meetdays_html_page(meetdays=meetdays)
     meetday_page = await find_meet_html_page(meet_name)
@@ -90,9 +90,9 @@ async def html_meetday(meet_name: str, request: Request):
 # async def html_meetday(request: Request):
 #     # mh = WorkoutHandler()
 #     # meetdays = await mh.filter_meetdays(meetday_filter=WorkoutFilter())
-#     # ah = AthleteHandler()
+#     # ah = MSAthleteHandler()
 #     # for meetday in meetdays:
-#     #     athlete = await ah.find_athlete(AthleteFilter(uid=[meetday.athlete_uid]))
+#     #     athlete = await ah.find_athlete(MSAthleteFilter(uid=[meetday.athlete_uid]))
 #     #     meetday.athlete = athlete
 #     # meetday_page = await filter_meetdays_html_page(meetdays=meetdays)
 #     meetday_page = await filter_meetdays_html_page()

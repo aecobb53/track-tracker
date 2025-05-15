@@ -9,8 +9,8 @@ from fastapi.responses import HTMLResponse, ORJSONResponse
 # from utils import parse_query_params, parse_header, MissingRecordException, DuplicateRecordsException
 from models import ContextSingleton
 # from .html.unimplemented_page import unimplemented_page
-from handlers import WorkoutHandler, AthleteHandler
-from models import WorkoutFilter, AthleteFilter
+from handlers import WorkoutHandler, MSAthleteHandler
+from models import WorkoutFilter, MSAthleteFilter
 
 
 from html import (
@@ -35,9 +35,9 @@ router = APIRouter(
 async def html_workout(request: Request):
     mh = WorkoutHandler()
     workouts = await mh.filter_workouts(workout_filter=WorkoutFilter())
-    ah = AthleteHandler()
+    ah = MSAthleteHandler()
     for workout in workouts:
-        athlete = await ah.find_athlete(AthleteFilter(uid=[workout.athlete_uid]))
+        athlete = await ah.find_athlete(MSAthleteFilter(uid=[workout.athlete_uid]))
         workout.athlete = athlete
     workout_page = await filter_workouts_html_page(workouts=workouts)
     # workout_page = await unimplemented_page()

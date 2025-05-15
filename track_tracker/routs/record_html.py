@@ -8,8 +8,8 @@ from fastapi.responses import HTMLResponse, ORJSONResponse
 # from handlers import EventHandler
 # from handlers import EventHandler, parse_query_params
 # from utils import parse_query_params, parse_header, MissingRecordException, DuplicateRecordsException
-from models import AthleteFilter, ResultFilter, ContextSingleton
-from handlers import AthleteHandler, ResultHandler, parse_query_params, DuplicateRecordsException, MissingRecordException
+from models import MSAthleteFilter, MSResultFilter, ContextSingleton
+from handlers import MSAthleteHandler, MSResultHandler, parse_query_params, DuplicateRecordsException, MissingRecordException
 
 
 from html import (
@@ -32,14 +32,14 @@ router = APIRouter(
 
 @router.get('/')
 async def html_record(request: Request):
-    ah = AthleteHandler()
-    mh = ResultHandler()
+    ah = MSAthleteHandler()
+    mh = MSResultHandler()
     offset = 0
     checking = True
-    size = ResultFilter().limit
+    size = MSResultFilter().limit
     results = []
     while checking:
-        results_l = await mh.filter_results(ResultFilter(offset=offset))
+        results_l = await mh.filter_results(MSResultFilter(offset=offset))
         results.extend(results_l)
         if len(results_l) < size:
             checking = False
@@ -52,13 +52,13 @@ async def html_record(request: Request):
     event_details = {}
     for result in results:
         if result.event not in event_details:
-            athlete = await ah.find_athlete(AthleteFilter(uid=[result.athlete_uid]))
+            athlete = await ah.find_athlete(MSAthleteFilter(uid=[result.athlete_uid]))
             result.athlete = athlete
             event_details[result.event] = result
         else:
             if result.result > event_details[result.event].result:
                 # New record
-                athlete = await ah.find_athlete(AthleteFilter(uid=[result.athlete_uid]))
+                athlete = await ah.find_athlete(MSAthleteFilter(uid=[result.athlete_uid]))
                 result.athlete = athlete
                 event_details[result.event] = result
     record_page = await filter_records_html_page(event_details)

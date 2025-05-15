@@ -1,5 +1,5 @@
-function addAthlete(rowIndex, athleteIndex) {
-    console.log('Adding Athlete Slot: ' + rowIndex + ', ' + athleteIndex);
+function addMSAthlete(rowIndex, athleteIndex) {
+    console.log('Adding MSAthlete Slot: ' + rowIndex + ', ' + athleteIndex);
     if (athleteIndex === undefined) {
         athleteIndex = 0;
     }
@@ -12,13 +12,13 @@ function addAthlete(rowIndex, athleteIndex) {
             var athleteColumn = dataRows[i].children[2];
             for (var j = 0; j < athleteColumn.children.length; j++) {
                 if (j === athleteIndex) {
-                    addSpecificAthlete(dataRows[i], 2, athleteIndex);
-                    addSpecificAthlete(dataRows[i], 3, athleteIndex);
-                    addSpecificAthlete(dataRows[i], 4, athleteIndex);
-                    addSpecificAthlete(dataRows[i], 5, athleteIndex);
-                    addSpecificAthlete(dataRows[i], 6, athleteIndex);
-                    addSpecificAthlete(dataRows[i], 7, athleteIndex);
-                    addSpecificAthlete(dataRows[i], 8, athleteIndex);
+                    addSpecificMSAthlete(dataRows[i], 2, athleteIndex);
+                    addSpecificMSAthlete(dataRows[i], 3, athleteIndex);
+                    addSpecificMSAthlete(dataRows[i], 4, athleteIndex);
+                    addSpecificMSAthlete(dataRows[i], 5, athleteIndex);
+                    addSpecificMSAthlete(dataRows[i], 6, athleteIndex);
+                    addSpecificMSAthlete(dataRows[i], 7, athleteIndex);
+                    addSpecificMSAthlete(dataRows[i], 8, athleteIndex);
                 }
             }
         }
@@ -26,22 +26,22 @@ function addAthlete(rowIndex, athleteIndex) {
     runUpdate();
 }
 
-function removeAthlete(rowIndex, athleteIndex) {
-    console.log('Removing Athlete Slot: ' + rowIndex + ', ' + athleteIndex);
+function removeMSAthlete(rowIndex, athleteIndex) {
+    console.log('Removing MSAthlete Slot: ' + rowIndex + ', ' + athleteIndex);
     // DIV
     var table_div = document.getElementById('meet-table');
     var dataRows = table_div.getElementsByClassName('meet-row');
     for (var i = 0; i < dataRows.length - 1; i++) {
         if (i === rowIndex) {
-            removeSpecificAthlete(dataRows[i], 2, athleteIndex);
-            removeSpecificAthlete(dataRows[i], 3, athleteIndex);
-            removeSpecificAthlete(dataRows[i], 4, athleteIndex);
-            removeSpecificAthlete(dataRows[i], 5, athleteIndex);
-            removeSpecificAthlete(dataRows[i], 6, athleteIndex);
-            removeSpecificAthlete(dataRows[i], 7, athleteIndex);
-            removeSpecificAthlete(dataRows[i], 8, athleteIndex);
-            removeSpecificAthlete(dataRows[i], 9, athleteIndex);
-            removeSpecificAthlete(dataRows[i], 10, athleteIndex);
+            removeSpecificMSAthlete(dataRows[i], 2, athleteIndex);
+            removeSpecificMSAthlete(dataRows[i], 3, athleteIndex);
+            removeSpecificMSAthlete(dataRows[i], 4, athleteIndex);
+            removeSpecificMSAthlete(dataRows[i], 5, athleteIndex);
+            removeSpecificMSAthlete(dataRows[i], 6, athleteIndex);
+            removeSpecificMSAthlete(dataRows[i], 7, athleteIndex);
+            removeSpecificMSAthlete(dataRows[i], 8, athleteIndex);
+            removeSpecificMSAthlete(dataRows[i], 9, athleteIndex);
+            removeSpecificMSAthlete(dataRows[i], 10, athleteIndex);
         }
     }
     runUpdate();
@@ -91,7 +91,7 @@ function removeEvent(rowIndex) {
 
 
 
-function addSpecificAthlete(containingDiv, columnIndex, athleteIndex) {
+function addSpecificMSAthlete(containingDiv, columnIndex, athleteIndex) {
     // DIV
     var athleteColumn = containingDiv.children[columnIndex];
     for (var j = 0; j < athleteColumn.children.length; j++) {
@@ -103,7 +103,7 @@ function addSpecificAthlete(containingDiv, columnIndex, athleteIndex) {
 }
 
 
-function removeSpecificAthlete(containingDiv, columnIndex, athleteIndex) {
+function removeSpecificMSAthlete(containingDiv, columnIndex, athleteIndex) {
     // DIV
     var meetItem = containingDiv.getElementsByClassName('meet-item');
     for (var i = 0; i < meetItem.length; i++) {

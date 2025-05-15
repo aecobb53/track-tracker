@@ -1,5 +1,5 @@
-async function populateAthleteTable(filterResults, page, page_size, page_count) {
-    console.log('Populating Athlete table');
+async function populateMSAthleteTable(filterResults, page, page_size, page_count) {
+    console.log('Populating MSAthlete table');
 
     // var tracking_project_name_hashtable = {};
 

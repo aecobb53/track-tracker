@@ -159,7 +159,7 @@ arrange:
                 - Gender
                 - Class
 display:
-    Athlete:
+    MSAthlete:
         last_name:
             variable: last_name
             display: Last Name

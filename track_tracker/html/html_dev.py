@@ -104,7 +104,7 @@ async def service_info_html_page():
 
 #     # Filter Form
 #     filter_form_div = Div()
-#     filter_form_div.add_element(Header(level=1, internal='Athlete Results'))
+#     filter_form_div.add_element(Header(level=1, internal='MSAthlete Results'))
 #     # filter_form_div.add_element(Paragraph(internal='''
 #     # This page is for finding athletes by filtering criteria. You can use it to get headcounts of similar athletes or 
 #     # find similar athletes to compare. The filters are partial as in you can query for the Team "Fairview" to get all 
@@ -270,8 +270,8 @@ async def service_info_html_page():
 #     # JS Files
 #     js_files = [
 #         os.path.join('athlete', 'applyFilterForm.js'),
-#         os.path.join('athlete', 'GETFilterAthlete.js'),
-#         os.path.join('athlete', 'populateAthleteTable.js'),
+#         os.path.join('athlete', 'GETFilterMSAthlete.js'),
+#         os.path.join('athlete', 'populateMSAthleteTable.js'),
 #         os.path.join('athlete', 'applyDisplayFilters.js'),
 #         os.path.join('athlete', 'toggleCheckboxes.js'),
 #         os.path.join('common', 'pagination.js'),
@@ -302,7 +302,7 @@ async def service_info_html_page():
 #     base_doc = await project_base_page()
 
 #     page_content = Div().add_class('page-content')
-#     # page_content.add_element(Header(level=1, internal='Athlete Page'))
+#     # page_content.add_element(Header(level=1, internal='MSAthlete Page'))
 
 #     # page_content.add_element(Paragraph(internal='''
 #     # This page displays information about an athlete. Notice there is one final row in each table and that is the 

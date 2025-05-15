@@ -4,7 +4,7 @@ Primary Pages:
         description: Straight to the FHS page.
     Points:
         endpoint: groups/points
-        description: Athlete point standings.
+        description: MSAthlete point standings.
     Meets:
         endpoint: meetday
         description: Meet centered pages.
@@ -19,9 +19,9 @@ Coaching Pages:
         endpoint: workout
         description: Practice Data.
 Searching Pages:
-    Athletes:
+    MSAthletes:
         endpoint: athlete
-        description: Find Athletes then view their page.
+        description: Find MSAthletes then view their page.
     Teams:
         endpoint: team
         description: Find Teams then view their page.
