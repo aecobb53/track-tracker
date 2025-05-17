@@ -24,6 +24,7 @@ class TestAthlete(BaseTestClass):
     def test_event_management(self):
         # Create Event
         print('Creating Event')
+        meet_name = 'Testing Meet'
         event_name = 'Example Event'
         example_event = {
             'event_name': event_name,
@@ -32,7 +33,7 @@ class TestAthlete(BaseTestClass):
         }
         create_resp, create_content = call(
             'post',
-            f"{TEST_URI}/meet/Testing Meet/{event_name}",
+            f"{TEST_URI}/meet/{meet_name}/{event_name}",
             json=example_event,
             assert_code=201,
         )
@@ -42,7 +43,7 @@ class TestAthlete(BaseTestClass):
         print('Failing to Create a dupe Event')
         dupe_resp, dupe_content = call(
             'post',
-            f"{TEST_URI}/meet/Testing Meet/{event_name}",
+            f"{TEST_URI}/meet/{meet_name}/{event_name}",
             json=example_event,
             assert_code=409,
         )
@@ -52,7 +53,7 @@ class TestAthlete(BaseTestClass):
         print('Verifying the Event shows up')
         resp, content = call(
             'get',
-            f"{TEST_URI}/meet/Testing Meet/",
+            f"{TEST_URI}/meet/{meet_name}/",
             assert_code=200,
         )
         for event_item in content['events']:
@@ -61,11 +62,23 @@ class TestAthlete(BaseTestClass):
         else:
             self.fail(f"Event {event_name} not found in events list")
 
+        # Find Event
+        print('Finding the Event')
+        resp, content = call(
+            'get',
+            f"{TEST_URI}/meet/{meet_name}/{event_name}",
+            assert_code=200,
+        )
+        print(f"FIND EVENT RESP: {dupe_resp}")
+        print(f"FIND EVENT CONTENT: {dupe_content}")
+
+        # Filter Events
+
         # # Update Event
         # print('Creating Event')
         # create_resp, create_content = call(
         #     'post',
-        #     f"{TEST_URI}/meet/Testing Meet/{event_name}",
+        #     f"{TEST_URI}/meet/{meet_name}/{event_name}",
         # )
         # print(f"CREATE RESP: {create_resp}")
         # print(f"CREATE CONTENT: {create_content}")
@@ -74,7 +87,7 @@ class TestAthlete(BaseTestClass):
         # print('Creating Event')
         # create_resp, create_content = call(
         #     'post',
-        #     f"{TEST_URI}/meet/Testing Meet/{event_name}",
+        #     f"{TEST_URI}/meet/{meet_name}/{event_name}",
         # )
         # print(f"CREATE RESP: {create_resp}")
         # print(f"CREATE CONTENT: {create_content}")
@@ -83,7 +96,7 @@ class TestAthlete(BaseTestClass):
         print('Deleting Event')
         delete_resp, delete_content = call(
             'delete',
-            f"{TEST_URI}/meet/Testing Meet/{event_name}",
+            f"{TEST_URI}/meet/{meet_name}/{event_name}",
             assert_code=200,
         )
         print(f"DELETING RESP: {delete_resp}")
@@ -91,7 +104,7 @@ class TestAthlete(BaseTestClass):
 
         delete_missing_resp, delete_missing_content = call(
             'delete',
-            f"{TEST_URI}/meet/Testing Meet/{event_name}",
+            f"{TEST_URI}/meet/{meet_name}/{event_name}",
             assert_code=404,
         )
         print(f"DELETING MISSING RESP: {delete_missing_resp}")
@@ -100,7 +113,7 @@ class TestAthlete(BaseTestClass):
         print('Verifying the Event does not show up')
         resp, content = call(
             'get',
-            f"{TEST_URI}/meet/Testing Meet/",
+            f"{TEST_URI}/meet/{meet_name}/",
             assert_code=200,
         )
         for event_item in content['events']:
@@ -113,7 +126,7 @@ class TestAthlete(BaseTestClass):
     # #     assert True
     # #     meet_resp, meet_content = call(
     # #         'get',
-    # #         f"{TEST_URI}/meet/Testing Meet/",
+    # #         f"{TEST_URI}/meet/{meet_name}/",
     # #         assert_code=200,
     # #     )
     # #     print(meet_resp)
@@ -123,7 +136,7 @@ class TestAthlete(BaseTestClass):
     # def test_add_athletes(self):
     #     resp, content = call(
     #         'get',
-    #         f"{TEST_URI}/meet/Testing Meet/",
+    #         f"{TEST_URI}/meet/{meet_name}/",
     #     )
     #     print(resp)
     #     print(content)
@@ -138,7 +151,7 @@ class TestAthlete(BaseTestClass):
     #     # assert True
     #     # meet_resp, meet_content = call(
     #     #     'post',
-    #     #     f"{TEST_URI}/meet/Testing Meet2/",
+    #     #     f"{TEST_URI}/meet/{meet_name}2/",
     #     #     assert_code=200,
     #     # )
     #     # print(meet_resp)
@@ -146,7 +159,7 @@ class TestAthlete(BaseTestClass):
 
     #     meet_resp, meet_content = call(
     #         'delete',
-    #         f"{TEST_URI}/meet/Testing Meet2/",
+    #         f"{TEST_URI}/meet/{meet_name}2/",
     #         assert_code=200,
     #     )
     #     print(meet_resp)
