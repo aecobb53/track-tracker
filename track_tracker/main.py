@@ -40,6 +40,7 @@ from routs import (
     result_router,
     athlete_router,
     team_router,
+    meet_router,
     # record_router,
     # result_html_router,
     # athlete_html_router,
@@ -85,6 +86,7 @@ app.add_middleware(
 app.include_router(result_router)
 app.include_router(athlete_router)
 app.include_router(team_router)
+app.include_router(meet_router)
 # app.include_router(record_router)
 # app.include_router(workout_router)
 # app.include_router(meetday_router)

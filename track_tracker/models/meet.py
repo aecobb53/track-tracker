@@ -1,0 +1,342 @@
+from datetime import datetime, timezone, date, time
+import json
+from typing import List, Dict, Any
+from sqlmodel import Field, SQLModel, JSON, ARRAY, String, Column, UniqueConstraint, select
+from sqlmodel import or_, and_
+from pydantic import BaseModel, model_validator
+from enum import Enum
+from uuid import uuid4
+
+# from .common import apply_modifier
+from .event import EventParser
+
+
+class MeetEvent(BaseModel):
+    event_name: str
+    event_time: time | None = None
+
+    athletes: List[str] = []
+
+    @property
+    def to_json(self):
+        output = {
+            'event_name': self.event_name,
+        }
+        if self.event_time:
+            output['event_time'] = str(self.event_time)
+        return output
+
+    @classmethod
+    def from_json(cls, data):
+        content = {
+            'event_name': data['event_name'],
+        }
+        if data.get('event_time'):
+            content['event_time'] = datetime.strftime(data['event_time'], "%H:%M:%S").time()
+        obj = cls(**content)
+        return obj
+
+
+class Meet(BaseModel):
+    uid: str
+    update_datetime: datetime
+
+    meet_name: str
+    meet_location: str | None = None
+    meet_date: date | None = None
+
+    events: List[MeetEvent] = []
+
+    varsity_points: bool = True
+    small_meet: bool = False
+    meet_metadata: Dict[str, Any] = {}
+
+    @property
+    def put(self):
+        output = self.model_dump()
+        return output
+
+    @property
+    def rest_output(self):
+        output = self.model_dump_json()
+        return output
+    
+    @property
+    def to_json(self):
+        output = {
+            'uid': self.uid,
+            'update_datetime': self.update_datetime.isoformat(),
+            'meet_name': self.meet_name,
+            'meet_location': self.meet_location,
+            'meet_date': self.meet_date,
+            'events': [e.to_json for e in self.events],
+            'varsity_points': self.varsity_points,
+            'small_meet': self.small_meet,
+            'meet_metadata': self.meet_metadata,
+        }
+        return output
+
+    @classmethod
+    def from_json(cls, data):
+        content = {
+            'uid': data['uid'],
+            'update_datetime': data['update_datetime'],
+            'meet_name': data['meet_name'],
+            'meet_location': data['meet_location'],
+            'meet_date': data['meet_date'],
+            'events': [MeetEvent.from_json(e) for e in data['events']],
+            'varsity_points': data['varsity_points'],
+            'small_meet': data['small_meet'],
+            'meet_metadata': data['meet_metadata'],
+        }
+        if data.get('event_time'):
+            content['event_time'] = datetime.strftime(data['event_time'], "%H:%M:%S").time()
+        obj = cls(**content)
+        return obj
+
+
+class MeetApiCreate(BaseModel):
+    meet_name: str
+    meet_location: str | None = None
+    meet_date: datetime | None = None
+
+    events: List[MeetEvent] = []
+
+    varsity_points: bool = True
+    small_meet: bool = False
+    meet_metadata: Dict[str, Any] = {}
+
+    @model_validator(mode='before')
+    def validate_fields(cls, fields):
+        if fields.get('meet_name'):
+            fields['meet_name'] = fields['meet_name'].strip()
+        if fields.get('meet_location'):
+            fields['meet_location'] = fields['meet_location'].strip()
+        if fields.get('meet_date'):
+            fields['meet_date'] = fields['meet_date'].strip()
+        return fields
+
+    def cast_data_object(self) -> Meet:
+        """Return a data object based on the Meet class"""
+        content = self.model_dump()
+        content['uid'] = str(uuid4())
+        content['update_datetime'] = datetime.now(timezone.utc)
+        data_obj = Meet(**content)
+        return data_obj
+
+
+# class MeetDBBase(SQLModel):
+#     id: int | None = Field(primary_key=True, default=None)
+#     uid: str = Field(unique=True)
+#     update_datetime: datetime | None = None
+
+#     meet_name: str | None = None
+#     meet_location: str | None = None
+#     meet_date: date | None = None
+
+#     events: str | None = None
+
+#     varsity_points: bool = True
+#     small_meet: bool = False
+#     meet_metadata: str | None = None
+
+#     def cast_data_object(self) -> Meet:
+#         """Return a data object based on the Meet class"""
+#         content = self.model_dump()
+#         # content['events']
+#         # content['tags'] = json.loads(self.tags)
+#         content['meet_metadata'] = json.loads(self.meet_metadata)
+#         data_obj = Meet(**content)
+#         return data_obj
+
+
+# class MeetDBCreate(MeetDBBase):
+#     @model_validator(mode='before')
+#     def validate_fields(cls, fields):
+#         fields = fields.model_dump()
+#         fields['meet_metadata'] = json.dumps(fields['meet_metadata'])
+#         return fields
+
+
+# class MeetDBRead(MeetDBBase):
+#     pass
+
+
+# class MeetDB(MeetDBBase, table=True):
+#     __tablename__ = "meet"
+
+
+# class MeetFilter(BaseModel):
+#     uid: List[str] | None = None
+
+#     first_name: List[str] | None = None
+#     last_name: List[str] | None = None
+
+#     first_name_only: List[str] | None = None
+#     last_name_only: List[str] | None = None
+#     first_nickname_only: List[str] | None = None
+#     last_nickname_only: List[str] | None = None
+
+#     team: List[str] | None = None
+#     gender: List[str] | None = None
+#     graduation_year: List[str] | None = None
+
+#     current: List[str] | None = None
+#     event_class: str | None = None
+#     tags: List[str] | None = None
+
+#     # active: bool = True
+
+#     limit: int = 1000
+#     order_by: List[str] = ['last_name', 'first_name']
+#     offset: int = 0
+
+#     @model_validator(mode='before')
+#     def validate_fields(cls, fields):
+#         if fields.get('first_name'):
+#             first_name = []
+#             [first_name.extend(i.lower().split(',')) for i in fields['first_name']]
+#             fields['first_name'] = [e.strip() for e in first_name]
+
+#         if fields.get('last_name'):
+#             last_name = []
+#             [last_name.extend(i.lower().split(',')) for i in fields['last_name']]
+#             fields['last_name'] = [e.strip() for e in last_name]
+
+#         if fields.get('first_name_only'):
+#             first_name_only = []
+#             [first_name_only.extend(i.lower().split(',')) for i in fields['first_name_only']]
+#             fields['first_name_only'] = [e.strip() for e in first_name_only]
+
+#         if fields.get('last_name_only'):
+#             last_name_only = []
+#             [last_name_only.extend(i.lower().split(',')) for i in fields['last_name_only']]
+#             fields['last_name_only'] = [e.strip() for e in last_name_only]
+
+#         if fields.get('first_nickname_only'):
+#             first_nickname_only = []
+#             [first_nickname_only.extend(i.lower().split(',')) for i in fields['first_nickname_only']]
+#             fields['first_nickname_only'] = [e.strip() for e in first_nickname_only]
+
+#         if fields.get('last_nickname_only'):
+#             last_nickname_only = []
+#             [last_nickname_only.extend(i.lower().split(',')) for i in fields['last_nickname_only']]
+#             fields['last_nickname_only'] = [e.strip() for e in last_nickname_only]
+
+#         if fields.get('team'):
+#             team = []
+#             [team.extend(i.lower().split(',')) for i in fields['team']]
+#             fields['team'] = [e.strip() for e in team]
+
+#         if fields.get('gender'):
+#             gender = []
+#             [gender.extend(i.split(',')) for i in fields['gender']]
+#             fields['gender'] = [g.strip() for g in gender]
+#             if fields['gender'] == ['All']:
+#                 fields['gender'] = []
+
+#         if fields.get('current'):
+#             if fields['current'] == ['Current']:
+#                 year = datetime.now(timezone.utc).year
+#                 fields['graduation_year'] = [f"Greater than or equal to{year}", f"Less than or equal to{year+3}"]
+
+#         if fields.get('event_class'):
+#             event_class = fields.pop('event_class')
+#             if event_class == ['All']:
+#                 del event_class
+#             else:
+#                 tags = []
+#                 for ec in event_class:
+#                     tags.extend(ec.split(','))
+#                 if 'tags' not in fields:
+#                     fields['tags'] = []
+#                 fields['tags'].extend(tags)
+
+#         if fields.get('graduation_year'):
+#             graduation_year = []
+#             for i in fields['graduation_year']:
+#                 i_l = i.split(',')
+#                 for ii in i_l:
+#                     ii = ii.strip()
+#                     if ii:
+#                         graduation_year.append(ii)
+#             fields['graduation_year'] = graduation_year
+
+#         if fields.get('sort'):
+#             order_by = fields.get('order_by', [])
+#             for sort in fields['sort']:
+#                 for item in sort.split(','):
+#                     if not item or item in ['-', 'None', 'null', None]:
+#                         continue
+#                     order_by.append(item.replace(' ', '_').lower())
+#             fields['order_by'] = order_by
+
+#         # if isinstance(fields.get('active'), list):
+#         #     fields['active'] = fields['active'][0]
+#         if isinstance(fields.get('limit'), list):
+#             fields['limit'] = fields['limit'][0]
+#         if isinstance(fields.get('offset'), list):
+#             fields['offset'] = fields['offset'][0]
+#         return fields
+
+#     def apply_filters(self, database_object_class: MeetDBBase, query: select, count: bool = False) -> select:
+#         """Apply the filters to the query"""
+#         if self.uid:
+#             query = query.filter(database_object_class.uid.in_(self.uid))
+
+#         if self.first_name:
+#             filter_list = [database_object_class.search_first_name.contains(e) for e in self.first_name]
+#             filter_list + [database_object_class.search_first_nickname.contains(e) for e in self.first_name]
+#             query = query.filter(or_(*filter_list))
+
+#         if self.last_name:
+#             filter_list = [database_object_class.search_last_name.contains(e) for e in self.last_name]
+#             filter_list + [database_object_class.search_last_nickname.contains(e) for e in self.last_name]
+#             query = query.filter(or_(*filter_list))
+
+#         if self.first_name_only:
+#             filter_list = [database_object_class.search_first_name.contains(e) for e in self.first_name_only]
+#             query = query.filter(or_(*filter_list))
+
+#         if self.last_name_only:
+#             filter_list = [database_object_class.search_last_name.contains(e) for e in self.last_name_only]
+#             query = query.filter(or_(*filter_list))
+
+#         if self.first_nickname_only:
+#             filter_list = [database_object_class.search_first_nickname.contains(e) for e in self.first_nickname_only]
+#             query = query.filter(or_(*filter_list))
+
+#         if self.last_nickname_only:
+#             filter_list = [database_object_class.search_last_nickname.contains(e) for e in self.last_nickname_only]
+#             query = query.filter(or_(*filter_list))
+
+#         if self.team:
+#             filter_list = [database_object_class.search_team.contains(e) for e in self.team]
+#             query = query.filter(or_(*filter_list))
+
+#         if self.tags:
+#             filter_list = [database_object_class.tags.contains(e) for e in self.tags]
+#             query = query.filter(or_(*filter_list))
+
+#         if self.graduation_year:
+#             filter_list = []
+#             for graduation_year in self.graduation_year:
+#                 query = apply_modifier(query, database_object_class.graduation_year, graduation_year)
+
+#         if self.gender:
+#             filter_list = [database_object_class.gender.contains(g) for g in self.gender]
+#             query = query.filter(or_(*filter_list))
+
+#         if not count:
+#             if self.limit:
+#                 query = query.limit(self.limit)
+#             for order_by in self.order_by:
+#                 query = query.order_by(getattr(database_object_class, order_by))
+#             if self.offset:
+#                 query = query.offset(self.offset)
+
+#         return query
+
+#     # def add_current_students_for_year(self, year):
+#     #     print(f"ADdING STUDENTS ACTIVE IN {year}")
+#     #     x=1

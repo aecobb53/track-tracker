@@ -19,6 +19,11 @@ from .ms_result import (
     MSResultDB,
     MSResultFilter,
 )
+from .meet import(
+    MeetEvent,
+    Meet,
+    MeetApiCreate,
+)
 # from .workout import (
 #     WorkoutData,
 #     WorkoutApiCreate,

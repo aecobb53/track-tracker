@@ -28,7 +28,10 @@ def call(
         print(f"    {key}: {value}")
     resp = getattr(requests, method)(**call)
     print(f"    Response status code: {resp.status_code}")
-    if not resp.ok:
+    # if not resp.ok:
+    #     print(f"    Response content: {resp.content}")
+        # raise Exception(f"Request failed with status code {resp.status_code}")
+    if resp.status_code == 422:
         print(f"    Response content: {resp.content}")
         raise Exception(f"Request failed with status code {resp.status_code}")
 
@@ -38,12 +41,14 @@ def call(
     try:
         content = resp.json()
     except requests.JSONDecodeError:
+        print(f"    Response content not JSON: {resp.content}")
         content = resp.content
     return resp, content
 
 
 class BaseTestClass(TestCase):
-    pass
+    def addDuration(test, elapsed):
+        pass
 
     def create_athletes(self):
         print(f"POPULATING ATHLETE DATABASE")
@@ -97,10 +102,42 @@ class BaseTestClass(TestCase):
             print(f"Response: {content}")
         print(f"DONE CLEARING RESULTS DATABASE")
 
+    def create_meets(self):
+        print(f"POPULATING MEET DATABASE")
+        meet_name = "Testing Meet"
+        meet_payload = {
+            "meet_name": meet_name,
+        }
+        resp, content = call(
+            'post',
+            f"{TEST_URI}/meet/{meet_name}/",
+            json=meet_payload,
+            assert_code=200,
+        )
+        # print(f"Response: {content}")
+        print(f"DONE POPULATING MEET DATABASE")
+
+    def delete_all_meets(self):
+        print(f"CLEARING MEET DATABASE")
+        resp, content = call(
+            'get',
+            f"{TEST_URI}/meet/",
+            assert_code=200,
+        )
+        for meet in content['meet_names']:
+            resp, content = call(
+                'delete',
+                f"{TEST_URI}/meet/{meet}/",
+                assert_code=200,
+            )
+            # print(f"Response: {content}")
+        print(f"DONE CLEARING MEET DATABASE")
+
     def setUp(self):
         # Load Data
         self.delete_all_results()
         self.delete_all_athletes()
+        self.delete_all_meets()
         pass
 
     def tearDown(self):

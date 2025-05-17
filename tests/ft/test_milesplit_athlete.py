@@ -15,12 +15,16 @@ class TestAthlete(BaseTestClass):
         # self.delete_all_results()
         # self.delete_all_athletes()
         self.create_athletes()
-        pass
+        print(f"###DONE WITH SETUP###")
+        print('')
 
     def tearDown(self):
         super().tearDown()
         # Clear Data
         pass
+
+    def test_pass(self):
+        assert True
 
 
     # def test_create_athlete(self):

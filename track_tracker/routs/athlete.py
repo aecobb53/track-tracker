@@ -1,4 +1,3 @@
-from re import L
 from fastapi import APIRouter, HTTPException, Request, Response, Depends
 
 # from models import MSAthlete, MSAthleteFilter
