@@ -8,6 +8,7 @@ from .base_file_handler import BaseFileHandler
 from models import (
     MeetEvent,
     Meet,
+    MeetEventAthlete,
 )
 from html import display_date
 from html.common import class_formatter
@@ -112,6 +113,32 @@ class MeetHandler(BaseFileHandler):
         else:
             raise MissingRecordException(f"Event {event_name} does not exist in meet {self.content.meet_name}")
 
+    def add_athlete(self, event_name: str, athlete: MeetEvent):
+        """
+        Add an athlete to an event in the meet
+        event_name: str
+        athlete: dict - or eventually a pydantic object
+        """
+        self.load_file()
+        event, _ = self.find_event(event_name=event_name)
+        event.athletes.append(athlete)
+        self._order_athletes_in_event(event=event)
+        self.save_file()
+
+    def _order_athletes_in_event(self, event: MeetEvent):
+        """
+        Order athletes in an event by their order
+        """
+        def sort_function(athlete: MeetEventAthlete):
+            order = 0
+            if athlete.flight:
+                order = athlete.flight
+            elif athlete.heat:
+                order = athlete.heat
+                if athlete.lane:
+                    order = order + athlete.lane / 100
+            return order
+        event.athletes.sort(key=lambda x: sort_function(x))
 
 # mh = MeetHandler(meet_name="Testing Meet")
 # mh.content = {

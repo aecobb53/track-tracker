@@ -2,7 +2,7 @@
 # import pytest
 # import requests
 # from requests import JSONDecodeError
-
+import json
 from .base_test_class import BaseTestClass, call, TEST_URI
 
 # TEST_URI += "/meet"
@@ -142,7 +142,7 @@ class TestAthlete(BaseTestClass):
         )
         print(f"DELETING MISSING RESP: {delete_missing_resp}")
         print(f"DELETING MISSING CONTENT: {delete_missing_content}")
-        
+
         print('Verifying the Event does not show up')
         resp, content = call(
             'get',
@@ -160,127 +160,183 @@ class TestAthlete(BaseTestClass):
         print(f"FIND MISSING EVENT RESP: {find_resp}")
         print(f"FIND MISSING EVENT CONTENT: {find_content}")
 
+    def test_detailed_event(self):
+        # Create Event
+        print('Creating Event')
+        meet_name = 'Testing Meet'
+        event_name = 'Detailed Event'
+        example_event = {
+            'event_name': event_name,
+            'event_time': '14:30',
+            # 'athletes': [],
+        }
+        create_resp, create_content = call(
+            'post',
+            f"{TEST_URI}/meet/{meet_name}/{event_name}",
+            json=example_event,
+            assert_code=201,
+        )
+        print(f"CREATE RESP: {create_resp}")
+        print(f"CREATE CONTENT: {create_content}")
 
-    # # def test_pass(self):
-    # #     assert True
-    # #     meet_resp, meet_content = call(
-    # #         'get',
-    # #         f"{TEST_URI}/meet/{meet_name}/",
-    # #         assert_code=200,
-    # #     )
-    # #     print(meet_resp)
-    # #     print(meet_content)
-    # #     # 1/0
-    
-    # def test_add_athletes(self):
-    #     resp, content = call(
-    #         'get',
-    #         f"{TEST_URI}/meet/{meet_name}/",
-    #     )
-    #     print(resp)
-    #     print(content)
-    #     print('')
-    #     print('')
-    #     print(f"EVENT: {content['events']['Boys 100m']}")
-    #     # content['events']['Boys 100m'].append()
-    #     assert True
-    #     1/0
+        # Find Event
+        print('Finding the Event')
+        find_resp, find_content = call(
+            'get',
+            f"{TEST_URI}/meet/{meet_name}/{event_name}",
+            assert_code=200,
+        )
+        print(f"FIND EVENT RESP: {find_resp}")
+        print(f"FIND EVENT CONTENT: {find_content}")
+        validate_event = {
+            'event_name': event_name,
+            'event_time': '14:30:00',
+            'athletes': [],
+            'is_relay': False,
+            'meet_metadata': {},
+            'gender': None,
+        }
+        self.assertEqual(find_content, validate_event, f"Event {event_name} not found in events list")
 
-    # def test_pass2(self):
-    #     # assert True
-    #     # meet_resp, meet_content = call(
-    #     #     'post',
-    #     #     f"{TEST_URI}/meet/{meet_name}2/",
-    #     #     assert_code=200,
-    #     # )
-    #     # print(meet_resp)
-    #     # print(meet_content)
+    def test_athlete_management(self):
+        # Create Event
+        print('Creating Event')
+        meet_name = 'Testing Meet'
+        event_name = 'Example Event'
+        example_event = {
+            'event_name': event_name,
+            'event_time': None,
+            'athletes': [],
+        }
+        create_resp, create_content = call(
+            'post',
+            f"{TEST_URI}/meet/{meet_name}/{event_name}",
+            json=example_event,
+            assert_code=201,
+        )
+        print(f"CREATE RESP: {create_resp}")
+        print(f"CREATE CONTENT: {create_content}")
+        print('Reorder Event')
+        reorder_resp, reorder_content = call(
+            'put',
+            f"{TEST_URI}/meet/{meet_name}/{event_name}/0",
+            assert_code=200,
+        )
+        print(f"REORDER RESP: {reorder_resp}")
+        print(f"REORDER CONTENT: {reorder_content}")
 
-    #     meet_resp, meet_content = call(
-    #         'delete',
-    #         f"{TEST_URI}/meet/{meet_name}2/",
-    #         assert_code=200,
-    #     )
-    #     print(meet_resp)
-    #     print(meet_content)
-    #     1/0
+        # Create Athletes
+        print('Creating Athletes')
+        athlete_1 = {
+            'first_name': 'John',
+            'last_name': 'Doe',
+            'heat': 1,
+            'lane': 3,
+        }
+        athlete_2 = {
+            'first_name': 'Jane',
+            'last_name': 'Doe',
+            'heat': 1,
+            'lane': 5,
+        }
+        athlete_3 = {
+            'first_name': 'John',
+            'last_name': 'Smith',
+            'heat': 1,
+            'lane': 4,
+        }
+        print('Creating Athlete 1')
+        create_resp, create_content = call(
+            'post',
+            f"{TEST_URI}/meet/{meet_name}/{event_name}/athlete",
+            json=athlete_1,
+            assert_code=201,
+        )
+        print(f"CREATE RESP: {create_resp}")
+        print(f"CREATE CONTENT: {create_content}")
 
+        print('Creating Athlete 3 (before athlete 2)')
+        create_resp, create_content = call(
+            'post',
+            f"{TEST_URI}/meet/{meet_name}/{event_name}/athlete",
+            json=athlete_3,
+            assert_code=201,
+        )
+        print(f"CREATE RESP: {create_resp}")
+        print(f"CREATE CONTENT: {create_content}")
 
-    # def test_create_athlete(self):
-    #     resp, content = call(
-    #         "get",
-    #         f"{TEST_URI}/",
-    #         assert_code=200,
-    #     )
-    #     validation_payload = {'athletes': []}
-    #     self.assertEqual(
-    #         content,
-    #         validation_payload,
-    #         f"Expected {validation_payload} but got {content}",
-    #     )
+        print('Creating Athlete 2')
+        create_resp, create_content = call(
+            'post',
+            f"{TEST_URI}/meet/{meet_name}/{event_name}/athlete",
+            json=athlete_2,
+            assert_code=201,
+        )
+        print(f"CREATE RESP: {create_resp}")
+        print(f"CREATE CONTENT: {create_content}")
 
-    # def test_get_athletes(self):
-    #     resp, content = call(
-    #         "get",
-    #         f"{TEST_URI}/",
-    #         assert_code=200,
-    #     )
-    #     validation_payload = {'athletes': []}
-    #     self.assertEqual(
-    #         content,
-    #         validation_payload,
-    #         f"Expected {validation_payload} but got {content}",
-    #     )
-
-    # def test_home(self):
-    #     resp, content = call(
-    #         "get",
-    #         f"{TEST_URI}/home",
-    #         assert_code=200,
-    #     )
-    #     validation_payload = {'Hello': 'WORLD!'}
-    #     self.assertEqual(
-    #         content,
-    #         validation_payload,
-    #         f"Expected {validation_payload} but got {content}",
-    #     )
-
-    # def test_favicon(self):
-    #     resp, content = call(
-    #         "get",
-    #         f"{TEST_URI}/favicon.ico",
-    #         assert_code=200,
-    #     )
-
-    # def test_robots(self):
-    #     resp, content = call(
-    #         "get",
-    #         f"{TEST_URI}/robots.txt",
-    #         assert_code=200,
-    #     )
-
-    # # def test_about(self):
-    # #     resp, content = call(
-    # #         "get",
-    # #         f"{TEST_URI}/",
-    # #         assert_code=200,
-    # #     )
-    # #     validation_payload = {'Hello': 'WORLD!'}
-    # #     self.assertEqual(
-    # #         content,
-    # #         validation_payload,
-    # #         f"Expected {validation_payload} but got {content}",
-    # #     )
-
-    # # def test_service_info(self):
-    # #     resp, content = call(
-    # #         "get",
-    # #         f"{TEST_URI}/",
-    # #         assert_code=200,
-    # #     )
-    # #     validation_payload = {'Hello': 'WORLD!'}
-    # #     self.assertEqual(
-    # #         content,
-    # #         validation_payload,
-    # #         f"Expected {validation_payload} but got {content}",
-    # #     )
+        # Find Event
+        print('Finding the Event')
+        find_resp, find_content = call(
+            'get',
+            f"{TEST_URI}/meet/{meet_name}/{event_name}",
+            assert_code=200,
+        )
+        print(f"FIND EVENT RESP: {find_resp}")
+        # print(f"FIND EVENT CONTENT: {find_content}")
+        print(json.dumps(find_content, indent=4))   
+        validation_event = {
+            "event_name": event_name,
+            "event_time": None,
+            "gender": None,
+            "athletes": [
+                {
+                    "first_name": "John",
+                    "last_name": "Doe",
+                    "team": None,
+                    "graduation_year": None,
+                    "flight": None,
+                    "heat": 1,
+                    "lane": 3,
+                    "place": None,
+                    "wind": None,
+                    "result": None,
+                    "meet_metadata": {}
+                },
+                {
+                    "first_name": "John",
+                    "last_name": "Smith",
+                    "team": None,
+                    "graduation_year": None,
+                    "flight": None,
+                    "heat": 1,
+                    "lane": 4,
+                    "place": None,
+                    "wind": None,
+                    "result": None,
+                    "meet_metadata": {}
+                },
+                {
+                    "first_name": "Jane",
+                    "last_name": "Doe",
+                    "team": None,
+                    "graduation_year": None,
+                    "flight": None,
+                    "heat": 1,
+                    "lane": 5,
+                    "place": None,
+                    "wind": None,
+                    "result": None,
+                    "meet_metadata": {}
+                }
+            ],
+            "is_relay": False,
+            "meet_metadata": {}
+        }
+        find_content_athletes = find_content.pop('athletes')
+        validation_event_athletes = validation_event.pop('athletes')
+        self.assertEqual(find_content, validation_event, f"Event {event_name} not found in events list")
+        self.assertEqual(len(find_content_athletes), len(validation_event_athletes), f"Length of athletes do not match")
+        for index, (a1, a2) in enumerate(zip(find_content_athletes, validation_event_athletes)):
+            print(f"Comparing athlete {index}: {a1} vs {a2}")
+            self.assertEqual(a1, a2, f"Athlete at index: [{index}] {a1} not the same as {a2}")

@@ -23,6 +23,7 @@ from .meet import(
     MeetEvent,
     Meet,
     MeetApiCreate,
+    MeetEventAthlete,
 )
 # from .workout import (
 #     WorkoutData,

@@ -9,30 +9,115 @@ from uuid import uuid4
 
 # from .common import apply_modifier
 from .event import EventParser
+from .result import Result
+
+
+class MeetEventAthlete(BaseModel):
+    first_name: str
+    last_name: str
+    team: str | None = None
+    graduation_year: int | None = None
+
+    flight: int | None = None
+    heat: int | None = None
+    lane: int | None = None
+
+    place: int | None = None
+    wind: float | None = None
+    result: Result | None = None
+
+    meet_metadata: Dict[str, Any] = {}
+
+    @property
+    def name(self):
+        return f"{self.first_name} {self.last_name}"
+
+    @property
+    def to_json(self):
+        output = {
+            'first_name': self.first_name,
+            'last_name': self.last_name,
+            'team': self.team,
+            'graduation_year': self.graduation_year,
+            'flight': self.flight,
+            'heat': self.heat,
+            'lane': self.lane,
+            'place': self.place,
+            'wind': self.wind,
+            'result': self.result.to_json if self.result else None,
+            'meet_metadata': self.meet_metadata,
+        }
+        return output
+
+    @classmethod
+    def from_json(cls, data):
+        content = {
+            'first_name': data['first_name'],
+            'last_name': data['last_name'],
+            'team': data['team'],
+            'graduation_year': data['graduation_year'],
+            'flight': data['flight'],
+            'heat': data['heat'],
+            'lane': data['lane'],
+            'place': data['place'],
+            'wind': data['wind'],
+            'result': Result.from_json(data['result']) if data.get('result') else None,
+            'meet_metadata': data['meet_metadata'],
+        }
+        obj = cls(**content)
+        return obj
 
 
 class MeetEvent(BaseModel):
     event_name: str
     event_time: time | None = None
+    gender: str | None = None
 
-    athletes: List[str] = []
+    athletes: List[MeetEventAthlete] = []
+
+    is_relay: bool = False
+    meet_metadata: Dict[str, Any] = {}
+
+    @model_validator(mode='before')
+    def validate_fields(cls, fields):
+        if not fields.get('gender'):
+            try:
+                fields['gender'] = EventParser.parse_event_gender(fields['event_name'])
+            except Exception as e:
+                pass
+        if not fields.get('is_relay'):
+            try:
+                fields['is_relay'] = EventParser.parse_event_is_relay(fields['event_name'])
+            except Exception as e:
+                pass
+        return fields
+
 
     @property
     def to_json(self):
         output = {
             'event_name': self.event_name,
+            'gender': self.gender,
+            'is_relay': self.is_relay,
+            'athletes': [a.to_json for a in self.athletes],
+            'meet_metadata': self.meet_metadata,
         }
         if self.event_time:
-            output['event_time'] = str(self.event_time)
+            # output['event_time'] = str(self.event_time)
+            output['event_time'] = self.event_time.isoformat()
         return output
 
     @classmethod
     def from_json(cls, data):
         content = {
             'event_name': data['event_name'],
+            'gender': data['gender'],
+            'is_relay': data['is_relay'],
+            'athletes': [MeetEventAthlete.from_json(a) for a in data['athletes']],
+            'meet_metadata': data['meet_metadata'],
         }
         if data.get('event_time'):
-            content['event_time'] = datetime.strftime(data['event_time'], "%H:%M:%S").time()
+            content['event_time'] = datetime.strptime(data['event_time'], "%H:%M:%S").time()
         obj = cls(**content)
         return obj
 
@@ -49,6 +134,7 @@ class Meet(BaseModel):
 
     varsity_points: bool = True
     small_meet: bool = False
+    max_school_scores: int | None = None
     meet_metadata: Dict[str, Any] = {}
 
     @property
@@ -60,7 +146,7 @@ class Meet(BaseModel):
     def rest_output(self):
         output = self.model_dump_json()
         return output
-    
+
     @property
     def to_json(self):
         output = {
@@ -72,6 +158,7 @@ class Meet(BaseModel):
             'events': [e.to_json for e in self.events],
             'varsity_points': self.varsity_points,
             'small_meet': self.small_meet,
+            'max_school_scores': self.max_school_scores,
             'meet_metadata': self.meet_metadata,
         }
         return output
@@ -87,6 +174,7 @@ class Meet(BaseModel):
             'events': [MeetEvent.from_json(e) for e in data['events']],
             'varsity_points': data['varsity_points'],
             'small_meet': data['small_meet'],
+            'max_school_scores': data['max_school_scores'],
             'meet_metadata': data['meet_metadata'],
         }
         if data.get('event_time'):

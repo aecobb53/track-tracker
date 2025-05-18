@@ -5,17 +5,18 @@ from models import ContextSingleton
 
 
 class BaseFileHandler:
-    def __init__(self, file_name: str, file_directory: str = None, first_save: bool = False, *args, **kwargs):
+    def __init__(self, file_name: str, file_directory: str = None, skip_load: bool = False, *args, **kwargs):
         self.context = ContextSingleton()
         self.base_file_directory = '/db'
         self.file_directory = file_directory
         self.file_name = file_name
         self._ensure_directory()
 
-        if first_save:
-            self.metadata = {
-                'last_updated': None,
-            }
+        if skip_load:
+            # self.metadata = {
+            #     'last_updated': None,
+            # }
+            self.metadata = {}
         else:
             self._saved_content = None
             self.load_file()
@@ -39,7 +40,7 @@ class BaseFileHandler:
             return os.path.join(self.base_file_directory, self.file_directory, self.file_name)
         else:
             return os.path.join(self.base_file_directory, self.file_name)
-        
+
     @property
     def file_directory_path(self):
         """
@@ -49,7 +50,7 @@ class BaseFileHandler:
             return os.path.join(self.base_file_directory, self.file_directory)
         else:
             return os.path.join(self.base_file_directory)
-        
+
     def inspect(self):
         if os.path.exists(self.file_path):
             with open(self.file_path, 'r') as f:

@@ -1,3 +1,4 @@
+import os
 from unittest import TestCase
 import pytest
 import requests
@@ -124,13 +125,20 @@ class BaseTestClass(TestCase):
             f"{TEST_URI}/meet/",
             assert_code=200,
         )
-        for meet in content['meet_names']:
+        meet_file_base_path = 'persisted_db/meet'
+        meet_names = []
+        for meet in os.listdir(meet_file_base_path):
+            if not meet.startswith('meet_') and not meet.endswith('.json'):
+                continue
+            meet = meet[5:-5]
+            meet_names.append(meet)
+
+        for meet in meet_names:
             resp, content = call(
                 'delete',
                 f"{TEST_URI}/meet/{meet}/",
                 assert_code=200,
             )
-            # print(f"Response: {content}")
         print(f"DONE CLEARING MEET DATABASE")
 
     def setUp(self):

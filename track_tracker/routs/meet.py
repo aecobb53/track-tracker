@@ -5,7 +5,7 @@ from fastapi import APIRouter, HTTPException, Request, Response, Depends
 # # from handlers import MeetHandler
 from handlers import MeetHandler, parse_query_params, DuplicateRecordsException, MissingRecordException
 # # from utils import parse_query_params, parse_header, MissingRecordException, DuplicateRecordsException
-from models import MSAthleteData, MSAthleteApiCreate, MSAthleteFilter, MSResultFilter, ContextSingleton, RestHeaders, MeetEvent, Meet, MeetApiCreate
+from models import MSAthleteData, MSAthleteApiCreate, MSAthleteFilter, MSResultFilter, ContextSingleton, RestHeaders, MeetEvent, Meet, MeetApiCreate, MeetEventAthlete
 
 
 
@@ -57,7 +57,7 @@ async def create_meet(meet_name: str, meet_create: MeetApiCreate, request: Reque
                 events.append(f"Boys {event}")
         meet.events = [MeetEvent(event_name=e) for e in events]
 
-        mh = MeetHandler(meet_name=meet_name, first_save=True)
+        mh = MeetHandler(meet_name=meet_name, skip_load=True)
         mh.content = meet
         mh.save_file()
         return mh.content
@@ -95,11 +95,16 @@ async def find_meet(meet_name: str, request: Request):
 @router.delete('/{meet_name}', status_code=200)
 async def delete_meet(meet_name: str, request: Request):
     try:
-        mh = MeetHandler(meet_name=meet_name)
-        mh.load_file()
-        output = mh.content
+        mh = MeetHandler(meet_name=meet_name, skip_load=True)
+        try:
+            mh.load_file()
+            output = mh.content
+        except Exception as err:
+            context.logger.warning(f'ERROR: {err}')
+            output = None
         mh.move_file(new_directory='meet/deleted')
-        return mh.content
+        if output:
+            return output
     except Exception as err:
         context.logger.warning(f'ERROR: {err}')
         raise HTTPException(status_code=500, detail='Internal Service Error')
@@ -188,6 +193,36 @@ async def delete_meet_event(meet_name: str, event_name: str, request: Request):
     except Exception as err:
         context.logger.warning(f'ERROR: {err}')
         raise HTTPException(status_code=500, detail='Internal Service Error')
+
+
+
+@router.post('/{meet_name}/{event_name}/athlete', status_code=201)
+async def create_meet_event(meet_name: str, event_name: str, athlete: MeetEventAthlete, request: Request):
+    try:
+        mh = MeetHandler(meet_name=meet_name)
+        mh.add_athlete(event_name=event_name, athlete=athlete)
+    except MissingRecordException as err:
+        message = f"Missing record attempt: {err}"
+        context.logger.warning(message)
+        raise HTTPException(status_code=404, detail=message)
+    except Exception as err:
+        context.logger.warning(f'ERROR: {err}')
+        raise HTTPException(status_code=500, detail='Internal Service Error')
+
+# # @router.get('/{meet_name}', status_code=200)
+# # async def filter_meet_events(meet_name: str, request: Request):
+
+# @router.get('/{meet_name}/{event_name}', status_code=200)
+# async def find_meet_event(meet_name: str, event_name: str, request: Request):
+
+# @router.put('/{meet_name}/{event_name}', status_code=200)
+# async def update_meet_event(meet_name: str, event_name: str, event: MeetEvent, request: Request):
+
+# @router.put('/{meet_name}/{event_name}/{index}', status_code=200)
+# async def reorder_meet_events(meet_name: str, event_name: str, index: int, request: Request):
+
+# @router.delete('/{meet_name}/{event_name}', status_code=200)
+# async def delete_meet_event(meet_name: str, event_name: str, request: Request):
 
 
 """

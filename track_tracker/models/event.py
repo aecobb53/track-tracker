@@ -1,4 +1,3 @@
-from multiprocessing.sharedctypes import Value
 import re
 
 
@@ -9,6 +8,7 @@ class EventParser:
     def __init__(self, event: str):
         self.event_s = event
         self.parse_event(event)
+        self.parse_is_relay(event)
 
     def parse_event(self, event_s: str):
         if re.search(r'(Dash|Run|Relay|Hurdles|Steeplechase|Javelin|Racewalk|Meter)', event_s):
@@ -18,6 +18,9 @@ class EventParser:
             self.re_s = r'((?P<FEET>\d+)-)?(?P<INCHES>\d*)\.?(?P<FRACTIONS>\d*)'
             self.event_type = 'field'
         elif re.search(r'\d+ ?(m)', event_s):
+            self.re_s = r'(?P<MINUTES>\d+:)?(?P<SECONDS>\d+)\.?(?P<SUBSECOND>\d*)'
+            self.event_type = 'run'
+        elif re.search(r' 4[xX]| H', event_s):
             self.re_s = r'(?P<MINUTES>\d+:)?(?P<SECONDS>\d+)\.?(?P<SUBSECOND>\d*)'
             self.event_type = 'run'
         else:
@@ -31,6 +34,13 @@ class EventParser:
         else:
             x=1
         return self.gender
+
+    def parse_is_relay(self, event_s: str):
+        if re.search(r'Relay| 4[xX]', event_s):
+            self.is_relay = True
+        else:
+            self.is_relay = False
+        return self.is_relay
 
     def parse_result(self, result_s: str):
         if not result_s or result_s == '-':
@@ -62,7 +72,6 @@ class EventParser:
                 fractions = re_s.group('FRACTIONS')
             except:
                 pass
-
 
             if not any([minutes, seconds, subsecond, feet, inches, fractions]):
                 raise ValueError(f"Result {result_s} is not valid for event {self.event_s} [{minutes, seconds, subsecond, feet, inches, fractions}]")
@@ -100,6 +109,11 @@ class EventParser:
         ep = cls(event_s)
         result = ep.parse_gender(event_s)
         return result
+
+    @classmethod
+    def parse_event_is_relay(cls, event_s: str):
+        ep = cls(event_s)
+        return ep.is_relay
 
 # # re_s = re.search(r'(?P<THING>\d+:?\d+\.?\d*)', '1:23.45')
 

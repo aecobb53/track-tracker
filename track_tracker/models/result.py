@@ -193,3 +193,11 @@ class Result(BaseModel):
         if self.fractions != other_object.fractions:
             return False
         return True
+
+    @property
+    def to_json(self):
+        return self.put
+
+    @classmethod
+    def from_json(cls, data):
+        return cls.build(data)
