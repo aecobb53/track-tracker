@@ -70,13 +70,13 @@ async def create_meet(meet_name: str, meet_create: MeetApiCreate, request: Reque
 async def filter_meet(request: Request):
     try:
         meet_names = []
-        for fl in os.listdir('/db/meet'):
-            if fl.startswith('meet_') and fl.endswith('.json'):
-                meet_names.append(fl[5:-5])
+        if os.path.exists('/db/meet'):
+            for fl in os.listdir('/db/meet'):
+                if fl.startswith('meet_') and fl.endswith('.json'):
+                    meet_names.append(fl[5:-5])
+        else:
+            meet_names = []
         return {'meet_names': meet_names}
-        # mh = MeetHandler(meet_name=meet_name)
-        # mh.load_file()
-        # return mh.content
     except Exception as err:
         context.logger.warning(f'ERROR: {err}')
         raise HTTPException(status_code=500, detail='Internal Service Error')
@@ -119,15 +119,61 @@ async def create_meet_event(meet_name: str, event_name: str, event: MeetEvent, r
     except Exception as err:
         context.logger.warning(f'ERROR: {err}')
         raise HTTPException(status_code=500, detail='Internal Service Error')
-        
+
+# @router.get('/{meet_name}', status_code=200)
+# async def filter_meet_events(meet_name: str, request: Request):
+#     try:
+#         mh = MeetHandler(meet_name=meet_name)
+#         mh.load_file()
+#         for event in mh.content.events:
+#             if 
+#         return mh.content
+#     except Exception as err:
+#         context.logger.warning(f'ERROR: {err}')
+#         raise HTTPException(status_code=500, detail='Internal Service Error')
+
+@router.get('/{meet_name}/{event_name}', status_code=200)
+async def find_meet_event(meet_name: str, event_name: str, request: Request):
+    try:
+        mh = MeetHandler(meet_name=meet_name)
+        mh.load_file()
+        meet_event, _ = mh.find_event(event_name=event_name)
+        return meet_event
+    except MissingRecordException as err:
+        message = f"Missing record attempt: {err}"
+        context.logger.warning(message)
+        raise HTTPException(status_code=404, detail=message)
+    except Exception as err:
+        context.logger.warning(f'ERROR: {err}')
+        raise HTTPException(status_code=500, detail='Internal Service Error')
 
 @router.put('/{meet_name}/{event_name}', status_code=200)
-async def update_meet_event(meet_name: str, event_name: str, request: Request):
-    pass
+async def update_meet_event(meet_name: str, event_name: str, event: MeetEvent, request: Request):
+    try:
+        mh = MeetHandler(meet_name=meet_name)
+        mh.load_file()
+        mh.update_event(event_name=event_name, event=event)
+    except MissingRecordException as err:
+        message = f"Missing record attempt: {err}"
+        context.logger.warning(message)
+        raise HTTPException(status_code=404, detail=message)
+    except Exception as err:
+        context.logger.warning(f'ERROR: {err}')
+        raise HTTPException(status_code=500, detail='Internal Service Error')
 
 @router.put('/{meet_name}/{event_name}/{index}', status_code=200)
 async def reorder_meet_events(meet_name: str, event_name: str, index: int, request: Request):
-    pass
+    try:
+        mh = MeetHandler(meet_name=meet_name)
+        mh.load_file()
+        mh.move_event(new_event_index=index, event_name=event_name)
+    except MissingRecordException as err:
+        message = f"Missing record attempt: {err}"
+        context.logger.warning(message)
+        raise HTTPException(status_code=404, detail=message)
+    except Exception as err:
+        context.logger.warning(f'ERROR: {err}')
+        raise HTTPException(status_code=500, detail='Internal Service Error')
 
 @router.delete('/{meet_name}/{event_name}', status_code=200)
 async def delete_meet_event(meet_name: str, event_name: str, request: Request):

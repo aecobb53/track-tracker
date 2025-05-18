@@ -64,33 +64,66 @@ class TestAthlete(BaseTestClass):
 
         # Find Event
         print('Finding the Event')
-        resp, content = call(
+        find_resp, find_content = call(
             'get',
             f"{TEST_URI}/meet/{meet_name}/{event_name}",
             assert_code=200,
         )
-        print(f"FIND EVENT RESP: {dupe_resp}")
-        print(f"FIND EVENT CONTENT: {dupe_content}")
+        print(f"FIND EVENT RESP: {find_resp}")
+        print(f"FIND EVENT CONTENT: {find_content}")
 
         # Filter Events
 
-        # # Update Event
-        # print('Creating Event')
-        # create_resp, create_content = call(
-        #     'post',
-        #     f"{TEST_URI}/meet/{meet_name}/{event_name}",
-        # )
-        # print(f"CREATE RESP: {create_resp}")
-        # print(f"CREATE CONTENT: {create_content}")
+        # Update Event
+        print('Updating the Event Name')
+        new_event_name = 'Updated Event'
+        new_event = find_content.copy()
+        new_event['event_name'] = new_event_name
+        update_resp, update_content = call(
+            'put',
+            f"{TEST_URI}/meet/{meet_name}/{event_name}",
+            json=new_event,
+            assert_code=200,
+        )
+        print(f"UPDATE EVENT RESP: {update_resp}")
+        print(f"UPDATE EVENT CONTENT: {update_content}")
+        print('Finding the updated Event')
+        find_resp, find_content = call(
+            'get',
+            f"{TEST_URI}/meet/{meet_name}/{new_event_name}",
+            assert_code=200,
+        )
+        print(f"FIND EVENT RESP: {find_resp}")
+        print(f"FIND EVENT CONTENT: {find_content}")
+        self.assertEqual(find_content['event_name'], new_event_name, f"Event name not updated to {new_event_name}")
 
-        # # Reorder Event
-        # print('Creating Event')
-        # create_resp, create_content = call(
-        #     'post',
-        #     f"{TEST_URI}/meet/{meet_name}/{event_name}",
-        # )
-        # print(f"CREATE RESP: {create_resp}")
-        # print(f"CREATE CONTENT: {create_content}")
+        find_resp, find_content = call(
+            'get',
+            f"{TEST_URI}/meet/{meet_name}/{event_name}",
+            assert_code=404,
+        )
+        print(f"FIND MISSING EVENT RESP: {find_resp}")
+        print(f"FIND MISSING EVENT CONTENT: {find_content}")
+        event_name = new_event_name
+
+        # Reorder Event
+        print('Reorder Event')
+        reorder_resp, reorder_content = call(
+            'put',
+            f"{TEST_URI}/meet/{meet_name}/{event_name}/1",
+            assert_code=200,
+        )
+        print(f"REORDER RESP: {reorder_resp}")
+        print(f"REORDER CONTENT: {reorder_content}")
+        print('Verifying the Event has been moved to the new index')
+        resp, content = call(
+            'get',
+            f"{TEST_URI}/meet/{meet_name}/",
+            assert_code=200,
+        )
+        for event_item in content['events']:
+            print(f"EVENT ITEM: {event_item}")
+        self.assertEqual(content['events'][1]['event_name'], event_name, f"Event {event_name} not found in events list")
 
         # Delete Event
         print('Deleting Event')
@@ -119,7 +152,13 @@ class TestAthlete(BaseTestClass):
         for event_item in content['events']:
             if event_item['event_name'] == event_name:
                 self.fail(f"Event {event_name} found in events list")
-
+        find_resp, find_content = call(
+            'get',
+            f"{TEST_URI}/meet/{meet_name}/{event_name}",
+            assert_code=404,
+        )
+        print(f"FIND MISSING EVENT RESP: {find_resp}")
+        print(f"FIND MISSING EVENT CONTENT: {find_content}")
 
 
     # # def test_pass(self):

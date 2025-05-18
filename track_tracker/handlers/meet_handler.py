@@ -54,6 +54,51 @@ class MeetHandler(BaseFileHandler):
                 raise DuplicateRecordsException(f"Event {event.event_name} already exists in meet {self.content.meet_name}")
         self.content.events.append(event)
 
+    def find_event(self, event_name: str = None, event_index: int = None):
+        self.load_file()
+        if event_name:
+            for index, event in enumerate(self.content.events):
+                if event.event_name == event_name:
+                    return event, index
+            else:
+                raise MissingRecordException(f"Event {event_name} does not exist in meet {self.content.meet_name}")
+        elif event_index:
+            if event_index < len(self.content.events):
+                return event.events[event_index], event_index
+            else:
+                raise MissingRecordException(f"Event index {event_index} does not exist in meet {self.content.meet_name}")
+        return None, None
+
+    def update_event(self, event_name: str, event: MeetEvent):
+        """
+        Update an event in the meet
+        event_name: str
+        event: dict - or eventually a pydantic object
+        """
+        self.load_file()
+        _, event_index = self.find_event(event_name=event_name)
+        self.content.events[event_index] = event
+        self.save_file()
+
+    def move_event(self, new_event_index: int, event_name: str = None, event_index: int = None):
+        """
+        Update an event in the meet
+        event_name: str
+        event: dict - or eventually a pydantic object
+        """
+        self.load_file()
+        _, event_index = self.find_event(event_name=event_name)
+        event = self.content.events.pop(event_index)
+        try:
+            # Try to add the popped event to a new index
+            self.content.events.insert(new_event_index, event)
+            self.save_file()
+        except Exception as e:
+            # Try to add the popped event to the old index (or just dont save?)
+            self.content.events.insert(event_index, event)
+            raise DataIntegrityException(f"Event {event.event_name} cannot be moved to index {new_event_index} in meet {self.content.meet_name}") from e
+        # self.save_file()
+
     def delete_event(self, event_name: str):
         """
         Delete an event from the meet
