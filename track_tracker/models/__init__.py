@@ -24,6 +24,7 @@ from .meet import(
     Meet,
     MeetApiCreate,
     MeetEventAthlete,
+    MeetEventAthleteAPICreate,
 )
 # from .workout import (
 #     WorkoutData,

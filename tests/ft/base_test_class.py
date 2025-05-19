@@ -113,7 +113,7 @@ class BaseTestClass(TestCase):
             'post',
             f"{TEST_URI}/meet/{meet_name}/",
             json=meet_payload,
-            assert_code=200,
+            assert_code=201,
         )
         # print(f"Response: {content}")
         print(f"DONE POPULATING MEET DATABASE")

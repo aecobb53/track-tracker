@@ -21,6 +21,7 @@ class MeetEventAthlete(BaseModel):
     flight: int | None = None
     heat: int | None = None
     lane: int | None = None
+    seed: Result | None = None
 
     place: int | None = None
     wind: float | None = None
@@ -67,6 +68,45 @@ class MeetEventAthlete(BaseModel):
         obj = cls(**content)
         return obj
 
+
+class MeetEventAthleteAPICreate(BaseModel):
+    first_name: str
+    last_name: str
+    team: str | None = None
+    graduation_year: int | None = None
+
+    flight: int | None = None
+    heat: int | None = None
+    lane: int | None = None
+    seed: Result | None = None
+
+    place: int | None = None
+    wind: float | None = None
+    result: Result | None = None
+
+    meet_metadata: Dict[str, Any] = {}
+
+    event_name: str | None = None
+
+    @model_validator(mode='before')
+    def validate_fields(cls, fields):
+        print(f"VALIDATE FIELDS1: {fields}")
+        if fields.get('result') and fields.get('event_name'):
+            result = Result.parse_event_result(event=fields['event_name'], result=fields['result'])
+            print(f"RESULT: {result}")
+            print(f"RESULT: {type(result)}")
+            fields['result'] = Result.parse_event_result(event=fields['event_name'], result=fields['result'])
+        elif fields.get('result') or fields.get('event_name'):
+            # I need both to be useful
+            pass
+        print(f"VALIDATE FIELDS2: {fields}")
+        return fields
+
+    def cast_data_object(self) -> MeetEventAthlete:
+        """Return a data object based on the MeetEventAthlete class"""
+        content = self.model_dump()
+        data_obj = MeetEventAthlete(**content)
+        return data_obj
 
 class MeetEvent(BaseModel):
     event_name: str
@@ -193,6 +233,8 @@ class MeetApiCreate(BaseModel):
     varsity_points: bool = True
     small_meet: bool = False
     meet_metadata: Dict[str, Any] = {}
+
+    auto_populate_events: bool = True
 
     @model_validator(mode='before')
     def validate_fields(cls, fields):
