@@ -275,6 +275,157 @@ class TestAthlete(BaseTestClass):
         print(f"CREATE RESP: {create_resp}")
         print(f"CREATE CONTENT: {create_content}")
 
+        print('Find Athlete')
+        find_resp, find_content = call(
+            'get',
+            f"{TEST_URI}/meet/{meet_name}/{event_name}/athlete/jane/doe",
+            assert_code=200,
+        )
+        print(f"FIND RESP: {find_resp}")
+        print(f"FIND CONTENT: {find_content}")
+
+        assert find_content['first_name'] == athlete_2['first_name'], f"First name does not match {athlete_2['first_name']}"
+        assert find_content['last_name'] == athlete_2['last_name'], f"Last name does not match {athlete_2['last_name']}"
+
+        print('Update Athlete')
+        modified_athlete = find_content.copy()
+        modified_athlete['heat'] = 2
+        modified_athlete['lane'] = 1
+        print(f"MODIFIED ATHLETE: {modified_athlete}")
+        modify_resp, modify_content = call(
+            'put',
+            f"{TEST_URI}/meet/{meet_name}/{event_name}/athlete/jane/doe",
+            json=modified_athlete,
+            assert_code=200,
+        )
+        print(f"MODIFY RESP: {modify_resp}")
+        print(f"MODIFY CONTENT: {modify_content}")
+
+        print('Find Athlete')
+        find_resp, find_content = call(
+            'get',
+            f"{TEST_URI}/meet/{meet_name}/{event_name}",
+            assert_code=200,
+        )
+        print(f"FIND RESP: {find_resp}")
+        print(f"FIND CONTENT: {find_content}")
+        self.assertEqual(find_content['athletes'][2]['heat'], 2, f"Heat not updated to 2")
+
+
+
+
+
+
+        print('Delete Athlete')
+        delete_resp, delete_content = call(
+            'delete',
+            f"{TEST_URI}/meet/{meet_name}/{event_name}/athlete/jane/doe",
+            json=modified_athlete,
+            assert_code=200,
+        )
+        print(f"DELETE RESP: {delete_resp}")
+        print(f"DELETE CONTENT: {delete_content}")
+
+        print('Find Athlete')
+        find_resp, find_content = call(
+            'get',
+            f"{TEST_URI}/meet/{meet_name}/{event_name}",
+            assert_code=200,
+        )
+        print(f"FIND RESP: {find_resp}")
+        print(f"FIND CONTENT: {find_content}")
+        self.assertEqual(len(find_content['athletes']), 2, f"Number of athletes not 2")
+
+
+
+
+    """
+    Extra features
+    Find every event an athlete is in for a meet
+    Filter athletes by first/last name and if not found look against nicknames
+    """
+
+
+
+
+
+    def test_detailed_athlete_management(self):
+        # Create Event
+        print('Creating Event')
+        meet_name = 'Testing Meet'
+        event_name = 'Example Event'
+        example_event = {
+            'event_name': event_name,
+            'event_time': None,
+            'athletes': [],
+        }
+        create_resp, create_content = call(
+            'post',
+            f"{TEST_URI}/meet/{meet_name}/{event_name}",
+            json=example_event,
+            assert_code=201,
+        )
+        print(f"CREATE RESP: {create_resp}")
+        print(f"CREATE CONTENT: {create_content}")
+        print('Reorder Event')
+        reorder_resp, reorder_content = call(
+            'put',
+            f"{TEST_URI}/meet/{meet_name}/{event_name}/0",
+            assert_code=200,
+        )
+        print(f"REORDER RESP: {reorder_resp}")
+        print(f"REORDER CONTENT: {reorder_content}")
+
+        # Create Athletes
+        print('Creating Athletes')
+        athlete_1 = {
+            'first_name': 'John',
+            'last_name': 'Doe',
+            'heat': 1,
+            'lane': 3,
+        }
+        athlete_2 = {
+            'first_name': 'Jane',
+            'last_name': 'Doe',
+            'heat': 1,
+            'lane': 5,
+        }
+        athlete_3 = {
+            'first_name': 'John',
+            'last_name': 'Smith',
+            'heat': 1,
+            'lane': 4,
+        }
+        print('Creating Athlete 1')
+        create_resp, create_content = call(
+            'post',
+            f"{TEST_URI}/meet/{meet_name}/{event_name}/athlete",
+            json=athlete_1,
+            assert_code=201,
+        )
+        print(f"CREATE RESP: {create_resp}")
+        print(f"CREATE CONTENT: {create_content}")
+
+        print('Creating Athlete 3 (before athlete 2)')
+        create_resp, create_content = call(
+            'post',
+            f"{TEST_URI}/meet/{meet_name}/{event_name}/athlete",
+            json=athlete_3,
+            assert_code=201,
+        )
+        print(f"CREATE RESP: {create_resp}")
+        print(f"CREATE CONTENT: {create_content}")
+
+        print('Creating Athlete 2')
+        create_resp, create_content = call(
+            'post',
+            f"{TEST_URI}/meet/{meet_name}/{event_name}/athlete",
+            json=athlete_2,
+            assert_code=201,
+        )
+        print(f"CREATE RESP: {create_resp}")
+        print(f"CREATE CONTENT: {create_content}")
+
         # Find Event
         print('Finding the Event')
         find_resp, find_content = call(

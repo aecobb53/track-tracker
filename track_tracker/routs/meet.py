@@ -197,10 +197,10 @@ async def delete_meet_event(meet_name: str, event_name: str, request: Request):
 
 
 @router.post('/{meet_name}/{event_name}/athlete', status_code=201)
-async def create_meet_event(meet_name: str, event_name: str, athlete: MeetEventAthlete, request: Request):
+async def create_meet_event_athlete(meet_name: str, event_name: str, athlete: MeetEventAthlete, request: Request):
     try:
         mh = MeetHandler(meet_name=meet_name)
-        mh.add_athlete(event_name=event_name, athlete=athlete)
+        mh.add_event_athlete(event_name=event_name, athlete=athlete)
     except MissingRecordException as err:
         message = f"Missing record attempt: {err}"
         context.logger.warning(message)
@@ -210,20 +210,53 @@ async def create_meet_event(meet_name: str, event_name: str, athlete: MeetEventA
         raise HTTPException(status_code=500, detail='Internal Service Error')
 
 # # @router.get('/{meet_name}', status_code=200)
-# # async def filter_meet_events(meet_name: str, request: Request):
+# # async def filter_meet_events_athlete(meet_name: str, request: Request):
 
-# @router.get('/{meet_name}/{event_name}', status_code=200)
-# async def find_meet_event(meet_name: str, event_name: str, request: Request):
+@router.get('/{meet_name}/{event_name}/athlete/{first}/{last}', status_code=200)
+async def find_meet_event_athlete(meet_name: str, event_name: str, first: str, last: str, request: Request):
+    try:
+        mh = MeetHandler(meet_name=meet_name)
+        mh.load_file()
+        athlete, _ = mh.find_event_athlete(event_name=event_name, first=first, last=last)
+        return athlete
+    except MissingRecordException as err:
+        message = f"Missing record attempt: {err}"
+        context.logger.warning(message)
+        raise HTTPException(status_code=404, detail=message)
+    except Exception as err:
+        context.logger.warning(f'ERROR: {err}')
+        raise HTTPException(status_code=500, detail='Internal Service Error')
 
-# @router.put('/{meet_name}/{event_name}', status_code=200)
-# async def update_meet_event(meet_name: str, event_name: str, event: MeetEvent, request: Request):
+# @router.get('/{meet_name}/athletes/{first}/{last}}', status_code=200)
+# async def find_meet_athlete(meet_name: str, event_name: str, first: str, last: str, request: Request):
 
-# @router.put('/{meet_name}/{event_name}/{index}', status_code=200)
-# async def reorder_meet_events(meet_name: str, event_name: str, index: int, request: Request):
+@router.put('/{meet_name}/{event_name}/athlete/{first}/{last}', status_code=200)
+async def update_meet_event_athlete(meet_name: str, event_name: str, first: str, last: str, athlete: MeetEventAthlete, request: Request):
+    try:
+        mh = MeetHandler(meet_name=meet_name)
+        mh.load_file()
+        mh.update_event_athlete(event_name=event_name, first=first, last=last, athlete=athlete)
+    except MissingRecordException as err:
+        message = f"Missing record attempt: {err}"
+        context.logger.warning(message)
+        raise HTTPException(status_code=404, detail=message)
+    except Exception as err:
+        context.logger.warning(f'ERROR: {err}')
+        raise HTTPException(status_code=500, detail='Internal Service Error')
 
-# @router.delete('/{meet_name}/{event_name}', status_code=200)
-# async def delete_meet_event(meet_name: str, event_name: str, request: Request):
-
+@router.delete('/{meet_name}/{event_name}/athlete/{first}/{last}', status_code=200)
+async def delete_meet_event_athlete(meet_name: str, event_name: str, first: str, last: str, request: Request):
+    try:
+        mh = MeetHandler(meet_name=meet_name)
+        mh.load_file()
+        mh.delete_event_athlete(event_name=event_name, first=first, last=last)
+    except MissingRecordException as err:
+        message = f"Missing record attempt: {err}"
+        context.logger.warning(message)
+        raise HTTPException(status_code=404, detail=message)
+    except Exception as err:
+        context.logger.warning(f'ERROR: {err}')
+        raise HTTPException(status_code=500, detail='Internal Service Error')
 
 """
 add_event
