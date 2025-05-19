@@ -26,6 +26,7 @@ class MeetEventAthlete(BaseModel):
     place: int | None = None
     wind: float | None = None
     result: Result | None = None
+    points: int | None = None
 
     meet_metadata: Dict[str, Any] = {}
 
@@ -44,6 +45,7 @@ class MeetEventAthlete(BaseModel):
             'heat': self.heat,
             'lane': self.lane,
             'place': self.place,
+            'points': self.points,
             'wind': self.wind,
             'result': self.result.to_json if self.result else None,
             'meet_metadata': self.meet_metadata,
@@ -61,6 +63,7 @@ class MeetEventAthlete(BaseModel):
             'heat': data['heat'],
             'lane': data['lane'],
             'place': data['place'],
+            'points': data['points'],
             'wind': data['wind'],
             'result': Result.from_json(data['result']) if data.get('result') else None,
             'meet_metadata': data['meet_metadata'],
@@ -90,16 +93,12 @@ class MeetEventAthleteAPICreate(BaseModel):
 
     @model_validator(mode='before')
     def validate_fields(cls, fields):
-        print(f"VALIDATE FIELDS1: {fields}")
         if fields.get('result') and fields.get('event_name'):
             result = Result.parse_event_result(event=fields['event_name'], result=fields['result'])
-            print(f"RESULT: {result}")
-            print(f"RESULT: {type(result)}")
             fields['result'] = Result.parse_event_result(event=fields['event_name'], result=fields['result'])
         elif fields.get('result') or fields.get('event_name'):
             # I need both to be useful
             pass
-        print(f"VALIDATE FIELDS2: {fields}")
         return fields
 
     def cast_data_object(self) -> MeetEventAthlete:
@@ -107,6 +106,7 @@ class MeetEventAthleteAPICreate(BaseModel):
         content = self.model_dump()
         data_obj = MeetEventAthlete(**content)
         return data_obj
+
 
 class MeetEvent(BaseModel):
     event_name: str
@@ -175,6 +175,7 @@ class Meet(BaseModel):
     varsity_points: bool = True
     small_meet: bool = False
     max_school_scores: int | None = None
+    meet_point_values: list[int] | None = None
     meet_metadata: Dict[str, Any] = {}
 
     @property
@@ -194,11 +195,12 @@ class Meet(BaseModel):
             'update_datetime': self.update_datetime.isoformat(),
             'meet_name': self.meet_name,
             'meet_location': self.meet_location,
-            'meet_date': self.meet_date,
+            'meet_date': self.meet_date.isoformat() if self.meet_date else None,
             'events': [e.to_json for e in self.events],
             'varsity_points': self.varsity_points,
             'small_meet': self.small_meet,
             'max_school_scores': self.max_school_scores,
+            'meet_point_values': self.meet_point_values,
             'meet_metadata': self.meet_metadata,
         }
         return output
@@ -207,18 +209,24 @@ class Meet(BaseModel):
     def from_json(cls, data):
         content = {
             'uid': data['uid'],
-            'update_datetime': data['update_datetime'],
+            # 'update_datetime': data['update_datetime'],
             'meet_name': data['meet_name'],
             'meet_location': data['meet_location'],
-            'meet_date': data['meet_date'],
+            # 'meet_date': data['meet_date'],
             'events': [MeetEvent.from_json(e) for e in data['events']],
             'varsity_points': data['varsity_points'],
             'small_meet': data['small_meet'],
             'max_school_scores': data['max_school_scores'],
+            'meet_point_values': data['meet_point_values'],
             'meet_metadata': data['meet_metadata'],
         }
-        if data.get('event_time'):
-            content['event_time'] = datetime.strftime(data['event_time'], "%H:%M:%S").time()
+        if data.get('update_datetime'):
+            # content['update_datetime'] = datetime.strptime(data['update_datetime'], "%Y-%m-%dT%H:%M:%S.%fZ")
+            content['update_datetime'] = datetime.fromisoformat(data['update_datetime'])
+        if data.get('meet_date'):
+            content['meet_date'] = datetime.strptime(data['meet_date'], "%Y-%m-%d").date()
+        # if data.get('event_time'):
+        #     content['event_time'] = datetime.strftime(data['event_time'], "%H:%M:%S").time()
         obj = cls(**content)
         return obj
 
@@ -226,15 +234,17 @@ class Meet(BaseModel):
 class MeetApiCreate(BaseModel):
     meet_name: str
     meet_location: str | None = None
-    meet_date: datetime | None = None
+    meet_date: date | None = None
 
     events: List[MeetEvent] = []
 
     varsity_points: bool = True
     small_meet: bool = False
+    max_school_scores: int | None = 3
     meet_metadata: Dict[str, Any] = {}
 
     auto_populate_events: bool = True
+    meet_point_values: list[int] | None = None
 
     @model_validator(mode='before')
     def validate_fields(cls, fields):
@@ -243,7 +253,15 @@ class MeetApiCreate(BaseModel):
         if fields.get('meet_location'):
             fields['meet_location'] = fields['meet_location'].strip()
         if fields.get('meet_date'):
-            fields['meet_date'] = fields['meet_date'].strip()
+            fields['meet_date'] = datetime.strptime(fields['meet_date'], "%Y-%m-%d").date()
+        if not fields.get('meet_point_values'):
+            if fields.get('varsity_points', True):
+                if fields.get('small_meet'):
+                    fields['meet_point_values'] = [5, 3, 1]
+                else:
+                    fields['meet_point_values'] = [10, 8, 6, 5, 4, 3, 2, 1]
+            else:
+                fields['meet_point_values'] = None
         return fields
 
     def cast_data_object(self) -> Meet:

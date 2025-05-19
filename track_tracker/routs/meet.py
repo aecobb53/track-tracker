@@ -230,8 +230,38 @@ async def find_meet_event_athlete(meet_name: str, event_name: str, first: str, l
         context.logger.warning(f'ERROR: {err}')
         raise HTTPException(status_code=500, detail='Internal Service Error')
 
-# @router.get('/{meet_name}/athletes/{first}/{last}}', status_code=200)
-# async def find_meet_athlete(meet_name: str, event_name: str, first: str, last: str, request: Request):
+@router.get('/{meet_name}/athlete/{first}/{last}/{team}', status_code=200)
+async def find_meet_athlete(meet_name: str, first: str, last: str, team: str, request: Request):
+    try:
+        athlete = {
+            'first_name': first,
+            'last_name': last,
+            'team': team,
+            'points': 0,
+            'meets': [],
+        }
+        if os.path.exists('/db/meet'):
+            for fl in os.listdir('/db/meet'):
+                if fl.startswith('meet_') and fl.endswith('.json'):
+                    meet_name = fl[5:-5]
+                    meet = MeetHandler(meet_name=meet_name)
+                    meet.load_file()
+                    events = meet.find_athlete(first=first, last=last, team=team)
+                    points = sum([e['athlete'].points for e in events if e['athlete'].points])
+                    athlete['meets'].append({
+                        'meet_name': meet_name,
+                        'points': points,
+                        'events': events
+                    })
+                    athlete['points'] += points
+        return athlete
+    except Exception as err:
+        context.logger.warning(f'ERROR: {err}')
+        raise HTTPException(status_code=500, detail='Internal Service Error')
+
+
+
+
 
 @router.put('/{meet_name}/{event_name}/athlete/{first}/{last}', status_code=200)
 async def update_meet_event_athlete(meet_name: str, event_name: str, first: str, last: str, athlete: MeetEventAthlete, request: Request):

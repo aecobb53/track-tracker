@@ -437,7 +437,7 @@ class TestAthlete(BaseTestClass):
         # print(f"FIND EVENT CONTENT: {find_content}")
         print(json.dumps(find_content, indent=4))   
         validation_event = {
-            "event_name": event_name,
+            "event_name": "Example Event",
             "event_time": None,
             "gender": None,
             "athletes": [
@@ -453,6 +453,7 @@ class TestAthlete(BaseTestClass):
                     "place": None,
                     "wind": None,
                     "result": None,
+                    "points": None,
                     "meet_metadata": {}
                 },
                 {
@@ -467,6 +468,7 @@ class TestAthlete(BaseTestClass):
                     "place": None,
                     "wind": None,
                     "result": None,
+                    "points": None,
                     "meet_metadata": {}
                 },
                 {
@@ -481,12 +483,13 @@ class TestAthlete(BaseTestClass):
                     "place": None,
                     "wind": None,
                     "result": None,
+                    "points": None,
                     "meet_metadata": {}
                 }
             ],
             "is_relay": False,
             "meet_metadata": {}
-        }
+            }
         find_content_athletes = find_content.pop('athletes')
         validation_event_athletes = validation_event.pop('athletes')
         self.assertEqual(find_content, validation_event, f"Event {event_name} not found in events list")
