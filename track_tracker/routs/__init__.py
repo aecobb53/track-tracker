@@ -4,7 +4,7 @@ from .team import router as team_router
 from .meet import router as meet_router
 # from .record import router as record_router
 # from .workout import router as workout_router
-# from .meetday import router as meetday_router
+from .meetday import router as meetday_router
 
 # from .result_html import router as result_html_router
 # from .athlete_html import router as athlete_html_router

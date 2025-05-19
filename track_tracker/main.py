@@ -52,7 +52,7 @@ from routs import (
     # workout_html_router,
     # group_html_router,
     html_routs_main_router,
-    # meetday_router,
+    meetday_router,
 )
 
 # Can delete after done testing rest calls from different sources
@@ -89,7 +89,7 @@ app.include_router(team_router)
 app.include_router(meet_router)
 # app.include_router(record_router)
 # app.include_router(workout_router)
-# app.include_router(meetday_router)
+app.include_router(meetday_router)
 # app.include_router(result_html_router)
 # app.include_router(athlete_html_router)
 # app.include_router(team_html_router)

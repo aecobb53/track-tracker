@@ -7,6 +7,9 @@ class EventParser:
     """
     def __init__(self, event: str):
         self.event_s = event
+        self.re_s = None
+        self.event_type = None
+        self.event_super_type = None
         self.parse_event(event)
         self.parse_is_relay(event)
 
@@ -14,15 +17,27 @@ class EventParser:
         if re.search(r'(Dash|Run|Relay|Hurdles|Steeplechase|Javelin|Racewalk|Meter)', event_s):
             self.re_s = r'(?P<MINUTES>\d+:)?(?P<SECONDS>\d+)\.?(?P<SUBSECOND>\d*)'
             self.event_type = 'run'
-        elif re.search(r'(Shot[\s\t]*Put|Discus|Hammer[\s\t]+Throw|High[\s\t]+Jump|Long[\s\t]+Jump|Triple[\s\t]+Jump|Pole[\s\t]+Vault)', event_s):
+            self.event_super_type = 'track'
+        elif re.search(r'(Shot[\s\t]*Put|Discus|Hammer[\s\t]+Throw)', event_s):
             self.re_s = r'((?P<FEET>\d+)-)?(?P<INCHES>\d*)\.?(?P<FRACTIONS>\d*)'
-            self.event_type = 'field'
+            self.event_type = 'throw'
+            self.event_super_type = 'field'
+        elif re.search(r'(High[\s\t]+Jump|Long[\s\t]+Jump|Triple[\s\t]+Jump)', event_s):
+            self.re_s = r'((?P<FEET>\d+)-)?(?P<INCHES>\d*)\.?(?P<FRACTIONS>\d*)'
+            self.event_type = 'jump'
+            self.event_super_type = 'field'
+        elif re.search(r'(Pole[\s\t]+Vault)', event_s):
+            self.re_s = r'((?P<FEET>\d+)-)?(?P<INCHES>\d*)\.?(?P<FRACTIONS>\d*)'
+            self.event_type = 'vault'
+            self.event_super_type = 'field'
         elif re.search(r'\d+ ?(m)', event_s):
             self.re_s = r'(?P<MINUTES>\d+:)?(?P<SECONDS>\d+)\.?(?P<SUBSECOND>\d*)'
             self.event_type = 'run'
+            self.event_super_type = 'track'
         elif re.search(r' 4[xX]| H', event_s):
             self.re_s = r'(?P<MINUTES>\d+:)?(?P<SECONDS>\d+)\.?(?P<SUBSECOND>\d*)'
             self.event_type = 'run'
+            self.event_super_type = 'track'
         else:
             raise ValueError(f"UNABLE TO DETERMINE EVENT TYPE FOR {event_s}")
 

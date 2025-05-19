@@ -28,26 +28,56 @@ class MeetEventAthlete(BaseModel):
     result: Result | None = None
     points: int | None = None
 
+    result_is_pr: bool | None = None
+
     meet_metadata: Dict[str, Any] = {}
 
     @property
     def name(self):
-        return f"{self.first_name} {self.last_name}"
+        return f"{self.first_name} {self.last_name}".strip()
+
+    @property
+    def place_in_lineup(self):
+        ep = EventParser(self.result.event_str)
+        if ep.event_type == 'run':
+            output = f"Heat {self.heat}"
+            if self.lane:
+                output += f" Lane {self.lane}"
+            return output.strip()
+        elif ep.event_type == 'throw':
+            output = f"Flight {self.flight}"
+            if self.lane:
+                output += f" Thrower {self.lane}"
+            return output.strip()
+        elif ep.event_type == 'jump':
+            output = f"Flight {self.flight}"
+            if self.lane:
+                output += f" Jumper {self.lane}"
+            return output.strip()
+        elif ep.event_type == 'vault':
+            output = f"Flight {self.flight}"
+            if self.lane:
+                output += f" Vaulter {self.lane}"
+            return output.strip()
 
     @property
     def to_json(self):
         output = {
             'first_name': self.first_name,
             'last_name': self.last_name,
+            'name': self.name,
             'team': self.team,
             'graduation_year': self.graduation_year,
+            'seed': self.seed.to_json if self.seed else None,
             'flight': self.flight,
             'heat': self.heat,
             'lane': self.lane,
+            'place_in_lineup': self.place_in_lineup,
             'place': self.place,
             'points': self.points,
             'wind': self.wind,
             'result': self.result.to_json if self.result else None,
+            'result_is_pr': self.result_is_pr,
             'meet_metadata': self.meet_metadata,
         }
         return output
@@ -59,6 +89,7 @@ class MeetEventAthlete(BaseModel):
             'last_name': data['last_name'],
             'team': data['team'],
             'graduation_year': data['graduation_year'],
+            'seed': Result.from_json(data['seed']) if data.get('seed') else None,
             'flight': data['flight'],
             'heat': data['heat'],
             'lane': data['lane'],
@@ -66,6 +97,7 @@ class MeetEventAthlete(BaseModel):
             'points': data['points'],
             'wind': data['wind'],
             'result': Result.from_json(data['result']) if data.get('result') else None,
+            'result_is_pr': data['result_is_pr'],
             'meet_metadata': data['meet_metadata'],
         }
         obj = cls(**content)

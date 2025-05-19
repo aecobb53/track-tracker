@@ -36,6 +36,7 @@ from .meet import(
 #     WorkoutFilter,
 # )
 # from .meetday import MeetDay, Meet
+from .meetday import MeetDay
 
 # from .bespoke_data_objects import(
 #     BespokeDataObjectBase,
