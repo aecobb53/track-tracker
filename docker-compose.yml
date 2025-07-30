@@ -2,7 +2,7 @@ version: '3'
 
 services:
     db:
-        image: postgis/postgis
+        image: postgres:17
         container_name: TrackTrackerDB
         environment:
             POSTGRES_USER: example
